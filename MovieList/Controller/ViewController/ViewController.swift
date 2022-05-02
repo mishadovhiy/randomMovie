@@ -11,7 +11,13 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
+        let load = NetworkModel()
+        load.loadMovies(page: 0) { movies, error in
+            for movie in movies {
+                print(movie.description)
+            }
+        }
     }
 
 
