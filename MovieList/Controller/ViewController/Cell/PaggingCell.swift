@@ -9,15 +9,23 @@ import UIKit
 
 class PaggingCell: UITableViewCell {
 
+    @IBOutlet weak var pageStepper: UIStepper!
+    @IBOutlet weak var pageLabel: UILabel!
+    var valueSteppedAction:((Double) -> ())?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
+    
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    @IBAction private func valueStepped(_ sender: UIStepper) {
+        if let val = valueSteppedAction {
+            val(sender.value)
+        }
     }
-
+    
+    
+    
+    
 }
