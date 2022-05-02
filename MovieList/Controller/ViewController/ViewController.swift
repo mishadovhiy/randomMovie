@@ -17,8 +17,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
         download()
         
     }
@@ -35,6 +33,10 @@ class ViewController: UIViewController {
                 print(movies[i].description)
             }
             DispatchQueue.main.async {
+                if self.tableView.delegate == nil {
+                    self.tableView.delegate = self
+                    self.tableView.dataSource = self
+                }
                 self.screenAI.stopAnimating()
                 self.tableView.reloadData()
             }
