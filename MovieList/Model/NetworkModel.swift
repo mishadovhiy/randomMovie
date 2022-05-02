@@ -9,18 +9,17 @@ import UIKit
 
 struct NetworkModel {
     
-    private let urlString = "https://k2maan-moviehut.herokuapp.com/api/"
+    private let urlString = "https://ott-details.p.rapidapi.com/"
     //"https://k2maan-moviehut.herokuapp.com/api/"
-    //"https://moviehut-random-movie.p.rapidapi.com/api/"
     private let apiKey = "77eb2877e4msh9e213a3cbcb9f58p1b5b3djsn82dd3c2c1d14"
-    
+
     func loadMovies(limit:Int = 25, page:Int, completion:@escaping([Movie], Bool) -> ()) {
-        let parameters = "limit=\(limit)&page=\(page)"
+        let parameters = "sort=latest&page=\(page)"
         Load(task: .movies, parameters: parameters) { jsonResult, errorString in
-            print(errorString, "!errorString")
+            print(errorString ?? "no error string", "!errorString")
             print(jsonResult, " jsonResultjsonResult")
             
-            guard let arrey = jsonResult["data"] as? NSArray else {
+            guard let arrey = jsonResult["results"] as? NSArray else {
                 completion([], true)
                 return
             }
@@ -55,11 +54,12 @@ struct NetworkModel {
         request.timeoutInterval = 100.0
         request.cachePolicy = .useProtocolCachePolicy
         if method != .post {
-           /* let headers = [
-                "X-RapidAPI-Host": "moviehut-random-movie.p.rapidapi.com",
-                "X-RapidAPI-Key": apiKey
+            let headers = [
+                "X-RapidAPI-Host": "ott-details.p.rapidapi.com",
+                "X-RapidAPI-Key": apiKey,
+                "content-type": "application/json; charset=utf-8",
             ]
-            request.allHTTPHeaderFields = headers*/
+            request.allHTTPHeaderFields = headers
         }
         
 
@@ -100,7 +100,7 @@ extension NetworkModel {
         case post = "POST"
     }
     enum Task: String {
-        case movies = "movies?"
+        case movies = "advancedsearch?"
     }
 }
 
