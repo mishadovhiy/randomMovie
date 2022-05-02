@@ -8,42 +8,38 @@
 import UIKit
 
 struct NetworkModel {
-    
-    private let urlString = "https://ott-details.p.rapidapi.com/"
-    //"https://k2maan-moviehut.herokuapp.com/api/"
-    private let apiKey = "77eb2877e4msh9e213a3cbcb9f58p1b5b3djsn82dd3c2c1d14"
 
     func loadMovies(limit:Int = 25, page:Int, completion:@escaping([Movie], Bool) -> ()) {
         let parameters = "sort=latest&page=\(page)"
         Load(task: .movies, parameters: parameters) { jsonResult, errorString in
             print(errorString ?? "no error string", "!errorString")
             print(jsonResult, " jsonResultjsonResult")
-            
-            guard let arrey = jsonResult["results"] as? NSArray else {
-                completion([], true)
-                return
-            }
-            var result:[Movie] = []
-            for i in 0..<arrey.count {
-                if let jsonElement = arrey[i] as? NSDictionary {
-                    if let dict = jsonElement as? [String : Any] {
-                        result.append(.init(dict: dict))
-                    }
-                }
-            }
-
             let error = (errorString ?? "") != ""
-            completion(result, error)
+            let result = Unparce.json(jsonResult)
+            completion(result ?? [], error)
         }
     }
     
+    //random num gen
+//.1    //load mySQL
+    //if mySQL != contains gen num
+    //get from api page
+    //if not error
+    //save to mySQL
+    //else if error
+    //get other rundom page from loaded MySQL
+    
+//.1 else    //if error
+    //get random local page
+    
+    
+    //method to load data from mySQL table
     
     
     
-    
-    private func Load(method:Method = .get, task:Task, parameters:String, completion:@escaping([String:Any], String?) -> ()) {
-        
-        let requestString = urlString + task.rawValue + parameters
+    private func Load(method:Method = .get, task:Task, parameters:String, mySql:Bool = false, completion:@escaping([String:Any], String?) -> ()) {
+        let url = mySql ? Keys.sqlURL : Keys.apiKey
+        let requestString = url + task.rawValue + parameters
         print(requestString, " requestStringrequestString")
         guard let url =  NSURL(string: requestString) else {
             completion([:], "Error creating url")
@@ -56,17 +52,14 @@ struct NetworkModel {
         if method != .post {
             let headers = [
                 "X-RapidAPI-Host": "ott-details.p.rapidapi.com",
-                "X-RapidAPI-Key": apiKey,
+                "X-RapidAPI-Key": Keys.apiKey,
                 "content-type": "application/json; charset=utf-8",
             ]
             request.allHTTPHeaderFields = headers
         }
-        
 
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-            
-
             if (error != nil) {
                 completion([:], error?.localizedDescription)
                 return
