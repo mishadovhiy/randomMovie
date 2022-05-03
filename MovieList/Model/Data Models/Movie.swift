@@ -22,18 +22,12 @@ class Movie {
     init(dict:[String:Any]) {
         self.name = dict["title"] as? String ?? "-"
         let images = dict["imageurl"] as? [String] ?? []
-        print(images, "imagesimagesimagesimages")
-        print(images.first ?? "", "images.first images.first images.firstimages.firstimages.first")
         self.imageURL = images.first ?? ""
         self.imdbid = dict["imdbid"] as? String ?? "-"
         self.imdbrating = dict["imdbrating"] as? Double ?? -1
-        print(imdbrating, "imdbratingimdbratingimdbrating")
         self.released = "\(dict["released"] as? Int ?? 0)"
-        print(released, "releasedreleasedreleasedreleasedreleased")
         self.about = dict["synopsis"] as? String ?? "-"
         self.genre = dict["genre"] as? [String] ?? []
-        print(genre, "genregenregenre")
-        print(dict, "dictdictdictdictdictdictdict")
         self.dict = dict
     }
     

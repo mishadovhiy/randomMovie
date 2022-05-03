@@ -41,7 +41,10 @@ class Unparce {
         for i in 0..<arrey.count {
             if let jsonElement = arrey[i] as? NSDictionary {
                 if let dict = jsonElement as? [String : Any] {
-                    result.append(.init(dict: dict))
+                    let movie = Movie(dict: dict)
+                    if movie.imageURL != "" {
+                        result.append(movie)
+                    }
                 }
             }
         }

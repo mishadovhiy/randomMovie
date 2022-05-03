@@ -10,11 +10,12 @@ import UIKit
 class NetworkModel {
 
     func getMovies(page:Int, completion:@escaping([Movie], Bool) -> ()) {
+        let pag = page <= 0 ? 1 : page
         loadSQLMovies { sqlMovies, error in
-            if let movies = self.movieFor(page: page, list: sqlMovies) {
+            if let movies = self.movieFor(page: pag, list: sqlMovies) {
                 completion(movies, error)
             } else {
-                self.updateDBwithApi(page: page) { apiMovies, apiError in
+                self.updateDBwithApi(page: pag) { apiMovies, apiError in
                     let resultMovies:[Movie] = apiMovies.count == 0 ? (sqlMovies.randomElement()?.movie ?? []) : apiMovies
                     completion(resultMovies, apiError)
                 }

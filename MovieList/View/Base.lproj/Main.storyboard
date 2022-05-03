@@ -37,7 +37,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" image="photo.fill" catalog="system" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YhK-H6-Izq">
-                                                    <rect key="frame" x="0.0" y="2.5" width="160" height="174.5"/>
+                                                    <rect key="frame" x="0.0" y="3" width="160" height="174"/>
                                                     <color key="tintColor" systemColor="systemGray4Color"/>
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
                                                 </imageView>
@@ -114,18 +114,27 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NOV-RQ-7DQ">
+                                <rect key="frame" x="5" y="39" width="7" height="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="NOV-RQ-7DQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="2Sv-0L-uA5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6Cv-0e-yXA" secondAttribute="trailing" id="CVP-bD-mEq"/>
                             <constraint firstAttribute="bottom" secondItem="6Cv-0e-yXA" secondAttribute="bottom" id="Ewj-LR-9hU"/>
+                            <constraint firstItem="NOV-RQ-7DQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-5" id="Gi4-ht-dg7"/>
                             <constraint firstItem="6Cv-0e-yXA" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Ni5-Kk-IXd"/>
                             <constraint firstItem="6Cv-0e-yXA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="sXv-jp-dqm"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="6Cv-0e-yXA" id="KH5-g5-N6Q"/>
+                        <outlet property="pageLabel" destination="NOV-RQ-7DQ" id="p3d-cs-VQl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

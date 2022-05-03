@@ -33,7 +33,6 @@ extension ViewController:UICollectionViewDelegate, UICollectionViewDataSource, U
             cell.dateLabel.text = data.released
             cell.imdbLabel.text = "\(data.imdbrating)"//String.init(format: "%.2f", data.imdbrating)
             cell.titleLabel.text = data.name
-            print("data.imageURLdata.imageURL", data.imageURL)
             if let imageData = data.image ?? load.localImage(url: data.imageURL),
                let image = UIImage(data:imageData) {
                 cell.movieImage.image = image
