@@ -9,30 +9,44 @@ import UIKit
 
 class Movie {
     let name:String
-    let id:String
-    let overview:String
-    let releaseYear:Int
-    let certificate:String
-    let runtime:String
-    let genre:String
-    let imdbRating:Int
-    let metaScore:String
-    let director:String
-    
+    let imageURL:String
+    let imdbid:String
+    let imdbrating:Double
+    let released:String
+    let about:String
+    let genre:[String]
     let dict:[String:Any]
     
+    var image:Data?
+    
     init(dict:[String:Any]) {
-        self.name = dict["name"] as? String ?? "-"
-        self.id = dict["_id"] as? String ?? "-"
-        self.overview = dict["overview"] as? String ?? "-"
-        self.releaseYear = dict["releaseYear"] as? Int ?? -1
-        self.certificate = dict["certificate"] as? String ?? "-"
-        self.runtime = dict["runtime"] as? String ?? "-"
-        self.genre = dict["genre"] as? String ?? "-"
-        self.imdbRating = dict["imdbRating"] as? Int ?? -1
-        self.metaScore = dict["metaScore"] as? String ?? "-"
-        self.director = dict["director"] as? String ?? "-"
+        self.name = dict["title"] as? String ?? "-"
+        let images = dict["imageurl"] as? [String] ?? []
+        print(images, "imagesimagesimagesimages")
+        print(images.first ?? "", "images.first images.first images.firstimages.firstimages.first")
+        self.imageURL = images.first ?? ""
+        self.imdbid = dict["imdbid"] as? String ?? "-"
+        self.imdbrating = dict["imdbrating"] as? Double ?? -1
+        print(imdbrating, "imdbratingimdbratingimdbrating")
+        self.released = "\(dict["released"] as? Int ?? 0)"
+        print(released, "releasedreleasedreleasedreleasedreleased")
+        self.about = dict["synopsis"] as? String ?? "-"
+        self.genre = dict["genre"] as? [String] ?? []
+        print(genre, "genregenregenre")
+        print(dict, "dictdictdictdictdictdictdict")
         self.dict = dict
+    }
+    
+    
+    var type:MovieType {
+        let str = self.dict["type"] as? String ?? ""
+        switch str {
+        case "movie": return .movie
+        case "show", "tvSeries", "tvMiniSeries":
+            return .show
+        default:
+            return .movie
+        }
     }
     
     var description:String {
@@ -47,6 +61,14 @@ class Movie {
         }
         return result
     }
+    
+    
+    enum MovieType:String {
+        case movie = "movie"
+        case show = "show"
+    }
+
+
 }
 
 

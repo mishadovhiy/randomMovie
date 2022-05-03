@@ -7,20 +7,49 @@
 
 import UIKit
 
-struct NetworkModel {
+class NetworkModel {
 
-    func randomMovies(page:Int, completion:@escaping([Movie], Bool) -> ()) {
+    func getMovies(page:Int, completion:@escaping([Movie], Bool) -> ()) {
         loadSQLMovies { sqlMovies, error in
-            if let movies = movieFor(page: page, list: sqlMovies) {
+            if let movies = self.movieFor(page: page, list: sqlMovies) {
                 completion(movies, error)
             } else {
-                updateDBwithApi(page: page) { apiMovies, apiError in
+                self.updateDBwithApi(page: page) { apiMovies, apiError in
                     let resultMovies:[Movie] = apiMovies.count == 0 ? (sqlMovies.randomElement()?.movie ?? []) : apiMovies
                     completion(resultMovies, apiError)
                 }
             }
         }
     }
+    
+
+    
+    func localImage(url:String) -> Data? {
+        let ud = UserDefaults.standard.value(forKey: "movieImages") as? [String:Data?] ?? [:]
+        if let result = ud[url] {
+            return result
+        } else {
+            return nil
+        }
+    }
+    
+    func image(for url:String, completion:@escaping(Data?) -> ()) {
+        if let localImage = localImage(url: url) {
+            completion(localImage)
+        } else {
+            Load(method: .get, task: .img, parameters: "", urlString: url) { data, error in
+                var ud = UserDefaults.standard.value(forKey: "movieImages") as? [String:Data?] ?? [:]
+                ud.updateValue(data, forKey: url)
+                UserDefaults.standard.setValue(ud, forKey: "movieImages")
+                completion(data)
+                
+            }
+        }
+        
+        
+    }
+    
+    
     
     
     private func updateDBwithApi(page:Int, completion:@escaping([Movie], Bool) -> ()) {
@@ -38,7 +67,7 @@ struct NetworkModel {
             let saveJson = dataa.base64EncodedString()
             let saveParameters = "page=\(page)&results=\(saveJson)"
 
-            Load(method: .post, task: .saveMovie, parameters: saveParameters) { saveData, errorSaveString in
+            self.Load(method: .post, task: .saveMovie, parameters: saveParameters) { saveData, errorSaveString in
                 let sended = Unparce.savedData(data: saveData)
                 print(sended, "sendedsendedsendedsendedsended")
                 completion(movies ?? [], false)
@@ -58,23 +87,29 @@ struct NetworkModel {
         return nil
     }
     
-    
+    var mySqlMovieList:[MovieList]?
     private func loadSQLMovies(completion:@escaping([MovieList], Bool) -> ()) {
-        Load(task: .sqlMovies, parameters: "") { data, errorString in
-            print(errorString ?? "no error", " errorStringerrorStringerrorString")
-            let error = (errorString ?? "") != ""
-            let jsonResult = Unparce.jsonDataArray(data)
-            let result = Unparce.json(jsonResult)
-            completion(result ?? [], error)
+        if let movieList = mySqlMovieList {
+            completion(movieList, false)
+        } else {
+            Load(task: .sqlMovies, parameters: "") { data, errorString in
+                print(errorString ?? "no error", " errorStringerrorStringerrorString")
+                let error = (errorString ?? "") != ""
+                let jsonResult = Unparce.jsonDataArray(data)
+                let result = Unparce.json(jsonResult)
+                self.mySqlMovieList = result
+                completion(result ?? [], error)
+            }
         }
+        
     }
 
     
-    private func Load(method:Method = .get, task:Task, parameters:String, completion:@escaping(Data?, String?) -> ()) {//movies 
+    private func Load(method:Method = .get, task:Task, parameters:String, urlString:String? = nil, completion:@escaping(Data?, String?) -> ()) {//movies
         let mySQL = task.rawValue.contains(".php")
         let url = mySQL ? Keys.sqlURL : Keys.apiURL
         let urlParam = task == .saveMovie ? "" : parameters
-        let requestString = url + task.rawValue + urlParam
+        let requestString = urlString ?? (url + task.rawValue + urlParam)
         print(requestString, " requestStringrequestString")
         guard let url =  NSURL(string: requestString) else {
             completion(nil, "Error creating url")
@@ -136,6 +171,7 @@ extension NetworkModel {
         case movies = "advancedsearch?"
         case sqlMovies = "LoadMovies.php"
         case saveMovie = "NewMovie.php?"
+        case img = ""
     }
 }
 
