@@ -9,40 +9,75 @@ import UIKit
 
 struct NetworkModel {
 
-    func loadMovies(limit:Int = 25, page:Int, completion:@escaping([Movie], Bool) -> ()) {
+    func randomMovies(page:Int, completion:@escaping([Movie], Bool) -> ()) {
+        loadSQLMovies { sqlMovies, error in
+            if let movies = movieFor(page: page, list: sqlMovies) {
+                completion(movies, error)
+            } else {
+                updateDBwithApi(page: page) { apiMovies, apiError in
+                    let resultMovies:[Movie] = apiMovies.count == 0 ? (sqlMovies.randomElement()?.movie ?? []) : apiMovies
+                    completion(resultMovies, apiError)
+                }
+            }
+        }
+    }
+    
+    
+    private func updateDBwithApi(page:Int, completion:@escaping([Movie], Bool) -> ()) {
         let parameters = "sort=latest&page=\(page)"
-        Load(task: .movies, parameters: parameters) { jsonResult, errorString in
-            print(errorString ?? "no error string", "!errorString")
-            print(jsonResult, " jsonResultjsonResult")
+        Load(task: .movies, parameters: parameters) { data, error in
+            guard let dataa = data else {
+                completion([],true)
+                return
+            }
+            guard let dictionary = Unparce.jsonDataDict(dataa) else {
+                completion([],true)
+                return
+            }
+            let movies = Unparce.json(dictionary)
+            let saveJson = dataa.base64EncodedString()
+            let saveParameters = "page=\(page)&results=\(saveJson)"
+
+            Load(method: .post, task: .saveMovie, parameters: saveParameters) { saveData, errorSaveString in
+                let sended = Unparce.savedData(data: saveData)
+                print(sended, "sendedsendedsendedsendedsended")
+                completion(movies ?? [], false)
+                
+            }
+        }
+    }
+    
+    
+    
+    private func movieFor(page:Int, list:[MovieList]) -> [Movie]? {
+        for item in list {
+            if item.page == page {
+                return item.movie
+            }
+        }
+        return nil
+    }
+    
+    
+    private func loadSQLMovies(completion:@escaping([MovieList], Bool) -> ()) {
+        Load(task: .sqlMovies, parameters: "") { data, errorString in
+            print(errorString ?? "no error", " errorStringerrorStringerrorString")
             let error = (errorString ?? "") != ""
+            let jsonResult = Unparce.jsonDataArray(data)
             let result = Unparce.json(jsonResult)
             completion(result ?? [], error)
         }
     }
+
     
-    //random num gen
-//.1    //load mySQL
-    //if mySQL != contains gen num
-    //get from api page
-    //if not error
-    //save to mySQL
-    //else if error
-    //get other rundom page from loaded MySQL
-    
-//.1 else    //if error
-    //get random local page
-    
-    
-    //method to load data from mySQL table
-    
-    
-    
-    private func Load(method:Method = .get, task:Task, parameters:String, mySql:Bool = false, completion:@escaping([String:Any], String?) -> ()) {
-        let url = mySql ? Keys.sqlURL : Keys.apiKey
-        let requestString = url + task.rawValue + parameters
+    private func Load(method:Method = .get, task:Task, parameters:String, completion:@escaping(Data?, String?) -> ()) {//movies 
+        let mySQL = task.rawValue.contains(".php")
+        let url = mySQL ? Keys.sqlURL : Keys.apiURL
+        let urlParam = task == .saveMovie ? "" : parameters
+        let requestString = url + task.rawValue + urlParam
         print(requestString, " requestStringrequestString")
         guard let url =  NSURL(string: requestString) else {
-            completion([:], "Error creating url")
+            completion(nil, "Error creating url")
             return
         }
         let request = NSMutableURLRequest(url: url as URL)
@@ -50,40 +85,45 @@ struct NetworkModel {
         request.timeoutInterval = 100.0
         request.cachePolicy = .useProtocolCachePolicy
         if method != .post {
-            let headers = [
+            let headers = mySQL ? [
+                "content-type": "application/json; charset=utf-8",
+            ] : [
                 "X-RapidAPI-Host": "ott-details.p.rapidapi.com",
                 "X-RapidAPI-Key": Keys.apiKey,
                 "content-type": "application/json; charset=utf-8",
             ]
             request.allHTTPHeaderFields = headers
         }
+        var dataUpload:Data? {
+            if method != .post {
+                return nil
+            }
+            var dataToSend = ""//"secretWord=" + Keys.secretKey
+            dataToSend = dataToSend + parameters
+            return dataToSend.data(using: .utf8)
+        }
 
-        let session = URLSession.shared
-        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+        performTask(method: method, request: request as URLRequest, data: dataUpload) { resultData, response, error in
             if (error != nil) {
-                completion([:], error?.localizedDescription)
+                completion(nil, error?.localizedDescription)
                 return
             } else {
-                var jsonResult:[String:Any]?
-                guard let dataa = data  else {
-                    completion([:], "Error converting results")
-                    return
-                }
-                
-                do{
-                    jsonResult = try JSONSerialization.jsonObject(with: dataa, options:.allowFragments) as? [String:Any] ?? [:]
-                } catch let error as NSError {
-                    completion([:], error.localizedDescription)
-                    return
-                }
-                completion(jsonResult ?? [:], nil)
-
-                
+                completion(resultData, nil)
             }
-        })
-
-        dataTask.resume()
+        }
     }
+    
+    
+    private func performTask(method:Method, request:URLRequest, data:Data?, completion:@escaping (Data?, URLResponse?, Error?) -> Void) {
+        if method == .post {
+            let dataTask = URLSession.shared.uploadTask(with: request, from: data, completionHandler: completion)
+            dataTask.resume()
+        } else {
+            let dataTask = URLSession.shared.dataTask(with: request, completionHandler: completion)
+            dataTask.resume()
+        }
+    }
+
 }
 
 
@@ -94,6 +134,8 @@ extension NetworkModel {
     }
     enum Task: String {
         case movies = "advancedsearch?"
+        case sqlMovies = "LoadMovies.php"
+        case saveMovie = "NewMovie.php?"
     }
 }
 

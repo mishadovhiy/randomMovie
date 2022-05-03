@@ -48,3 +48,9 @@ class Movie {
         return result
     }
 }
+
+
+struct MovieList {
+    let movie:[Movie]
+    let page:Int
+}

@@ -35,7 +35,6 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource {
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "PaggingCell", for: indexPath) as! PaggingCell
             cell.valueSteppedAction = pageChanged(_:)
-            let page = UserDefaults.standard.value(forKey: "PageNumber") as? Int ?? 0
             cell.pageLabel.text = "\(page)"
             cell.pageStepper.value = Double("\(page)") ?? 0
             return cell

@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     
     let load = NetworkModel()
     var tableData:[Movie] = []
+    var page:Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,16 +23,13 @@ class ViewController: UIViewController {
     }
 
     func download(_ page:Int? = nil) {
-        let pageResult = page ??  UserDefaults.standard.value(forKey: "PageNumber") as? Int ?? 0
+        self.page = page ?? Int.random(in: 1..<2000)
         DispatchQueue.main.async {
             self.screenAI.startAnimating()
             self.screenAI.isHidden = false
         }
-        load.loadMovies(page: pageResult) { movies, error in
+        load.randomMovies(page: self.page) { movies, error in
             self.tableData = movies
-            for i in 0..<movies.count {
-                print(movies[i].description)
-            }
             DispatchQueue.main.async {
                 if self.tableView.delegate == nil {
                     self.tableView.delegate = self
@@ -44,10 +42,7 @@ class ViewController: UIViewController {
     }
     
     func pageChanged(_ newValue:Double) {
-        
-        let n = Int(newValue)
-        UserDefaults.standard.setValue(n, forKey: "PageNumber")
-        download(n)
+        download()
     }
 
 }
