@@ -20,13 +20,13 @@ class Movie {
     var image:Data?
     
     init(dict:[String:Any]) {
-        self.name = dict["title"] as? String ?? "-"
+        self.name = dict["title"] as? String ?? ""
         let images = dict["imageurl"] as? [String] ?? []
         self.imageURL = images.first ?? ""
-        self.imdbid = dict["imdbid"] as? String ?? "-"
-        self.imdbrating = dict["imdbrating"] as? Double ?? -1
+        self.imdbid = dict["imdbid"] as? String ?? ""
+        self.imdbrating = dict["imdbrating"] as? Double ?? 0.0
         self.released = "\(dict["released"] as? Int ?? 0)"
-        self.about = dict["synopsis"] as? String ?? "-"
+        self.about = dict["synopsis"] as? String ?? ""
         self.genre = dict["genre"] as? [String] ?? []
         self.dict = dict
     }
@@ -62,6 +62,36 @@ class Movie {
         case show = "show"
     }
 
+    
+    func filterValidation() -> Bool {
+        if self.imageURL != "" &&
+            self.validateRange(release: true) &&
+            self.validateRange(release: false)
+        {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    
+    
+    
+    private func validateRange(release:Bool) -> Bool {
+        if release {
+            return true//inGange(min: 1970, max: 2022, value: self.released)
+        } else {
+            //imdb rating
+            return true//inGange(min: 1, max: 10, value: "", doubleValue: self.imdbrating)
+        }
+    }
+    
+    private func inGange(min:Double, max:Double, value:String, doubleValue:Double = 0) -> Bool {
+
+        let numberRange = (min - 0.01)...(max + 0.01)
+        let selfNumber = Double(value) ?? doubleValue
+        return numberRange.contains(selfNumber) ? true : false
+    }
 
 }
 

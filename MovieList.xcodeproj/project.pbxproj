@@ -18,6 +18,9 @@
 		8DD4635228212385008EB85A /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD4635128212385008EB85A /* View.swift */; };
 		8DD4635528212C78008EB85A /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD4635428212C78008EB85A /* UIView.swift */; };
 		8DD4635728212D75008EB85A /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD4635628212D75008EB85A /* UICollectionView.swift */; };
+		8DD4635A2821C622008EB85A /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD463592821C622008EB85A /* Label.swift */; };
+		8DD4635C2821CB14008EB85A /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD4635B2821CB14008EB85A /* Button.swift */; };
+		8DD4635E2821CEA1008EB85A /* MovieVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD4635D2821CEA1008EB85A /* MovieVC.swift */; };
 		8DF671D4281F6B0D0064849A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF671D3281F6B0D0064849A /* AppDelegate.swift */; };
 		8DF671D6281F6B0D0064849A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF671D5281F6B0D0064849A /* SceneDelegate.swift */; };
 		8DF671D8281F6B0D0064849A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF671D7281F6B0D0064849A /* ViewController.swift */; };
@@ -60,6 +63,9 @@
 		8DD4635128212385008EB85A /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		8DD4635428212C78008EB85A /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		8DD4635628212D75008EB85A /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
+		8DD463592821C622008EB85A /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		8DD4635B2821CB14008EB85A /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		8DD4635D2821CEA1008EB85A /* MovieVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieVC.swift; sourceTree = "<group>"; };
 		8DF671D0281F6B0D0064849A /* MovieList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DF671D3281F6B0D0064849A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8DF671D5281F6B0D0064849A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -159,8 +165,18 @@
 			isa = PBXGroup;
 			children = (
 				8DD4635128212385008EB85A /* View.swift */,
+				8DD463592821C622008EB85A /* Label.swift */,
+				8DD4635B2821CB14008EB85A /* Button.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		8DD4635F2821CEA6008EB85A /* MovieVC */ = {
+			isa = PBXGroup;
+			children = (
+				8DD4635D2821CEA1008EB85A /* MovieVC.swift */,
+			);
+			path = MovieVC;
 			sourceTree = "<group>";
 		};
 		8DF671C7281F6B0D0064849A = {
@@ -235,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				8DF67208281F89750064849A /* ViewController */,
+				8DD4635F2821CEA6008EB85A /* MovieVC */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -416,6 +433,7 @@
 				8DD4634D2821206F008EB85A /* PreviewCollectionCell.swift in Sources */,
 				8D7E3E7A281F8CF90094F05B /* PaggingCell.swift in Sources */,
 				8DD4635728212D75008EB85A /* UICollectionView.swift in Sources */,
+				8DD4635C2821CB14008EB85A /* Button.swift in Sources */,
 				8DF671D8281F6B0D0064849A /* ViewController.swift in Sources */,
 				8DF671D4281F6B0D0064849A /* AppDelegate.swift in Sources */,
 				8DF6720A281F89A40064849A /* MovieCell.swift in Sources */,
@@ -423,6 +441,8 @@
 				8DD4635528212C78008EB85A /* UIView.swift in Sources */,
 				8DD4634F28212084008EB85A /* LoadingCollectionCell.swift in Sources */,
 				8D7E3E812820420D0094F05B /* Keys.swift in Sources */,
+				8DD4635A2821C622008EB85A /* Label.swift in Sources */,
+				8DD4635E2821CEA1008EB85A /* MovieVC.swift in Sources */,
 				8DD4635228212385008EB85A /* View.swift in Sources */,
 				8DF671D6281F6B0D0064849A /* SceneDelegate.swift in Sources */,
 			);

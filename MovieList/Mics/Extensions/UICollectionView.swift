@@ -10,11 +10,11 @@ import UIKit
 extension UICollectionView {
     func doubleView() {
         let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = .zero
+        layout.sectionInset = .init(top: 0, left: 2, bottom: 0, right: 2)
         layout.minimumLineSpacing = 2
         layout.minimumInteritemSpacing = 2
         layout.scrollDirection = .vertical
-        let width = (self.frame.width - 5)/3
+        let width = (self.frame.width - 10)/3
         layout.itemSize = CGSize(width: width, height: width + 20)
         self.collectionViewLayout = layout
     }

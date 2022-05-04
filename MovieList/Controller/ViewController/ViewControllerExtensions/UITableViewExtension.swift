@@ -31,7 +31,8 @@ extension ViewController:UICollectionViewDelegate, UICollectionViewDataSource, U
             let data = tableData[indexPath.row]
             
             cell.dateLabel.text = data.released
-            cell.imdbLabel.text = "\(data.imdbrating)"//String.init(format: "%.2f", data.imdbrating)
+            cell.imdbLabel.text = data.imdbrating > 0 ? String.init(format: "%.2f", data.imdbrating) : ""
+            //String.init(format: "%.2f", data.imdbrating)
             cell.titleLabel.text = data.name
             if let imageData = data.image ?? load.localImage(url: data.imageURL),
                let image = UIImage(data:imageData) {
@@ -59,5 +60,7 @@ extension ViewController:UICollectionViewDelegate, UICollectionViewDataSource, U
     }
     
 
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedMovie = tableData[indexPath.row]
+    }
 }

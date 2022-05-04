@@ -9,18 +9,26 @@ import UIKit
 
 class NetworkModel {
 
+    var maxPage = 490
+    
     func getMovies(page:Int, completion:@escaping([Movie], Bool) -> ()) {
-        let pag = page <= 0 ? 1 : page
-        loadSQLMovies { sqlMovies, error in
-            if let movies = self.movieFor(page: pag, list: sqlMovies) {
-                completion(movies, error)
-            } else {
-                self.updateDBwithApi(page: pag) { apiMovies, apiError in
-                    let resultMovies:[Movie] = apiMovies.count == 0 ? (sqlMovies.randomElement()?.movie ?? []) : apiMovies
-                    completion(resultMovies, apiError)
+        if page >= maxPage {
+            UserDefaults.standard.setValue(nil, forKey: "page")
+            completion([],true)
+        } else {
+            loadSQLMovies { sqlMovies, error in
+                if let movies = self.movieFor(page: page, list: sqlMovies) {
+                    completion(movies, error)
+                } else {
+                    self.updateDBwithApi(page: page) { apiMovies, apiError in
+                        sleep(1)//delete later
+                        let resultMovies:[Movie] = apiMovies.count == 0 ? (sqlMovies.randomElement()?.movie ?? []) : apiMovies
+                        completion(resultMovies, apiError)
+                    }
                 }
             }
         }
+        
     }
     
 
@@ -35,6 +43,10 @@ class NetworkModel {
     }
     
     func image(for url:String, completion:@escaping(Data?) -> ()) {
+        if url == "" {
+            completion(nil)
+            return
+        }
         if let localImage = localImage(url: url) {
             completion(localImage)
         } else {
@@ -54,7 +66,10 @@ class NetworkModel {
     
     
     private func updateDBwithApi(page:Int, completion:@escaping([Movie], Bool) -> ()) {
-        let parameters = "sort=latest&page=\(page)"
+        guard let parameters = (Keys.apiDefaultParameters + "\(page)").addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            completion([],true)
+            return
+        }
         Load(task: .movies, parameters: parameters) { data, error in
             guard let dataa = data else {
                 completion([],true)
@@ -66,8 +81,16 @@ class NetworkModel {
             }
             let movies = Unparce.json(dictionary)
             let saveJson = dataa.base64EncodedString()
-            let saveParameters = "page=\(page)&results=\(saveJson)"
-
+            
+            var hasImage = "false"
+            if let movies = movies {
+                for movie in movies {
+                    if movie.imageURL != "" {
+                        hasImage = "true"
+                    }
+                }
+            }
+            let saveParameters = "page=\(page)&results=\(saveJson)&hasImage=\(hasImage)"
             self.Load(method: .post, task: .saveMovie, parameters: saveParameters) { saveData, errorSaveString in
                 let sended = Unparce.savedData(data: saveData)
                 print(sended, "sendedsendedsendedsendedsended")
@@ -88,21 +111,27 @@ class NetworkModel {
         return nil
     }
     
-    var mySqlMovieList:[MovieList]?
+    var mySqlMovieList:Data?
     private func loadSQLMovies(completion:@escaping([MovieList], Bool) -> ()) {
         if let movieList = mySqlMovieList {
-            completion(movieList, false)
+            let result = sqlLoaded(data: movieList)
+            completion(result, false)
         } else {
             Load(task: .sqlMovies, parameters: "") { data, errorString in
                 print(errorString ?? "no error", " errorStringerrorStringerrorString")
                 let error = (errorString ?? "") != ""
-                let jsonResult = Unparce.jsonDataArray(data)
-                let result = Unparce.json(jsonResult)
-                self.mySqlMovieList = result
-                completion(result ?? [], error)
+                let result = self.sqlLoaded(data: data)
+                completion(result, error)
             }
         }
+    }
         
+    private func sqlLoaded(data:Data?) -> [MovieList] {
+        if mySqlMovieList == nil {
+            mySqlMovieList = data
+        }
+        let jsonResult = Unparce.jsonDataArray(data)
+        return Unparce.json(jsonResult) ?? []
     }
 
     
@@ -134,7 +163,7 @@ class NetworkModel {
             if method != .post {
                 return nil
             }
-            var dataToSend = ""//"secretWord=" + Keys.secretKey
+            var dataToSend = ""//"secretWord=" + Keys.sqlKey
             dataToSend = dataToSend + parameters
             return dataToSend.data(using: .utf8)
         }
