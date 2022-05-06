@@ -9,10 +9,14 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var mainContentView: UIView!
+    @IBOutlet weak var sideBarPinchView: UIView!
+    @IBOutlet weak var sideBarTable: UITableView!
     @IBOutlet weak var shakeButton: Button!
     @IBOutlet weak var pageLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    static var shared:ViewController?
     let load = NetworkModel()
     var _tableData:[Movie] = []
     
@@ -22,23 +26,35 @@ class ViewController: UIViewController {
     var firstDispleyingPage:Int?
     var loading = false
     
+    //sideBar
+    @IBOutlet weak var sideBar: SideBar!
+    var sidescrolling = false
+    var wasShowingSideBar = false
+    var beginScrollPosition:CGFloat = 0
+    var sideBarShowing = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //51820 page has 6.1
-        //53624 - found - 53400
-//        UserDefaults.standard.setValue(nil, forKey: "page")
+        ViewController.shared = self
+
+        sideBarPinchView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(sideBarPinched(_:))))
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         self.collectionView.doubleView()
         download()
-        
+        sideBar.load()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        refresh = UIRefreshControl.init(frame: .init(x: 0, y: 0, width: self.view.frame.width, height: 30))
-        collectionView.addSubview(refresh ?? UIRefreshControl.init(frame: .zero))
-        refresh?.addTarget(self, action: #selector(self.refresh(sender:)), for: .valueChanged)
+    private var subviewsLayoued = false
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if !subviewsLayoued {
+            subviewsLayoued = true
+            refresh = UIRefreshControl.init(frame: .init(x: 0, y: 0, width: self.view.frame.width, height: 30))
+            collectionView.addSubview(refresh ?? UIRefreshControl.init(frame: .zero))
+            refresh?.addTarget(self, action: #selector(self.refresh(sender:)), for: .valueChanged)
+        }
+        
     }
     
     var tableData:[Movie] {
@@ -70,24 +86,26 @@ class ViewController: UIViewController {
         if firstDispleyingPage == nil {
             firstDispleyingPage = self.page
         }
-        load.getMovies(page: self.page) { movies, error in
-            UserDefaults.standard.setValue(page, forKey: "page")
-            DispatchQueue.main.async {
-                self.pageLabel.text = "\(self.page)"
-            }
-            var i = 0
-            self.loading = false
-            for movie in movies {
-                self.load.image(for: movie.imageURL) { data in
-                    movie.image = data
-                    self.tableData.append(movie)
+        DispatchQueue.init(label: "download", qos: .userInitiated).async {
+            self.load.getMovies(page: self.page) { movies, error in
+                UserDefaults.standard.setValue(page, forKey: "page")
+                DispatchQueue.main.async {
+                    self.pageLabel.text = "\(self.page)"
                 }
-                i += 1
-            }
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-                if self.refresh?.isRefreshing ?? true {
-                    self.refresh?.endRefreshing()
+                var i = 0
+                self.loading = false
+                for movie in movies {
+                    self.load.image(for: movie.imageURL) { data in
+                        movie.image = data
+                        self.tableData.append(movie)
+                    }
+                    i += 1
+                }
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                    if self.refresh?.isRefreshing ?? true {
+                        self.refresh?.endRefreshing()
+                    }
                 }
             }
         }
@@ -130,6 +148,9 @@ class ViewController: UIViewController {
         }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if sideBarShowing {
+            self.toggleSideBar(false, animated: true)
+        }
         switch segue.identifier {
         case "toMovie":
             let vc = segue.destination as! MovieVC
@@ -188,3 +209,6 @@ class ViewController: UIViewController {
     }
     
 }
+
+
+

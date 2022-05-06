@@ -79,18 +79,21 @@ class Movie {
     
     private func validateRange(release:Bool) -> Bool {
         if release {
-            return true//inGange(min: 1970, max: 2022, value: self.released)
+            return inRange(min: LocalDB.Filter.yearRating.from, max: LocalDB.Filter.yearRating.to, value: self.released)
         } else {
-            //imdb rating
-            return true//inGange(min: 1, max: 10, value: "", doubleValue: self.imdbrating)
+            return inRange(min: LocalDB.Filter.imdbRating.from, max: LocalDB.Filter.imdbRating.to, value: "", doubleValue: self.imdbrating)
         }
     }
     
-    private func inGange(min:Double, max:Double, value:String, doubleValue:Double = 0) -> Bool {
-
-        let numberRange = (min - 0.01)...(max + 0.01)
-        let selfNumber = Double(value) ?? doubleValue
-        return numberRange.contains(selfNumber) ? true : false
+    private func inRange(min:Double, max:Double, value:String, doubleValue:Double = 0) -> Bool {
+        if min < max {
+            let numberRange = (min - 0.01)...(max + 0.01)
+            let selfNumber = Double(value) ?? doubleValue
+            return numberRange.contains(selfNumber) ? true : false
+        } else {
+            return true
+        }
+        
     }
 
 }

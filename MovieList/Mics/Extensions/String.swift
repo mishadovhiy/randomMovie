@@ -8,6 +8,10 @@
 import UIKit
 
 extension String {
+    init(decimalsCount:Int, from double:Double) {
+        self.init(format: "%.\(decimalsCount)f", double)
+    }
+    
     var json:[String: Any]? {
         let str = self.replacingOccurrences(of: "\n", with: "")
         let data = Data(str.utf8)
@@ -25,6 +29,9 @@ extension String {
             return nil
         }
     }
+    
+    
+    
 }
 
 

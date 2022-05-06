@@ -21,7 +21,6 @@ class NetworkModel {
                     completion(movies, error)
                 } else {
                     self.updateDBwithApi(page: page) { apiMovies, apiError in
-                        sleep(1)//delete later
                         let resultMovies:[Movie] = apiMovies.count == 0 ? (sqlMovies.randomElement()?.movie ?? []) : apiMovies
                         completion(resultMovies, apiError)
                     }
@@ -34,7 +33,7 @@ class NetworkModel {
 
     
     func localImage(url:String) -> Data? {
-        let ud = UserDefaults.standard.value(forKey: "movieImages") as? [String:Data?] ?? [:]
+        let ud = LocalDB.movieImages
         if let result = ud[url] {
             return result
         } else {
@@ -51,9 +50,9 @@ class NetworkModel {
             completion(localImage)
         } else {
             Load(method: .get, task: .img, parameters: "", urlString: url) { data, error in
-                var ud = UserDefaults.standard.value(forKey: "movieImages") as? [String:Data?] ?? [:]
+                var ud = LocalDB.movieImages
                 ud.updateValue(data, forKey: url)
-                UserDefaults.standard.setValue(ud, forKey: "movieImages")
+                LocalDB.movieImages = ud
                 completion(data)
                 
             }
@@ -163,7 +162,7 @@ class NetworkModel {
             if method != .post {
                 return nil
             }
-            var dataToSend = ""//"secretWord=" + Keys.sqlKey
+            var dataToSend = ""
             dataToSend = dataToSend + parameters
             return dataToSend.data(using: .utf8)
         }
