@@ -12,18 +12,13 @@ class NetworkModel {
     var maxPage = 490
     
     func getMovies(page:Int, completion:@escaping([Movie], Bool) -> ()) {
-        if page >= maxPage {
-            UserDefaults.standard.setValue(nil, forKey: "page")
-            completion([],true)
-        } else {
-            loadSQLMovies { sqlMovies, error in
-                if let movies = self.movieFor(page: page, list: sqlMovies) {
-                    completion(movies, error)
-                } else {
-                    self.updateDBwithApi(page: page) { apiMovies, apiError in
-                        let resultMovies:[Movie] = apiMovies.count == 0 ? (sqlMovies.randomElement()?.movie ?? []) : apiMovies
-                        completion(resultMovies, apiError)
-                    }
+        loadSQLMovies { sqlMovies, error in
+            if let movies = self.movieFor(page: page, list: sqlMovies) {
+                completion(movies, error)
+            } else {
+                self.updateDBwithApi(page: page) { apiMovies, apiError in
+                    let resultMovies:[Movie] = apiMovies.count == 0 ? (sqlMovies.randomElement()?.movie ?? []) : apiMovies
+                    completion(resultMovies, apiError)
                 }
             }
         }

@@ -10,7 +10,7 @@ import UIKit
 extension SideBar: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return tableData.count
+        return tableData.count + self.sectionsBeforeData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -18,48 +18,59 @@ extension SideBar: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if let sliderData = tableData[indexPath.section].cells as? SliderCellData {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SideBarSliderCell", for: indexPath) as! SideBarSliderCell
-            cell.range = .init(view: cell.rangeHolderView, range: sliderData.range, newPosition: sliderData.newPosition)
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SideBarTitleCell", for: indexPath) as! SideBarTitleCell
+            cell.mainLabel.text = "Filter"
             return cell
         } else {
-            if let collections = tableData[indexPath.section].cells as? CollectionCellData {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "SideBarCollectionCell", for: indexPath) as! SideBarCollectionCell
+            let section = indexPath.section - sectionsBeforeData
+            if let sliderData = tableData[section].cells as? SliderCellData {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SideBarSliderCell", for: indexPath) as! SideBarSliderCell
+                cell.range = .init(view: cell.rangeHolderView, range: sliderData.range, newPosition: sliderData.newPosition)
                 return cell
             } else {
-                return UITableViewCell()
+                if let collections = tableData[section].cells as? CollectionCellData {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "SideBarCollectionCell", for: indexPath) as! SideBarCollectionCell
+                    cell.data = collections.collectionData
+                    return cell
+                } else {
+                    return UITableViewCell()
+                }
             }
         }
+        
 
         
     }
     
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       /* if tableData[indexPath.section].section[indexPath.row].name != "" {
-            let segue = tableData[indexPath.section].section[indexPath.row].segue
-            if segue != "" {
-                DispatchQueue.main.async {
-                    ViewController.shared?.performSegue(withIdentifier: segue, sender: self)
-                }
-            } else {
-                if let action = tableData[indexPath.section].section[indexPath.row].selectAction {
-                    action()
-                }
-            }
-        }
-        tableView.reloadData()
-        */
-    }
 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let section = indexPath.section == 0 ? 0 : (indexPath.section - sectionsBeforeData)
+        if let data = tableData[section].cells as? CollectionCellData {
+            let numOfSections = data.collectionData.count / 3
+            let result = numOfSections * 50
+            return CGFloat(result)
+            
+        } else {
+            return UITableView.automaticDimension
+        }
+    }
+    
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 38
+        return section != 0 ? 38 : 0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SideBarHeaderCell") as! SideBarHeaderCell
-        cell.mainTitleLabel.text = tableData[section].title
-        return cell.contentView
+        
+        if section != 0 {
+            let sectionn = section == 0 ? 0 : (section - sectionsBeforeData)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SideBarHeaderCell") as! SideBarHeaderCell
+            cell.mainTitleLabel.text = tableData[sectionn].title
+            return cell.contentView
+        } else {
+            return nil
+        }
+        
     }
 }

@@ -81,9 +81,9 @@ class ViewController: UIViewController {
         }
 
         let calcPage = page ?? (UserDefaults.standard.value(forKey: "page") as? Int ?? 1)
-        self.page = calcPage <= 0 ? 0 : calcPage
+        self.page = calcPage <= 0 || calcPage >= (self.load.maxPage + 10) ? 0 : calcPage
         print(self.page, "pagepagepagepagepage")
-        if firstDispleyingPage == nil {
+        if firstDispleyingPage == nil || self.page == 0 {
             firstDispleyingPage = self.page
         }
         DispatchQueue.init(label: "download", qos: .userInitiated).async {

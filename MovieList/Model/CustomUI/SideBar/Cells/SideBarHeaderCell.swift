@@ -10,15 +10,11 @@ import UIKit
 class SideBarHeaderCell: UITableViewCell {
 
     @IBOutlet weak var mainTitleLabel: UILabel!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+}
 
-        // Configure the view for the selected state
-    }
 
+class SideBarTitleCell: UITableViewCell {
+    
+    @IBOutlet weak var mainLabel: UILabel!
 }

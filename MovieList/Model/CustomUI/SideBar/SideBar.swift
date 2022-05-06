@@ -11,6 +11,7 @@ import UIKit
 class SideBar: UIView {
     
     var tableData:[TableData] = []
+    let sectionsBeforeData = 1
     
     func getData(){
 
@@ -27,9 +28,17 @@ class SideBar: UIView {
                                              digitsCount: 0)
         let yearCell:SliderCellData = .init(range: yearData, newPosition: newYearRange(_:))
         
+        let genres = ["one", "two", "three four", "five", "six", "seven", "ten", "nine", "eleven", "twelve", "theretheen"]
+        var ganrs : [CollectionCellData.ColldetionData] = []
+        for ganr in genres {
+            ganrs.append(.init(name: ganr))
+        }
+        let genresCell:CollectionCellData = .init(collectionData: ganrs, selected: genreSelected(_:))
+        
         tableData = [
-            .init(cells: imdbCell, title: "imdb rating", hidden: false),
-            .init(cells: yearCell, title: "year range", hidden: false)
+            .init(cells: imdbCell, title: "imdb rating"),
+            .init(cells: yearCell, title: "year range"),
+            .init(cells: genresCell, title: "genre")
         ]
         
         DispatchQueue.main.async {
@@ -53,22 +62,25 @@ class SideBar: UIView {
     
     
     
+    
 
-    struct TableData {
-        let cells: Any
-        let title: String
-        let hidden: Bool
-    }
     
-    struct SliderCellData {
-        let range:RangeSliderView
-        let newPosition: ((Double, Double)) -> ()
-    }
-    
-    struct CollectionCellData {
-        let collectionData:[String]
-        let selected: (Int) -> ()
-    }
 }
 
 
+
+extension SideBar {
+    func newImdbRange(_ newValue:(Double, Double)) {
+        print(#function, ": ", newValue)
+        LocalDB.Filter.imdbRating = .init(from: newValue.0, to: newValue.1)
+    }
+    
+    func newYearRange(_ newValue:(Double, Double)) {
+        print(#function, ": ", newValue)
+        LocalDB.Filter.yearRating = .init(from: newValue.0, to: newValue.1)
+    }
+    
+    func genreSelected(_ at:Int) {
+        
+    }
+}

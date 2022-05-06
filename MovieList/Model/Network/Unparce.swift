@@ -42,6 +42,7 @@ class Unparce {
             if let jsonElement = arrey[i] as? NSDictionary {
                 if let dict = jsonElement as? [String : Any] {
                     let movie = Movie(dict: dict)
+                    let release = dict[""]
                     if movie.filterValidation() {
                         result.append(movie)
                     }

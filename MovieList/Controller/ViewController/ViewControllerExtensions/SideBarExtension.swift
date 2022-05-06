@@ -7,17 +7,6 @@
 
 import UIKit
 
-extension SideBar {
-    func newImdbRange(_ newValue:(Double, Double)) {
-        print(#function, ": ", newValue)
-        LocalDB.Filter.imdbRating = .init(from: newValue.0, to: newValue.1)
-    }
-    
-    func newYearRange(_ newValue:(Double, Double)) {
-        print(#function, ": ", newValue)
-        LocalDB.Filter.yearRating = .init(from: newValue.0, to: newValue.1)
-    }
-}
 
 
 extension ViewController {
@@ -62,4 +51,6 @@ extension ViewController {
         }
     }
 
+    
+    
 }
