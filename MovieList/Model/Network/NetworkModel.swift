@@ -11,14 +11,16 @@ class NetworkModel {
 
     var maxPage = 490
     
-    func getMovies(page:Int, completion:@escaping([Movie], Bool) -> ()) {
+    func getMovies(page:Int, completion:@escaping([Movie], Bool, Int) -> ()) {
         loadSQLMovies { sqlMovies, error in
-            if let movies = self.movieFor(page: page, list: sqlMovies) {
-                completion(movies, error)
+            let data = self.movieFor(page: page, list: sqlMovies)
+            print(data.lastPage, "datadatadatadatadatadatadatadata")
+            if let moviesData = data.movies {
+                completion(moviesData, error, data.lastPage)
             } else {
                 self.updateDBwithApi(page: page) { apiMovies, apiError in
                     let resultMovies:[Movie] = apiMovies.count == 0 ? (sqlMovies.randomElement()?.movie ?? []) : apiMovies
-                    completion(resultMovies, apiError)
+                    completion(resultMovies, apiError, data.lastPage)
                 }
             }
         }
@@ -94,15 +96,34 @@ class NetworkModel {
         }
     }
     
+    var moviesCount = 0
     
-    
-    private func movieFor(page:Int, list:[MovieList]) -> [Movie]? {
-        for item in list {
-            if item.page == page {
-                return item.movie
+    private func movieFor(page:Int, list:[MovieList]) -> (movies: [Movie]?, lastPage:Int) {
+        var result:[Movie] = []
+        moviesCount = list.count
+        let sorted = list.sorted { $0.page < $1.page }
+        //.sorted { Double($0.value) ?? 0.0 < Double($1.value) ?? 0.0 }
+        for i in 0..<sorted.count {
+            print("pageee ", sorted[i].page, "movies count: ", sorted[i].movie.count)
+            if sorted[i].page == page {
+                result = result + (sorted[i].movie)
+                if result.count >= 50 {
+                    print("pageee return ", sorted[i].page)
+                    return (result, sorted[i].page)
+                }
+            } else {
+                if sorted[i].page > page {
+                    result = result + (sorted[i].movie)
+                    if result.count >= 50 {
+                        print("pageee return ", sorted[i].page)
+                        return (result, sorted[i].page)
+                    }
+                }
             }
+            
         }
-        return nil
+        print("isResulttt")
+        return (result, 0)
     }
     
     var mySqlMovieList:Data?

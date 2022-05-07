@@ -20,7 +20,8 @@ class ViewController: UIViewController {
     let load = NetworkModel()
     var _tableData:[Movie] = []
     
-    var page:Int = 0
+    var _page:Int = 0
+    var _selectedMovie:Movie?
     var downloading = false
     var refresh:UIRefreshControl?
     var firstDispleyingPage:Int?
@@ -32,6 +33,7 @@ class ViewController: UIViewController {
     var wasShowingSideBar = false
     var beginScrollPosition:CGFloat = 0
     var sideBarShowing = false
+    var stopDownloading = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +47,11 @@ class ViewController: UIViewController {
         sideBar.load()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        sideBar.getData()
+    }
+    
     private var subviewsLayoued = false
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -81,25 +88,24 @@ class ViewController: UIViewController {
         }
 
         let calcPage = page ?? (UserDefaults.standard.value(forKey: "page") as? Int ?? 1)
-        self.page = calcPage <= 0 || calcPage >= (self.load.maxPage + 10) ? 0 : calcPage
+        let loadingPage = calcPage <= 0 || calcPage >= (self.load.maxPage + 10) ? 0 : calcPage
+        
         print(self.page, "pagepagepagepagepage")
         if firstDispleyingPage == nil || self.page == 0 {
             firstDispleyingPage = self.page
         }
         DispatchQueue.init(label: "download", qos: .userInitiated).async {
-            self.load.getMovies(page: self.page) { movies, error in
-                UserDefaults.standard.setValue(page, forKey: "page")
-                DispatchQueue.main.async {
-                    self.pageLabel.text = "\(self.page)"
+            self.load.getMovies(page: loadingPage) { movies, error, newPage in
+                if ((newPage + 1) >= self.load.moviesCount) || (loadingPage > newPage) {
+                    self.stopDownloading = true
                 }
-                var i = 0
+                self.page = newPage
                 self.loading = false
                 for movie in movies {
                     self.load.image(for: movie.imageURL) { data in
                         movie.image = data
                         self.tableData.append(movie)
                     }
-                    i += 1
                 }
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
@@ -118,7 +124,7 @@ class ViewController: UIViewController {
     }
 
     func getRandom() {
-        load.getMovies(page: Int.random(in: 0..<load.maxPage)) { movies, error in
+        load.getMovies(page: Int.random(in: 0..<load.maxPage)) { movies, error, newPage  in
             if let random = movies.randomElement() {
                 self.selectedMovie = random
             } else {
@@ -135,7 +141,11 @@ class ViewController: UIViewController {
         download(new)
     }
     
-    var _selectedMovie:Movie?
+    
+    
+    
+    
+    
     var selectedMovie:Movie? {
         get { return _selectedMovie}
         set {
@@ -147,6 +157,31 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    
+    
+    
+    
+    
+    var page:Int {
+        get {
+            return _page
+        }
+        set {
+            _page = newValue
+            UserDefaults.standard.setValue(newValue, forKey: "page")
+            print("newPage: ", newValue)
+            DispatchQueue.main.async {
+                self.pageLabel.text = "\(newValue)"
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if sideBarShowing {
             self.toggleSideBar(false, animated: true)

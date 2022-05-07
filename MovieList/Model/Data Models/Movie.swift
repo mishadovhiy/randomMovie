@@ -31,6 +31,16 @@ class Movie {
         self.dict = dict
     }
     
+    func filterValidation() -> Bool {
+        if self.imageURL != "" &&
+            self.validateRange(release: true) &&
+            self.validateRange(release: false)
+        {
+            return true
+        } else {
+            return false
+        }
+    }
     
     var type:MovieType {
         let str = self.dict["type"] as? String ?? ""
@@ -63,16 +73,7 @@ class Movie {
     }
 
     
-    func filterValidation() -> Bool {
-        if self.imageURL != "" &&
-            self.validateRange(release: true) &&
-            self.validateRange(release: false)
-        {
-            return true
-        } else {
-            return false
-        }
-    }
+    
     
     
     

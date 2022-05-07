@@ -45,7 +45,7 @@ extension ViewController:UICollectionViewDelegate, UICollectionViewDataSource, U
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LoadingCollectionCell", for: indexPath) as! LoadingCollectionCell
-            cell.ai.startAnimating()
+            cell.setCell(animating: !stopDownloading)
             return cell
         default:
             return UICollectionViewCell()
@@ -53,13 +53,30 @@ extension ViewController:UICollectionViewDelegate, UICollectionViewDataSource, U
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
+        if indexPath.section == 1 && !stopDownloading {
+          //  page += 1
             download(page + 1)
         }
     }
     
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedMovie = tableData[indexPath.row]
+        switch indexPath.section {
+        case 0:
+            selectedMovie = tableData[indexPath.row]
+        case 1:
+            if stopDownloading {
+                stopDownloading = false
+                DispatchQueue.main.async {
+                    collectionView.reloadData()
+                }
+                if tableData.count > 50 {
+                    tableData = []
+                }
+            }
+        default:
+            break
+        }
+        
     }
 }

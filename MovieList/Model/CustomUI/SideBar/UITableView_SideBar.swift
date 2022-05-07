@@ -46,14 +46,15 @@ extension SideBar: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let section = indexPath.section == 0 ? 0 : (indexPath.section - sectionsBeforeData)
-        if let data = tableData[section].cells as? CollectionCellData {
-            let numOfSections = data.collectionData.count / 3
-            let result = numOfSections * 50
-            return CGFloat(result)
-            
-        } else {
-            return UITableView.automaticDimension
+        if indexPath.section != 0 {
+            if let data = tableData[section].cells as? CollectionCellData {
+                let numOfSections = data.collectionData.count / 3
+                let result = numOfSections * 50
+                return CGFloat(result)
+                
+            }
         }
+        return UITableView.automaticDimension
     }
     
     

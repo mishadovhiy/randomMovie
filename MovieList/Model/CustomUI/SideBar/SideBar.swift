@@ -50,14 +50,10 @@ class SideBar: UIView {
 
     
     func load() {
-        DispatchQueue.main.async {
-            if ViewController.shared?.sideBarTable.delegate == nil {
-                ViewController.shared?.sideBarTable.delegate = self
-                ViewController.shared?.sideBarTable.dataSource = self
-            }
-            
+        if ViewController.shared?.sideBarTable.delegate == nil {
+            ViewController.shared?.sideBarTable.delegate = self
+            ViewController.shared?.sideBarTable.dataSource = self
         }
-        getData()
     }
     
     

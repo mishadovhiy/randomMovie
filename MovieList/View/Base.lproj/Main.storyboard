@@ -331,17 +331,29 @@
                                                             <rect key="frame" x="150" y="54" width="20" height="20"/>
                                                             <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </activityIndicatorView>
+                                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oeJ-OB-LAQ">
+                                                            <rect key="frame" x="10" y="92" width="300" height="36"/>
+                                                            <string key="text">Press to
+Resume downloading</string>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="Aw7-b1-rnc" firstAttribute="centerX" secondItem="hHj-JM-Mtd" secondAttribute="centerX" id="6qS-CS-gND"/>
                                                         <constraint firstItem="Aw7-b1-rnc" firstAttribute="centerY" secondItem="hHj-JM-Mtd" secondAttribute="centerY" id="AyH-x7-0cL"/>
+                                                        <constraint firstAttribute="bottom" secondItem="oeJ-OB-LAQ" secondAttribute="bottom" id="FYI-bO-d1s"/>
+                                                        <constraint firstAttribute="trailing" secondItem="oeJ-OB-LAQ" secondAttribute="trailing" constant="10" id="QMd-Hd-jPD"/>
+                                                        <constraint firstItem="oeJ-OB-LAQ" firstAttribute="leading" secondItem="hHj-JM-Mtd" secondAttribute="leading" constant="10" id="hAR-fk-jak"/>
                                                     </constraints>
                                                 </collectionViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <size key="customSize" width="320" height="128"/>
                                                 <connections>
                                                     <outlet property="ai" destination="Aw7-b1-rnc" id="hcV-bI-Zsj"/>
+                                                    <outlet property="mainLabel" destination="oeJ-OB-LAQ" id="o5w-ow-U8x"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>
@@ -540,6 +552,9 @@
     <designables>
         <designable name="6vo-Jr-PrN">
             <size key="intrinsicContentSize" width="31" height="14.5"/>
+        </designable>
+        <designable name="NJU-BO-GEC">
+            <size key="intrinsicContentSize" width="28.5" height="25"/>
         </designable>
         <designable name="Zte-2U-iMa">
             <size key="intrinsicContentSize" width="24" height="11"/>
