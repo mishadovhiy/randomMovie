@@ -25,6 +25,7 @@ extension SideBar {
         
         struct ColldetionData {
             let name:String
+            let ignored:Bool
         }
     }
     

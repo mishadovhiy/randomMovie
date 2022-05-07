@@ -77,6 +77,15 @@ extension LocalDB {
             }
         }
         
+        static var allGenres = ["Horror", "Comedy", "Drama", "Romance", "Sci-Fi", "Thriller", "Action", "Fantasy", "History", "Biography", "War", "Sport", "Adventure", "Crime", "Mystery", "Family", "Animation", "Music", "Musical", "Adult", "Western", "Documentary"]
+        static var ignoredGenres:[String:Bool] {
+            get {
+                return LocalDB.Filter.dictionary["ignoredGenres"] as? [String:Bool] ?? [:]
+            }
+            set {
+                LocalDB.Filter.dictionary.updateValue(newValue, forKey: "ignoredGenres")
+            }
+        }
         
         struct Rating {
             let from:Double

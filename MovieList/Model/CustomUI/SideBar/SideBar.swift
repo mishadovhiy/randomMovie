@@ -28,10 +28,12 @@ class SideBar: UIView {
                                              digitsCount: 0)
         let yearCell:SliderCellData = .init(range: yearData, newPosition: newYearRange(_:))
         
-        let genres = ["one", "two", "three four", "five", "six", "seven", "ten", "nine", "eleven", "twelve", "theretheen"]
+        let genres = LocalDB.Filter.allGenres
         var ganrs : [CollectionCellData.ColldetionData] = []
+        let ignoredList = LocalDB.Filter.ignoredGenres
         for ganr in genres {
-            ganrs.append(.init(name: ganr))
+            let ignored = ignoredList[ganr] ?? false
+            ganrs.append(.init(name: ganr, ignored: ignored))
         }
         let genresCell:CollectionCellData = .init(collectionData: ganrs, selected: genreSelected(_:))
         
@@ -55,11 +57,6 @@ class SideBar: UIView {
             ViewController.shared?.sideBarTable.dataSource = self
         }
     }
-    
-    
-    
-    
-
     
 }
 

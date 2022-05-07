@@ -56,7 +56,7 @@ class MovieVC: UIViewController {
     }
     
     func tempDescr(_ movie:Movie) -> String {
-        return "Genres: \(tempArrey(movie.genre))\n" + "imdb: \(movie.imdbrating)\n" + "relaesed: \(movie.released)\n" + "type: \(movie.type.rawValue)"
+        return "Genres: \(tempArrey(movie.genre))\n" + "imdb: \(movie.imdbrating)\n" + "relaesed: \(movie.released)\n"
     }
     
     

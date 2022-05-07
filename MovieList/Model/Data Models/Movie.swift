@@ -34,7 +34,8 @@ class Movie {
     func filterValidation() -> Bool {
         if self.imageURL != "" &&
             self.validateRange(release: true) &&
-            self.validateRange(release: false)
+            self.validateRange(release: false) &&
+            self.validateGanre()
         {
             return true
         } else {
@@ -76,7 +77,18 @@ class Movie {
     
     
     
-    
+    private func validateGanre() -> Bool {
+        let ignoredList = LocalDB.Filter.ignoredGenres
+        var result = false
+        let movieGanres = self.genre
+        for i in 0..<movieGanres.count {
+            let ignored = ignoredList[movieGanres[i]] ?? false
+            if !ignored {
+                result = true
+            }
+        }
+        return result
+    }
     
     private func validateRange(release:Bool) -> Bool {
         if release {
