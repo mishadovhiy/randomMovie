@@ -146,7 +146,7 @@ class NetworkModel {
             mySqlMovieList = data
         }
         let jsonResult = Unparce.jsonDataArray(data)
-        return Unparce.json(jsonResult) ?? []
+        return Unparce.movieList(jsonResult) ?? []
     }
 
     

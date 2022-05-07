@@ -10,7 +10,7 @@ import UIKit
 class Unparce {
     
     
-    static func json(_ jsonArrey:NSArray?) -> [MovieList]? {
+    static func movieList(_ jsonArrey:NSArray?) -> [MovieList]? {
         guard let arrey = jsonArrey else {
             return nil
         }

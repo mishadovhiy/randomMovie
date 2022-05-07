@@ -141,8 +141,8 @@
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="QiE-t9-KD5" secondAttribute="bottom" constant="10" id="0BI-f8-rk7"/>
-                                                        <constraint firstAttribute="trailing" secondItem="QiE-t9-KD5" secondAttribute="trailing" constant="5" id="kKX-v7-Z0A"/>
-                                                        <constraint firstItem="QiE-t9-KD5" firstAttribute="leading" secondItem="DNf-TV-Apn" secondAttribute="leading" constant="5" id="yFp-yE-knD"/>
+                                                        <constraint firstAttribute="trailing" secondItem="QiE-t9-KD5" secondAttribute="trailing" constant="10" id="kKX-v7-Z0A"/>
+                                                        <constraint firstItem="QiE-t9-KD5" firstAttribute="leading" secondItem="DNf-TV-Apn" secondAttribute="leading" constant="10" id="yFp-yE-knD"/>
                                                         <constraint firstItem="QiE-t9-KD5" firstAttribute="top" secondItem="DNf-TV-Apn" secondAttribute="top" constant="5" id="z0P-AS-FfY"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
@@ -377,7 +377,7 @@ Resume downloading</string>
                                     <constraint firstAttribute="trailing" secondItem="6Cv-0e-yXA" secondAttribute="trailing" id="rUz-i2-rTr"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NOV-RQ-7DQ">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NOV-RQ-7DQ">
                                 <rect key="frame" x="5" y="39" width="6.5" height="12"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

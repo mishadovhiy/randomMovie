@@ -96,9 +96,11 @@ class ViewController: UIViewController {
         }
         DispatchQueue.init(label: "download", qos: .userInitiated).async {
             self.load.getMovies(page: loadingPage) { movies, error, newPage in
+                print(error, " errorrrr")
                 if ((newPage + 1) >= self.load.moviesCount) || (loadingPage > newPage) {
                     self.stopDownloading = true
                 }
+                self.tableData = self.prepareTableData(loadedCount: movies.count)
                 self.page = newPage
                 self.loading = false
                 for movie in movies {
@@ -119,6 +121,26 @@ class ViewController: UIViewController {
     }
     
 
+    func prepareTableData(loadedCount:Int) -> [Movie] {
+        let data = tableData
+        var result:[Movie] = []
+        if data.count >= 1000 {
+            for i in 0..<data.count {
+                if i > 850 {
+                    result.append(data[i])
+                }
+            }
+            return result
+        } else {
+            if loadedCount < 40 && data.count < 40 {
+                return []
+            } else {
+                return data
+            }
+        }
+    }
+    
+    
     @IBAction func randomPressed(_ sender: Any) {
         getRandom()
     }
@@ -171,9 +193,6 @@ class ViewController: UIViewController {
             _page = newValue
             UserDefaults.standard.setValue(newValue, forKey: "page")
             print("newPage: ", newValue)
-            DispatchQueue.main.async {
-                self.pageLabel.text = "\(newValue)"
-            }
         }
     }
     
