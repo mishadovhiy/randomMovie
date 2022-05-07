@@ -10,8 +10,6 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var mainContentView: UIView!
-    @IBOutlet weak var sideBarPinchView: UIView!
-    @IBOutlet weak var sideBarTable: UITableView!
     @IBOutlet weak var shakeButton: Button!
     @IBOutlet weak var pageLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -29,6 +27,8 @@ class ViewController: UIViewController {
     
     //sideBar
     @IBOutlet weak var sideBar: SideBar!
+    @IBOutlet weak var sideBarPinchView: UIView!
+    @IBOutlet weak var sideBarTable: UITableView!
     var sidescrolling = false
     var wasShowingSideBar = false
     var beginScrollPosition:CGFloat = 0
@@ -37,15 +37,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ViewController.shared = self
-
-        sideBarPinchView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(sideBarPinched(_:))))
-        self.collectionView.delegate = self
-        self.collectionView.dataSource = self
-        self.collectionView.doubleView()
-        download()
-        sideBar.load()
+        updateUI(for: screenType)
     }
+    
+
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -63,6 +58,24 @@ class ViewController: UIViewController {
         }
         
     }
+    
+    
+    func updateUI(for type: ScreenType) {
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        self.collectionView.doubleView()
+        
+        switch type {
+        case .all:
+            ViewController.shared = self
+            sideBarPinchView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(sideBarPinched(_:))))
+            download()
+            sideBar.load()
+        case .favorite:
+            self.tableData = LocalDB.favoriteMovies
+        }
+    }
+    
     
     var tableData:[Movie] {
         get {
@@ -146,14 +159,23 @@ class ViewController: UIViewController {
     }
 
     func getRandom() {
-        load.getMovies(page: Int.random(in: 0..<load.maxPage)) { movies, error, newPage  in
+        switch screenType {
+        case .favorite:
+            let movies = LocalDB.favoriteMovies
             if let random = movies.randomElement() {
                 self.selectedMovie = random
-            } else {
-                self.getRandom()
             }
             
+        case .all:
+            load.getMovies(page: Int.random(in: 0..<load.maxPage)) { movies, error, newPage  in
+                if let random = movies.randomElement() {
+                    self.selectedMovie = random
+                } else {
+                    self.getRandom()
+                }
+            }
         }
+        
     }
     
     
@@ -259,6 +281,27 @@ class ViewController: UIViewController {
                     self.shakeButton.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, position, 0)
                 }
             }
+        }
+    }
+    
+    var screenType:ScreenType = .all
+    enum ScreenType {
+        case all
+        case favorite
+    }
+    
+    @IBAction func favoritesPressed(_ sender: Button) {
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "MovieList") as! ViewController
+            vc.screenType = .favorite
+            vc.modalPresentationStyle = .formSheet
+            self.present(vc, animated: true)
+            
+            if self.sideBarShowing {
+                self.toggleSideBar(false, animated: true)
+            }
+            
         }
     }
     

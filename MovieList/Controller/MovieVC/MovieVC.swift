@@ -13,6 +13,7 @@ class MovieVC: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var additionalLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var heartButton: Button!
     
     var movie:Movie?
     
@@ -24,6 +25,9 @@ class MovieVC: UIViewController {
             textView.text = movie.about
             additionalLabel.text = tempDescr(movie)
             nameLabel.text = movie.name
+            if let _ = LocalDB.favoriteMovieID[movie.imdbid] {
+                self.heartButton.tintColor = .red
+            }
             DispatchQueue.init(label: "load", qos: .userInitiated).async {
                 load.image(for: movie.imageURL, completion: { data in
                     if let imageData = data {
@@ -69,4 +73,18 @@ class MovieVC: UIViewController {
         return result
     }
 
+    @IBAction func favoritesPressed(_ sender: UIButton) {
+        if let movie = movie {
+            var movieFav:UIColor = .systemGray
+            if let _ = LocalDB.favoriteMovieID[movie.imdbid] {
+                LocalDB.favoriteMovieID.removeValue(forKey: movie.imdbid)
+            } else {
+                movieFav = .red
+                LocalDB.favoriteMovieID.updateValue(movie.dict, forKey: movie.imdbid)
+            }
+            DispatchQueue.main.async {
+                self.heartButton.tintColor = movieFav
+            }
+        }
+    }
 }

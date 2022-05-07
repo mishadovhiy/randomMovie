@@ -13,16 +13,16 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MovieList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MovieList" id="BYZ-38-t0r" customClass="ViewController" customModule="MovieList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lei-AX-9gj" customClass="SideBar" customModule="MovieList" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="270" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="270" height="862"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="B5g-6J-Uj1">
-                                        <rect key="frame" x="0.0" y="0.0" width="265" height="896"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="265" height="817"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -221,11 +221,39 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cab-5n-z3u">
+                                        <rect key="frame" x="5" y="822" width="40" height="40"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xWS-XS-1o6" customClass="Button" customModule="MovieList" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                <color key="backgroundColor" red="1" green="0.7337169812267188" blue="0.57252625686929615" alpha="0.070000000000000007" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="32T-Pj-Iue"/>
+                                                    <constraint firstAttribute="width" constant="40" id="leW-gt-Lkw"/>
+                                                </constraints>
+                                                <color key="tintColor" systemColor="systemRedColor"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" image="heart.fill" catalog="system">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="23"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="favoritesPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Pnx-cY-rvr"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="cab-5n-z3u" firstAttribute="leading" secondItem="lei-AX-9gj" secondAttribute="leading" constant="5" id="9pV-4g-8Tt"/>
+                                    <constraint firstItem="cab-5n-z3u" firstAttribute="top" secondItem="B5g-6J-Uj1" secondAttribute="bottom" constant="5" id="Fg3-le-mds"/>
                                     <constraint firstItem="B5g-6J-Uj1" firstAttribute="top" secondItem="lei-AX-9gj" secondAttribute="top" id="Ta8-nK-Lp8"/>
-                                    <constraint firstAttribute="bottom" secondItem="B5g-6J-Uj1" secondAttribute="bottom" id="aMo-85-MBa"/>
+                                    <constraint firstAttribute="bottom" secondItem="cab-5n-z3u" secondAttribute="bottom" id="Vdf-dQ-9ji"/>
                                     <constraint firstAttribute="width" constant="270" id="cQN-69-ocV"/>
                                     <constraint firstItem="B5g-6J-Uj1" firstAttribute="leading" secondItem="lei-AX-9gj" secondAttribute="leading" id="kak-sk-D4u"/>
                                     <constraint firstAttribute="trailing" secondItem="B5g-6J-Uj1" secondAttribute="trailing" constant="5" id="w1z-Iz-jyn"/>
@@ -384,10 +412,13 @@ Resume downloading</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xvl-kn-2Cy" customClass="Button" customModule="MovieList" customModuleProvider="target">
-                                <rect key="frame" x="254" y="46" width="156" height="41"/>
+                                <rect key="frame" x="254" y="46" width="156" height="40"/>
                                 <color key="backgroundColor" red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Acm-lt-CZD"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
+                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Random movie">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -415,7 +446,7 @@ Resume downloading</string>
                             <constraint firstItem="lei-AX-9gj" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="NHb-76-2Rc"/>
                             <constraint firstItem="hHY-LZ-u9T" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="VcZ-h7-w14"/>
                             <constraint firstItem="xvl-kn-2Cy" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="2" id="ioQ-Fw-E4Q"/>
-                            <constraint firstAttribute="bottom" secondItem="lei-AX-9gj" secondAttribute="bottom" id="ksG-FG-Y31"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="lei-AX-9gj" secondAttribute="bottom" id="kEA-rr-sQ3"/>
                             <constraint firstAttribute="trailing" secondItem="hHY-LZ-u9T" secondAttribute="trailing" id="ukO-uk-Nr6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xvl-kn-2Cy" secondAttribute="trailing" constant="4" id="wbM-iS-O7t"/>
                             <constraint firstAttribute="bottom" secondItem="hHY-LZ-u9T" secondAttribute="bottom" id="zi1-x8-y2i"/>
@@ -434,7 +465,7 @@ Resume downloading</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="20" y="23"/>
+            <point key="canvasLocation" x="18.840579710144929" y="22.767857142857142"/>
         </scene>
         <!--MovieVC-->
         <scene sceneID="R0r-cm-bXT">
@@ -482,20 +513,6 @@ Resume downloading</string>
                                     <action selector="imdbPressed:" destination="GeP-ju-G10" eventType="touchUpInside" id="2Fg-QF-dRJ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJU-BO-GEC" customClass="Button" customModule="MovieList" customModuleProvider="target">
-                                <rect key="frame" x="80" y="212.5" width="28.5" height="25"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="heart.fill" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="23"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="6"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6Cu-tL-s30">
                                 <rect key="frame" x="10" y="57.5" width="394" height="180"/>
                                 <subviews>
@@ -515,6 +532,18 @@ Resume downloading</string>
                                     </label>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJU-BO-GEC" userLabel="heart" customClass="Button" customModule="MovieList" customModuleProvider="target">
+                                <rect key="frame" x="80" y="213.5" width="28.5" height="24"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="heart.fill" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="23"/>
+                                </state>
+                                <connections>
+                                    <action selector="favoritesPressed:" destination="GeP-ju-G10" eventType="touchUpInside" id="oAa-Jf-pUH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="EWZ-rG-0I4"/>
                         <color key="backgroundColor" red="0.086995232965528357" green="0.086995232965528357" blue="0.086995232965528357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -539,6 +568,7 @@ Resume downloading</string>
                     <navigationItem key="navigationItem" id="pUh-v0-TNi"/>
                     <connections>
                         <outlet property="additionalLabel" destination="1QR-40-292" id="7Na-QF-8hU"/>
+                        <outlet property="heartButton" destination="NJU-BO-GEC" id="8FK-lk-0mr"/>
                         <outlet property="movieImage" destination="Z2M-Ax-gXL" id="zlg-23-E0P"/>
                         <outlet property="nameLabel" destination="VEg-PN-xfp" id="ljA-LT-lqR"/>
                         <outlet property="textView" destination="xg3-6t-RAj" id="gme-Sb-Tow"/>
@@ -554,7 +584,7 @@ Resume downloading</string>
             <size key="intrinsicContentSize" width="31" height="14.5"/>
         </designable>
         <designable name="NJU-BO-GEC">
-            <size key="intrinsicContentSize" width="28.5" height="25"/>
+            <size key="intrinsicContentSize" width="28.5" height="24"/>
         </designable>
         <designable name="Zte-2U-iMa">
             <size key="intrinsicContentSize" width="24" height="11"/>
@@ -563,12 +593,15 @@ Resume downloading</string>
             <size key="intrinsicContentSize" width="35" height="30"/>
         </designable>
         <designable name="xvl-kn-2Cy">
-            <size key="intrinsicContentSize" width="156" height="41"/>
+            <size key="intrinsicContentSize" width="156" height="21"/>
         </designable>
     </designables>
     <resources>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="photo.fill" catalog="system" width="128" height="93"/>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="tintColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

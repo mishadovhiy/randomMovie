@@ -7,8 +7,6 @@
 
 import UIKit
 
-
-
 extension ViewController {
     
     @objc func sideBarPinched(_ sender: UIPanGestureRecognizer) {

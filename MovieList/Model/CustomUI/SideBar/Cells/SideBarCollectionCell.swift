@@ -50,7 +50,8 @@ extension SideBarCollectionCell:UICollectionViewDelegate, UICollectionViewDataSo
         let igoneredList = LocalDB.Filter.ignoredGenres
         let ignored = igoneredList[data[indexPath.row].name] ?? false
         LocalDB.Filter.ignoredGenres.updateValue(!ignored, forKey: data[indexPath.row].name)
-        ViewController.shared?.sideBar.getData()
+        data[indexPath.row].ignored = !ignored
+       // self.collectionView.reloadData()
     }
 }
 

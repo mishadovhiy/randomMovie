@@ -10,7 +10,7 @@ import UIKit
 extension ViewController:UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return screenType == .all ? 2 : 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -18,7 +18,7 @@ extension ViewController:UICollectionViewDelegate, UICollectionViewDataSource, U
         case 0:
             return tableData.count
         case 1:
-            return 1
+            return screenType == .all ? 1 : 0
         default:
             return 0
         }
@@ -54,7 +54,6 @@ extension ViewController:UICollectionViewDelegate, UICollectionViewDataSource, U
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.section == 1 && !stopDownloading {
-          //  page += 1
             download(page + 1)
         }
     }

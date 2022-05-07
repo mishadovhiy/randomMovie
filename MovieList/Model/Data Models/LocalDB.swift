@@ -27,7 +27,33 @@ struct LocalDB {
         }
     }
     
-    
+    static var favoriteMovieID: [String:Any] {
+        get {
+            return UserDefaults.standard.value(forKey: "favoriteMovie") as? [String:Any] ?? [:]
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "favoriteMovie")
+        }
+    }
+    static var favoriteMovies: [Movie] {
+        get {
+            let movieListDB = UserDefaults.standard.value(forKey: "favoriteMovie") as? [String:Any] ?? [:]
+            var result:[Movie] = []
+            for (key, movieAny) in movieListDB {
+                if let movie = movieAny as? [String:Any] {
+                    result.append(.init(dict: movie))
+                }
+            }
+            return result
+        }
+        set {
+            var result:[String:Any] = [:]
+            for movie in newValue {
+                result.updateValue(movie.dict, forKey: movie.imdbid)
+            }
+            UserDefaults.standard.setValue(result, forKey: "favoriteMovie")
+        }
+    }
 }
 
 
@@ -48,15 +74,19 @@ extension LocalDB {
         static var imdbRating:Rating {
             get {
                 let imdb = LocalDB.Filter.dictionary["imdb"] as? [String:String] ?? [:]
-                return .init(from: Double.init(imdb["from"] ?? "4") ?? 0.0,
-                             to: Double.init(imdb["to"] ?? "10") ?? 0.0)
+                let from = Double.init(imdb["from"] ?? "4") ?? 0.0
+                let to = Double.init(imdb["to"] ?? "10") ?? 0.0
+                print("imdbRating from: ",from, " to:", to, "\ndict: ", imdb)
+                return .init(from: from,
+                             to: to)
             }
             set {
                 let new = [
-                    "from":String.init(decimalsCount: 3, from: newValue.from),
-                    "to":String.init(decimalsCount: 3, from: newValue.to)
+                    "from":"\(newValue.from)",
+                    "to":"\(newValue.to)",
                 ]
                 LocalDB.Filter.dictionary.updateValue(new, forKey: "imdb")
+                print(new, " newValueSetted imdbRating")
             }
         }
 

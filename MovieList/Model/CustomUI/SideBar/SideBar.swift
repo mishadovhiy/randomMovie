@@ -19,14 +19,14 @@ class SideBar: UIView {
                                              selectedMin: LocalDB.Filter.imdbRating.from,
                                              selectedMax: LocalDB.Filter.imdbRating.to,
                                              digitsCount: 1)
-        let imdbCell:SliderCellData = .init(range: imdbData, newPosition: newImdbRange(_:))
+        let imdbCell:SliderCellData = .init(range: imdbData, newPosition: newImdbRange)
         
 
         let yearData:RangeSliderView = .init(min: 1980, max: 2022,
                                              selectedMin: LocalDB.Filter.yearRating.from,
                                              selectedMax: LocalDB.Filter.yearRating.to,
                                              digitsCount: 0)
-        let yearCell:SliderCellData = .init(range: yearData, newPosition: newYearRange(_:))
+        let yearCell:SliderCellData = .init(range: yearData, newPosition: newYearRange)
         
         let genres = LocalDB.Filter.allGenres
         var ganrs : [CollectionCellData.ColldetionData] = []
@@ -66,14 +66,16 @@ extension SideBar {
     func newImdbRange(_ newValue:(Double, Double)) {
         print(#function, ": ", newValue)
         LocalDB.Filter.imdbRating = .init(from: newValue.0, to: newValue.1)
+        //getData()
     }
     
     func newYearRange(_ newValue:(Double, Double)) {
         print(#function, ": ", newValue)
         LocalDB.Filter.yearRating = .init(from: newValue.0, to: newValue.1)
+      //  getData()
     }
     
     func genreSelected(_ at:Int) {
-        
+        print(#function, ": ", at)
     }
 }

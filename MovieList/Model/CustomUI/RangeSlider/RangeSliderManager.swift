@@ -28,11 +28,12 @@ class RangeSliderManager {
     init(view:UIView,
          range:RangeSliderView,
          newPosition:@escaping ((Double, Double)) -> ()) {
-        
+        print("range slider: to: ", range.selectedMax)
         self.digitsCount = range.digitsCount
         self.minValue = range.min
         self.maxValue = range.max
         self.thumbtimeSeconds = Int(range.selectedMax)
+        self.selectedMaxValue = range.selectedMax
         self.view = view
         self.newPosition = newPosition
         
@@ -42,6 +43,7 @@ class RangeSliderManager {
         rangeSlider.sendActions(for: .valueChanged)
     }
 
+    var selectedMaxValue:Double = 0.0
     func rangeAppeared(data:RangeSliderView) {
         self.digitsCount = data.digitsCount
         self.minValue = data.min
@@ -106,7 +108,7 @@ class RangeSliderManager {
           
       }
     }
-    
+    var firstLoad = true
     var minValue:Double
     var maxValue:Double
     @objc func rangeSliderValueChanged(_ rangeSlider: RangeSlider) {
@@ -116,13 +118,18 @@ class RangeSliderManager {
       rangeSlider.minimumValue = minValue
       rangeSlider.maximumValue = maxValue
       
-      rangeSlider.upperValue = Double(thumbtimeSeconds)
+        rangeSlider.upperValue = !firstLoad ? Double(thumbtimeSeconds) : self.selectedMaxValue
       isSliderEnd = !isSliderEnd
 
     }
 
         selectedDuration = (rangeSlider.lowerValue, rangeSlider.upperValue)
-        newPosition(selectedDuration)
+        if !firstLoad {
+            newPosition(selectedDuration)
+        } else {
+            firstLoad = false
+        }
+        
         
   }
 }

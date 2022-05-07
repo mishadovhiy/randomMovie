@@ -192,10 +192,10 @@
 		8D81F5962824659C00338946 /* SideBar */ = {
 			isa = PBXGroup;
 			children = (
+				8D81F5992824662400338946 /* Cells */,
 				8D81F5932824658400338946 /* SideBar.swift */,
 				8D81F5A02824679100338946 /* UITableView_SideBar.swift */,
 				8D99FE632825A8AE009AAB71 /* StructsSideBar.swift */,
-				8D81F5992824662400338946 /* Cells */,
 			);
 			path = SideBar;
 			sourceTree = "<group>";
@@ -329,8 +329,8 @@
 			isa = PBXGroup;
 			children = (
 				8DF671D7281F6B0D0064849A /* ViewController.swift */,
-				8D7E3E78281F8C180094F05B /* Cell */,
 				8D7E3E85282043630094F05B /* ViewControllerExtensions */,
+				8D7E3E78281F8C180094F05B /* Cell */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
