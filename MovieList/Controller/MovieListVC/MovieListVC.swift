@@ -113,9 +113,7 @@ class MovieListVC: UIViewController {
         if firstDispleyingPage == nil || self.page == 0 {
             firstDispleyingPage = self.page
         }
-        DispatchQueue.global(qos: .userInitiated).async {
-
-//        DispatchQueue.init(label: "download", qos: .userInitiated).async {
+        DispatchQueue.init(label: "download", qos: .userInitiated).async {
             if self.tableData.count > 1000 {
                 self.tableData.removeSubrange(0..<850)
             }
