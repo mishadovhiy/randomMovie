@@ -55,7 +55,7 @@ class Button: UIButton {
             .init(item: ai, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: self.frame.height)
         ])
         ai.hidesWhenStopped = true
-        ai.isHidden = true//self.isEnabled
+        ai.isHidden = self.isEnabled
       //  if ai.isHidden != self.isEnabled {
       //      ai.isHidden = self.isEnabled
       //  }
