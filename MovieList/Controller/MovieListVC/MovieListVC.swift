@@ -68,7 +68,6 @@ class MovieListVC: UIViewController {
             sectionTitle = "Movie List"
             MovieListVC.shared = self
             sideBarPinchView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(sideBarPinched(_:))))
-            download()
             sideBar.load()
             
         case .favorite:
@@ -89,6 +88,9 @@ class MovieListVC: UIViewController {
             _tableData = newValue
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
+                if self.refresh?.isRefreshing ?? true {
+                    self.refresh?.endRefreshing()
+                }
             }
         }
     }
@@ -111,17 +113,23 @@ class MovieListVC: UIViewController {
         if firstDispleyingPage == nil || self.page == 0 {
             firstDispleyingPage = self.page
         }
-        DispatchQueue.init(label: "download", qos: .userInitiated).async {
+        DispatchQueue.global(qos: .userInitiated).async {
+
+//        DispatchQueue.init(label: "download", qos: .userInitiated).async {
+            if self.tableData.count > 1000 {
+                self.tableData.removeSubrange(0..<850)
+            }
             self.load.getMovies(page: loadingPage) { movies, error, newPage in
                 print(error, " errorrrr")
                 if error && (movies.count == 0) {
                     print("Error and no loaded movies")
-                    
                 }
                 if ((newPage + 1) >= self.load.moviesCount) || (loadingPage > newPage) {
                     self.stopDownloading = true
                 }
-                self.tableData = self.prepareTableData(loadedCount: movies.count)
+                if self.tableData.count < 40 && movies.count < 40 {
+                    self.tableData.removeAll()
+                }
                 self.page = newPage
                 self.loading = false
                 for movie in movies {
@@ -141,20 +149,41 @@ class MovieListVC: UIViewController {
         
     }
     
+    var _moviesWithoutIMG:[Movie] = []
+    var moviesWithoutIMG:[Movie] {
+        get {
+            return _moviesWithoutIMG
+        }
+        set {
+            
+            for movie in newValue {
+                self.load.image(for: movie.imageURL) { data in
+                    movie.image = data
+                    self.tableData.append(movie)
+                }
 
-    func prepareTableData(loadedCount:Int) -> [Movie] {
+            }
+        }
+    }
+
+    func prepareTableData(loadedCount:Int?) -> [Movie] {
+        print(#function)
         let data = tableData
         var result:[Movie] = []
-        if data.count >= 1000 {
-            for i in 0..<data.count {
-                if i > 850 {
-                    result.append(data[i])
-                }
-            }
-            return result
-        } else {
+        if let loadedCount = loadedCount {
             if loadedCount < 40 && data.count < 40 {
                 return []
+            } else {
+                return data
+            }
+        } else {
+            if data.count >= 1000 {
+                for i in 0..<data.count {
+                    if i > 850 {
+                        result.append(data[i])
+                    }
+                }
+                return result
             } else {
                 return data
             }
@@ -163,6 +192,7 @@ class MovieListVC: UIViewController {
     
     
     @IBAction func randomPressed(_ sender: Any) {
+        shakeButton.isEnabled = false
         getRandom()
     }
 
@@ -172,16 +202,23 @@ class MovieListVC: UIViewController {
             let movies = LocalDB.favoriteMovies
             if let random = movies.randomElement() {
                 self.selectedMovie = random
+            } else {
+                DispatchQueue.main.async {
+                    self.shakeButton.isEnabled = true
+                }
             }
             
         case .all:
-            load.getMovies(page: Int.random(in: 0..<load.maxPage)) { movies, error, newPage  in
-                if let random = movies.randomElement() {
-                    self.selectedMovie = random
-                } else {
-                    self.getRandom()
+            DispatchQueue.init(label: "download", qos: .userInitiated).async {
+                self.load.getMovies(page: Int.random(in: 0..<self.load.maxPage)) { movies, error, newPage  in
+                    if let random = movies.randomElement() {
+                        self.selectedMovie = random
+                    } else {
+                        self.getRandom()
+                    }
                 }
             }
+            
         }
         
     }
@@ -205,6 +242,7 @@ class MovieListVC: UIViewController {
             if newValue != nil {
                 DispatchQueue.main.async {
                     self.performSegue(withIdentifier: "toMovie", sender: self)
+                    self.shakeButton.isEnabled = true
                 }
             }
         }
@@ -292,6 +330,7 @@ class MovieListVC: UIViewController {
     
     @IBAction func favoritesPressed(_ sender: Button) {
         DispatchQueue.main.async {
+            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "MovieList") as! MovieListVC
             vc.screenType = .favorite

@@ -33,6 +33,8 @@ class Unparce {
         return result
     }
     
+    //as [string:movie]
+    //return (thecond method): for key valye
     static func json(_ jsonResult:[String:Any]) -> [Movie]? {
         guard let arrey = jsonResult["results"] as? NSArray else {
             return nil

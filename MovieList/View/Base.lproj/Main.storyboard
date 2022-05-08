@@ -498,6 +498,7 @@ Resume</string>
                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowOpasity">
                                         <real key="value" value="0.90000000000000002"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="needAI" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="randomPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cfJ-s6-KSX"/>
