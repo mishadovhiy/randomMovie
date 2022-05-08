@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension ViewController {
+extension MovieListVC {
     
     @objc func sideBarPinched(_ sender: UIPanGestureRecognizer) {
         let finger = sender.location(in: self.view)

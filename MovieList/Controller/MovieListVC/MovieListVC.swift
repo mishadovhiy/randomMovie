@@ -7,14 +7,14 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MovieListVC: UIViewController {
 
     @IBOutlet weak var mainContentView: UIView!
     @IBOutlet weak var shakeButton: Button!
     @IBOutlet weak var pageLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    static var shared:ViewController?
+    static var shared:MovieListVC?
     let load = NetworkModel()
     var _tableData:[Movie] = []
     
@@ -66,7 +66,7 @@ class ViewController: UIViewController {
         switch type {
         case .all:
             sectionTitle = "Movie List"
-            ViewController.shared = self
+            MovieListVC.shared = self
             sideBarPinchView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(sideBarPinched(_:))))
             download()
             sideBar.load()
@@ -293,7 +293,7 @@ class ViewController: UIViewController {
     @IBAction func favoritesPressed(_ sender: Button) {
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "MovieList") as! ViewController
+            let vc = storyboard.instantiateViewController(withIdentifier: "MovieList") as! MovieListVC
             vc.screenType = .favorite
             vc.modalPresentationStyle = .formSheet
             self.present(vc, animated: true)

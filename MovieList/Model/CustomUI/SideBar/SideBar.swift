@@ -44,7 +44,7 @@ class SideBar: UIView {
         ]
         
         DispatchQueue.main.async {
-            ViewController.shared?.sideBarTable.reloadData()
+            MovieListVC.shared?.sideBarTable.reloadData()
         }
     }
     
@@ -52,9 +52,9 @@ class SideBar: UIView {
 
     
     func load() {
-        if ViewController.shared?.sideBarTable.delegate == nil {
-            ViewController.shared?.sideBarTable.delegate = self
-            ViewController.shared?.sideBarTable.dataSource = self
+        if MovieListVC.shared?.sideBarTable.delegate == nil {
+            MovieListVC.shared?.sideBarTable.delegate = self
+            MovieListVC.shared?.sideBarTable.dataSource = self
         }
     }
     
@@ -94,7 +94,6 @@ extension SideBar {
         let c = decimalsCount
         if (convert(new.to, count: c) != convert(old.to, count: c)) ||
             (convert(new.from, count: c) != convert(old.from, count: c)) {
-          //  UIImpactFeedbackGenerator(style: .soft).impactOccurred()
             return true
         } else {
             return false
