@@ -64,18 +64,44 @@ class SideBar: UIView {
 
 extension SideBar {
     func newImdbRange(_ newValue:(Double, Double)) {
-        print(#function, ": ", newValue)
-        LocalDB.Filter.imdbRating = .init(from: newValue.0, to: newValue.1)
-        //getData()
+        let new:LocalDB.Filter.Rating = .init(from: newValue.0, to: newValue.1)
+        let old = LocalDB.Filter.imdbRating
+        if newRating(new: new, old: old, decimalsCount: 1) {
+            LocalDB.Filter.imdbRating = new
+        }
     }
     
     func newYearRange(_ newValue:(Double, Double)) {
-        print(#function, ": ", newValue)
-        LocalDB.Filter.yearRating = .init(from: newValue.0, to: newValue.1)
-      //  getData()
+        let new:LocalDB.Filter.Rating = .init(from: newValue.0, to: newValue.1)
+        let old = LocalDB.Filter.yearRating
+        if newRating(new: new, old: old, decimalsCount: 0) {
+            LocalDB.Filter.yearRating = new
+        }
     }
     
     func genreSelected(_ at:Int) {
         print(#function, ": ", at)
+        let genres = LocalDB.Filter.allGenres
+        UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+        let igoneredList = LocalDB.Filter.ignoredGenres
+        let ignored = igoneredList[genres[at]] ?? false
+        LocalDB.Filter.ignoredGenres.updateValue(!ignored, forKey: genres[at])
+        getData()
+    }
+    
+    
+    private func newRating(new:LocalDB.Filter.Rating, old:LocalDB.Filter.Rating, decimalsCount:Int) -> Bool {
+        let c = decimalsCount
+        if (convert(new.to, count: c) != convert(old.to, count: c)) ||
+            (convert(new.from, count: c) != convert(old.from, count: c)) {
+          //  UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    private func convert(_ value: Double, count:Int = 1) -> String {
+        return String.init(decimalsCount: count, from: value)
     }
 }

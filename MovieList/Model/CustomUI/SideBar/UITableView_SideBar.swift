@@ -32,6 +32,7 @@ extension SideBar: UITableViewDelegate, UITableViewDataSource {
                 if let collections = tableData[section].cells as? CollectionCellData {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "SideBarCollectionCell", for: indexPath) as! SideBarCollectionCell
                     cell.data = collections.collectionData
+                    cell.valueSelected = collections.selected
                     return cell
                 } else {
                     return UITableViewCell()

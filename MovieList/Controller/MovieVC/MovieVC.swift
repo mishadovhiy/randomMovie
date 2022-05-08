@@ -30,9 +30,10 @@ class MovieVC: UIViewController {
             }
             DispatchQueue.init(label: "load", qos: .userInitiated).async {
                 load.image(for: movie.imageURL, completion: { data in
-                    if let imageData = data {
+                    if let imageData = data,
+                       let image = UIImage(data: imageData) {
                         DispatchQueue.main.async {
-                            self.movieImage.image = UIImage(data: imageData)
+                            self.movieImage.image = image
                         }
                     }
                 })
@@ -83,6 +84,7 @@ class MovieVC: UIViewController {
                 LocalDB.favoriteMovieID.updateValue(movie.dict, forKey: movie.imdbid)
             }
             DispatchQueue.main.async {
+                UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                 self.heartButton.tintColor = movieFav
             }
         }

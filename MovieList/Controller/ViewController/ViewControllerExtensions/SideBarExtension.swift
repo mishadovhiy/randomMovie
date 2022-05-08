@@ -14,6 +14,7 @@ extension ViewController {
         if sender.state == .began {
             sidescrolling = finger.x < 80
             wasShowingSideBar = sideBarShowing
+            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
         }
         if sidescrolling || sideBarShowing {
             if sender.state == .began || sender.state == .changed {
@@ -35,7 +36,6 @@ extension ViewController {
         sideBarShowing = show
         DispatchQueue.main.async {
             let frame = self.sideBar.layer.frame
-
             UIView.animate(withDuration: animated ? 0.25 : 0) {
                 self.mainContentView.layer.transform = CATransform3DTranslate(CATransform3DIdentity, show ? frame.width : 0, 0, 0)
             } completion: { _ in

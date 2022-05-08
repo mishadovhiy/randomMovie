@@ -27,6 +27,8 @@ class SideBarCollectionCell: UITableViewCell {
             }
         }
     }
+    
+    var valueSelected:((Int) -> ())?
 }
 
 
@@ -47,11 +49,9 @@ extension SideBarCollectionCell:UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let igoneredList = LocalDB.Filter.ignoredGenres
-        let ignored = igoneredList[data[indexPath.row].name] ?? false
-        LocalDB.Filter.ignoredGenres.updateValue(!ignored, forKey: data[indexPath.row].name)
-        data[indexPath.row].ignored = !ignored
-       // self.collectionView.reloadData()
+        if let selected = valueSelected {
+            selected(indexPath.row)
+        }
     }
 }
 

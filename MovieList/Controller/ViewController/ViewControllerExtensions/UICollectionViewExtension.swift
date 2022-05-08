@@ -10,14 +10,16 @@ import UIKit
 extension ViewController:UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return screenType == .all ? 2 : 1
+        return screenType == .all ? 3 : 2
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return tableData.count
+            return sectionTitle == nil ? 0 : 1
         case 1:
+            return tableData.count
+        case 2:
             return screenType == .all ? 1 : 0
         default:
             return 0
@@ -27,6 +29,10 @@ extension ViewController:UICollectionViewDelegate, UICollectionViewDataSource, U
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TitleCollectionCell", for: indexPath) as! TitleCollectionCell
+            cell.mainLabel.text = sectionTitle
+            return cell
+        case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PreviewCollectionCell", for: indexPath) as! PreviewCollectionCell
             let data = tableData[indexPath.row]
             
@@ -43,7 +49,7 @@ extension ViewController:UICollectionViewDelegate, UICollectionViewDataSource, U
 
             
             return cell
-        case 1:
+        case 2:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LoadingCollectionCell", for: indexPath) as! LoadingCollectionCell
             cell.setCell(animating: !stopDownloading)
             return cell
@@ -53,7 +59,7 @@ extension ViewController:UICollectionViewDelegate, UICollectionViewDataSource, U
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.section == 1 && !stopDownloading {
+        if indexPath.section == 2 && !stopDownloading {
             download(page + 1)
         }
     }
@@ -61,9 +67,9 @@ extension ViewController:UICollectionViewDelegate, UICollectionViewDataSource, U
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
-        case 0:
-            selectedMovie = tableData[indexPath.row]
         case 1:
+            selectedMovie = tableData[indexPath.row]
+        case 2:
             if stopDownloading {
                 stopDownloading = false
                 DispatchQueue.main.async {
@@ -78,4 +84,7 @@ extension ViewController:UICollectionViewDelegate, UICollectionViewDataSource, U
         }
         
     }
+    
+
+
 }

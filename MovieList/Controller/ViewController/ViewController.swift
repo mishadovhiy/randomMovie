@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     var refresh:UIRefreshControl?
     var firstDispleyingPage:Int?
     var loading = false
-    
+    var sectionTitle:String?
     //sideBar
     @IBOutlet weak var sideBar: SideBar!
     @IBOutlet weak var sideBarPinchView: UIView!
@@ -40,8 +40,6 @@ class ViewController: UIViewController {
         updateUI(for: screenType)
     }
     
-
-
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         sideBar.getData()
@@ -67,15 +65,21 @@ class ViewController: UIViewController {
         
         switch type {
         case .all:
+            sectionTitle = "Movie List"
             ViewController.shared = self
             sideBarPinchView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(sideBarPinched(_:))))
             download()
             sideBar.load()
+            
         case .favorite:
+            sectionTitle = "Favorites"
             self.tableData = LocalDB.favoriteMovies
+            self.pinchIndicatorStack.isHidden = true
         }
     }
     
+    
+    @IBOutlet weak var pinchIndicatorStack: UIStackView!
     
     var tableData:[Movie] {
         get {
@@ -110,6 +114,10 @@ class ViewController: UIViewController {
         DispatchQueue.init(label: "download", qos: .userInitiated).async {
             self.load.getMovies(page: loadingPage) { movies, error, newPage in
                 print(error, " errorrrr")
+                if error && (movies.count == 0) {
+                    print("Error and no loaded movies")
+                    
+                }
                 if ((newPage + 1) >= self.load.moviesCount) || (loadingPage > newPage) {
                     self.stopDownloading = true
                 }
@@ -271,24 +279,16 @@ class ViewController: UIViewController {
     
     
     var shakeHidden = false
-    private func toggleShakeButton(hide:Bool) {
-        if shakeHidden != hide {
-            shakeHidden = hide
-            DispatchQueue.main.async {
-                let space = self.view.safeAreaInsets.top + self.shakeButton.frame.maxY + 50
-                let position = hide ? (space * (-1)) : 0
-                UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0, options: .allowAnimatedContent) {
-                    self.shakeButton.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, position, 0)
-                }
-            }
-        }
-    }
+    
     
     var screenType:ScreenType = .all
     enum ScreenType {
         case all
         case favorite
     }
+    
+    
+    
     
     @IBAction func favoritesPressed(_ sender: Button) {
         DispatchQueue.main.async {
@@ -302,6 +302,33 @@ class ViewController: UIViewController {
                 self.toggleSideBar(false, animated: true)
             }
             
+        }
+    }
+    
+    
+    
+    
+    
+    
+    func toggleShakeButton(hide:Bool) {
+        if shakeHidden != hide {
+            shakeHidden = hide
+            DispatchQueue.main.async {
+                let space = self.view.safeAreaInsets.top + self.shakeButton.frame.maxY + 50
+                let position = hide ? (space * (-1)) : 0
+                if !hide && !self.sideBarShowing {
+                    self.pinchIndicatorStack.alpha = 1
+                }
+                UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0, options: .allowAnimatedContent) {
+                    self.shakeButton.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, position, 0)
+                    if !self.sideBarShowing {
+                        self.pinchIndicatorStack.layer.transform = CATransform3DTranslate(CATransform3DIdentity, hide ? -(self.sideBar.frame.width + 20) : 0, 0, 0)
+                    }
+                    
+                } completion: { _ in
+                }
+
+            }
         }
     }
     

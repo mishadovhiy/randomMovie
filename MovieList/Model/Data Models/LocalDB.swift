@@ -54,6 +54,16 @@ struct LocalDB {
             UserDefaults.standard.setValue(result, forKey: "favoriteMovie")
         }
     }
+    
+    
+    static var mySqlMovieListUD: Data? {
+        get {
+            return UserDefaults.standard.value(forKey: "mySqlMovieList") as? Data
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "mySqlMovieList")
+        }
+    }
 }
 
 
@@ -76,7 +86,6 @@ extension LocalDB {
                 let imdb = LocalDB.Filter.dictionary["imdb"] as? [String:String] ?? [:]
                 let from = Double.init(imdb["from"] ?? "4") ?? 0.0
                 let to = Double.init(imdb["to"] ?? "10") ?? 0.0
-                print("imdbRating from: ",from, " to:", to, "\ndict: ", imdb)
                 return .init(from: from,
                              to: to)
             }
@@ -86,7 +95,6 @@ extension LocalDB {
                     "to":"\(newValue.to)",
                 ]
                 LocalDB.Filter.dictionary.updateValue(new, forKey: "imdb")
-                print(new, " newValueSetted imdbRating")
             }
         }
 

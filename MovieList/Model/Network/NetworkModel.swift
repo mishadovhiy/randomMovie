@@ -14,7 +14,6 @@ class NetworkModel {
     func getMovies(page:Int, completion:@escaping([Movie], Bool, Int) -> ()) {
         loadSQLMovies { sqlMovies, error in
             let data = self.movieFor(page: page, list: sqlMovies)
-            print(data.lastPage, "datadatadatadatadatadatadatadata")
             if let moviesData = data.movies {
                 completion(moviesData, error, data.lastPage)
             } else {
@@ -133,9 +132,8 @@ class NetworkModel {
             completion(result, false)
         } else {
             Load(task: .sqlMovies, parameters: "") { data, errorString in
-                print(errorString ?? "no error", " errorStringerrorStringerrorString")
                 let error = (errorString ?? "") != ""
-                let result = self.sqlLoaded(data: data)
+                let result = self.sqlLoaded(data: error ? LocalDB.mySqlMovieListUD : data)
                 completion(result, error)
             }
         }
@@ -144,6 +142,7 @@ class NetworkModel {
     private func sqlLoaded(data:Data?) -> [MovieList] {
         if mySqlMovieList == nil {
             mySqlMovieList = data
+            LocalDB.mySqlMovieListUD = data
         }
         let jsonResult = Unparce.jsonDataArray(data)
         return Unparce.movieList(jsonResult) ?? []
