@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieVC: UIViewController {
+class MovieVC: BaseVC {
 
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!

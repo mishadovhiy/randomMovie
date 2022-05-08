@@ -43,7 +43,11 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
                let image = UIImage(data:imageData) {
                 cell.movieImage.image = image
             } else {
-                cell.movieImage.image = UIImage(systemName: "photo.fill")
+                if #available(iOS 13.0, *) {
+                    cell.movieImage.image = UIImage(systemName: "photo.fill")
+                } else {
+                    // Fallback on earlier versions
+                }
             }
             
 

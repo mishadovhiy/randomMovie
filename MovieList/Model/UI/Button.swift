@@ -43,7 +43,6 @@ class Button: UIButton {
         self.addSubview(ai)
         
         ai.translatesAutoresizingMaskIntoConstraints = false
-        ai.startAnimating()
         ai.color = .black
         ai.backgroundColor = .init(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.2)
         
@@ -56,7 +55,7 @@ class Button: UIButton {
             .init(item: ai, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: self.frame.height)
         ])
         ai.hidesWhenStopped = true
-        ai.isHidden = self.isEnabled
+        ai.isHidden = true//self.isEnabled
       //  if ai.isHidden != self.isEnabled {
       //      ai.isHidden = self.isEnabled
       //  }

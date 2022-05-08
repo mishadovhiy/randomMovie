@@ -19,7 +19,7 @@ class NetworkModel {
             } else {
                 self.updateDBwithApi(page: page) { apiMovies, apiError in
                     let resultMovies:[Movie] = apiMovies.count == 0 ? (sqlMovies.randomElement()?.movie ?? []) : apiMovies
-                    completion(resultMovies, apiError, data.lastPage)
+                    completion(resultMovies, error, data.lastPage)
                 }
             }
         }

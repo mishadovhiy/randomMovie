@@ -82,7 +82,11 @@ extension SideBar {
     func genreSelected(_ at:Int) {
         print(#function, ": ", at)
         let genres = LocalDB.Filter.allGenres
-        UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+        if #available(iOS 13.0, *) {
+            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+        } else {
+            // Fallback on earlier versions
+        }
         let igoneredList = LocalDB.Filter.ignoredGenres
         let ignored = igoneredList[genres[at]] ?? false
         LocalDB.Filter.ignoredGenres.updateValue(!ignored, forKey: genres[at])

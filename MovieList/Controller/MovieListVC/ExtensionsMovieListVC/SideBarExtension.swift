@@ -14,7 +14,11 @@ extension MovieListVC {
         if sender.state == .began {
             sidescrolling = finger.x < 80
             wasShowingSideBar = sideBarShowing
-            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+            if #available(iOS 13.0, *) {
+                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+            } else {
+                // Fallback on earlier versions
+            }
         }
         if sidescrolling || sideBarShowing {
             if sender.state == .began || sender.state == .changed {

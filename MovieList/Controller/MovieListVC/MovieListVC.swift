@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieListVC: UIViewController {
+class MovieListVC: BaseVC {
 
     @IBOutlet weak var mainContentView: UIView!
     @IBOutlet weak var shakeButton: Button!
@@ -121,6 +121,9 @@ class MovieListVC: UIViewController {
                 print(error, " errorrrr")
                 if error && (movies.count == 0) {
                     print("Error and no loaded movies")
+                    DispatchQueue.main.async {
+                        self.message.show(type: .internetError)
+                    }
                 }
                 if ((newPage + 1) >= self.load.moviesCount) || (loadingPage > newPage) {
                     self.stopDownloading = true
@@ -209,6 +212,11 @@ class MovieListVC: UIViewController {
         case .all:
             DispatchQueue.init(label: "download", qos: .userInitiated).async {
                 self.load.getMovies(page: Int.random(in: 0..<self.load.maxPage)) { movies, error, newPage  in
+                    if error && movies.count == 0 {
+                        DispatchQueue.main.async {
+                            self.message.show(type: .internetError)
+                        }
+                    }
                     if let random = movies.randomElement() {
                         self.selectedMovie = random
                     } else {
@@ -328,7 +336,11 @@ class MovieListVC: UIViewController {
     
     @IBAction func favoritesPressed(_ sender: Button) {
         DispatchQueue.main.async {
-            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+            if #available(iOS 13.0, *) {
+                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+            } else {
+                // Fallback on earlier versions
+            }
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "MovieList") as! MovieListVC
             vc.screenType = .favorite
