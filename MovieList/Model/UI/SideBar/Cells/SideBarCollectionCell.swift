@@ -43,8 +43,8 @@ extension SideBarCollectionCell:UICollectionViewDelegate, UICollectionViewDataSo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GenresCollectionCell", for: indexPath) as! GenresCollectionCell
         cell.nameLabel.text = data[indexPath.row].name
         let ignored = data[indexPath.row].ignored
-        cell.contentView.backgroundColor = ignored ? .systemGray : .white
-        cell.nameLabel.textColor = ignored ? .lightGray : .black
+        cell.contentView.backgroundColor = ignored ? Text.Colors.darkGrey : Text.Colors.white
+        cell.nameLabel.textColor = ignored ? Text.Colors.white.withAlphaComponent(0.1) : Text.Colors.primaryBackground
         return cell
     }
     

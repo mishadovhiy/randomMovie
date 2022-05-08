@@ -80,7 +80,7 @@ class RangeSliderThumbLayer: CALayer {
         ctx.strokePath()
         
         if highlighted {
-            ctx.setFillColor(UIColor(white: 0.0, alpha: 0.1).cgColor)
+            ctx.setFillColor(Text.Colors.lightGrey.cgColor)
             ctx.addPath(thumbPath.cgPath)
             ctx.fillPath()
         }
@@ -120,7 +120,7 @@ class RangeSlider: UIControl {
             uppar.textAlignment = .center
             uppar.font = .systemFont(ofSize: 12)
             uppar.adjustsFontSizeToFitWidth = true
-            uppar.backgroundColor = UIColor.init(red: 255, green: 255, blue: 255, alpha: 0.7)
+            uppar.backgroundColor = Text.Colors.white.withAlphaComponent(0.7)
             uppar.layer.cornerRadius = 6
             uppar.layer.masksToBounds = true
             self.upperLabel = uppar
@@ -133,7 +133,7 @@ class RangeSlider: UIControl {
             lower.font = .systemFont(ofSize: 12)
             lower.adjustsFontSizeToFitWidth = true
             lower.layer.masksToBounds = true
-            lower.backgroundColor = UIColor.init(red: 255, green: 255, blue: 255, alpha: 0.7)
+            lower.backgroundColor = Text.Colors.white.withAlphaComponent(0.7)
             lower.layer.cornerRadius = 6
             self.lowerLabel = lower
             self.addSubview(lower)
@@ -195,7 +195,7 @@ class RangeSlider: UIControl {
         }
     }
     
-    @IBInspectable var thumbTintColor: UIColor = UIColor.white {
+    @IBInspectable var thumbTintColor: UIColor = Text.Colors.white {
         didSet {
             lowerThumbLayer.setNeedsDisplay()
             upperThumbLayer.setNeedsDisplay()

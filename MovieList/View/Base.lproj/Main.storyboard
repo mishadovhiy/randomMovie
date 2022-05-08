@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -37,7 +38,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTu-Ks-dZ8">
                                                             <rect key="frame" x="10" y="0.0" width="245" height="33"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="27"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="textColor" name="WhiteColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -67,7 +68,7 @@
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wnp-ME-MDi">
                                                                     <rect key="frame" x="0.0" y="0.5" width="250" height="18"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="textColor" name="DarkGreyColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
@@ -101,7 +102,7 @@
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y2c-he-Cfd" customClass="View" customModule="MovieList" customModuleProvider="target">
                                                                             <rect key="frame" x="2" y="23.5" width="241" height="4"/>
-                                                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <color key="backgroundColor" name="DarkGreyColor"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="4" id="ccb-5W-79l"/>
                                                                             </constraints>
@@ -121,7 +122,7 @@
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>
-                                                            <color key="backgroundColor" red="0.070741555129999995" green="0.070741555129999995" blue="0.070741555129999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="backgroundColor" name="BlackGreyColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="trailing" secondItem="URe-0S-MRt" secondAttribute="trailing" id="NoG-JE-WVX"/>
                                                                 <constraint firstAttribute="bottom" secondItem="URe-0S-MRt" secondAttribute="bottom" id="ZdD-Ap-ZmO"/>
@@ -185,7 +186,7 @@
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                         </subviews>
-                                                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <color key="backgroundColor" name="DarkGreyColor"/>
                                                                         <constraints>
                                                                             <constraint firstItem="jBE-M5-4jw" firstAttribute="top" secondItem="8Ky-8e-5Sp" secondAttribute="top" constant="3" id="f8t-Fv-66H"/>
                                                                             <constraint firstAttribute="trailing" secondItem="jBE-M5-4jw" secondAttribute="trailing" constant="10" id="n60-22-5u8"/>
@@ -283,7 +284,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XO8-ja-z2q">
                                                             <rect key="frame" x="0.0" y="167.5" width="66" height="32.5"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="27"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="textColor" name="WhiteColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -384,14 +385,14 @@
                                                     <subviews>
                                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Aw7-b1-rnc">
                                                             <rect key="frame" x="150" y="54" width="20" height="20"/>
-                                                            <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="color" name="WhiteColor"/>
                                                         </activityIndicatorView>
                                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oeJ-OB-LAQ">
                                                             <rect key="frame" x="10" y="99" width="300" height="29"/>
                                                             <string key="text">Press to
 Resume</string>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="textColor" name="DarkGreyColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -421,7 +422,7 @@ Resume</string>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ca-xD-rEr" customClass="View" customModule="MovieList" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="6" height="6"/>
-                                                        <color key="backgroundColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" name="PurpureColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="6" id="GRe-Yt-19v"/>
                                                             <constraint firstAttribute="height" constant="6" id="xzM-Ff-w6t"/>
@@ -434,7 +435,7 @@ Resume</string>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7z0-vX-c01" customClass="View" customModule="MovieList" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="11" width="6" height="6"/>
-                                                        <color key="backgroundColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" name="PurpureColor"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                 <real key="value" value="3"/>
@@ -443,7 +444,7 @@ Resume</string>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bl0-wB-WNy" customClass="View" customModule="MovieList" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="22" width="6" height="6"/>
-                                                        <color key="backgroundColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" name="PurpureColor"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                 <real key="value" value="3"/>
@@ -462,7 +463,7 @@ Resume</string>
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="PimaryBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="6Cv-0e-yXA" firstAttribute="top" secondItem="hHY-LZ-u9T" secondAttribute="top" id="20e-Rm-AGe"/>
                                     <constraint firstItem="zJc-77-kwQ" firstAttribute="top" secondItem="hHY-LZ-u9T" secondAttribute="top" id="2BQ-mK-vIe"/>
@@ -479,9 +480,9 @@ Resume</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xvl-kn-2Cy" customClass="Button" customModule="MovieList" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xvl-kn-2Cy" customClass="LoadingButton" customModule="MovieList" customModuleProvider="target">
                                 <rect key="frame" x="254" y="46" width="156" height="40"/>
-                                <color key="backgroundColor" red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" name="PurpureColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Acm-lt-CZD"/>
                                 </constraints>
@@ -489,7 +490,7 @@ Resume</string>
                                 <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Random movie">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" name="WhiteColor"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -548,14 +549,14 @@ Resume</string>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VEg-PN-xfp">
                                 <rect key="frame" x="10" y="15" width="347" height="32.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="27"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" name="WhiteColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xg3-6t-RAj">
                                 <rect key="frame" x="10" y="242.5" width="404" height="599.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" name="WhiteColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -588,7 +589,7 @@ Resume</string>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Z2M-Ax-gXL">
                                         <rect key="frame" x="0.0" y="1" width="60" height="177.5"/>
-                                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" name="DarkGreyColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="QBB-KN-9by"/>
                                             <constraint firstAttribute="height" constant="180" id="d84-3c-kDz"/>
@@ -597,7 +598,7 @@ Resume</string>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1QR-40-292">
                                         <rect key="frame" x="70" y="0.0" width="324" height="180"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" name="LightGreyColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -605,7 +606,7 @@ Resume</string>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJU-BO-GEC" userLabel="heart" customClass="Button" customModule="MovieList" customModuleProvider="target">
                                 <rect key="frame" x="80" y="213.5" width="28.5" height="24"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" name="DarkGreyColor"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="heart.fill" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="23"/>
@@ -616,7 +617,7 @@ Resume</string>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="EWZ-rG-0I4"/>
-                        <color key="backgroundColor" red="0.086995232965528357" green="0.086995232965528357" blue="0.086995232965528357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="SecondaryBacgroundColor"/>
                         <constraints>
                             <constraint firstItem="EWZ-rG-0I4" firstAttribute="trailing" secondItem="xg3-6t-RAj" secondAttribute="trailing" id="1dy-Cp-nDP"/>
                             <constraint firstItem="m9i-ab-phE" firstAttribute="top" secondItem="EWZ-rG-0I4" secondAttribute="top" constant="5" id="1fU-4T-YD8"/>
@@ -656,6 +657,9 @@ Resume</string>
         <designable name="NJU-BO-GEC">
             <size key="intrinsicContentSize" width="28.5" height="24"/>
         </designable>
+        <designable name="VQ8-KJ-hl3">
+            <size key="intrinsicContentSize" width="24" height="11"/>
+        </designable>
         <designable name="Zte-2U-iMa">
             <size key="intrinsicContentSize" width="24" height="11"/>
         </designable>
@@ -672,6 +676,27 @@ Resume</string>
     <resources>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="photo.fill" catalog="system" width="128" height="93"/>
+        <namedColor name="BlackGreyColor">
+            <color red="0.070588235294117646" green="0.070588235294117646" blue="0.070588235294117646" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="DarkGreyColor">
+            <color red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="LightGreyColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="PimaryBackgroundColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="PurpureColor">
+            <color red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="SecondaryBacgroundColor">
+            <color red="0.086274509803921567" green="0.086274509803921567" blue="0.086274509803921567" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="WhiteColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

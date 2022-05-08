@@ -74,6 +74,9 @@ class MovieListVC: BaseVC {
             sectionTitle = "Favorites"
             self.tableData = LocalDB.favoriteMovies
             self.pinchIndicatorStack.isHidden = true
+            UIView.animate(withDuration: 0.2) {
+                self.view.backgroundColor = Text.Colors.secondaryBacground
+            }
         }
     }
     

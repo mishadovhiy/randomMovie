@@ -76,7 +76,7 @@ class MovieVC: BaseVC {
 
     @IBAction func favoritesPressed(_ sender: UIButton) {
         if let movie = movie {
-            var movieFav:UIColor = .systemGray
+            var movieFav:UIColor = Text.Colors.darkGrey
             if let _ = LocalDB.favoriteMovieID[movie.imdbid] {
                 LocalDB.favoriteMovieID.removeValue(forKey: movie.imdbid)
             } else {
