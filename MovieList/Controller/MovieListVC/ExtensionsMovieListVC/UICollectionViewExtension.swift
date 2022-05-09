@@ -34,6 +34,9 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PreviewCollectionCell", for: indexPath) as! PreviewCollectionCell
+            if tableData.count <= indexPath.row {
+                return cell
+            }
             let data = tableData[indexPath.row]
             
             cell.dateLabel.text = data.released

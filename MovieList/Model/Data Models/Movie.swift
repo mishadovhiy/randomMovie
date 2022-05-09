@@ -31,16 +31,25 @@ class Movie {
         self.dict = dict
     }
     
-    func filterValidation() -> Bool {
-        if self.imageURL != "" &&
-            self.validateRange(release: true) &&
-            self.validateRange(release: false) &&
-            self.validateGanre()
-        {
-            return true
+    func filterValidation(imgOnly:Bool = false) -> Bool {
+        if self.imageURL != "" {
+            if imgOnly {
+                return true
+            } else {
+                if self.validateRange(release: true) &&
+                    self.validateRange(release: false) &&
+                    self.validateGanre()
+                {
+                    return true
+                } else {
+                    return false
+                }
+            }
         } else {
             return false
         }
+        
+        
     }
     
     var type:MovieType {
@@ -107,6 +116,18 @@ class Movie {
             return true
         }
         
+    }
+    
+    
+    
+    
+    
+    var genreString:String {
+        var result = ""
+        for item in genre {
+            result = result + " " + item
+        }
+        return result
     }
 
 }

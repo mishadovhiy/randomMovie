@@ -19,5 +19,9 @@ class Label: UILabel {
         }
     }
 
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("toucheeees")
+    }
 
 }

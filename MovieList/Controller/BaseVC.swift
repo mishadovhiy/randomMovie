@@ -9,7 +9,7 @@ import UIKit
 
 class BaseVC: UIViewController {
 
-    lazy var message = AppModel.message
+    lazy var message = AppModel.Appearence.message
     
     override func viewDidLoad() {
         super.viewDidLoad()

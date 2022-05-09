@@ -10,7 +10,7 @@ import UIKit
 class Unparce {
     
     
-    static func movieList(_ jsonArrey:NSArray?) -> [MovieList]? {
+    static func movieList(_ jsonArrey:NSArray?, filter:Bool) -> [MovieList]? {
         guard let arrey = jsonArrey else {
             return nil
         }
@@ -23,7 +23,7 @@ class Unparce {
                     }
                     let data = Data(base64Encoded: resultString, options: .ignoreUnknownCharacters)
                     let dictt = jsonDataDict(data)
-                    let movies = Unparce.json(dictt ?? [:])
+                    let movies = Unparce.json(dictt ?? [:], filter: filter)
                     let page = Double.init(dict["page"] as? String ?? "")
                     let list:MovieList = .init(movie: movies ?? [], page: Int(page ?? 0))
                     result.append(list)
@@ -35,7 +35,7 @@ class Unparce {
     
     //as [string:movie]
     //return (thecond method): for key valye
-    static func json(_ jsonResult:[String:Any]) -> [Movie]? {
+    static func json(_ jsonResult:[String:Any], filter:Bool = true) -> [Movie]? {
         guard let arrey = jsonResult["results"] as? NSArray else {
             return nil
         }
@@ -44,8 +44,7 @@ class Unparce {
             if let jsonElement = arrey[i] as? NSDictionary {
                 if let dict = jsonElement as? [String : Any] {
                     let movie = Movie(dict: dict)
-                    let release = dict[""]
-                    if movie.filterValidation() {
+                    if movie.filterValidation(imgOnly: !filter)  {
                         result.append(movie)
                     }
                 }

@@ -29,4 +29,15 @@ class Button: UIButton {
         }
     }
     
+    
+    @IBInspectable open var tintBackground: Bool = false {
+        didSet {
+            DispatchQueue.main.async {
+                self.backgroundColor = self.tintColor.withAlphaComponent(0.15)
+            }
+        }
+    }
+    
+
+
 }

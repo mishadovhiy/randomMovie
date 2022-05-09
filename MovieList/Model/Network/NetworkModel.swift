@@ -26,6 +26,28 @@ class NetworkModel {
         
     }
     
+    func getMovies(text:String) -> [Movie]? {
+        let searchingText = text.uppercased()
+        if let movieList = AppModel.mySqlMovieList {
+            let result = sqlLoaded(data: movieList, filter: false)
+            var resultMovies:[Movie] = []
+            for movies in result {
+                for movie in movies.movie {
+                    if movie.name.uppercased().contains(searchingText) ||
+                    //    movie.genreString.uppercased().contains(searchingText) ||
+                        movie.imdbid.uppercased().contains(searchingText) ||
+                        movie.released.uppercased().contains(searchingText)
+                    {
+                        resultMovies.append(movie)
+                    }
+                }
+            }
+            return resultMovies
+        } else {
+            return nil
+        }
+        
+    }
 
     
     func localImage(url:String) -> Data? {
@@ -125,9 +147,9 @@ class NetworkModel {
         return (result, 0)
     }
     
-    var mySqlMovieList:Data?
+    
     private func loadSQLMovies(completion:@escaping([MovieList], Bool) -> ()) {
-        if let movieList = mySqlMovieList {
+        if let movieList = AppModel.mySqlMovieList {
             let result = sqlLoaded(data: movieList)
             completion(result, false)
         } else {
@@ -139,13 +161,13 @@ class NetworkModel {
         }
     }
         
-    private func sqlLoaded(data:Data?) -> [MovieList] {
-        if mySqlMovieList == nil {
-            mySqlMovieList = data
+    private func sqlLoaded(data:Data?, filter:Bool = true) -> [MovieList] {
+        if AppModel.mySqlMovieList == nil {
+            AppModel.mySqlMovieList = data
             LocalDB.mySqlMovieListUD = data
         }
         let jsonResult = Unparce.jsonDataArray(data)
-        return Unparce.movieList(jsonResult) ?? []
+        return Unparce.movieList(jsonResult, filter: filter) ?? []
     }
 
     
