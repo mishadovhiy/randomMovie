@@ -115,7 +115,6 @@ class MovieListVC: BaseVC {
     
     
     @IBAction func randomPressed(_ sender: Any) {
-        //shakeButton.isEnabled = false
         getRandom()
     }
     
