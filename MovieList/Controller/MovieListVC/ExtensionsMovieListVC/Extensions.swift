@@ -66,6 +66,11 @@ extension MovieListVC {
         }
     }
     
+    func loadFavorites() {
+        self.tableData = LocalDB.favoriteMovies
+    }
+    
+    
     func getRandom() {
         switch screenType {
         case .favorite:

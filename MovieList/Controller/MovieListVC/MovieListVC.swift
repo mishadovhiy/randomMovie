@@ -102,6 +102,7 @@ class MovieListVC: BaseVC {
         case "toMovie":
             let vc = segue.destination as! MovieVC
             vc.movie = selectedMovie
+            vc.favoritesPressedAction = screenType == .favorite ? loadFavorites : nil
             selectedMovie = nil
         default:
             break

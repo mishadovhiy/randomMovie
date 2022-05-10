@@ -28,7 +28,7 @@ extension MovieListVC {
         case .favorite, .search:
             self.pinchIndicatorStack.isHidden = true
             if type == .favorite {
-                self.tableData = LocalDB.favoriteMovies
+                loadFavorites()
                 sectionTitle = "Favorites"
             } else if type == .search {
                 self.searchBar.isHidden = false

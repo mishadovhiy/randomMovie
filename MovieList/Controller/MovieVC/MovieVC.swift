@@ -16,10 +16,27 @@ class MovieVC: BaseVC {
     @IBOutlet weak var heartButton: Button!
     
     var movie:Movie?
+    var favoritesPressedAction:(() -> ())?
+    
+    private var favoriteChanged = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        loadData()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if favoriteChanged {
+            if let action = favoritesPressedAction {
+                action()
+            }
+        }
+    }
+    
+    
+    func loadData() {
         let load = NetworkModel()
         if let movie = movie {
             textView.text = movie.about
@@ -41,25 +58,6 @@ class MovieVC: BaseVC {
         }
     }
     
-    @IBAction func imdbPressed(_ sender: UIButton) {
-        guard let movie = movie else {
-            print("error")
-            return
-        }
-        if movie.imdbid != "" {
-            let str = "https://www.imdb.com/title/\(movie.imdbid)/"
-            guard let url = URL(string: str) else {
-                print("error")
-                return
-            }
-            DispatchQueue.main.async {
-                UIApplication.shared.open(url, options: [:]) { _ in
-                    
-                }
-            }
-        }
-    }
-    
     func tempDescr(_ movie:Movie) -> String {
         return "Genres: \(tempArrey(movie.genre))\n" + "imdb: \(movie.imdbrating)\n" + "relaesed: \(movie.released)\n"
     }
@@ -68,13 +66,17 @@ class MovieVC: BaseVC {
     private func tempArrey(_ arrey:[String]) -> String {
         var result:String = ""
         for ar in arrey {
-            let new = ar + ", "
+            let comma = ar != arrey.last ? ", " : ""
+            let new = ar + comma
             result += new
         }
         return result
     }
 
+    
+    
     @IBAction func favoritesPressed(_ sender: UIButton) {
+        favoriteChanged = true
         if let movie = movie {
             var movieFav:UIColor = Text.Colors.darkGrey
             if let _ = LocalDB.favoriteMovieID[movie.imdbid] {
@@ -87,6 +89,33 @@ class MovieVC: BaseVC {
                 UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                 self.heartButton.tintColor = movieFav
             }
+        }
+    }
+    
+    
+    @IBAction func imdbPressed(_ sender: UIButton) {
+        let errorActions = {
+            DispatchQueue.main.async {
+                self.message.show(title:"URL not found", type: .error)
+            }
+        }
+        guard let movie = movie else {
+            errorActions()
+            return
+        }
+        if movie.imdbid != "" {
+            let str = "https://www.imdb.com/title/\(movie.imdbid)/"
+            guard let url = URL(string: str) else {
+                errorActions()
+                return
+            }
+            DispatchQueue.main.async {
+                UIApplication.shared.open(url, options: [:]) { _ in
+                    
+                }
+            }
+        } else {
+            errorActions()
         }
     }
 }
