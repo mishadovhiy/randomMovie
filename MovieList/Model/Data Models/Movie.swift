@@ -7,6 +7,11 @@
 
 import UIKit
 
+struct MovieList {
+    let movie:[Movie]
+    let page:Int
+}
+
 class Movie {
     let name:String
     let imageURL:String
@@ -31,31 +36,12 @@ class Movie {
         self.dict = dict
     }
     
-    func filterValidation(imgOnly:Bool = false) -> Bool {
-        if self.imageURL != "" {
-            if imgOnly {
-                return true
-            } else {
-                if self.validateRange(release: true) &&
-                    self.validateRange(release: false) &&
-                    self.validateGanre()
-                {
-                    return true
-                } else {
-                    return false
-                }
-            }
-        } else {
-            return false
-        }
-        
-        
-    }
     
     var type:MovieType {
         let str = self.dict["type"] as? String ?? ""
         switch str {
-        case "movie": return .movie
+        case "movie":
+            return .movie
         case "show", "tvSeries", "tvMiniSeries":
             return .show
         default:
@@ -76,14 +62,41 @@ class Movie {
         return result
     }
     
+    var genreString:String {
+        var result = ""
+        for item in genre {
+            result = result + " " + item
+        }
+        return result
+    }
+
+    
+    
+    func filterValidation(imgOnly:Bool = false) -> Bool {
+        if self.imageURL != "" {
+            return imgOnly ? true : self.validate()
+        } else {
+            return false
+        }
+    }
+    
+    
     
     enum MovieType:String {
         case movie = "movie"
         case show = "show"
     }
+}
 
-    
-    
+
+
+
+
+extension Movie {
+    func validate() -> Bool {
+        return self.validateRange(.year) && self.validateRange(.imdb) && self.validateGanre()
+    }
+
     
     
     private func validateGanre() -> Bool {
@@ -99,11 +112,12 @@ class Movie {
         return result
     }
     
-    private func validateRange(release:Bool) -> Bool {
-        if release {
-            return inRange(min: LocalDB.Filter.yearRating.from, max: LocalDB.Filter.yearRating.to, value: self.released)
-        } else {
+    private func validateRange(_ type:RangeType) -> Bool {
+        switch type {
+        case .imdb:
             return inRange(min: LocalDB.Filter.imdbRating.from, max: LocalDB.Filter.imdbRating.to, value: "", doubleValue: self.imdbrating)
+        case .year:
+            return inRange(min: LocalDB.Filter.yearRating.from, max: LocalDB.Filter.yearRating.to, value: self.released)
         }
     }
     
@@ -117,23 +131,12 @@ class Movie {
         }
         
     }
+
     
     
-    
-    
-    
-    var genreString:String {
-        var result = ""
-        for item in genre {
-            result = result + " " + item
-        }
-        return result
+    private enum RangeType {
+        case imdb
+        case year
     }
-
 }
 
-
-struct MovieList {
-    let movie:[Movie]
-    let page:Int
-}
