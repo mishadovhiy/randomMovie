@@ -1,15 +1,27 @@
 //
-//  SideBar.swift
-//  Budget Tracker
+//  SideBarVC.swift
+//  MovieList
 //
-//  Created by Mikhailo Dovhyi on 06.12.2021.
-//  Copyright © 2021 Misha Dovhiy. All rights reserved.
+//  Created by Misha Dovhiy on 20.05.2022.
 //
 
 import UIKit
 
-class SideBar: UIView {
+class SideBarVC: UIViewController {
+
+    @IBOutlet weak var tableView: UITableView!
     
+    static var shared:SideBarVC?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        SideBarVC.shared = self
+        tableView.delegate = self
+        tableView.dataSource = self
+        getData()
+    }
+    
+
     var tableData:[TableData] = []
     let sectionsBeforeData = 1
     
@@ -44,25 +56,24 @@ class SideBar: UIView {
         ]
         
         DispatchQueue.main.async {
-            MovieListVC.shared?.sideBarTable.reloadData()
+            self.tableView.reloadData()
         }
     }
     
 
-
-    
-    func load() {
-        if MovieListVC.shared?.sideBarTable.delegate == nil {
-            MovieListVC.shared?.sideBarTable.delegate = self
-            MovieListVC.shared?.sideBarTable.dataSource = self
-        }
+    @IBAction func favoritesPressed(_ sender: Any) {
+        toListVC(type: .favorite)
     }
     
+    @IBAction func searchPressed(_ sender: Any) {
+        toListVC(type: .search)
+    }
+    
+
 }
 
 
-
-extension SideBar {
+extension SideBarVC {
     func newImdbRange(_ newValue:(Double, Double)) {
         let new:LocalDB.Filter.Rating = .init(from: newValue.0, to: newValue.1)
         let old = LocalDB.Filter.imdbRating

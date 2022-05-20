@@ -39,14 +39,14 @@ extension MovieListVC {
     func toggleSideBar(_ show: Bool, animated:Bool) {
         sideBarShowing = show
         DispatchQueue.main.async {
-            let frame = self.sideBar.layer.frame
+            let frame = SideBarVC.shared?.view.layer.frame ?? .zero
             UIView.animate(withDuration: animated ? 0.25 : 0) {
                 self.mainContentView.layer.transform = CATransform3DTranslate(CATransform3DIdentity, show ? frame.width : 0, 0, 0)
             } completion: { _ in
                 if show {
-                    self.sideBar.getData()
+                    SideBarVC.shared?.getData()
                 }
-                self.sideBar.isUserInteractionEnabled = show
+             //   .sideba.isUserInteractionEnabled = show
                 self.collectionView.reloadData()
             }
 

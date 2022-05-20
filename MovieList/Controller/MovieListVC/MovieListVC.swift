@@ -28,9 +28,9 @@ class MovieListVC: BaseVC {
     var sectionTitle:String?
     //sideBar
     @IBOutlet weak var pinchIndicatorStack: UIStackView!
-    @IBOutlet weak var sideBar: SideBar!
+   // @IBOutlet weak var sideBar: SideBar!
     @IBOutlet weak var sideBarPinchView: UIView!
-    @IBOutlet weak var sideBarTable: UITableView!
+ //   @IBOutlet weak var sideBarTable: UITableView!
     var sidescrolling = false
     var wasShowingSideBar = false
     var beginScrollPosition:CGFloat = 0
@@ -109,21 +109,12 @@ class MovieListVC: BaseVC {
         }
     }
 
-    
-    @IBAction func favoritesPressed(_ sender: Button) {
-        toListVC(type: .favorite)
-    }
-    
-    
+
     @IBAction func randomPressed(_ sender: Any) {
         getRandom()
     }
     
-    @IBAction func searchPressed(_ sender: Any) {
-        toListVC(type: .search)
-    }
-    
-    
+
 
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {

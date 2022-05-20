@@ -10,7 +10,7 @@ import UIKit
 class SideBarCollectionCell: UITableViewCell {
 
     @IBOutlet weak var collectionView: UICollectionView!
-    var _data:[SideBar.CollectionCellData.ColldetionData]?
+    var _data:[SideBarVC.CollectionCellData.ColldetionData]?
     
     override func didMoveToWindow() {
         super.didMoveToWindow()
@@ -18,7 +18,7 @@ class SideBarCollectionCell: UITableViewCell {
         collectionView.dataSource = self
     }
     
-    var data:[SideBar.CollectionCellData.ColldetionData] {
+    var data:[SideBarVC.CollectionCellData.ColldetionData] {
         get { return _data ?? [] }
         set {
             _data = newValue

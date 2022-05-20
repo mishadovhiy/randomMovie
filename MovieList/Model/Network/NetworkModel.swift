@@ -123,27 +123,25 @@ class NetworkModel {
         var result:[Movie] = []
         moviesCount = list.count
         let sorted = list.sorted { $0.page < $1.page }
-        //.sorted { Double($0.value) ?? 0.0 < Double($1.value) ?? 0.0 }
+
         for i in 0..<sorted.count {
-            print("pageee ", sorted[i].page, "movies count: ", sorted[i].movie.count)
+
             if sorted[i].page == page {
                 result = result + (sorted[i].movie)
                 if result.count >= 50 {
-                    print("pageee return ", sorted[i].page)
                     return (result, sorted[i].page)
                 }
             } else {
                 if sorted[i].page > page {
                     result = result + (sorted[i].movie)
                     if result.count >= 50 {
-                        print("pageee return ", sorted[i].page)
                         return (result, sorted[i].page)
                     }
                 }
             }
             
         }
-        print("isResulttt")
+        
         return (result, 0)
     }
     

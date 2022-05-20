@@ -23,7 +23,6 @@ extension MovieListVC {
             sectionTitle = "Movie List"
             MovieListVC.shared = self
             sideBarPinchView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(sideBarPinched(_:))))
-            sideBar.load()
             
         case .favorite, .search:
             self.pinchIndicatorStack.isHidden = true
@@ -56,7 +55,7 @@ extension MovieListVC {
                 UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0, options: .allowAnimatedContent) {
                     self.shakeButton.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, position, 0)
                     if !self.sideBarShowing {
-                        self.pinchIndicatorStack.layer.transform = CATransform3DTranslate(CATransform3DIdentity, hide ? -(self.sideBar.frame.width + 20) : 0, 0, 0)
+                        self.pinchIndicatorStack.layer.transform = CATransform3DTranslate(CATransform3DIdentity, hide ? -((SideBarVC.shared?.view.frame.width ?? 10) + 20) : 0, 0, 0)
                     }
                     
                 } completion: { _ in
@@ -70,7 +69,7 @@ extension MovieListVC {
     func viewAppeare() {
         switch screenType {
         case .all:
-            sideBar.getData()
+            SideBarVC.shared?.getData()
             addRefreshControll()
         case .favorite:
             break
@@ -100,16 +99,7 @@ extension MovieListVC {
         download(new)
     }
     
-    
-    func toListVC(type:MovieListVC.ScreenType) {
-        AppModel.Present.movieList(self, type: type)
-        DispatchQueue.main.async {
-            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-            if self.sideBarShowing {
-                self.toggleSideBar(false, animated: true)
-            }
-        }
-    }
+
   
     
 }

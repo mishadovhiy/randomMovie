@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension SideBar: UITableViewDelegate, UITableViewDataSource {
+extension SideBarVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return tableData.count + self.sectionsBeforeData

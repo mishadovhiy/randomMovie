@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Unparce {
+struct Unparce {
     
     
     static func movieList(_ jsonArrey:NSArray?, filter:Bool) -> [MovieList]? {

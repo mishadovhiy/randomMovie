@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension SideBar {
+extension SideBarVC {
     struct TableData {
         let cells: Any
         let title: String
