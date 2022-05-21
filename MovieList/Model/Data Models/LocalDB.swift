@@ -23,6 +23,7 @@ struct LocalDB {
             UserDefaults.standard.value(forKey: "movieImages") as? [String:Data?] ?? [:]
         }
         set {
+            
             UserDefaults.standard.setValue(newValue, forKey: "movieImages")
         }
     }

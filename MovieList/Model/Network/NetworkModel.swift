@@ -68,9 +68,12 @@ class NetworkModel {
             completion(localImage)
         } else {
             Load(method: .get, task: .img, parameters: "", urlString: url) { data, error in
-                var ud = LocalDB.movieImages
-                ud.updateValue(data, forKey: url)
-                LocalDB.movieImages = ud
+                if let data = data {
+                    var ud = LocalDB.movieImages
+                    ud.updateValue(data, forKey: url)
+                    LocalDB.movieImages = ud
+                }
+                
                 completion(data)
                 
             }
