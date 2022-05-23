@@ -25,7 +25,7 @@ extension MovieListVC {
             sideBarPinchView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(sideBarPinched(_:))))
             
         case .favorite, .search:
-            self.pinchIndicatorStack.isHidden = true
+            self.sideBarButton.isHidden = true
             if type == .favorite {
                 loadFavorites()
                 sectionTitle = "Favorites"
@@ -49,14 +49,10 @@ extension MovieListVC {
             DispatchQueue.main.async {
                 let space = self.view.safeAreaInsets.top + self.shakeButton.frame.maxY + 50
                 let position = hide ? (space * (-1)) : 0
-                if !hide && !self.sideBarShowing {
-                    self.pinchIndicatorStack.alpha = 1
-                }
+                
                 UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0, options: .allowAnimatedContent) {
                     self.shakeButton.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, position, 0)
-                    if !self.sideBarShowing {
-                        self.pinchIndicatorStack.layer.transform = CATransform3DTranslate(CATransform3DIdentity, hide ? -((SideBarVC.shared?.view.frame.width ?? 10) + 20) : 0, 0, 0)
-                    }
+                    self.sideBarButton.alpha = hide ? 0 : 1
                     
                 } completion: { _ in
                 }

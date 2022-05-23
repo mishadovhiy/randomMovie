@@ -9,6 +9,7 @@ import UIKit
 
 class MovieListVC: BaseVC {
 
+    @IBOutlet weak var sideBarButton: Button!
     @IBOutlet weak var mainContentView: UIView!
     @IBOutlet weak var shakeButton: Button!
     @IBOutlet weak var pageLabel: UILabel!
@@ -27,7 +28,6 @@ class MovieListVC: BaseVC {
     var loading = false
     var sectionTitle:String?
     //sideBar
-    @IBOutlet weak var pinchIndicatorStack: UIStackView!
    // @IBOutlet weak var sideBar: SideBar!
     @IBOutlet weak var sideBarPinchView: UIView!
  //   @IBOutlet weak var sideBarTable: UITableView!
@@ -125,6 +125,9 @@ class MovieListVC: BaseVC {
         }
     }
 
+    @IBAction func sideBarPressed(_ sender: Button) {
+        toggleSideBar(!sideBarShowing, animated: true)
+    }
 }
 
 
