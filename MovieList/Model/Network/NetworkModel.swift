@@ -67,7 +67,7 @@ class NetworkModel {
         if let localImage = localImage(url: url) {
             completion(localImage)
         } else {
-            Load(method: .get, task: .img, parameters: "", urlString: url) { data, error in
+            Load(method: .get, task: .other, parameters: "", urlString: url) { data, error in
                 if let data = data {
                     var ud = LocalDB.movieImages
                     ud.updateValue(data, forKey: url)
@@ -172,7 +172,18 @@ class NetworkModel {
     }
 
     
-    private func Load(method:Method = .get, task:Task, parameters:String, urlString:String? = nil, completion:@escaping(Data?, String?) -> ()) {//movies
+    func sendAnalytics(data:String, completion:@escaping (Bool) -> ()) {
+        let doDataString = "applicationName=MovieList&data=\(data)"
+        let url = "https://www.dovhiy.com/apps/other-apps-db/analyticsDB/" + "newAnalytic.php?"
+        Load(method: .post, task: .other, parameters: doDataString, urlString: url) { data, error in
+            let error = error != nil ? true : false
+            completion(error)
+        }
+    }
+    
+    
+    
+    private func Load(optUrl:String? = nil, method:Method = .get, task:Task, parameters:String, urlString:String? = nil, completion:@escaping(Data?, String?) -> ()) {//movies
         let mySQL = task.rawValue.contains(".php")
         let url = mySQL ? Keys.sqlURL : Keys.apiURL
         let urlParam = task == .saveMovie ? "" : parameters
@@ -186,6 +197,7 @@ class NetworkModel {
         request.httpMethod = method.rawValue
         request.timeoutInterval = 100.0
         request.cachePolicy = .useProtocolCachePolicy
+        
         if method != .post {
             let headers = mySQL ? [
                 "content-type": "application/json; charset=utf-8",
@@ -196,13 +208,12 @@ class NetworkModel {
             ]
             request.allHTTPHeaderFields = headers
         }
+        print(parameters, " parametersparametersparametersparameters")
         var dataUpload:Data? {
             if method != .post {
                 return nil
             }
-            var dataToSend = ""
-            dataToSend = dataToSend + parameters
-            return dataToSend.data(using: .utf8)
+            return parameters.data(using: .utf8)
         }
 
         performTask(method: method, request: request as URLRequest, data: dataUpload) { resultData, response, error in
@@ -238,7 +249,7 @@ extension NetworkModel {
         case movies = "advancedsearch?"
         case sqlMovies = "LoadMovies.php"
         case saveMovie = "NewMovie.php?"
-        case img = ""
+        case other = ""
     }
 }
 
