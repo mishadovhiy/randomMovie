@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import AlertViewLibrary
+import MessageViewLibrary
 
 struct AppModel {
     static var mySqlMovieList:Data?
@@ -32,8 +34,15 @@ extension AppModel {
 
 extension AppModel {
     struct Appearence {
-        static var message:MessageView = {
-            return MessageView.instanceFromNib() as! MessageView
+        static var message:MessageViewLibrary = {
+            return MessageViewLibrary.instanceFromNib()
+        }()
+        
+        static var ai:AlertViewLibrary = {
+            let ai = AlertViewLibrary.instanceFromNib()
+            return ai
         }()
     }
+    
+    
 }

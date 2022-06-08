@@ -6,15 +6,21 @@
 //
 
 import UIKit
-
+//var count = 0
 class BaseVC: UIViewController {
 
     lazy var message = AppModel.Appearence.message
+    lazy var ai = AppModel.Appearence.ai
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        /*//test message
+        if count > 1 {
+            count = 0
+        }
         
+        self.message.show(type: count == 0 ? .internetError : .standart)
+        count += 1*/
     }
 
     override func viewDidAppear(_ animated: Bool) {

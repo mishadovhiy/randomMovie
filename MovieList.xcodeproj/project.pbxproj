@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8D06DF442828561900372351 /* Message.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D06DF432828561900372351 /* Message.xib */; };
-		8D06DF462828562100372351 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06DF452828562100372351 /* MessageView.swift */; };
 		8D06DF492828570500372351 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06DF482828570500372351 /* UIViewController.swift */; };
 		8D06DF4B2828585500372351 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06DF4A2828585500372351 /* BaseVC.swift */; };
 		8D06DF4D28285BAB00372351 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06DF4C28285BAB00372351 /* AppModel.swift */; };
@@ -38,6 +36,7 @@
 		8D81F5A5282468B200338946 /* RangeSliderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D81F5A3282468B200338946 /* RangeSliderManager.swift */; };
 		8D81F5A82824786500338946 /* SideBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D81F5A72824786500338946 /* SideBarExtension.swift */; };
 		8D99FE642825A8AE009AAB71 /* StructsSideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D99FE632825A8AE009AAB71 /* StructsSideBar.swift */; };
+		8DB7C45C284EBC4D001DBFB7 /* AlertViewLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 8DB7C45B284EBC4D001DBFB7 /* AlertViewLibrary */; };
 		8DD4634D2821206F008EB85A /* PreviewCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD4634C2821206F008EB85A /* PreviewCollectionCell.swift */; };
 		8DD4634F28212084008EB85A /* LoadingCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD4634E28212084008EB85A /* LoadingCollectionCell.swift */; };
 		8DD4635228212385008EB85A /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD4635128212385008EB85A /* View.swift */; };
@@ -46,6 +45,7 @@
 		8DD4635A2821C622008EB85A /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD463592821C622008EB85A /* Label.swift */; };
 		8DD4635C2821CB14008EB85A /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD4635B2821CB14008EB85A /* Button.swift */; };
 		8DD4635E2821CEA1008EB85A /* MovieVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD4635D2821CEA1008EB85A /* MovieVC.swift */; };
+		8DE94B6D28502D1D00ADF861 /* MessageViewLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 8DE94B6C28502D1D00ADF861 /* MessageViewLibrary */; };
 		8DE9C5402838375D008168DF /* SideBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE9C53F2838375D008168DF /* SideBarVC.swift */; };
 		8DE9C54428383B4F008168DF /* ExtensionsSideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE9C54328383B4F008168DF /* ExtensionsSideBar.swift */; };
 		8DF671D4281F6B0D0064849A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF671D3281F6B0D0064849A /* AppDelegate.swift */; };
@@ -78,8 +78,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8D06DF432828561900372351 /* Message.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Message.xib; sourceTree = "<group>"; };
-		8D06DF452828562100372351 /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		8D06DF482828570500372351 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		8D06DF4A2828585500372351 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		8D06DF4C28285BAB00372351 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
@@ -140,6 +138,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DB7C45C284EBC4D001DBFB7 /* AlertViewLibrary in Frameworks */,
+				8DE94B6D28502D1D00ADF861 /* MessageViewLibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,15 +160,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8D06DF472828562E00372351 /* MessageView */ = {
-			isa = PBXGroup;
-			children = (
-				8D06DF432828561900372351 /* Message.xib */,
-				8D06DF452828562100372351 /* MessageView.swift */,
-			);
-			path = MessageView;
-			sourceTree = "<group>";
-		};
 		8D3E741A28289E6F003AC968 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,7 +256,6 @@
 		8DD463532821238B008EB85A /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				8D06DF472828562E00372351 /* MessageView */,
 				8D81F5A6282468BB00338946 /* RangeSlider */,
 				8DD4635128212385008EB85A /* View.swift */,
 				8DD463592821C622008EB85A /* Label.swift */,
@@ -437,6 +427,10 @@
 			dependencies = (
 			);
 			name = MovieList;
+			packageProductDependencies = (
+				8DB7C45B284EBC4D001DBFB7 /* AlertViewLibrary */,
+				8DE94B6C28502D1D00ADF861 /* MessageViewLibrary */,
+			);
 			productName = MovieList;
 			productReference = 8DF671D0281F6B0D0064849A /* MovieList.app */;
 			productType = "com.apple.product-type.application";
@@ -509,6 +503,10 @@
 				Base,
 			);
 			mainGroup = 8DF671C7281F6B0D0064849A;
+			packageReferences = (
+				8DB7C45A284EBC4D001DBFB7 /* XCRemoteSwiftPackageReference "AlertViewLibrary" */,
+				8DE94B6B28502D1D00ADF861 /* XCRemoteSwiftPackageReference "MessageViewLibrary" */,
+			);
 			productRefGroup = 8DF671D1281F6B0D0064849A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -526,7 +524,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DF671E0281F6B0F0064849A /* LaunchScreen.storyboard in Resources */,
-				8D06DF442828561900372351 /* Message.xib in Resources */,
 				8DF671DD281F6B0F0064849A /* Assets.xcassets in Resources */,
 				8DF671DB281F6B0E0064849A /* Main.storyboard in Resources */,
 			);
@@ -560,7 +557,6 @@
 				8D47531F2824C3C30061970C /* Date.swift in Sources */,
 				8D81F59B2824663C00338946 /* SideBarSliderCell.swift in Sources */,
 				8D7E3E7C282000160094F05B /* Movie.swift in Sources */,
-				8D06DF462828562100372351 /* MessageView.swift in Sources */,
 				8D7E3E87282092A00094F05B /* String.swift in Sources */,
 				8D06DF492828570500372351 /* UIViewController.swift in Sources */,
 				8D81F5A82824786500338946 /* SideBarExtension.swift in Sources */,
@@ -944,6 +940,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8DB7C45A284EBC4D001DBFB7 /* XCRemoteSwiftPackageReference "AlertViewLibrary" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mishadovhiy/AlertViewLibrary.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		8DE94B6B28502D1D00ADF861 /* XCRemoteSwiftPackageReference "MessageViewLibrary" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mishadovhiy/MessageViewLibrary.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8DB7C45B284EBC4D001DBFB7 /* AlertViewLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8DB7C45A284EBC4D001DBFB7 /* XCRemoteSwiftPackageReference "AlertViewLibrary" */;
+			productName = AlertViewLibrary;
+		};
+		8DE94B6C28502D1D00ADF861 /* MessageViewLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8DE94B6B28502D1D00ADF861 /* XCRemoteSwiftPackageReference "MessageViewLibrary" */;
+			productName = MessageViewLibrary;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8DF671C8281F6B0D0064849A /* Project object */;
 }

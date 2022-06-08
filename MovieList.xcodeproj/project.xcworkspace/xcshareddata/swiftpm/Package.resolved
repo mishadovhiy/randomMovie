@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "AlertViewLibrary",
+        "repositoryURL": "https://github.com/mishadovhiy/AlertViewLibrary.git",
+        "state": {
+          "branch": "main",
+          "revision": "adae47253a5445796ef33016b61ff0ac99fcb4ce",
+          "version": null
+        }
+      },
+      {
+        "package": "MessageViewLibrary",
+        "repositoryURL": "https://github.com/mishadovhiy/MessageViewLibrary.git",
+        "state": {
+          "branch": "main",
+          "revision": "bd86436983525462eb41a7d266d721defc4b0107",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
