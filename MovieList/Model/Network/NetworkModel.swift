@@ -172,15 +172,7 @@ class NetworkModel {
     }
 
     
-    func sendAnalytics(data:String, completion:@escaping (Bool) -> ()) {
-        let doDataString = "applicationName=MovieList&data=\(data)"
-        let url = "https://www.dovhiy.com/apps/other-apps-db/analyticsDB/" + "newAnalytic.php?"
-        Load(method: .post, task: .other, parameters: doDataString, urlString: url) { data, error in
-            let error = error != nil ? true : false
-            completion(error)
-        }
-    }
-    
+
     
     
     private func Load(optUrl:String? = nil, method:Method = .get, task:Task, parameters:String, urlString:String? = nil, completion:@escaping(Data?, String?) -> ()) {//movies

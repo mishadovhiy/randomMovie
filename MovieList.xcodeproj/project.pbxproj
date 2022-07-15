@@ -10,7 +10,6 @@
 		8D06DF492828570500372351 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06DF482828570500372351 /* UIViewController.swift */; };
 		8D06DF4B2828585500372351 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06DF4A2828585500372351 /* BaseVC.swift */; };
 		8D06DF4D28285BAB00372351 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06DF4C28285BAB00372351 /* AppModel.swift */; };
-		8D2A18992839DD710059D472 /* AnalyticModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2A18982839DD710059D472 /* AnalyticModel.swift */; };
 		8D3E741928289550003AC968 /* NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E74182828954F003AC968 /* NSLayoutConstraint.swift */; };
 		8D3E741C2828A797003AC968 /* UISearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E741B2828A797003AC968 /* UISearchBarDelegate.swift */; };
 		8D47531D2824B2A20061970C /* LocalDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47531C2824B2A20061970C /* LocalDB.swift */; };
@@ -81,7 +80,6 @@
 		8D06DF482828570500372351 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		8D06DF4A2828585500372351 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		8D06DF4C28285BAB00372351 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
-		8D2A18982839DD710059D472 /* AnalyticModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticModel.swift; sourceTree = "<group>"; };
 		8D3E74182828954F003AC968 /* NSLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraint.swift; sourceTree = "<group>"; };
 		8D3E741B2828A797003AC968 /* UISearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISearchBarDelegate.swift; sourceTree = "<group>"; };
 		8D47531C2824B2A20061970C /* LocalDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDB.swift; sourceTree = "<group>"; };
@@ -184,7 +182,6 @@
 			children = (
 				8DF67203281F6B920064849A /* NetworkModel.swift */,
 				8D7E3E7E282041AB0094F05B /* Unparce.swift */,
-				8D2A18982839DD710059D472 /* AnalyticModel.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -583,7 +580,6 @@
 				8DE9C54428383B4F008168DF /* ExtensionsSideBar.swift in Sources */,
 				8D3E741928289550003AC968 /* NSLayoutConstraint.swift in Sources */,
 				8D81F5A4282468B200338946 /* RangeSlider.swift in Sources */,
-				8D2A18992839DD710059D472 /* AnalyticModel.swift in Sources */,
 				8DD4634F28212084008EB85A /* LoadingCollectionCell.swift in Sources */,
 				8D81F59D2824665600338946 /* SideBarCollectionCell.swift in Sources */,
 				8D7E3E812820420D0094F05B /* Keys.swift in Sources */,
@@ -785,7 +781,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Dovhiy.RandomMovie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -815,7 +811,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Dovhiy.RandomMovie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

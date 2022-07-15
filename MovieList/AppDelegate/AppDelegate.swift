@@ -20,21 +20,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    
-    private let analyticsName = "AppDelegate"
-    // MARK: UISceneSession Lifecycle
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        AnalyticModel.shared.analiticStorage.append(.init(key: #function.description, action: analyticsName))
+        
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        AnalyticModel.shared.analiticStorage.append(.init(key: #function.description, action: analyticsName))
-        AnalyticModel.shared.checkData()
+
     }
 
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
-        AnalyticModel.shared.analiticStorage.append(.init(key: #function.description, action: analyticsName))
+        
     }
 
 }
