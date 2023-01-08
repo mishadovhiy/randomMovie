@@ -12,6 +12,16 @@ class BaseVC: UIViewController {
     lazy var message = AppModel.Appearence.message
     lazy var ai = AppModel.Appearence.ai
     
+    private var sbvsLoaded = false
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if !sbvsLoaded {
+            sbvsLoaded = true
+            self.additionalSafeAreaInsets.bottom = 60
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         /*//test message

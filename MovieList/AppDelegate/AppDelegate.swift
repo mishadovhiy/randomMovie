@@ -12,11 +12,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     static var shared:AppDelegate?
-    
+    lazy var banner: adBannerView = {
+        return adBannerView.instanceFromNib() as! adBannerView
+    }()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         AppDelegate.shared = self
+        banner.createBanner()
         return true
     }
 

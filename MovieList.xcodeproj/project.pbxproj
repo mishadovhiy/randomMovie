@@ -10,8 +10,12 @@
 		8D06DF492828570500372351 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06DF482828570500372351 /* UIViewController.swift */; };
 		8D06DF4B2828585500372351 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06DF4A2828585500372351 /* BaseVC.swift */; };
 		8D06DF4D28285BAB00372351 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06DF4C28285BAB00372351 /* AppModel.swift */; };
+		8D353E2E28E24562007F774F /* adBannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D353E2B28E24561007F774F /* adBannerView.xib */; };
+		8D353E2F28E24562007F774F /* adBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D353E2C28E24561007F774F /* adBannerView.swift */; };
+		8D353E3028E24562007F774F /* ExtensionGADBannerViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D353E2D28E24561007F774F /* ExtensionGADBannerViewDelegate.swift */; };
 		8D3E741928289550003AC968 /* NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E74182828954F003AC968 /* NSLayoutConstraint.swift */; };
 		8D3E741C2828A797003AC968 /* UISearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E741B2828A797003AC968 /* UISearchBarDelegate.swift */; };
+		8D461D6B29394BC7000EDF01 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 8D461D6A29394BC7000EDF01 /* GoogleMobileAds */; };
 		8D47531D2824B2A20061970C /* LocalDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47531C2824B2A20061970C /* LocalDB.swift */; };
 		8D47531F2824C3C30061970C /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47531E2824C3C30061970C /* Date.swift */; };
 		8D6DCF682827C0BA0039E062 /* TitleCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6DCF672827C0BA0039E062 /* TitleCollectionCell.swift */; };
@@ -80,6 +84,9 @@
 		8D06DF482828570500372351 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		8D06DF4A2828585500372351 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		8D06DF4C28285BAB00372351 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		8D353E2B28E24561007F774F /* adBannerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = adBannerView.xib; sourceTree = "<group>"; };
+		8D353E2C28E24561007F774F /* adBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = adBannerView.swift; sourceTree = "<group>"; };
+		8D353E2D28E24561007F774F /* ExtensionGADBannerViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionGADBannerViewDelegate.swift; sourceTree = "<group>"; };
 		8D3E74182828954F003AC968 /* NSLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraint.swift; sourceTree = "<group>"; };
 		8D3E741B2828A797003AC968 /* UISearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISearchBarDelegate.swift; sourceTree = "<group>"; };
 		8D47531C2824B2A20061970C /* LocalDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDB.swift; sourceTree = "<group>"; };
@@ -136,6 +143,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D461D6B29394BC7000EDF01 /* GoogleMobileAds in Frameworks */,
 				8DB7C45C284EBC4D001DBFB7 /* AlertViewLibrary in Frameworks */,
 				8DE94B6D28502D1D00ADF861 /* MessageViewLibrary in Frameworks */,
 			);
@@ -158,6 +166,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8D353E2A28E24561007F774F /* adBannerView */ = {
+			isa = PBXGroup;
+			children = (
+				8D353E2B28E24561007F774F /* adBannerView.xib */,
+				8D353E2C28E24561007F774F /* adBannerView.swift */,
+				8D353E2D28E24561007F774F /* ExtensionGADBannerViewDelegate.swift */,
+			);
+			path = adBannerView;
+			sourceTree = "<group>";
+		};
 		8D3E741A28289E6F003AC968 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
@@ -253,6 +271,7 @@
 		8DD463532821238B008EB85A /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				8D353E2A28E24561007F774F /* adBannerView */,
 				8D81F5A6282468BB00338946 /* RangeSlider */,
 				8DD4635128212385008EB85A /* View.swift */,
 				8DD463592821C622008EB85A /* Label.swift */,
@@ -427,6 +446,7 @@
 			packageProductDependencies = (
 				8DB7C45B284EBC4D001DBFB7 /* AlertViewLibrary */,
 				8DE94B6C28502D1D00ADF861 /* MessageViewLibrary */,
+				8D461D6A29394BC7000EDF01 /* GoogleMobileAds */,
 			);
 			productName = MovieList;
 			productReference = 8DF671D0281F6B0D0064849A /* MovieList.app */;
@@ -503,6 +523,7 @@
 			packageReferences = (
 				8DB7C45A284EBC4D001DBFB7 /* XCRemoteSwiftPackageReference "AlertViewLibrary" */,
 				8DE94B6B28502D1D00ADF861 /* XCRemoteSwiftPackageReference "MessageViewLibrary" */,
+				8D461D6929394BC7000EDF01 /* XCRemoteSwiftPackageReference "GoogleMobileAds" */,
 			);
 			productRefGroup = 8DF671D1281F6B0D0064849A /* Products */;
 			projectDirPath = "";
@@ -523,6 +544,7 @@
 				8DF671E0281F6B0F0064849A /* LaunchScreen.storyboard in Resources */,
 				8DF671DD281F6B0F0064849A /* Assets.xcassets in Resources */,
 				8DF671DB281F6B0E0064849A /* Main.storyboard in Resources */,
+				8D353E2E28E24562007F774F /* adBannerView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,6 +593,7 @@
 				8D06DF4B2828585500372351 /* BaseVC.swift in Sources */,
 				8D81F5A12824679100338946 /* UITableView_SideBar.swift in Sources */,
 				8DF671D4281F6B0D0064849A /* AppDelegate.swift in Sources */,
+				8D353E3028E24562007F774F /* ExtensionGADBannerViewDelegate.swift in Sources */,
 				8D81F5A5282468B200338946 /* RangeSliderManager.swift in Sources */,
 				8D72207E28286FA2004C5C6C /* Text.swift in Sources */,
 				8DF6720A281F89A40064849A /* MovieCell.swift in Sources */,
@@ -578,6 +601,7 @@
 				8DD4635528212C78008EB85A /* UIView.swift in Sources */,
 				8D722080282874F8004C5C6C /* Appeareance.swift in Sources */,
 				8DE9C54428383B4F008168DF /* ExtensionsSideBar.swift in Sources */,
+				8D353E2F28E24562007F774F /* adBannerView.swift in Sources */,
 				8D3E741928289550003AC968 /* NSLayoutConstraint.swift in Sources */,
 				8D81F5A4282468B200338946 /* RangeSlider.swift in Sources */,
 				8DD4634F28212084008EB85A /* LoadingCollectionCell.swift in Sources */,
@@ -699,6 +723,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -753,6 +778,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -771,9 +797,11 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MovieList/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Random Movie";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -781,7 +809,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Dovhiy.RandomMovie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -801,9 +829,11 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MovieList/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Random Movie";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -811,7 +841,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Dovhiy.RandomMovie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -938,6 +968,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		8D461D6929394BC7000EDF01 /* XCRemoteSwiftPackageReference "GoogleMobileAds" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/quanghits/GoogleMobileAds.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 		8DB7C45A284EBC4D001DBFB7 /* XCRemoteSwiftPackageReference "AlertViewLibrary" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mishadovhiy/AlertViewLibrary.git";
@@ -957,6 +995,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		8D461D6A29394BC7000EDF01 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D461D6929394BC7000EDF01 /* XCRemoteSwiftPackageReference "GoogleMobileAds" */;
+			productName = GoogleMobileAds;
+		};
 		8DB7C45B284EBC4D001DBFB7 /* AlertViewLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8DB7C45A284EBC4D001DBFB7 /* XCRemoteSwiftPackageReference "AlertViewLibrary" */;

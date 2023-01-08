@@ -1,25 +1,77 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "AlertViewLibrary",
-        "repositoryURL": "https://github.com/mishadovhiy/AlertViewLibrary.git",
-        "state": {
-          "branch": "main",
-          "revision": "adae47253a5445796ef33016b61ff0ac99fcb4ce",
-          "version": null
-        }
-      },
-      {
-        "package": "MessageViewLibrary",
-        "repositoryURL": "https://github.com/mishadovhiy/MessageViewLibrary.git",
-        "state": {
-          "branch": "main",
-          "revision": "bd86436983525462eb41a7d266d721defc4b0107",
-          "version": null
-        }
+  "pins" : [
+    {
+      "identity" : "alertviewlibrary",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mishadovhiy/AlertViewLibrary.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "adae47253a5445796ef33016b61ff0ac99fcb4ce"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "googleappmeasurement",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/GoogleAppMeasurement.git",
+      "state" : {
+        "revision" : "c1cfde8067668027b23a42c29d11c246152fe046",
+        "version" : "9.6.0"
+      }
+    },
+    {
+      "identity" : "googlemobileads",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/quanghits/GoogleMobileAds.git",
+      "state" : {
+        "revision" : "271e6d6bc1d7756a88fe82df558145a264a34331",
+        "version" : "9.8.0"
+      }
+    },
+    {
+      "identity" : "googleusermessagingplatform",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/quanghits/GoogleUserMessagingPlatform.git",
+      "state" : {
+        "revision" : "f322d91b6b0497b727b228a5fa5b9394e7886d3a",
+        "version" : "2.0.0"
+      }
+    },
+    {
+      "identity" : "googleutilities",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/GoogleUtilities.git",
+      "state" : {
+        "revision" : "6db6edb48bdd9943426562c7f042a5492de5ba3d",
+        "version" : "7.10.0"
+      }
+    },
+    {
+      "identity" : "messageviewlibrary",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mishadovhiy/MessageViewLibrary.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "bd86436983525462eb41a7d266d721defc4b0107"
+      }
+    },
+    {
+      "identity" : "nanopb",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/firebase/nanopb.git",
+      "state" : {
+        "revision" : "819d0a2173aff699fb8c364b6fb906f7cdb1a692",
+        "version" : "2.30909.0"
+      }
+    },
+    {
+      "identity" : "promises",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/promises.git",
+      "state" : {
+        "revision" : "3e4e743631e86c8c70dbc6efdc7beaa6e90fd3bb",
+        "version" : "2.1.1"
+      }
+    }
+  ],
+  "version" : 2
 }
