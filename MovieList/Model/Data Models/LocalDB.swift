@@ -18,15 +18,34 @@ struct LocalDB {
         }
     }
     
-    static var movieImages: [String:Data?] {
+    static var movieImages: [String:[String:Any]] {
         get {
-            UserDefaults.standard.value(forKey: "movieImages") as? [String:Data?] ?? [:]
+            if let _ = UserDefaults.standard.value(forKey: "movieImages") as? [String:Data?] {
+                UserDefaults.standard.removeObject(forKey: "movieImages")
+                return [:]
+            } else {
+                return UserDefaults.standard.value(forKey: "movieImages") as? [String:[String:Any]] ?? [:]
+            }
+            
         }
         set {
             
             UserDefaults.standard.setValue(newValue, forKey: "movieImages")
         }
     }
+    
+    static func checkOldImgs() {
+        let db = LocalDB.movieImages
+        db.forEach { (key: String, value: [String : Any]) in
+            let dif = (value["date"] as? Date)?.differenceFromNow
+            let bigger = ((dif?.year ?? 0) + (dif?.month ?? 0) + (dif?.day ?? 0 >= 15 ? 1 : 0)) >= 1
+            if bigger {
+                LocalDB.movieImages.removeValue(forKey: key)
+            }
+        }
+
+    }
+    
     
     static var favoriteMovieID: [String:Any] {
         get {

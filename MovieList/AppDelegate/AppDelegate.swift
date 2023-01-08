@@ -20,6 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         AppDelegate.shared = self
         banner.createBanner()
+        
+        DispatchQueue.init(label: "local", qos: .userInitiated).async {
+            LocalDB.checkOldImgs()
+        }
         return true
     }
 

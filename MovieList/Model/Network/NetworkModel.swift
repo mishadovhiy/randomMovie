@@ -53,7 +53,7 @@ class NetworkModel {
     func localImage(url:String) -> Data? {
         let ud = LocalDB.movieImages
         if let result = ud[url] {
-            return result
+            return result["img"] as? Data
         } else {
             return nil
         }
@@ -70,7 +70,11 @@ class NetworkModel {
             Load(method: .get, task: .other, parameters: "", urlString: url) { data, error in
                 if let data = data {
                     var ud = LocalDB.movieImages
-                    ud.updateValue(data, forKey: url)
+                    let new:[String:Any] = [
+                        "img":data,
+                        "date":Date()
+                    ]
+                    ud.updateValue(new, forKey: url)
                     LocalDB.movieImages = ud
                 }
                 
