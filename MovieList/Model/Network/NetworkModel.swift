@@ -9,6 +9,9 @@ import UIKit
 
 class NetworkModel {
 
+    ///todo:
+    //:[int:int]
+    //key - top
     var maxPage = 490
     
     func getMovies(page:Int, completion:@escaping([Movie], Bool, Int) -> ()) {
