@@ -28,21 +28,21 @@ class SideBarVC: UIViewController {
     func getData(){
 
         let imdbData:RangeSliderView = .init(min: 4, max: 10,
-                                             selectedMin: LocalDB.Filter.imdbRating.from,
-                                             selectedMax: LocalDB.Filter.imdbRating.to,
+                                             selectedMin: LocalDB.db.filter.imdbRating.from,
+                                             selectedMax: LocalDB.db.filter.imdbRating.to,
                                              digitsCount: 1)
         let imdbCell:SliderCellData = .init(range: imdbData, newPosition: newImdbRange)
         
 
         let yearData:RangeSliderView = .init(min: 1980, max: 2022,
-                                             selectedMin: LocalDB.Filter.yearRating.from,
-                                             selectedMax: LocalDB.Filter.yearRating.to,
+                                             selectedMin: LocalDB.db.filter.yearRating.from,
+                                             selectedMax: LocalDB.db.filter.yearRating.to,
                                              digitsCount: 0)
         let yearCell:SliderCellData = .init(range: yearData, newPosition: newYearRange)
         
-        let genres = LocalDB.Filter.allGenres
+        let genres = LocalDB.db.filter.allGenres
         var ganrs : [CollectionCellData.ColldetionData] = []
-        let ignoredList = LocalDB.Filter.ignoredGenres
+        let ignoredList = LocalDB.db.filter.ignoredGenres
         for ganr in genres {
             let ignored = ignoredList[ganr] ?? false
             ganrs.append(.init(name: ganr, ignored: ignored))
@@ -76,31 +76,31 @@ class SideBarVC: UIViewController {
 extension SideBarVC {
     func newImdbRange(_ newValue:(Double, Double)) {
         let new:LocalDB.Filter.Rating = .init(from: newValue.0, to: newValue.1)
-        let old = LocalDB.Filter.imdbRating
+        let old = LocalDB.db.filter.imdbRating
         if newRating(new: new, old: old, decimalsCount: 1) {
-            LocalDB.Filter.imdbRating = new
+            LocalDB.db.filter.imdbRating = new
         }
     }
     
     func newYearRange(_ newValue:(Double, Double)) {
         let new:LocalDB.Filter.Rating = .init(from: newValue.0, to: newValue.1)
-        let old = LocalDB.Filter.yearRating
+        let old = LocalDB.db.filter.yearRating
         if newRating(new: new, old: old, decimalsCount: 0) {
-            LocalDB.Filter.yearRating = new
+            LocalDB.db.filter.yearRating = new
         }
     }
     
     func genreSelected(_ at:Int) {
         print(#function, ": ", at)
-        let genres = LocalDB.Filter.allGenres
+        let genres = LocalDB.db.filter.allGenres
         if #available(iOS 13.0, *) {
             UIImpactFeedbackGenerator(style: .soft).impactOccurred()
         } else {
             // Fallback on earlier versions
         }
-        let igoneredList = LocalDB.Filter.ignoredGenres
+        let igoneredList = LocalDB.db.filter.ignoredGenres
         let ignored = igoneredList[genres[at]] ?? false
-        LocalDB.Filter.ignoredGenres.updateValue(!ignored, forKey: genres[at])
+        LocalDB.db.filter.ignoredGenres.updateValue(!ignored, forKey: genres[at])
         getData()
     }
     

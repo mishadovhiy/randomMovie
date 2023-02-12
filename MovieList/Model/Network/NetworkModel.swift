@@ -54,7 +54,7 @@ class NetworkModel {
 
     
     func localImage(url:String) -> Data? {
-        let ud = LocalDB.movieImages
+        let ud = LocalDB.db.movieImages
         if let result = ud[url] {
             return result["img"] as? Data
         } else {
@@ -72,13 +72,13 @@ class NetworkModel {
         } else {
             Load(method: .get, task: .other, parameters: "", urlString: url) { data, error in
                 if let data = data {
-                    var ud = LocalDB.movieImages
+                    var ud = LocalDB.db.movieImages
                     let new:[String:Any] = [
                         "img":data,
                         "date":Date()
                     ]
                     ud.updateValue(new, forKey: url)
-                    LocalDB.movieImages = ud
+                    LocalDB.db.movieImages = ud
                 }
                 
                 completion(data)
@@ -163,7 +163,7 @@ class NetworkModel {
         } else {
             Load(task: .sqlMovies, parameters: "") { data, errorString in
                 let error = (errorString ?? "") != ""
-                let result = self.sqlLoaded(data: error ? LocalDB.mySqlMovieListUD : data)
+                let result = self.sqlLoaded(data: error ? LocalDB.db.mySqlMovieListUD : data)
                 completion(result, error)
             }
         }
@@ -172,7 +172,7 @@ class NetworkModel {
     private func sqlLoaded(data:Data?, filter:Bool = true) -> [MovieList] {
         if AppModel.mySqlMovieList == nil {
             AppModel.mySqlMovieList = data
-            LocalDB.mySqlMovieListUD = data
+            LocalDB.db.mySqlMovieListUD = data
         }
         let jsonResult = Unparce.jsonDataArray(data)
         return Unparce.movieList(jsonResult, filter: filter) ?? []

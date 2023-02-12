@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         banner.createBanner()
         
         DispatchQueue.init(label: "local", qos: .userInitiated).async {
-            LocalDB.checkOldImgs()
+            LocalDB.db.checkOldImgs()
         }
         return true
     }

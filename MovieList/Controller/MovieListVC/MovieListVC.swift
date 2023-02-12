@@ -81,16 +81,6 @@ class MovieListVC: BaseVC {
         }
     }
     
-    var page:Int {
-        get {
-            return _page
-        }
-        set {
-            _page = newValue
-            UserDefaults.standard.setValue(newValue, forKey: "page")
-            print("newPage: ", newValue)
-        }
-    }
     
     
     

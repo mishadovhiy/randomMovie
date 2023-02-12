@@ -67,7 +67,7 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.section == 2 && !stopDownloading {
-            download(page + 1)
+            download(LocalDB.db.page + 1)
         }
     }
     

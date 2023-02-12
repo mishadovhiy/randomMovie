@@ -13,17 +13,18 @@ extension MovieListVC {
             return
         }
         loading = true
-        let bigger = ((self.page > (page ?? 0)) && (page != nil)) ? false : true
+        let dbPage = LocalDB.db.page
+        let bigger = ((dbPage > (page ?? 0)) && (page != nil)) ? false : true
         if !bigger {
             self.tableData = []
         }
 
-        let calcPage = page ?? (UserDefaults.standard.value(forKey: "page") as? Int ?? 1)
+        let calcPage = page ?? dbPage
         let loadingPage = calcPage <= 0 || calcPage >= (self.load.maxPage + 10) ? 0 : calcPage
         
-        print(self.page, "pagepagepagepagepage")
-        if firstDispleyingPage == nil || self.page == 0 {
-            firstDispleyingPage = self.page
+        print(dbPage, "pagepagepagepagepage")
+        if firstDispleyingPage == nil || dbPage == 0 {
+            firstDispleyingPage = dbPage
         }
         DispatchQueue.init(label: "download", qos: .userInitiated).async {
             if self.tableData.count > 1000 {
@@ -50,7 +51,7 @@ extension MovieListVC {
         if self.tableData.count < 40 && movies.count < 40 {
             self.tableData.removeAll()
         }
-        self.page = newPage
+        LocalDB.db.page = newPage
         self.loading = false
         for movie in movies {
             self.load.image(for: movie.imageURL) { data in
@@ -67,14 +68,14 @@ extension MovieListVC {
     }
     
     func loadFavorites() {
-        self.tableData = LocalDB.favoriteMovies
+        self.tableData = LocalDB.db.favoriteMovies
     }
     
     
     func getRandom() {
         switch screenType {
         case .favorite:
-            let movies = LocalDB.favoriteMovies
+            let movies = LocalDB.db.favoriteMovies
             if let random = movies.randomElement() {
                 self.selectedMovie = random
             } else {

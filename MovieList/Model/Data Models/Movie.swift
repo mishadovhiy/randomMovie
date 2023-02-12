@@ -100,7 +100,7 @@ extension Movie {
     
     
     private func validateGanre() -> Bool {
-        let ignoredList = LocalDB.Filter.ignoredGenres
+        let ignoredList = LocalDB.db.filter.ignoredGenres
         var result = false
         let movieGanres = self.genre
         for i in 0..<movieGanres.count {
@@ -115,9 +115,9 @@ extension Movie {
     private func validateRange(_ type:RangeType) -> Bool {
         switch type {
         case .imdb:
-            return inRange(min: LocalDB.Filter.imdbRating.from, max: LocalDB.Filter.imdbRating.to, value: "", doubleValue: self.imdbrating)
+            return inRange(min: LocalDB.db.filter.imdbRating.from, max: LocalDB.db.filter.imdbRating.to, value: "", doubleValue: self.imdbrating)
         case .year:
-            return inRange(min: LocalDB.Filter.yearRating.from, max: LocalDB.Filter.yearRating.to, value: self.released)
+            return inRange(min: LocalDB.db.filter.yearRating.from, max: LocalDB.db.filter.yearRating.to, value: self.released)
         }
     }
     

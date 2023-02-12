@@ -42,7 +42,7 @@ class MovieVC: BaseVC {
             textView.text = movie.about
             additionalLabel.text = tempDescr(movie)
             nameLabel.text = movie.name
-            if let _ = LocalDB.favoriteMovieID[movie.imdbid] {
+            if let _ = LocalDB.db.favoriteMovieID[movie.imdbid] {
                 self.heartButton.tintColor = .red
             }
             DispatchQueue.init(label: "load", qos: .userInitiated).async {
@@ -79,11 +79,11 @@ class MovieVC: BaseVC {
         favoriteChanged = true
         if let movie = movie {
             var movieFav:UIColor = Text.Colors.darkGrey
-            if let _ = LocalDB.favoriteMovieID[movie.imdbid] {
-                LocalDB.favoriteMovieID.removeValue(forKey: movie.imdbid)
+            if let _ = LocalDB.db.favoriteMovieID[movie.imdbid] {
+                LocalDB.db.favoriteMovieID.removeValue(forKey: movie.imdbid)
             } else {
                 movieFav = .red
-                LocalDB.favoriteMovieID.updateValue(movie.dict, forKey: movie.imdbid)
+                LocalDB.db.favoriteMovieID.updateValue(movie.dict, forKey: movie.imdbid)
             }
             DispatchQueue.main.async {
                 UIImpactFeedbackGenerator(style: .heavy).impactOccurred()

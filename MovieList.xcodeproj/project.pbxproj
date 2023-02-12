@@ -10,6 +10,7 @@
 		8D06DF492828570500372351 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06DF482828570500372351 /* UIViewController.swift */; };
 		8D06DF4B2828585500372351 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06DF4A2828585500372351 /* BaseVC.swift */; };
 		8D06DF4D28285BAB00372351 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06DF4C28285BAB00372351 /* AppModel.swift */; };
+		8D1191F02998626B00D381F6 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1191EF2998626B00D381F6 /* Filter.swift */; };
 		8D353E2E28E24562007F774F /* adBannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D353E2B28E24561007F774F /* adBannerView.xib */; };
 		8D353E2F28E24562007F774F /* adBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D353E2C28E24561007F774F /* adBannerView.swift */; };
 		8D353E3028E24562007F774F /* ExtensionGADBannerViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D353E2D28E24561007F774F /* ExtensionGADBannerViewDelegate.swift */; };
@@ -84,6 +85,7 @@
 		8D06DF482828570500372351 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		8D06DF4A2828585500372351 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		8D06DF4C28285BAB00372351 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		8D1191EF2998626B00D381F6 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		8D353E2B28E24561007F774F /* adBannerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = adBannerView.xib; sourceTree = "<group>"; };
 		8D353E2C28E24561007F774F /* adBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = adBannerView.swift; sourceTree = "<group>"; };
 		8D353E2D28E24561007F774F /* ExtensionGADBannerViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionGADBannerViewDelegate.swift; sourceTree = "<group>"; };
@@ -166,6 +168,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8D1191F12998627600D381F6 /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				8D47531C2824B2A20061970C /* LocalDB.swift */,
+				8D1191EF2998626B00D381F6 /* Filter.swift */,
+			);
+			path = DB;
+			sourceTree = "<group>";
+		};
 		8D353E2A28E24561007F774F /* adBannerView */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,7 +219,6 @@
 			isa = PBXGroup;
 			children = (
 				8D7E3E7B282000160094F05B /* Movie.swift */,
-				8D47531C2824B2A20061970C /* LocalDB.swift */,
 			);
 			path = "Data Models";
 			sourceTree = "<group>";
@@ -361,6 +371,7 @@
 		8DF67205281F6B990064849A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8D1191F12998627600D381F6 /* DB */,
 				8D06DF4C28285BAB00372351 /* AppModel.swift */,
 				8DD463532821238B008EB85A /* UI */,
 				8D7E3E7D282041870094F05B /* Network */,
@@ -585,6 +596,7 @@
 				8DD4634D2821206F008EB85A /* PreviewCollectionCell.swift in Sources */,
 				8D47531D2824B2A20061970C /* LocalDB.swift in Sources */,
 				8D7E3E7A281F8CF90094F05B /* PaggingCell.swift in Sources */,
+				8D1191F02998626B00D381F6 /* Filter.swift in Sources */,
 				8D72208428287A34004C5C6C /* UIActivityIndicatorView.swift in Sources */,
 				8DD4635728212D75008EB85A /* UICollectionView.swift in Sources */,
 				8D81F59F282466C300338946 /* UITableViewCell.swift in Sources */,
