@@ -70,7 +70,7 @@ class NetworkModel {
         if let localImage = localImage(url: url) {
             completion(localImage)
         } else {
-            Load(method: .get, task: .other, parameters: "", urlString: url) { data, error in
+            Load(method: .get, task: .img, parameters: "", urlString: url) { data, error in
                 if let data = data {
                     var ud = LocalDB.db.movieImages
                     let new:[String:Any] = [
@@ -118,6 +118,7 @@ class NetworkModel {
                 }
             }
             let saveParameters = "page=\(page)&results=\(saveJson)&hasImage=\(hasImage)"
+            //updates my mysql
             self.Load(method: .post, task: .saveMovie, parameters: saveParameters) { saveData, errorSaveString in
                 let sended = Unparce.savedData(data: saveData)
                 print(sended, "sendedsendedsendedsendedsended")
@@ -184,7 +185,7 @@ class NetworkModel {
     
     private func Load(optUrl:String? = nil, method:Method = .get, task:Task, parameters:String, urlString:String? = nil, completion:@escaping(Data?, String?) -> ()) {//movies
         let mySQL = task.rawValue.contains(".php")
-        let url = mySQL ? Keys.sqlURL : Keys.apiURL
+        let url = task.url//mySQL ? Keys.sqlURL : Keys.apiURL
         let urlParam = task == .saveMovie ? "" : parameters
         let requestString = urlString ?? (url + task.rawValue + urlParam)
         print(requestString, " requestStringrequestString")
@@ -202,7 +203,7 @@ class NetworkModel {
                 "content-type": "application/json; charset=utf-8",
             ] : [
                 "X-RapidAPI-Host": "ott-details.p.rapidapi.com",
-                "X-RapidAPI-Key": Keys.apiKey,
+                "X-RapidAPI-Key": task.key,
                 "content-type": "application/json; charset=utf-8",
             ]
             request.allHTTPHeaderFields = headers
@@ -248,7 +249,26 @@ extension NetworkModel {
         case movies = "advancedsearch?"
         case sqlMovies = "LoadMovies.php"
         case saveMovie = "NewMovie.php?"
-        case other = ""
+        case img = ""
+        
+        
+        var url:String {
+            switch self {
+            case .movies:
+                return Keys.apiURL
+            case .sqlMovies, .saveMovie:
+                return Keys.sqlURL
+            case .img:
+                return ""
+            }
+        }
+        
+        var key:String {
+            switch self {
+            case .movies: return Keys.apiKey
+            default: return ""
+            }
+        }
     }
 }
 
