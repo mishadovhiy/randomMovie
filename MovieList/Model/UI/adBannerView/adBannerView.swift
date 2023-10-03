@@ -19,7 +19,8 @@ class adBannerView: UIView {
     var adNotReceved = true
     
     public func createBanner() {
-        
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "a26e1d88e010a69ebf4638dde3217821" ]//removee
+
         GADMobileAds.sharedInstance().start { status in
             DispatchQueue.main.async {
                 let window = AppDelegate.shared?.window ?? UIWindow()

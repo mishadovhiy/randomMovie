@@ -47,7 +47,7 @@ extension SwipeMovieVC {
     }
     
     
-    func fixView(cards: (first: MoviePreviewView, second: MoviePreviewView?, third: MoviePreviewView?), cardRemoved:Bool = false) {
+    func fixView(cards: (first: MoviePreviewView, second: MoviePreviewView?, third: MoviePreviewView?), cardRemoved:Bool = false, firstLoaded:Bool = false) {
         if !touched {
             self.containerView.alpha = 0
             self.containerView.layer.transform = CATransform3DMakeScale(0.8, 0.8, 1)
@@ -65,6 +65,10 @@ extension SwipeMovieVC {
                 self.performMoveCards(cards: cards)
             } completion: { _ in
                 self.cardMovedToTop(card: cards.first, fixingViews: true, cardRemoved: cardRemoved)
+                if firstLoaded {
+                    print("egrfwcdwrfe")
+                    self.removeFirst(action: .like)
+                }
             }
         }
         

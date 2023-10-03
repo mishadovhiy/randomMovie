@@ -208,3 +208,20 @@ extension UIColor {
         return makeColor(componentDelta: -1*componentDelta)
     }
 }
+
+
+extension UIActivityIndicatorView {
+    var setAnimating:Bool {
+        get {
+            return self.isAnimating
+        }
+        set {
+            self.isHidden = !newValue
+            if newValue {
+                self.startAnimating()
+            } else {
+                self.stopAnimating()
+            }
+        }
+    }
+}

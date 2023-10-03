@@ -304,6 +304,56 @@ Resume</string>
             </objects>
             <point key="canvasLocation" x="18.840579710144929" y="22.767857142857142"/>
         </scene>
+        <!--Item 2-->
+        <scene sceneID="g7r-KG-z1W">
+            <objects>
+                <viewController id="XFP-HM-3cM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Su7-qF-YqC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="uUZ-K2-MC0"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="KNz-sT-awu"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jhL-nq-iS9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1730" y="1099"/>
+        </scene>
+        <!--Item 1-->
+        <scene sceneID="gb4-LC-w8Y">
+            <objects>
+                <viewController id="ZLb-wG-Nja" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fY9-s2-TSh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="wX8-2c-Hxd"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 1" id="f1H-nA-tN1"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Or6-p3-Sbj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1730" y="491"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="ZSh-Op-czI">
+            <objects>
+                <tabBarController id="5gM-0y-F5C" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Nn5-VC-dgV">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="ZLb-wG-Nja" kind="relationship" relationship="viewControllers" id="Gpo-Aw-iZS"/>
+                        <segue destination="XFP-HM-3cM" kind="relationship" relationship="viewControllers" id="tcX-gx-erg"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rSL-1N-SV8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2619" y="795"/>
+        </scene>
         <!--Swipe MovieVC-->
         <scene sceneID="P3w-QD-UIF">
             <objects>
@@ -312,22 +362,81 @@ Resume</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v2X-99-XJ9" customClass="TouchView" customModule="MovieList" customModuleProvider="target">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="HXH-Ev-uzJ">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="e4f-9H-cPj">
+                                        <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                        <color key="color" name="WhiteColor"/>
+                                    </activityIndicatorView>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labelпвавы" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6QS-bw-boe">
+                                        <rect key="frame" x="-57" y="0.0" width="134.5" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                        <color key="textColor" name="WhiteColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EAF-qO-AJa">
+                                        <rect key="frame" x="-10.5" y="0.0" width="41.5" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" name="DarkGreyColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v2X-99-XJ9" customClass="TouchView" customModule="MovieList" customModuleProvider="target">
                                 <rect key="frame" x="5" y="53" width="404" height="804"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpasity">
+                                        <real key="value" value="0.90000000000000002"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </containerView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="plC-QN-6r5" customClass="Button" customModule="MovieList" customModuleProvider="target">
+                                <rect key="frame" x="132" y="812" width="150" height="45"/>
+                                <color key="backgroundColor" name="PurpureColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="dpP-Qz-5ZC"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="uSM-rd-vgE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <color key="tintColor" name="WhiteColor"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Reload"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="reloadPressed:" destination="umj-e7-yr3" eventType="touchUpInside" id="aMS-ZS-8Nt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="v9L-PA-49n"/>
                         <color key="backgroundColor" name="PimaryBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="v9L-PA-49n" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="plC-QN-6r5" secondAttribute="trailing" constant="10" id="2Nc-i2-2AU"/>
+                            <constraint firstItem="HXH-Ev-uzJ" firstAttribute="centerY" secondItem="QnX-3E-1ri" secondAttribute="centerY" id="8ks-xP-rQS"/>
+                            <constraint firstItem="HXH-Ev-uzJ" firstAttribute="height" relation="lessThanOrEqual" secondItem="QnX-3E-1ri" secondAttribute="height" id="AMp-kJ-yim"/>
+                            <constraint firstItem="HXH-Ev-uzJ" firstAttribute="width" relation="lessThanOrEqual" secondItem="QnX-3E-1ri" secondAttribute="width" id="CPv-hF-Rj0"/>
                             <constraint firstItem="v2X-99-XJ9" firstAttribute="top" secondItem="v9L-PA-49n" secondAttribute="top" constant="5" id="Cdp-9x-Obm"/>
+                            <constraint firstItem="plC-QN-6r5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="v9L-PA-49n" secondAttribute="leading" constant="10" id="EPQ-3t-OIE"/>
                             <constraint firstItem="v2X-99-XJ9" firstAttribute="leading" secondItem="QnX-3E-1ri" secondAttribute="leading" constant="5" id="RU9-CI-Imz"/>
                             <constraint firstItem="v9L-PA-49n" firstAttribute="bottom" secondItem="v2X-99-XJ9" secondAttribute="bottom" constant="5" id="c3f-z8-bSz"/>
+                            <constraint firstItem="plC-QN-6r5" firstAttribute="centerX" secondItem="QnX-3E-1ri" secondAttribute="centerX" id="dbs-4b-wlP"/>
+                            <constraint firstItem="v9L-PA-49n" firstAttribute="bottom" secondItem="plC-QN-6r5" secondAttribute="bottom" constant="5" id="mbW-aP-GS5"/>
+                            <constraint firstItem="HXH-Ev-uzJ" firstAttribute="centerX" secondItem="QnX-3E-1ri" secondAttribute="centerX" id="qTh-Hm-hxl"/>
                             <constraint firstAttribute="trailing" secondItem="v2X-99-XJ9" secondAttribute="trailing" constant="5" id="sg7-vr-oji"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="containerView" destination="v2X-99-XJ9" id="KrQ-x4-piH"/>
+                        <outlet property="loadingStack" destination="HXH-Ev-uzJ" id="vhb-aC-eaY"/>
+                        <outlet property="reloadButton" destination="plC-QN-6r5" id="Umg-d0-acI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NK9-D5-vQQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -784,11 +893,14 @@ Resume</string>
         <namedColor name="WhiteColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tintColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

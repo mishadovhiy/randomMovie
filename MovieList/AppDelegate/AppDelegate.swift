@@ -17,10 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         AppDelegate.shared = self
         banner.createBanner()
-        
         DispatchQueue.init(label: "local", qos: .userInitiated).async {
             LocalDB.db.checkOldImgs()
         }
@@ -28,17 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        
-    }
-    
-    func applicationDidEnterBackground(_ application: UIApplication) {
-
-    }
-
-    func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
-        
-    }
 
 }
 

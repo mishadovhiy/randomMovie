@@ -8,11 +8,12 @@
 import UIKit
 
 extension SwipeMovieVC {
-    func createMovie() -> MoviePreviewView? {
-        if data.count - 1 >= index && data.count != 0 {
-            return performCreatingMovie()
+    func createMovie(first:Bool = false) -> MoviePreviewView? {
+        if randomList.count - 1 >= index && randomList.count != 0 {
+            return performCreatingMovie(first: first)
         } else {
             return nil
+            
         }
     }
     
@@ -26,10 +27,9 @@ extension SwipeMovieVC {
             let newCards = (first:first, second:second, third:third)
             self.movieBoxes = newCards
             first.touchesEnded()
-            self.fixView(cards: newCards, cardRemoved: removed)
+            self.fixView(cards: newCards, cardRemoved: removed, firstLoaded: firstLoad)
             
         } else {
-           // self.toggleScreenAI(hide: false)
             if apiError == nil {
                 self.loadMovies()
             }
@@ -37,7 +37,6 @@ extension SwipeMovieVC {
     }
     
     func prepareFirstCard(to container: MoviePreviewView) {
-        
         container.isUserInteractionEnabled = true
         container.layer.zPosition = 9999999
         container.alpha = 1
@@ -63,8 +62,6 @@ extension SwipeMovieVC {
     func performMoveCards(cards: (first: MoviePreviewView, second: MoviePreviewView?, third: MoviePreviewView?)) {
         cards.first.transform = CGAffineTransform(rotationAngle: 0)
         cards.first.moveToCenter()
-        cards.first.vc?.view.backgroundColor = .white
-
         self.prepareAdditionalCard(cards.second, isSecond: true)
         self.prepareAdditionalCard(cards.third, isSecond: false)
         let previewVC = cards.first.vc
@@ -75,7 +72,6 @@ extension SwipeMovieVC {
     }
     
     private func prepareAdditionalCard(_ container:MoviePreviewView?, isSecond:Bool) {
-        container?.vc?.view.backgroundColor = .red
         container?.layer.zPosition = isSecond ? -1 : -2
         container?.isUserInteractionEnabled = false
         container?.subviews.last?.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, isSecond ? transform.first : transform.second, 0)
@@ -84,7 +80,10 @@ extension SwipeMovieVC {
         container?.alpha = transform + 0.5
     }
     
-    private func performCreatingMovie() -> MoviePreviewView {
+    private func performCreatingMovie(first:Bool = false) -> MoviePreviewView? {
+        if !(randomList.count - 1 >= index) {
+            return nil
+        }
         let container = MoviePreviewView()
         containerView.addSubview(container)
         container.addConstaits([.left:0, .right:0, .top:0, .bottom:0], superV: containerView)
@@ -96,12 +95,13 @@ extension SwipeMovieVC {
         container.gesture = panGesture
         container.addGestureRecognizer(panGesture)
         
-        let vc = MovieVC()
+        let vc = MovieVC.configure(isPreview: true, movie: randomList[index])
         addChild(vc)
         container.addSubview(vc.view)
         vc.view.addConstaits([.left:0, .right:0, .top:0, .bottom:0], superV: container)
         container.vc = vc
         index += 1
+        vc.didMove(toParent: self)
         print(index, " ytgrfewd")
         return container
     }

@@ -19,12 +19,14 @@ class MovieVC: BaseVC {
     var favoritesPressedAction:(() -> ())?
     
     private var favoriteChanged = false
-
-    var testData:String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
+        if isPreview {
+            self.view.layer.cornerRadius = 12
+            self.view.layer.masksToBounds = true
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -136,10 +138,12 @@ class MovieVC: BaseVC {
 }
 
 extension MovieVC {
-    static func configure(isPreview:Bool = false) -> MovieVC {
+    static func configure(isPreview:Bool = false, movie:Movie? = nil, favoritesPressedAction:(() -> ())? = nil) -> MovieVC {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "MovieVC") as! MovieVC
         vc.isPreview = isPreview
+        vc.movie = movie
+        vc.favoritesPressedAction = favoritesPressedAction
         return vc
     }
 }

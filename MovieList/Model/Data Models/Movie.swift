@@ -10,6 +10,10 @@ import UIKit
 struct MovieList {
     let movie:[Movie]
     let page:Int
+    
+    var randomMovie: Movie? {
+        return movie.randomElement()
+    }
 }
 
 class Movie {

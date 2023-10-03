@@ -14,6 +14,7 @@ class BaseVC: UIViewController {
     
     private var sbvsLoaded = false
     var apiError:String?
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if !sbvsLoaded {
@@ -40,6 +41,7 @@ class BaseVC: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
     }

@@ -157,7 +157,7 @@ class NetworkModel {
     }
     
     
-    private func loadSQLMovies(completion:@escaping([MovieList], Bool) -> ()) {
+    func loadSQLMovies(completion:@escaping(_ loadedData:[MovieList], _ error:Bool) -> ()) {
         if let movieList = AppModel.mySqlMovieList {
             let result = sqlLoaded(data: movieList)
             completion(result, false)
