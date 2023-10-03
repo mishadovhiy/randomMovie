@@ -13,7 +13,7 @@ class BaseVC: UIViewController {
     lazy var ai = AppModel.Appearence.ai
     
     private var sbvsLoaded = false
-    
+    var apiError:String?
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if !sbvsLoaded {

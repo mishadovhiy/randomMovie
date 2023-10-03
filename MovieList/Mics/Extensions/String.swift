@@ -36,4 +36,33 @@ extension String {
 
 
 
+extension Data {
+    var array: NSArray? {
+        var jsonResult:NSArray?
+        let dataa = self
+        
+        do{
+            jsonResult = try JSONSerialization.jsonObject(with: dataa, options:.allowFragments) as? NSArray ?? []
+        } catch _ as NSError {
+            return nil
+        }
+        return jsonResult
+    }
+}
+
+extension NSArray {
+    func data(dictKey:String) -> [(Data?, [String:Any]?)]? {
+
+        return self.compactMap({
+            if let jsonElement = $0 as? NSDictionary,
+               let dict = jsonElement as? [String : Any],
+               let resultString = dict[dictKey] as? String
+            {
+                return (Data(base64Encoded: resultString, options: .ignoreUnknownCharacters), dict)
+            } else {
+                return (nil, nil)
+            }
+        })
+    }
+}
 

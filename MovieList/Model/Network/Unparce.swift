@@ -14,23 +14,13 @@ struct Unparce {
         guard let arrey = jsonArrey else {
             return nil
         }
-        var result:[MovieList] = []
-        for i in 0..<arrey.count {
-            if let jsonElement = arrey[i] as? NSDictionary {
-                if let dict = jsonElement as? [String : Any] {
-                    guard let resultString = dict["results"] as? String else {
-                        break
-                    }
-                    let data = Data(base64Encoded: resultString, options: .ignoreUnknownCharacters)
-                    let dictt = jsonDataDict(data)
-                    let movies = Unparce.json(dictt ?? [:], filter: filter)
-                    let page = Double.init(dict["page"] as? String ?? "")
-                    let list:MovieList = .init(movie: movies ?? [], page: Int(page ?? 0))
-                    result.append(list)
-                }
-            }
-        }
-        return result
+
+        return arrey.data(dictKey: "results")?.compactMap({
+            let dictt = jsonDataDict($0.0)
+            let movies = Unparce.json(dictt ?? [:], filter: filter)
+            let page = Double.init($0.1?["page"] as? String ?? "")
+            return .init(movie: movies ?? [], page: Int(page ?? 0))
+        })
     }
     
     //as [string:movie]
@@ -68,17 +58,7 @@ struct Unparce {
     }
     
     static func jsonDataArray(_ data:Data?) -> NSArray? {
-        var jsonResult:NSArray?
-        guard let dataa = data  else {
-            return nil
-        }
-        
-        do{
-            jsonResult = try JSONSerialization.jsonObject(with: dataa, options:.allowFragments) as? NSArray ?? []
-        } catch _ as NSError {
-            return nil
-        }
-        return jsonResult
+        return data?.array
     }
     
     

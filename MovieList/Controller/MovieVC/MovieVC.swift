@@ -20,6 +20,7 @@ class MovieVC: BaseVC {
     
     private var favoriteChanged = false
 
+    var testData:String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,5 +118,28 @@ class MovieVC: BaseVC {
         } else {
             errorActions()
         }
+    }
+    var isPreview:Bool = false
+    var movedToTop:Bool = false
+    func containerAppeared() {
+        
+    }
+    
+    func updateScroll(scrValue:CGFloat, topValue:CGFloat, action:PanActionType?) {
+        
+    }
+    
+    var isHapptic:Bool = false
+    func happtic(start:Bool) {
+        
+    }
+}
+
+extension MovieVC {
+    static func configure(isPreview:Bool = false) -> MovieVC {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "MovieVC") as! MovieVC
+        vc.isPreview = isPreview
+        return vc
     }
 }

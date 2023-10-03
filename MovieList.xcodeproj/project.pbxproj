@@ -52,6 +52,11 @@
 		8DE94B6D28502D1D00ADF861 /* MessageViewLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 8DE94B6C28502D1D00ADF861 /* MessageViewLibrary */; };
 		8DE9C5402838375D008168DF /* SideBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE9C53F2838375D008168DF /* SideBarVC.swift */; };
 		8DE9C54428383B4F008168DF /* ExtensionsSideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE9C54328383B4F008168DF /* ExtensionsSideBar.swift */; };
+		8DEF46F72ACB6D34008EEFA6 /* SwipeMovieVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF46F62ACB6D34008EEFA6 /* SwipeMovieVC.swift */; };
+		8DEF46FB2ACB6DDE008EEFA6 /* TouchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF46FA2ACB6DDE008EEFA6 /* TouchView.swift */; };
+		8DEF46FD2ACB7848008EEFA6 /* Extensions_Swipe_SwipeMovieVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF46FC2ACB7848008EEFA6 /* Extensions_Swipe_SwipeMovieVC.swift */; };
+		8DEF46FF2ACB7F72008EEFA6 /* Animate_SwipeViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF46FE2ACB7F72008EEFA6 /* Animate_SwipeViewVC.swift */; };
+		8DEF47012ACB82B3008EEFA6 /* ContainerPanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF47002ACB82B3008EEFA6 /* ContainerPanGesture.swift */; };
 		8DF671D4281F6B0D0064849A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF671D3281F6B0D0064849A /* AppDelegate.swift */; };
 		8DF671D8281F6B0D0064849A /* MovieListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF671D7281F6B0D0064849A /* MovieListVC.swift */; };
 		8DF671DB281F6B0E0064849A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DF671D9281F6B0E0064849A /* Main.storyboard */; };
@@ -124,6 +129,11 @@
 		8DD4635D2821CEA1008EB85A /* MovieVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieVC.swift; sourceTree = "<group>"; };
 		8DE9C53F2838375D008168DF /* SideBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarVC.swift; sourceTree = "<group>"; };
 		8DE9C54328383B4F008168DF /* ExtensionsSideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsSideBar.swift; sourceTree = "<group>"; };
+		8DEF46F62ACB6D34008EEFA6 /* SwipeMovieVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeMovieVC.swift; sourceTree = "<group>"; };
+		8DEF46FA2ACB6DDE008EEFA6 /* TouchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchView.swift; sourceTree = "<group>"; };
+		8DEF46FC2ACB7848008EEFA6 /* Extensions_Swipe_SwipeMovieVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_Swipe_SwipeMovieVC.swift; sourceTree = "<group>"; };
+		8DEF46FE2ACB7F72008EEFA6 /* Animate_SwipeViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animate_SwipeViewVC.swift; sourceTree = "<group>"; };
+		8DEF47002ACB82B3008EEFA6 /* ContainerPanGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerPanGesture.swift; sourceTree = "<group>"; };
 		8DF671D0281F6B0D0064849A /* MovieList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DF671D3281F6B0D0064849A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8DF671D7281F6B0D0064849A /* MovieListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListVC.swift; sourceTree = "<group>"; };
@@ -283,7 +293,7 @@
 			children = (
 				8D353E2A28E24561007F774F /* adBannerView */,
 				8D81F5A6282468BB00338946 /* RangeSlider */,
-				8DD4635128212385008EB85A /* View.swift */,
+				8DEF46F92ACB6DC5008EEFA6 /* UIView */,
 				8DD463592821C622008EB85A /* Label.swift */,
 				8D3E741A28289E6F003AC968 /* Buttons */,
 			);
@@ -316,6 +326,26 @@
 				8DE9C54328383B4F008168DF /* ExtensionsSideBar.swift */,
 			);
 			path = ExtensionsSideBar;
+			sourceTree = "<group>";
+		};
+		8DEF46F82ACB6DA4008EEFA6 /* SwipeMovieVC */ = {
+			isa = PBXGroup;
+			children = (
+				8DEF46F62ACB6D34008EEFA6 /* SwipeMovieVC.swift */,
+				8DEF46FC2ACB7848008EEFA6 /* Extensions_Swipe_SwipeMovieVC.swift */,
+				8DEF46FE2ACB7F72008EEFA6 /* Animate_SwipeViewVC.swift */,
+				8DEF47002ACB82B3008EEFA6 /* ContainerPanGesture.swift */,
+			);
+			path = SwipeMovieVC;
+			sourceTree = "<group>";
+		};
+		8DEF46F92ACB6DC5008EEFA6 /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				8DD4635128212385008EB85A /* View.swift */,
+				8DEF46FA2ACB6DDE008EEFA6 /* TouchView.swift */,
+			);
+			path = UIView;
 			sourceTree = "<group>";
 		};
 		8DF671C7281F6B0D0064849A = {
@@ -395,6 +425,7 @@
 				8DF67208281F89750064849A /* MovieListVC */,
 				8DD4635F2821CEA6008EB85A /* MovieVC */,
 				8DE9C5412838378F008168DF /* SideBarVC */,
+				8DEF46F82ACB6DA4008EEFA6 /* SwipeMovieVC */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -599,10 +630,13 @@
 				8D1191F02998626B00D381F6 /* Filter.swift in Sources */,
 				8D72208428287A34004C5C6C /* UIActivityIndicatorView.swift in Sources */,
 				8DD4635728212D75008EB85A /* UICollectionView.swift in Sources */,
+				8DEF47012ACB82B3008EEFA6 /* ContainerPanGesture.swift in Sources */,
 				8D81F59F282466C300338946 /* UITableViewCell.swift in Sources */,
+				8DEF46F72ACB6D34008EEFA6 /* SwipeMovieVC.swift in Sources */,
 				8DD4635C2821CB14008EB85A /* Button.swift in Sources */,
 				8DF671D8281F6B0D0064849A /* MovieListVC.swift in Sources */,
 				8D06DF4B2828585500372351 /* BaseVC.swift in Sources */,
+				8DEF46FD2ACB7848008EEFA6 /* Extensions_Swipe_SwipeMovieVC.swift in Sources */,
 				8D81F5A12824679100338946 /* UITableView_SideBar.swift in Sources */,
 				8DF671D4281F6B0D0064849A /* AppDelegate.swift in Sources */,
 				8D353E3028E24562007F774F /* ExtensionGADBannerViewDelegate.swift in Sources */,
@@ -611,6 +645,7 @@
 				8DF6720A281F89A40064849A /* MovieCell.swift in Sources */,
 				8D7E3E7F282041AB0094F05B /* Unparce.swift in Sources */,
 				8DD4635528212C78008EB85A /* UIView.swift in Sources */,
+				8DEF46FB2ACB6DDE008EEFA6 /* TouchView.swift in Sources */,
 				8D722080282874F8004C5C6C /* Appeareance.swift in Sources */,
 				8DE9C54428383B4F008168DF /* ExtensionsSideBar.swift in Sources */,
 				8D353E2F28E24562007F774F /* adBannerView.swift in Sources */,
@@ -618,6 +653,7 @@
 				8D81F5A4282468B200338946 /* RangeSlider.swift in Sources */,
 				8DD4634F28212084008EB85A /* LoadingCollectionCell.swift in Sources */,
 				8D81F59D2824665600338946 /* SideBarCollectionCell.swift in Sources */,
+				8DEF46FF2ACB7F72008EEFA6 /* Animate_SwipeViewVC.swift in Sources */,
 				8D7E3E812820420D0094F05B /* Keys.swift in Sources */,
 				8D06DF4D28285BAB00372351 /* AppModel.swift in Sources */,
 				8D3E741C2828A797003AC968 /* UISearchBarDelegate.swift in Sources */,
