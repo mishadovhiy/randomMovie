@@ -12,10 +12,15 @@ class SwipeMovieVC: BaseVC {
     var data:[String] = ["fwe", "ew", "sfdfsd", "sfgda", "wre", "thrg", "hyrgt", "yh5trg", "njyhtbg", "ew", "sfdfsd", "sfgda", "wre", "thrg", "hyrgt", "yh5trg", "njyhtbg"]
     var index:Int = 0
     lazy var cardsGestureManager:ContainerPanGesture = .init(vc: self, delegate: self)
-    
+    var touched:Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         loadMovies()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        touched = false
     }
     
     var movieBoxes:(first:MoviePreviewView, second:MoviePreviewView?, third:MoviePreviewView?)?
@@ -26,10 +31,11 @@ class SwipeMovieVC: BaseVC {
         } else {
             print("fetching new data")
             index = 0
+            touched = false
             data = [
                 "ew", "sfdfsd", "sfgda", "wre", "thrg", "hyrgt", "yh5trg", "njyhtbg"
             ]
-           // self.loadMovies()
+            self.loadMovies()
             //load from api
         }
     }
@@ -41,7 +47,7 @@ class SwipeMovieVC: BaseVC {
     }()
     
     func cardMovedToTop(card:MoviePreviewView, fixingViews:Bool = false, cardRemoved:Bool = false) {
-        if fixingViews {
+        if fixingViews && !touched {
             UIView.animate(withDuration: 0.4) {
                 self.containerView.alpha = 1
                 self.containerView.layer.transform = CATransform3DMakeScale(1, 1, 1)

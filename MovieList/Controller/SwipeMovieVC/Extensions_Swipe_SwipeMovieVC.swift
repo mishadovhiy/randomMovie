@@ -21,7 +21,7 @@ extension SwipeMovieVC {
         if let first = nextCard {
             let second = (firstLoad ? all.second : all.third) ?? self.createMovie()
             self.prepareFirstCard(to: first)
-            let third = self.createMovie()
+            let third = firstLoad ? all.third : self.createMovie()
             
             let newCards = (first:first, second:second, third:third)
             self.movieBoxes = newCards
@@ -69,7 +69,9 @@ extension SwipeMovieVC {
         self.prepareAdditionalCard(cards.third, isSecond: false)
         let previewVC = cards.first.vc
         previewVC?.updateScroll(scrValue: 0, topValue: 0, action: nil)
-        self.containerView.alpha = 1
+        if self.touched {
+            self.containerView.alpha = 1
+        }
     }
     
     private func prepareAdditionalCard(_ container:MoviePreviewView?, isSecond:Bool) {
@@ -139,6 +141,7 @@ extension SwipeMovieVC {
 
 extension SwipeMovieVC:ContainerPanGestureProtocol {
     func updateWhileScrolling(_ action: PanActionType?, _ scrollValue: CGFloat, topCalc: CGFloat) {
+        touched = true
         guard let cards = movieBoxes else { return }
         let previewVC = cards.first.vc
         guard let action = action else {

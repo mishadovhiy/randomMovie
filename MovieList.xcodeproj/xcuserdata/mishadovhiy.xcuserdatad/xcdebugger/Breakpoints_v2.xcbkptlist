@@ -1064,8 +1064,8 @@
             filePath = "MovieList/Controller/SwipeMovieVC/Extensions_Swipe_SwipeMovieVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
             landmarkName = "panEndAction(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1080,8 +1080,8 @@
             filePath = "MovieList/Controller/SwipeMovieVC/Extensions_Swipe_SwipeMovieVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
             landmarkName = "panEndAction(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1096,8 +1096,8 @@
             filePath = "MovieList/Controller/SwipeMovieVC/Animate_SwipeViewVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
             landmarkName = "fixView(cards:cardRemoved:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1112,8 +1112,8 @@
             filePath = "MovieList/Controller/SwipeMovieVC/Animate_SwipeViewVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
             landmarkName = "fixView(cards:cardRemoved:)"
             landmarkType = "7">
             <Locations>
@@ -1160,8 +1160,8 @@
             filePath = "MovieList/Controller/SwipeMovieVC/Animate_SwipeViewVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "fixView(cards:cardRemoved:)"
             landmarkType = "7">
             <Locations>
@@ -1224,8 +1224,8 @@
             filePath = "MovieList/Controller/SwipeMovieVC/SwipeMovieVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "moveToCenter()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1256,8 +1256,8 @@
             filePath = "MovieList/Controller/SwipeMovieVC/Extensions_Swipe_SwipeMovieVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "performCreatingMovie()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1355,6 +1355,22 @@
             startingLineNumber = "13"
             endingLineNumber = "13"
             landmarkName = "removeFirst(action:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EBCEDB79-A8E6-473E-802D-23DF4D9EB6B5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MovieList/Controller/SwipeMovieVC/Extensions_Swipe_SwipeMovieVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "moveNext(all:firstLoad:removed:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

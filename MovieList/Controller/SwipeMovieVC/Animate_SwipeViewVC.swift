@@ -27,7 +27,7 @@ extension SwipeMovieVC {
             }
         }
         self.cardWillMove(for: action, card: old)
-        UIView.animate(withDuration: 0.1, delay: 0, options: .allowUserInteraction, animations: {
+        UIView.animate(withDuration: 0.24, delay: 0, options: .allowUserInteraction, animations: {
             old.vc?.view.alpha = 0
             old.layer.position = newCenter
             old.transform = CGAffineTransform(rotationAngle: 0)
@@ -38,7 +38,7 @@ extension SwipeMovieVC {
             self.cardDidMove(for: action, card: cards.first)
         })
         
-        Timer.scheduledTimer(withTimeInterval: 0.02, repeats: false, block: {_ in
+        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false, block: {_ in
             self.moveNext(all: cards, removed: true)
         })
         
@@ -48,9 +48,13 @@ extension SwipeMovieVC {
     
     
     func fixView(cards: (first: MoviePreviewView, second: MoviePreviewView?, third: MoviePreviewView?), cardRemoved:Bool = false) {
+        if !touched {
+            self.containerView.alpha = 0
+            self.containerView.layer.transform = CATransform3DMakeScale(0.8, 0.8, 1)
+        }
         if cardRemoved {
             print("fixViewcardRemoved")
-            UIView.animate(withDuration: 0.1, delay: 0, options: .allowUserInteraction, animations: {
+            UIView.animate(withDuration: 0.23, delay: 0, options: .allowUserInteraction, animations: {
                 self.performMoveCards(cards: cards)
             }, completion: { _ in
                 self.cardMovedToTop(card: cards.first, fixingViews: true)
