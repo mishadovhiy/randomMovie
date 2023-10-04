@@ -15,8 +15,6 @@ protocol ContainerPanGestureProtocol {
 enum PanActionType:Int {
     case dislike = 0
     case like = 1
-    case bet = 2
-    case superLike = 3
 }
 
 class ContainerPanGesture {
@@ -47,7 +45,7 @@ class ContainerPanGesture {
         let topCalc = abs(scrollTop) / vc.view.center.y
         
         var result = valuesToAction(resultCalc: resultCalc, topCalc: topCalc, isInCenter: isInCenter)
-        let scrVal = (result ?? .dislike) == .bet ? topCalc : resultCalc
+        let scrVal = resultCalc//(result ?? .dislike) == .bet ? topCalc : resultCalc
         delegate.updateWhileScrolling(result ?? (isInCenter > 0 ? .like : .dislike), scrVal, topCalc: topCalc)
         
         if result != self.result {
@@ -71,8 +69,8 @@ class ContainerPanGesture {
     }
 
     func valuesToAction(resultCalc:CGFloat, topCalc:CGFloat, isInCenter:CGFloat, ended:Bool = false) -> PanActionType? {
-        if topCalc >= 0.6 {
-            return .bet
+        if topCalc >= 0.8 {
+            return nil
         } else if resultCalc > 0.55 {
             return isInCenter > 0 ? .like : .dislike
         } else {

@@ -18,11 +18,11 @@ extension UIView {
         }
     }
     
-    func addConstaits(_ constants:[NSLayoutConstraint.Attribute:CGFloat], superV:UIView) {
+    func addConstaits(_ constants:[NSLayoutConstraint.Attribute:CGFloat], superV:UIView, toSafe:Bool = false) {
         let layout = superV
         constants.forEach { (key, value) in
             let keyNil = key == .height || key == .width
-            let item:Any? = keyNil ? nil : layout
+            let item:Any? = keyNil ? nil : (toSafe ? layout.safeAreaLayoutGuide : layout)
             superV.addConstraint(.init(item: self, attribute: key, relatedBy: .equal, toItem: item, attribute: key, multiplier: 1, constant: value))
         }
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -84,6 +84,12 @@ extension UIView {
 
 
 extension CALayer {
+    func shadow(opasity:Float = 0.6, offset:CGSize = .init(width: 0, height: 0), color:UIColor? = nil, radius:CGFloat = 10) {
+        self.shadowColor = (color ?? .black).cgColor
+        self.shadowOffset = offset
+        self.shadowRadius = radius
+        self.shadowOpacity = opasity
+    }
     func radius(_ value:CGFloat? = nil, at:RadiusAt) {
         self.cornerRadius = value ?? (self.frame.height / 2)
         self.maskedCorners = at.masks
@@ -169,6 +175,71 @@ extension CALayer {
             linePath.addLine(to: line)
         }
         return linePath
+    }
+    
+    enum KeyPath:String {
+        case height = "bounds.size.height"
+        case background = "backgroundColor"
+        case zoom = "transform.scale"
+        
+        func from(_ view:CALayer) -> Any {
+            switch self {
+            case .height:
+                return view.bounds.size.height
+            case .background:
+                return view.backgroundColor ?? UIColor.black.cgColor
+            case .zoom: return CGFloat(1)
+            }
+        }
+        
+        func to(_ view:CALayer) -> Any? {
+            switch self {
+            case .height:
+                return 0
+            case .background:
+                return nil
+            case .zoom: return nil
+            }
+        }
+        
+        func set(to:Any?, view:CALayer) {
+            switch self {
+            case .height:
+                view.bounds.size.height = ((to ?? self.to(view)) as? CGFloat ?? 0)
+            case .background:
+                view.backgroundColor = ((to ?? self.to(view)) as! CGColor)
+            case .zoom:
+                let to = (to ?? self.to(view)) as! CGFloat
+                view.transform = CATransform3DMakeScale(to, to, 1)
+            }
+        }
+    }
+
+    enum AnimationKey:String {
+        case general = "backgroundpress"
+        case general1 = "backgroundpress1"
+        
+    }
+    
+    func performAnimation(key:KeyPath,
+                          to:Any? = nil,
+                          code:AnimationKey = .general,
+                          duration:CGFloat = 0.3,
+                          completion:(()->())? = nil
+    ) {
+     //   self.removeAnimation(forKey: key.rawValue)
+        let animation = CABasicAnimation(keyPath: key.rawValue)
+        animation.fromValue = key.from(self)
+        animation.toValue = to ?? key.to(self)
+        animation.duration = duration
+        animation.beginTime = CACurrentMediaTime()
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+            key.set(to: to, view: self)
+            completion?()
+        }
+        self.add(animation, forKey: code.rawValue)
+        CATransaction.commit()
     }
 }
 

@@ -14,12 +14,14 @@ class BaseVC: UIViewController {
     
     private var sbvsLoaded = false
     var apiError:String?
+    var appeared:Bool = false
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if !sbvsLoaded {
             sbvsLoaded = true
-            self.additionalSafeAreaInsets.bottom = 60
+            self.additionalSafeAreaInsets.bottom = 65
+            self.firstLayoutSubviews()
         }
     }
     
@@ -36,6 +38,7 @@ class BaseVC: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        appeared = true
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -43,6 +46,13 @@ class BaseVC: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+    }
+    func firstLayoutSubviews() {
+        
+    }
+    
+    func filterChanged() {
         
     }
 }

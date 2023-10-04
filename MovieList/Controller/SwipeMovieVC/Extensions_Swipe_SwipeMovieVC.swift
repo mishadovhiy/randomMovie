@@ -85,12 +85,18 @@ extension SwipeMovieVC {
             return nil
         }
         let container = MoviePreviewView()
+        container.customTouchAnimation = { begun in
+            container.vc?.view.layer.performAnimation(key: .zoom, to: begun ? CGFloat(1.02) : CGFloat(1))
+        }
+        container.backgroundColor = #colorLiteral(red: 0.08600000292, green: 0.08600000292, blue: 0.08600000292, alpha: 1)
+        container.layer.cornerRadius = 12
+        container.layer.masksToBounds = true
         containerView.addSubview(container)
         container.addConstaits([.left:0, .right:0, .top:0, .bottom:0], superV: containerView)
         container.center =
             .init(x: self.view.frame.width / 2, y: self.view.frame.height / 3)
         container.layer.transform = CATransform3DMakeScale(0.8, 0.8, 1)
-
+        
         let panGesture:UIPanGestureRecognizer = .init(target: self, action: #selector(containerPanned(_:)))
         container.gesture = panGesture
         container.addGestureRecognizer(panGesture)
@@ -126,16 +132,16 @@ extension SwipeMovieVC {
     }
     
     func setupGradientButtons(action:PanActionType, value:CGFloat, topCalc:CGFloat) {
-       /* let dict:[PanActionType:TapGradientButton] = [
-            .bet:superBetButton,
-            .dislike:dislikeButton,
-            .like:likeButton,
-            .superLike:betButton
-        ]
-        dict.forEach { (actionKey, button) in
-            let val = action == .bet || action == .superLike ? topCalc : value
-            button.pressed(percent: actionKey == action ? val : 0, animated: false)
-        }*/
+        /* let dict:[PanActionType:TapGradientButton] = [
+         .bet:superBetButton,
+         .dislike:dislikeButton,
+         .like:likeButton,
+         .superLike:betButton
+         ]
+         dict.forEach { (actionKey, button) in
+         let val = action == .bet || action == .superLike ? topCalc : value
+         button.pressed(percent: actionKey == action ? val : 0, animated: false)
+         }*/
     }
 }
 
@@ -152,7 +158,7 @@ extension SwipeMovieVC:ContainerPanGestureProtocol {
         }
         setupCardsWhileScrolling(action, scrollValue, cards: cards)
         setupGradientButtons(action: action, value: scrollValue, topCalc: topCalc)
-
+        
         if scrollValue >= 0.15 && (previewVC?.isHapptic ?? false) {
             previewVC?.happtic(start: false)
         }
@@ -166,11 +172,6 @@ extension SwipeMovieVC:ContainerPanGestureProtocol {
             cards.first.transform = CGAffineTransform(rotationAngle: (scrollValue / 5) * (-1))
         case .like:
             cards.first.transform = CGAffineTransform(rotationAngle: scrollValue / 5)
-        case .superLike, .bet:
-            UIView.animate(withDuration: 0.3) {
-                cards.first.transform = CGAffineTransform(rotationAngle: 0)
-            }
-            
         }
     }
     
@@ -189,5 +190,78 @@ extension SwipeMovieVC:ContainerPanGestureProtocol {
         vibrate()
     }
     
+    func reloadPressed() {
+        self.setAnimating(animating: true) {
+            self.apiLoad()
+        }
+    }
+    
+    //
+    
+    func removeAllBoxes() {
+        let all = [movieBoxes?.first, movieBoxes?.second, movieBoxes?.third]
+        all.forEach({
+            if let box = $0 {
+                box.vc?.view.removeFromSuperview()
+                box.vc?.removeFromParent()
+                box.removeFromSuperview()
+            }
+        })
+        movieBoxes = nil
+        randomList = []
+        allApi = []
+    }
+    
+    private func randomMovies(page: Int) -> [Movie] {
+        var newData:[Movie] = []
+        for _ in 0..<(Int.random(in: 2...5)) {
+            if let new = (allApi.first(where: {$0.page == page}))?.movie.randomElement() {
+                newData.append(new)
+                
+            }
+        }
+        return newData
+    }
+    
+    func setRandoms() -> Bool {
+        print("setRandomssetRandomssetRandoms")
+        randomList.removeAll()
+        var data:[Int: [Movie]] = [:]
+        for _ in 0..<20 {
+            if let randomPage = allApi.randomElement()?.page {
+                var newMovies = self.randomMovies(page: randomPage)
+                
+                if let updating = data[randomPage] {
+                    updating.forEach({newMovies.append($0)})
+                }
+                data.updateValue(newMovies, forKey: randomPage)
+                
+            }
+        }
+        
+        var c = 0
+        let api = Array(allApi)
+        data.forEach({ list in
+            var new = api.first(where: {$0.page == list.key})?.movie ?? []
+            print(new.count, " gterfwds")
+            new.removeAll(where: { rem in
+                return list.value.contains(where: {$0.imdbid == rem.imdbid})
+            })
+            print(new.count, " gterfwdsafterrrr")
+            list.value.forEach({ _ in
+                c += 1
+            })
+            allApi.removeAll(where: {$0.page == list.key})
+            allApi.append(.init(movie: new, page: list.key))
+        })
+        data.forEach({ dict in
+            dict.value.forEach({
+                self.randomList.append($0)
+            })
+        })
+        
+        print(c, " brtgerfrvrgb")
+        return !(randomList.count == 0)
+    }
     
 }

@@ -80,19 +80,7 @@ class MovieVC: BaseVC {
     
     @IBAction func favoritesPressed(_ sender: UIButton) {
         favoriteChanged = true
-        if let movie = movie {
-            var movieFav:UIColor = Text.Colors.darkGrey
-            if let _ = LocalDB.db.favoriteMovieID[movie.imdbid] {
-                LocalDB.db.favoriteMovieID.removeValue(forKey: movie.imdbid)
-            } else {
-                movieFav = .red
-                LocalDB.db.favoriteMovieID.updateValue(movie.dict, forKey: movie.imdbid)
-            }
-            DispatchQueue.main.async {
-                UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
-                self.heartButton.tintColor = movieFav
-            }
-        }
+        LocalDB.db.favoritePressed(button: sender, movie: movie)
     }
     
     

@@ -49,6 +49,7 @@ extension SideBarCollectionCell:UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        SideBarVC.shared?.changed = true
         if let selected = valueSelected {
             selected(indexPath.row)
         }

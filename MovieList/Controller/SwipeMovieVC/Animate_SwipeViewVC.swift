@@ -12,7 +12,6 @@ extension SwipeMovieVC {
         guard let cards = movieBoxes else { return }
         cards.second?.isUserInteractionEnabled = true
         let old = cards.first
-        let cPos = old.frame
         var newCenter:CGPoint {
             switch action {
             case .dislike:
@@ -21,9 +20,6 @@ extension SwipeMovieVC {
             case .like:
                 let val = self.view.frame.width
                 return .init(x: val + 400, y: old.layer.position.y)
-            case .superLike, .bet:
-                let val = self.view.frame.height
-                return .init(x: old.layer.position.x, y: (val + 200) * (-1))
             }
         }
         self.cardWillMove(for: action, card: old)
@@ -72,5 +68,52 @@ extension SwipeMovieVC {
             }
         }
         
+    }
+    
+    
+    
+    
+    func setAnimating(animating:Bool = false, error:MessageContent? = nil, completion:(()->())? = nil) {
+        let showStack = animating || error != nil
+        let showButton = error != nil
+        if self.loadingStack.isHidden != !showStack || reloadButton.isHidden != !showButton {
+            let errorTitleLabel =                 self.loadingStack.arrangedSubviews.first(where: {$0 is UILabel && $0.tag == 0}) as? UILabel
+            let errorDescriptionLabel =                 self.loadingStack.arrangedSubviews.first(where: {$0 is UILabel && $0.tag == 1}) as? UILabel
+            let aiView = self.loadingStack.arrangedSubviews.first(where: {$0 is UIActivityIndicatorView}) as? UIActivityIndicatorView
+            var animateButton:Bool = false
+            let toHideButton = self.view.safeAreaInsets.bottom + self.reloadButton.frame.height + 20
+            
+            if showButton {
+                errorTitleLabel?.text = error?.title
+                errorDescriptionLabel?.text = error?.description
+                reloadButton.isHidden = false
+                self.reloadButton.layer.move(.top, value: toHideButton)
+                animateButton = true
+            }
+            let alphaStack:CGFloat = showStack ? 1 : 0
+            UIView.animate(withDuration: 0.3, animations: {
+                if self.loadingStack.alpha != alphaStack {
+                    self.loadingStack.alpha = alphaStack
+                }
+                if errorTitleLabel?.isHidden != !showButton {
+                    errorTitleLabel?.isHidden = !showButton
+                }
+                if errorDescriptionLabel?.isHidden != !showButton {
+                    errorDescriptionLabel?.isHidden = !showButton
+                }
+                
+                aiView?.setAnimating = animating
+                if self.reloadButton.isHidden != !showButton || animateButton {
+                    self.reloadButton.layer.move(.top, value: showButton ? 0 : toHideButton)
+                }
+            }, completion: { _ in
+                completion?()
+                if self.reloadButton.isHidden != !showButton {
+                    self.reloadButton.isHidden = !showButton
+                }
+            })
+        } else {
+            completion?()
+        }
     }
 }

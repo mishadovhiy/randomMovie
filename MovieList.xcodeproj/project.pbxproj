@@ -38,10 +38,15 @@
 		8D81F5A12824679100338946 /* UITableView_SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D81F5A02824679100338946 /* UITableView_SideBar.swift */; };
 		8D81F5A4282468B200338946 /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D81F5A2282468B200338946 /* RangeSlider.swift */; };
 		8D81F5A5282468B200338946 /* RangeSliderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D81F5A3282468B200338946 /* RangeSliderManager.swift */; };
-		8D81F5A82824786500338946 /* SideBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D81F5A72824786500338946 /* SideBarExtension.swift */; };
 		8D99FE642825A8AE009AAB71 /* StructsSideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D99FE632825A8AE009AAB71 /* StructsSideBar.swift */; };
 		8DB065552ACC469D00DE10CC /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB065542ACC469C00DE10CC /* TabBarVC.swift */; };
 		8DB065572ACC5C7600DE10CC /* MessageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB065562ACC5C7600DE10CC /* MessageContent.swift */; };
+		8DB065642ACC8EC500DE10CC /* SegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB0655E2ACC8EC500DE10CC /* SegmentView.swift */; };
+		8DB065652ACC8EC500DE10CC /* create_SegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB0655F2ACC8EC500DE10CC /* create_SegmentedView.swift */; };
+		8DB065662ACC8EC500DE10CC /* Extensions_SegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB065602ACC8EC500DE10CC /* Extensions_SegmentedView.swift */; };
+		8DB065672ACC8EC500DE10CC /* SegmentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB065622ACC8EC500DE10CC /* SegmentItem.swift */; };
+		8DB065682ACC8EC500DE10CC /* Extensions_SegmentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB065632ACC8EC500DE10CC /* Extensions_SegmentItem.swift */; };
+		8DB0656B2ACCB34B00DE10CC /* SidebarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB0656A2ACCB34B00DE10CC /* SidebarManager.swift */; };
 		8DB7C45C284EBC4D001DBFB7 /* AlertViewLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 8DB7C45B284EBC4D001DBFB7 /* AlertViewLibrary */; };
 		8DD4634D2821206F008EB85A /* PreviewCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD4634C2821206F008EB85A /* PreviewCollectionCell.swift */; };
 		8DD4634F28212084008EB85A /* LoadingCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD4634E28212084008EB85A /* LoadingCollectionCell.swift */; };
@@ -119,10 +124,15 @@
 		8D81F5A02824679100338946 /* UITableView_SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView_SideBar.swift; sourceTree = "<group>"; };
 		8D81F5A2282468B200338946 /* RangeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
 		8D81F5A3282468B200338946 /* RangeSliderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSliderManager.swift; sourceTree = "<group>"; };
-		8D81F5A72824786500338946 /* SideBarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarExtension.swift; sourceTree = "<group>"; };
 		8D99FE632825A8AE009AAB71 /* StructsSideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructsSideBar.swift; sourceTree = "<group>"; };
 		8DB065542ACC469C00DE10CC /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		8DB065562ACC5C7600DE10CC /* MessageContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContent.swift; sourceTree = "<group>"; };
+		8DB0655E2ACC8EC500DE10CC /* SegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentView.swift; sourceTree = "<group>"; };
+		8DB0655F2ACC8EC500DE10CC /* create_SegmentedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = create_SegmentedView.swift; sourceTree = "<group>"; };
+		8DB065602ACC8EC500DE10CC /* Extensions_SegmentedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions_SegmentedView.swift; sourceTree = "<group>"; };
+		8DB065622ACC8EC500DE10CC /* SegmentItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentItem.swift; sourceTree = "<group>"; };
+		8DB065632ACC8EC500DE10CC /* Extensions_SegmentItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions_SegmentItem.swift; sourceTree = "<group>"; };
+		8DB0656A2ACCB34B00DE10CC /* SidebarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarManager.swift; sourceTree = "<group>"; };
 		8DD4634C2821206F008EB85A /* PreviewCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewCollectionCell.swift; sourceTree = "<group>"; };
 		8DD4634E28212084008EB85A /* LoadingCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCollectionCell.swift; sourceTree = "<group>"; };
 		8DD4635128212385008EB85A /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
@@ -243,7 +253,6 @@
 			children = (
 				8D3E741B2828A797003AC968 /* UISearchBarDelegate.swift */,
 				8D7E3E832820435D0094F05B /* UICollectionViewExtension.swift */,
-				8D81F5A72824786500338946 /* SideBarExtension.swift */,
 				8D72207F282874F8004C5C6C /* Appeareance.swift */,
 				8D72208128287822004C5C6C /* ExtensionsMovieListVC.swift */,
 			);
@@ -282,6 +291,35 @@
 				8D81F5A2282468B200338946 /* RangeSlider.swift */,
 			);
 			path = RangeSlider;
+			sourceTree = "<group>";
+		};
+		8DB0655D2ACC8EC500DE10CC /* SegmentedView */ = {
+			isa = PBXGroup;
+			children = (
+				8DB0655E2ACC8EC500DE10CC /* SegmentView.swift */,
+				8DB0655F2ACC8EC500DE10CC /* create_SegmentedView.swift */,
+				8DB065602ACC8EC500DE10CC /* Extensions_SegmentedView.swift */,
+				8DB065612ACC8EC500DE10CC /* SegmentItem */,
+			);
+			path = SegmentedView;
+			sourceTree = "<group>";
+		};
+		8DB065612ACC8EC500DE10CC /* SegmentItem */ = {
+			isa = PBXGroup;
+			children = (
+				8DB065622ACC8EC500DE10CC /* SegmentItem.swift */,
+				8DB065632ACC8EC500DE10CC /* Extensions_SegmentItem.swift */,
+			);
+			path = SegmentItem;
+			sourceTree = "<group>";
+		};
+		8DB065692ACCB32800DE10CC /* TabBarVC */ = {
+			isa = PBXGroup;
+			children = (
+				8DB065542ACC469C00DE10CC /* TabBarVC.swift */,
+				8DB0656A2ACCB34B00DE10CC /* SidebarManager.swift */,
+			);
+			path = TabBarVC;
 			sourceTree = "<group>";
 		};
 		8DD4635028212092008EB85A /* old */ = {
@@ -349,6 +387,7 @@
 			children = (
 				8DD4635128212385008EB85A /* View.swift */,
 				8DEF46FA2ACB6DDE008EEFA6 /* TouchView.swift */,
+				8DB0655D2ACC8EC500DE10CC /* SegmentedView */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
@@ -427,7 +466,7 @@
 			isa = PBXGroup;
 			children = (
 				8D06DF4A2828585500372351 /* BaseVC.swift */,
-				8DB065542ACC469C00DE10CC /* TabBarVC.swift */,
+				8DB065692ACCB32800DE10CC /* TabBarVC */,
 				8DF67208281F89750064849A /* MovieListVC */,
 				8DD4635F2821CEA6008EB85A /* MovieVC */,
 				8DE9C5412838378F008168DF /* SideBarVC */,
@@ -619,6 +658,7 @@
 			files = (
 				8D81F5982824661D00338946 /* SideBarHeaderCell.swift in Sources */,
 				8DE9C5402838375D008168DF /* SideBarVC.swift in Sources */,
+				8DB065642ACC8EC500DE10CC /* SegmentView.swift in Sources */,
 				8D99FE642825A8AE009AAB71 /* StructsSideBar.swift in Sources */,
 				8D6DCF682827C0BA0039E062 /* TitleCollectionCell.swift in Sources */,
 				8D47531F2824C3C30061970C /* Date.swift in Sources */,
@@ -626,7 +666,6 @@
 				8D7E3E7C282000160094F05B /* Movie.swift in Sources */,
 				8D7E3E87282092A00094F05B /* String.swift in Sources */,
 				8D06DF492828570500372351 /* UIViewController.swift in Sources */,
-				8D81F5A82824786500338946 /* SideBarExtension.swift in Sources */,
 				8D72207C28286A7B004C5C6C /* LoadingButton.swift in Sources */,
 				8D7E3E842820435D0094F05B /* UICollectionViewExtension.swift in Sources */,
 				8DF67204281F6B920064849A /* NetworkModel.swift in Sources */,
@@ -638,10 +677,13 @@
 				8DD4635728212D75008EB85A /* UICollectionView.swift in Sources */,
 				8DEF47012ACB82B3008EEFA6 /* ContainerPanGesture.swift in Sources */,
 				8D81F59F282466C300338946 /* UITableViewCell.swift in Sources */,
+				8DB065672ACC8EC500DE10CC /* SegmentItem.swift in Sources */,
 				8DEF46F72ACB6D34008EEFA6 /* SwipeMovieVC.swift in Sources */,
+				8DB065662ACC8EC500DE10CC /* Extensions_SegmentedView.swift in Sources */,
 				8DD4635C2821CB14008EB85A /* Button.swift in Sources */,
 				8DB065572ACC5C7600DE10CC /* MessageContent.swift in Sources */,
 				8DF671D8281F6B0D0064849A /* MovieListVC.swift in Sources */,
+				8DB065682ACC8EC500DE10CC /* Extensions_SegmentItem.swift in Sources */,
 				8D06DF4B2828585500372351 /* BaseVC.swift in Sources */,
 				8DEF46FD2ACB7848008EEFA6 /* Extensions_Swipe_SwipeMovieVC.swift in Sources */,
 				8D81F5A12824679100338946 /* UITableView_SideBar.swift in Sources */,
@@ -653,6 +695,7 @@
 				8DF6720A281F89A40064849A /* MovieCell.swift in Sources */,
 				8D7E3E7F282041AB0094F05B /* Unparce.swift in Sources */,
 				8DD4635528212C78008EB85A /* UIView.swift in Sources */,
+				8DB0656B2ACCB34B00DE10CC /* SidebarManager.swift in Sources */,
 				8DEF46FB2ACB6DDE008EEFA6 /* TouchView.swift in Sources */,
 				8D722080282874F8004C5C6C /* Appeareance.swift in Sources */,
 				8DE9C54428383B4F008168DF /* ExtensionsSideBar.swift in Sources */,
@@ -663,6 +706,7 @@
 				8D81F59D2824665600338946 /* SideBarCollectionCell.swift in Sources */,
 				8DEF46FF2ACB7F72008EEFA6 /* Animate_SwipeViewVC.swift in Sources */,
 				8D7E3E812820420D0094F05B /* Keys.swift in Sources */,
+				8DB065652ACC8EC500DE10CC /* create_SegmentedView.swift in Sources */,
 				8D06DF4D28285BAB00372351 /* AppModel.swift in Sources */,
 				8D3E741C2828A797003AC968 /* UISearchBarDelegate.swift in Sources */,
 				8D72208228287822004C5C6C /* ExtensionsMovieListVC.swift in Sources */,

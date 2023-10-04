@@ -68,13 +68,14 @@ class SideBarVC: UIViewController {
     @IBAction func searchPressed(_ sender: Any) {
         toListVC(type: .search)
     }
-    
+    var changed:Bool = false
 
 }
 
 
 extension SideBarVC {
     func newImdbRange(_ newValue:(Double, Double)) {
+        changed = true
         let new:LocalDB.Filter.Rating = .init(from: newValue.0, to: newValue.1)
         let old = LocalDB.db.filter.imdbRating
         if newRating(new: new, old: old, decimalsCount: 1) {
@@ -83,6 +84,7 @@ extension SideBarVC {
     }
     
     func newYearRange(_ newValue:(Double, Double)) {
+        changed = true
         let new:LocalDB.Filter.Rating = .init(from: newValue.0, to: newValue.1)
         let old = LocalDB.db.filter.yearRating
         if newRating(new: new, old: old, decimalsCount: 0) {
@@ -91,6 +93,7 @@ extension SideBarVC {
     }
     
     func genreSelected(_ at:Int) {
+        changed = true
         print(#function, ": ", at)
         let genres = LocalDB.db.filter.allGenres
         if #available(iOS 13.0, *) {
@@ -117,5 +120,14 @@ extension SideBarVC {
     
     private func convert(_ value: Double, count:Int = 1) -> String {
         return String.init(decimalsCount: count, from: value)
+    }
+}
+
+
+extension SideBarVC {
+    static func configure() -> SideBarVC {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "SideBarVC") as! SideBarVC
+        return vc
     }
 }

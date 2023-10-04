@@ -9,7 +9,6 @@ import UIKit
 
 class MovieListVC: BaseVC {
 
-    @IBOutlet weak var sideBarButton: Button!
     @IBOutlet weak var mainContentView: UIView!
     @IBOutlet weak var shakeButton: Button!
     @IBOutlet weak var pageLabel: UILabel!
@@ -27,20 +26,12 @@ class MovieListVC: BaseVC {
     var firstDispleyingPage:Int?
     var loading = false
     var sectionTitle:String?
-    //sideBar
-   // @IBOutlet weak var sideBar: SideBar!
-    @IBOutlet weak var sideBarPinchView: UIView!
- //   @IBOutlet weak var sideBarTable: UITableView!
-    var sidescrolling = false
-    var wasShowingSideBar = false
+
     var beginScrollPosition:CGFloat = 0
-    var sideBarShowing = false
     var stopDownloading = false
     var previousScrollPosition:CGFloat = 0
     var shakeHidden = false
     var screenType:ScreenType = .all
-    private var subviewsLayoued = false
-    var viewAppeareCalled = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +42,17 @@ class MovieListVC: BaseVC {
         super.viewDidAppear(animated)
         viewAppeare()
     }
+    
+    override func firstLayoutSubviews() {
+        if screenType == .search {
+            self.searchBar.becomeFirstResponder()
+        }
+    }
 
+    override func filterChanged() {
+        super.filterChanged()
+        self.collectionView.reloadData()
+    }
     
     var tableData:[Movie] {
         get {
@@ -85,9 +86,6 @@ class MovieListVC: BaseVC {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if sideBarShowing {
-            self.toggleSideBar(false, animated: true)
-        }
         switch segue.identifier {
         case "toMovie":
             let vc = segue.destination as! MovieVC
@@ -115,9 +113,6 @@ class MovieListVC: BaseVC {
         }
     }
 
-    @IBAction func sideBarPressed(_ sender: Button) {
-        toggleSideBar(!sideBarShowing, animated: true)
-    }
 }
 
 

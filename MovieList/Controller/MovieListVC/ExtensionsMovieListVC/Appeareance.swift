@@ -22,10 +22,8 @@ extension MovieListVC {
         case .all:
             sectionTitle = "Movie List"
             MovieListVC.shared = self
-            sideBarPinchView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(sideBarPinched(_:))))
             
         case .favorite, .search:
-            self.sideBarButton.isHidden = true
             if type == .favorite {
                 loadFavorites()
                 sectionTitle = "Favorites"
@@ -46,18 +44,14 @@ extension MovieListVC {
     func toggleShakeButton(hide:Bool) {
         if shakeHidden != hide {
             shakeHidden = hide
-            DispatchQueue.main.async {
-                let space = self.view.safeAreaInsets.top + self.shakeButton.frame.maxY + 50
-                let position = hide ? (space * (-1)) : 0
-                
-                UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0, options: .allowAnimatedContent) {
-                    self.shakeButton.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, position, 0)
-                    self.sideBarButton.alpha = hide ? 0 : 1
-                    
-                } completion: { _ in
-                }
+            let segment = TabBarVC.shared?.segmented
+            let button = TabBarVC.shared?.sideBar?.button
+            let toHide = ((AppDelegate.shared?.window?.safeAreaInsets.top ?? 0) + 60) * -1
+            UIView.animate(withDuration: 0.3, delay: 0, animations: {
+                segment?.layer.move(.top, value: hide ? toHide : 0)
+                button?.layer.move(.top, value: hide ? toHide : 0)
 
-            }
+            })
         }
     }
     
@@ -67,14 +61,8 @@ extension MovieListVC {
         case .all:
             SideBarVC.shared?.getData()
             addRefreshControll()
-        case .favorite:
+        default:
             break
-        case .search:
-            if !viewAppeareCalled {
-                viewAppeareCalled = true
-                self.searchBar.becomeFirstResponder()
-            }
-            
         }
     }
     

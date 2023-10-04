@@ -63,7 +63,6 @@ class TouchView: View {
     
     func touchesEnded() {
         touch(false)
-
     }
     
     private func defaultAnimation(begun:Bool) {

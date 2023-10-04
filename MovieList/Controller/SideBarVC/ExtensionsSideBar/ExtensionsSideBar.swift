@@ -13,8 +13,8 @@ extension SideBarVC {
         AppModel.Present.movieList(self, type: type)
         DispatchQueue.main.async {
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-            if MovieListVC.shared?.sideBarShowing ?? true {
-                MovieListVC.shared?.toggleSideBar(false, animated: true)
+            if TabBarVC.shared?.sideBar?.isShowing ?? true {
+                TabBarVC.shared?.sideBar?.toggleSideBar(false, animated: true)
             }
         }
     }
