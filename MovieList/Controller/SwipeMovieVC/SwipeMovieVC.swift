@@ -31,8 +31,8 @@ class SwipeMovieVC: BaseVC {
     }
     
     func apiLoad() {
-      //   tempAppearence()
-       DispatchQueue(label: "api", qos: .userInitiated).async {
+         tempAppearence()
+      /* DispatchQueue(label: "api", qos: .userInitiated).async {
             NetworkModel().loadSQLMovies { loadedData, error in
                 if Thread.isMainThread {
                     print("rgefdscfewr fataaal")
@@ -47,7 +47,7 @@ class SwipeMovieVC: BaseVC {
                     })
                 }
             }
-        }
+        }*/
     }
     
     override func viewDidAppear(_ animated: Bool) {

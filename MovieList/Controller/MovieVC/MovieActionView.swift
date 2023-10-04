@@ -28,7 +28,7 @@ class MovieActionView: View {
         }
         
         let img = UIImageView()
-        img.image = type == .like ? #imageLiteral(resourceName: "like.svg") : #imageLiteral(resourceName: "dislike.svg")
+        img.image = type == .like ? .init(named: "like")! : .init(named: "dislike")!
         view.addSubview(img)
         img.addConstaits([.left:0, .right:0, .top:0, .bottom:0], superV: view)
         img.shadow(opasity: 0.8)
