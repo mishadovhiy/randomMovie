@@ -32,7 +32,7 @@ class SwipeMovieVC: BaseVC {
     
     func apiLoad() {
       //   tempAppearence()
-        DispatchQueue(label: "api", qos: .userInitiated).async {
+       DispatchQueue(label: "api", qos: .userInitiated).async {
             NetworkModel().loadSQLMovies { loadedData, error in
                 if Thread.isMainThread {
                     print("rgefdscfewr fataaal")
@@ -122,6 +122,9 @@ extension SwipeMovieVC {
         var gesture:UIPanGestureRecognizer?
         lazy var defaultCenter:CGPoint = { return self.center }()
         var isFirst:Bool = false
+        var likeView:MovieActionView?
+        var dislikeView:MovieActionView?
+        
         func moveToCenter() {
             self.center = defaultCenter
             

@@ -8,6 +8,46 @@
 import UIKit
 
 extension SwipeMovieVC {
+    private func performCreatingMovie(first:Bool = false) -> MoviePreviewView? {
+        if !(randomList.count - 1 >= index) {
+            return nil
+        }
+        let container = MoviePreviewView()
+        container.customTouchAnimation = { begun in
+            UIView.animate(withDuration: Styles.pressedAnimation, delay: 0, animations: {
+                container.layer.zoom(value: begun ? 1.01 : 1)
+            })
+        }
+        container.shadow(opasity: Styles.buttonShadow)
+        container.backgroundColor = #colorLiteral(red: 0.08600000292, green: 0.08600000292, blue: 0.08600000292, alpha: 1)
+        container.layer.cornerRadius = Styles.buttonRadius3
+       // container.layer.masksToBounds = true
+        containerView.addSubview(container)
+        container.addConstaits([.left:0, .right:0, .top:0, .bottom:0], superV: containerView)
+        
+        container.center =
+            .init(x: self.view.frame.width / 2, y: self.view.frame.height / 3)
+        container.layer.transform = CATransform3DMakeScale(0.8, 0.8, 1)
+        
+        let panGesture:UIPanGestureRecognizer = .init(target: self, action: #selector(containerPanned(_:)))
+        container.gesture = panGesture
+        container.addGestureRecognizer(panGesture)
+        
+        let vc = MovieVC.configure(isPreview: true, movie: randomList[index])
+        addChild(vc)
+        container.addSubview(vc.view)
+        vc.view.addConstaits([.left:0, .right:0, .top:0, .bottom:0], superV: container)
+        container.vc = vc
+        index += 1
+        vc.didMove(toParent: self)
+        print(index, " ytgrfewd")
+        container.likeView = .createTo(container: container, type: .like)
+        container.dislikeView = .createTo(container: container, type: .dislike)
+        vc.container = container
+        return container
+    }
+
+    
     func createMovie(first:Bool = false) -> MoviePreviewView? {
         if randomList.count - 1 >= index && randomList.count != 0 {
             return performCreatingMovie(first: first)
@@ -86,42 +126,7 @@ extension SwipeMovieVC {
         container?.vc?.view.backgroundColor = #colorLiteral(red: 0.08600000292, green: 0.08600000292, blue: 0.08600000292, alpha: 1).darker(0.015)
 
     }
-    
-    private func performCreatingMovie(first:Bool = false) -> MoviePreviewView? {
-        if !(randomList.count - 1 >= index) {
-            return nil
-        }
-        let container = MoviePreviewView()
-        container.customTouchAnimation = { begun in
-            UIView.animate(withDuration: Styles.pressedAnimation, delay: 0, animations: {
-                container.layer.zoom(value: begun ? 1.01 : 1)
-            })
-        }
-        container.shadow(opasity: Styles.buttonShadow)
-        container.backgroundColor = #colorLiteral(red: 0.08600000292, green: 0.08600000292, blue: 0.08600000292, alpha: 1)
-        container.layer.cornerRadius = Styles.buttonRadius3
-        container.layer.masksToBounds = true
-        containerView.addSubview(container)
-        container.addConstaits([.left:0, .right:0, .top:0, .bottom:0], superV: containerView)
-        container.center =
-            .init(x: self.view.frame.width / 2, y: self.view.frame.height / 3)
-        container.layer.transform = CATransform3DMakeScale(0.8, 0.8, 1)
         
-        let panGesture:UIPanGestureRecognizer = .init(target: self, action: #selector(containerPanned(_:)))
-        container.gesture = panGesture
-        container.addGestureRecognizer(panGesture)
-        
-        let vc = MovieVC.configure(isPreview: true, movie: randomList[index])
-        addChild(vc)
-        container.addSubview(vc.view)
-        vc.view.addConstaits([.left:0, .right:0, .top:0, .bottom:0], superV: container)
-        container.vc = vc
-        index += 1
-        vc.didMove(toParent: self)
-        print(index, " ytgrfewd")
-        return container
-    }
-    
     @objc func containerPanned(_ sender:UIPanGestureRecognizer) {
         cardsGestureManager.update(sender)
     }
@@ -160,6 +165,7 @@ extension SwipeMovieVC:ContainerPanGestureProtocol {
         touched = true
         guard let cards = movieBoxes else { return }
         let previewVC = cards.first.vc
+        previewVC?.updateScroll(scrValue: scrollValue, topValue: topCalc, action: action)
         guard let action = action else {
             UIView.animate(withDuration: 0.3) {
                 cards.first.transform = CGAffineTransform(rotationAngle: 0)
@@ -195,8 +201,7 @@ extension SwipeMovieVC:ContainerPanGestureProtocol {
     }
     
     func actionValueChanged(_ action: PanActionType?, scrollValue: CGFloat, topCalc: CGFloat) {
-        let previewVC = movieBoxes?.first.vc
-        previewVC?.updateScroll(scrValue: scrollValue, topValue: topCalc, action: action)
+        
         vibrate()
     }
     

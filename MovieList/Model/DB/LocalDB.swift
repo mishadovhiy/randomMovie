@@ -42,20 +42,23 @@ struct LocalDB {
             }
         }
         
-        func favoritePressed(button:UIButton?, canRemove:Bool = true, movie:Movie?) {
+        func favoritePressed(button:UIButton?, canRemove:Bool = true, movie:Movie?, completion:((_ isFavorite:Bool)->())? = nil) {
             if let movie = movie {
                 var movieFav:UIColor = Text.Colors.darkGrey
+                var isFavorite = false
                 DispatchQueue(label: "db", qos: .userInitiated).async {
                     if let _ = LocalDB.db.favoriteMovieID[movie.imdbid], canRemove {
                         LocalDB.db.favoriteMovieID.removeValue(forKey: movie.imdbid)
                     } else {
                         movieFav = .red
                         LocalDB.db.favoriteMovieID.updateValue(movie.dict, forKey: movie.imdbid)
+                        isFavorite = true
                     }
                     DispatchQueue.main.async {
                         UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                         button?.tintColor = movieFav
                     }
+                    completion?(isFavorite)
                 }
             }
         }

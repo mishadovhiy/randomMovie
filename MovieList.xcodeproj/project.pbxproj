@@ -48,6 +48,8 @@
 		8DB065682ACC8EC500DE10CC /* Extensions_SegmentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB065632ACC8EC500DE10CC /* Extensions_SegmentItem.swift */; };
 		8DB0656B2ACCB34B00DE10CC /* SidebarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB0656A2ACCB34B00DE10CC /* SidebarManager.swift */; };
 		8DB7C45C284EBC4D001DBFB7 /* AlertViewLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 8DB7C45B284EBC4D001DBFB7 /* AlertViewLibrary */; };
+		8DBD01EE2ACE2AC200DD1264 /* MovieActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBD01ED2ACE2AC200DD1264 /* MovieActionView.swift */; };
+		8DBD01F12ACE2AD900DD1264 /* ImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBD01F02ACE2AD900DD1264 /* ImageVC.swift */; };
 		8DD4634D2821206F008EB85A /* PreviewCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD4634C2821206F008EB85A /* PreviewCollectionCell.swift */; };
 		8DD4634F28212084008EB85A /* LoadingCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD4634E28212084008EB85A /* LoadingCollectionCell.swift */; };
 		8DD4635228212385008EB85A /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD4635128212385008EB85A /* View.swift */; };
@@ -133,6 +135,8 @@
 		8DB065622ACC8EC500DE10CC /* SegmentItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentItem.swift; sourceTree = "<group>"; };
 		8DB065632ACC8EC500DE10CC /* Extensions_SegmentItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions_SegmentItem.swift; sourceTree = "<group>"; };
 		8DB0656A2ACCB34B00DE10CC /* SidebarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarManager.swift; sourceTree = "<group>"; };
+		8DBD01ED2ACE2AC200DD1264 /* MovieActionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieActionView.swift; sourceTree = "<group>"; };
+		8DBD01F02ACE2AD900DD1264 /* ImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageVC.swift; sourceTree = "<group>"; };
 		8DD4634C2821206F008EB85A /* PreviewCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewCollectionCell.swift; sourceTree = "<group>"; };
 		8DD4634E28212084008EB85A /* LoadingCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCollectionCell.swift; sourceTree = "<group>"; };
 		8DD4635128212385008EB85A /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
@@ -322,6 +326,14 @@
 			path = TabBarVC;
 			sourceTree = "<group>";
 		};
+		8DBD01EF2ACE2AD900DD1264 /* ImageVC */ = {
+			isa = PBXGroup;
+			children = (
+				8DBD01F02ACE2AD900DD1264 /* ImageVC.swift */,
+			);
+			path = ImageVC;
+			sourceTree = "<group>";
+		};
 		8DD4635028212092008EB85A /* old */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,6 +359,7 @@
 			isa = PBXGroup;
 			children = (
 				8DD4635D2821CEA1008EB85A /* MovieVC.swift */,
+				8DBD01ED2ACE2AC200DD1264 /* MovieActionView.swift */,
 			);
 			path = MovieVC;
 			sourceTree = "<group>";
@@ -471,6 +484,7 @@
 				8DD4635F2821CEA6008EB85A /* MovieVC */,
 				8DE9C5412838378F008168DF /* SideBarVC */,
 				8DEF46F82ACB6DA4008EEFA6 /* SwipeMovieVC */,
+				8DBD01EF2ACE2AD900DD1264 /* ImageVC */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -671,6 +685,7 @@
 				8DF67204281F6B920064849A /* NetworkModel.swift in Sources */,
 				8DD4634D2821206F008EB85A /* PreviewCollectionCell.swift in Sources */,
 				8D47531D2824B2A20061970C /* LocalDB.swift in Sources */,
+				8DBD01EE2ACE2AC200DD1264 /* MovieActionView.swift in Sources */,
 				8D7E3E7A281F8CF90094F05B /* PaggingCell.swift in Sources */,
 				8D1191F02998626B00D381F6 /* Filter.swift in Sources */,
 				8D72208428287A34004C5C6C /* UIActivityIndicatorView.swift in Sources */,
@@ -709,6 +724,7 @@
 				8DB065652ACC8EC500DE10CC /* create_SegmentedView.swift in Sources */,
 				8D06DF4D28285BAB00372351 /* AppModel.swift in Sources */,
 				8D3E741C2828A797003AC968 /* UISearchBarDelegate.swift in Sources */,
+				8DBD01F12ACE2AD900DD1264 /* ImageVC.swift in Sources */,
 				8D72208228287822004C5C6C /* ExtensionsMovieListVC.swift in Sources */,
 				8DD4635A2821C622008EB85A /* Label.swift in Sources */,
 				8DD4635E2821CEA1008EB85A /* MovieVC.swift in Sources */,

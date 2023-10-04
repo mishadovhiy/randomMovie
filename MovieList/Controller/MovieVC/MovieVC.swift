@@ -15,6 +15,7 @@ class MovieVC: BaseVC {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var heartButton: Button!
     
+    var container:SwipeMovieVC.MoviePreviewView?
     var movie:Movie?
     var favoritesPressedAction:(() -> ())?
     
@@ -27,6 +28,7 @@ class MovieVC: BaseVC {
             self.view.layer.cornerRadius = Styles.buttonRadius3
             self.view.layer.masksToBounds = true
         }
+        movieImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imgPressed(_:))))
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -38,6 +40,15 @@ class MovieVC: BaseVC {
         }
     }
     
+    @objc func imgPressed(_ sender:UITapGestureRecognizer) {
+        let sup = (movieImage.superview as? UIStackView)?.frame ?? .zero
+        //    .init(x: 20, y: 88)
+        let hasContainer = (TabBarVC.shared?.segmented?.frame.height ?? 0) - 9
+        let xContainer = sup.minX + (container?.frame.minX ?? 0) + 13.2
+
+        let top = container != nil ? hasContainer : (-15)
+        ImageVC.present(img: movie?.image, from: movieImage.frame, inVC: self, fromAdditional: .init(x: xContainer, y: top + sup.minY), animateBack: container != nil)
+    }
     
     func loadData() {
         let load = NetworkModel()
@@ -52,6 +63,7 @@ class MovieVC: BaseVC {
                 load.image(for: movie.imageURL, completion: { data in
                     if let imageData = data,
                        let image = UIImage(data: imageData) {
+                        self.movie?.image = imageData
                         DispatchQueue.main.async {
                             self.movieImage.image = image
                         }
@@ -114,9 +126,28 @@ class MovieVC: BaseVC {
     func containerAppeared() {
         
     }
-    
+
     func updateScroll(scrValue:CGFloat, topValue:CGFloat, action:PanActionType?) {
-        
+        let actionView = actionView(type: action)
+        let views = [container?.dislikeView, container?.likeView]
+        print(scrValue, " scrValuescrValuescrValue")
+        let value:CGFloat = action == nil ? 0 : scrValue
+        views.forEach({
+            let selected = actionView == $0
+            print(selected, " bgrtfec")
+            $0?.pressed(percent: selected ? value : 0)
+        })
+    }
+    
+    func actionView(type:PanActionType?) -> MovieActionView? {
+        switch type {
+        case .dislike:
+            return container?.dislikeView
+        case .like:
+            return container?.likeView
+        default:
+            return nil
+        }
     }
     
     var isHapptic:Bool = false

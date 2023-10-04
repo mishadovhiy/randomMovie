@@ -27,6 +27,7 @@ extension MovieListVC {
             if type == .favorite {
                 loadFavorites()
                 sectionTitle = "Favorites"
+                self.shakeButton.isHidden = false
             } else if type == .search {
                 self.searchBar.isHidden = false
                 self.searchBar.delegate = self

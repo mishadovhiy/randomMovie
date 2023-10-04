@@ -11,6 +11,19 @@ import UIKit
 @IBDesignable
 class View: UIView {
 
+    private var moved:Bool = false
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
+        if !moved {
+            moved = true
+            firstMovedToWindow()
+        }
+    }
+    
+    func firstMovedToWindow() {
+        
+    }
+    
     @IBInspectable open var cornerRadius: CGFloat = 0 {
         didSet {
             let radius = self.cornerRadius == -1 ? Styles.buttonRadius : (self.cornerRadius == -2 ? Styles.buttonRadius2 : self.cornerRadius)
