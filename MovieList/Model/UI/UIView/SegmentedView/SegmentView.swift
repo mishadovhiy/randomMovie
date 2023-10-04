@@ -39,6 +39,7 @@ class SegmentView:UIView {
         self.fontWeight = fontWeight
         super.init(frame: .zero)
         create()
+        self.shadow(opasity: Styles.buttonShadow)
     }
 
     
@@ -58,7 +59,7 @@ class SegmentView:UIView {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: Styles.pressedAnimation) {
             self.selectedShadowView.alpha = 0.8
         }
         touching = true
@@ -85,7 +86,7 @@ class SegmentView:UIView {
     private func touchEnded(_ touches: Set<UITouch>) {
         let touchingHolder = touching
         touching = false
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: Styles.pressedAnimation) {
             self.selectedShadowView.alpha = 1
         }
 

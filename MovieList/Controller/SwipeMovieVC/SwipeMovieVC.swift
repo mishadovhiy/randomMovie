@@ -31,7 +31,7 @@ class SwipeMovieVC: BaseVC {
     }
     
     func apiLoad() {
-        // tempAppearence()
+      //   tempAppearence()
         DispatchQueue(label: "api", qos: .userInitiated).async {
             NetworkModel().loadSQLMovies { loadedData, error in
                 if Thread.isMainThread {
@@ -108,6 +108,11 @@ class SwipeMovieVC: BaseVC {
             LocalDB.db.favoritePressed(button: nil, movie: card.vc?.movie)
         }
     }
+    
+    
+    ///todo: scroll on scrollView didScroll
+    var scroll:TableScroll = .init()
+
 }
 
 
@@ -122,6 +127,17 @@ extension SwipeMovieVC {
             
         }
         
+    }
+    
+    struct TableScroll {
+        var active = false
+        var startPositionY:CGFloat = 0
+        var toHide:Bool = false
+        var isDeclaring = false
+        var endedNavAnimation = false
+        var positionY:CGFloat = 0
+        var canChange:Bool = false
+        var scrollingTop:CGFloat = 0
     }
 }
 

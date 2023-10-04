@@ -11,9 +11,10 @@ import UIKit
 class Button: UIButton {
     @IBInspectable open var cornerRadius: CGFloat = 0 {
         didSet {
+            let radius = self.cornerRadius == -1 ? Styles.buttonRadius : (self.cornerRadius == -2 ? Styles.buttonRadius2 : self.cornerRadius)
             DispatchQueue.main.async {
-                self.layer.cornerRadius = self.cornerRadius
-                self.layer.masksToBounds = self.cornerRadius > 0
+                self.layer.cornerRadius = radius
+                self.layer.masksToBounds = radius > 0
             }
         }
     }
@@ -24,7 +25,7 @@ class Button: UIButton {
                 self.layer.shadowColor = UIColor.black.cgColor
                 self.layer.shadowOffset = .zero
                 self.layer.shadowRadius = 10
-                self.layer.shadowOpacity = self.shadowOpasity
+                self.layer.shadowOpacity = self.shadowOpasity == -1 ? Styles.buttonShadow : self.shadowOpasity
             }
         }
     }
@@ -33,7 +34,9 @@ class Button: UIButton {
     @IBInspectable open var tintBackground: Bool = false {
         didSet {
             DispatchQueue.main.async {
-                self.backgroundColor = self.tintColor.withAlphaComponent(0.15)
+                let color = self.tintColor.withAlphaComponent(Styles.opacityBackground)
+                self.backgroundColor = color
+                self.backHolder = color
             }
         }
     }
@@ -80,7 +83,7 @@ class Button: UIButton {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
-        touch(self.contains(touches))
+        touch(false)
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -90,10 +93,10 @@ class Button: UIButton {
     
     
     private func defaultAnimation(begun:Bool) {
-        let defaultColor = self.backHolder ?? .white
+        let defaultColor = self.backHolder ?? (begun ? (self.tintColor ?? .red) : .clear)
 
-        UIView.animate(withDuration: 0.2, delay: 0, options: .allowUserInteraction) {
-            self.backgroundColor = begun ? defaultColor.lighter(0.1) : defaultColor
+        UIView.animate(withDuration: Styles.pressedAnimation, delay: 0, options: .allowUserInteraction) {
+            self.backgroundColor = begun ? defaultColor.lighter(Styles.buttonPressedComponentDelta) : defaultColor
         }
     }
 

@@ -19,8 +19,6 @@ class adBannerView: UIView {
     var adNotReceved = true
     
     public func createBanner() {
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "a26e1d88e010a69ebf4638dde3217821" ]//removee
-
         GADMobileAds.sharedInstance().start { status in
             DispatchQueue.main.async {
                 let window = AppDelegate.shared?.window ?? UIWindow()
@@ -35,7 +33,7 @@ class adBannerView: UIView {
                 bannerView.delegate = self
                 self.adStack.addArrangedSubview(bannerView)
                 self.addConstants(window)
-                self.adStack.layer.cornerRadius = 4
+                self.adStack.layer.cornerRadius = Styles.buttonRadius
                 self.adStack.layer.masksToBounds = true
                 self.layer.zPosition = 999
                 self.backgroundView.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, window.frame.height, 0)

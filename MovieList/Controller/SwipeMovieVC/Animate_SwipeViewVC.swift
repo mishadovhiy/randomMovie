@@ -8,7 +8,7 @@
 import UIKit
 
 extension SwipeMovieVC {
-    func removeFirst(action:PanActionType) {//here
+    func removeFirst(action:PanActionType, animated:Bool = true) {//here
         guard let cards = movieBoxes else { return }
         cards.second?.isUserInteractionEnabled = true
         let old = cards.first
@@ -23,7 +23,7 @@ extension SwipeMovieVC {
             }
         }
         self.cardWillMove(for: action, card: old)
-        UIView.animate(withDuration: 0.24, delay: 0, options: .allowUserInteraction, animations: {
+        UIView.animate(withDuration: animated ? 0.24 : 0, delay: 0, options: .allowUserInteraction, animations: {
             old.vc?.view.alpha = 0
             old.layer.position = newCenter
             old.transform = CGAffineTransform(rotationAngle: 0)
@@ -31,10 +31,12 @@ extension SwipeMovieVC {
             old.vc?.view.removeFromSuperview()
             old.vc?.removeFromParent()
             old.removeFromSuperview()
-            self.cardDidMove(for: action, card: cards.first)
+            if animated {
+                self.cardDidMove(for: action, card: cards.first)
+            }
         })
         
-        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false, block: {_ in
+        Timer.scheduledTimer(withTimeInterval: animated ? 0.2 : 0, repeats: false, block: {_ in
             self.moveNext(all: cards, removed: true)
         })
         
@@ -43,27 +45,28 @@ extension SwipeMovieVC {
     }
     
     
-    func fixView(cards: (first: MoviePreviewView, second: MoviePreviewView?, third: MoviePreviewView?), cardRemoved:Bool = false, firstLoaded:Bool = false) {
+    func fixView(cards: (first: MoviePreviewView, second: MoviePreviewView?, third: MoviePreviewView?), cardRemoved:Bool = false, firstLoaded:Bool = false, animated:Bool = true) {
         if !touched {
             self.containerView.alpha = 0
             self.containerView.layer.transform = CATransform3DMakeScale(0.8, 0.8, 1)
         }
         if cardRemoved {
             print("fixViewcardRemoved")
-            UIView.animate(withDuration: 0.23, delay: 0, options: .allowUserInteraction, animations: {
+            /*UIView.animate(withDuration: animated ? 0.23 : 0, delay: 0, options: .allowUserInteraction, animations: {*/
+            UIView.animate(withDuration: animated ? 0.5 : 0, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: [.allowAnimatedContent, .allowUserInteraction], animations: {
                 self.performMoveCards(cards: cards)
             }, completion: { _ in
                 self.cardMovedToTop(card: cards.first, fixingViews: true)
             })
         } else {
             print("fixViewsdfdfs")
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: [.allowAnimatedContent, .allowUserInteraction]) {
+            UIView.animate(withDuration: animated ? 0.5 : 0, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: [.allowAnimatedContent, .allowUserInteraction]) {
                 self.performMoveCards(cards: cards)
             } completion: { _ in
                 self.cardMovedToTop(card: cards.first, fixingViews: true, cardRemoved: cardRemoved)
                 if firstLoaded {
                     print("egrfwcdwrfe")
-                    self.removeFirst(action: .like)
+                    self.removeFirst(action: .dislike, animated: false)
                 }
             }
         }
@@ -91,7 +94,7 @@ extension SwipeMovieVC {
                 animateButton = true
             }
             let alphaStack:CGFloat = showStack ? 1 : 0
-            UIView.animate(withDuration: 0.3, animations: {
+            UIView.animate(withDuration: Styles.pressedAnimation + 0.1, animations: {
                 if self.loadingStack.alpha != alphaStack {
                     self.loadingStack.alpha = alphaStack
                 }

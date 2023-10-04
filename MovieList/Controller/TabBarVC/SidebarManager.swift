@@ -24,8 +24,9 @@ class SidebarManager {
     private func createSidebar() {
         let sideBarContainer = SideBarView()
         sideBarContainer.alpha = 0
+        let width:CGFloat = 270
         superView.view.addSubview(sideBarContainer)
-        sideBarContainer.addConstaits([.left:0, .top:0, .bottom:0, .width:270], superV: superView.view)
+        sideBarContainer.addConstaits([.left:0, .top:0, .bottom:0, .width:width], superV: superView.view)
         sideBarContainer.backgroundColor = .black
         let vc = SideBarVC.configure()
         sideBarContainer.vc = vc
@@ -37,7 +38,7 @@ class SidebarManager {
         self.toggleSideBar(false, animated: false)
         let view = TouchView()
         superView.view.addSubview(view)
-        view.addConstaits([.left:CGFloat(270 - 20), .top:0, .bottom:0, .width:60], superV: superView.view, toSafe: true)
+        view.addConstaits([.left:CGFloat(width - 20), .top:0, .bottom:0, .width:60], superV: superView.view, toSafe: true)
         view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(pinched(_:))))
         helperView = view
         
@@ -45,14 +46,13 @@ class SidebarManager {
         button.setImage(.init(systemName: "line.3.horizontal"), for: .normal)
         button.tintColor = #colorLiteral(red: 0.2630000114, green: 0.2630000114, blue: 0.2630000114, alpha: 1)
         button.backgroundColor = #colorLiteral(red: 0.08600000292, green: 0.08600000292, blue: 0.08600000292, alpha: 1)
-        button.layer.cornerRadius = 12
+        button.layer.cornerRadius = Styles.buttonRadius3
         view.addSubview(button)
-        button.addConstaits([.top:1, .left:30, .width:40, .height:40], superV: view, toSafe: true)
+        button.addConstaits([.top:0, .left:30, .width:40, .height:40], superV: view, toSafe: true)
+        button.addTarget(self, action: #selector(sidebarPressed(_:)), for: .touchUpInside)
         button.layer.zPosition = -1
+        button.shadow(opasity: Styles.buttonShadow)
         self.button = button
-        button.pressed = {
-            self.toggleSideBar(!self.isShowing, animated: true)
-        }
         view.alpha = 0
         //scrolling
         view.customTouchAnimation = {
@@ -63,6 +63,10 @@ class SidebarManager {
 
     }
     
+    
+    @objc private func sidebarPressed(_ sender:UIButton) {
+        toggleSideBar(!isShowing, animated: true)
+    }
     
     private var width:CGFloat {
         return containerView?.frame.width ?? 0
@@ -78,7 +82,7 @@ class SidebarManager {
         if scrolling || isShowing {
             if sender.state == .began || sender.state == .changed {
                 let newPosition = (finger.x - width) >= 0 ? 0 : (finger.x - width)
-                UIView.animate(withDuration: 0.1) {
+                UIView.animate(withDuration: Styles.pressedAnimation) {
                     self.containerView?.layer.transform = CATransform3DTranslate(CATransform3DIdentity, newPosition, 0, 0)
                     self.helperView?.layer.transform = CATransform3DTranslate(CATransform3DIdentity, newPosition, 0, 0)
                 }
@@ -96,8 +100,8 @@ class SidebarManager {
     func toggleSideBar(_ show: Bool, animated:Bool) {
         isShowing = show
         DispatchQueue.main.async {
-            let newPosition = show ? 0 : -self.width
-            UIView.animate(withDuration: animated ? 0.25 : 0) {
+            let newPosition = show ? 0 : -self.width//hereddas
+            UIView.animate(withDuration: animated ? (Styles.pressedAnimation + 0.1) : 0, delay: 0, options: .allowUserInteraction) {
                 self.containerView?.layer.transform = CATransform3DTranslate(CATransform3DIdentity, newPosition, 0, 0)
                 self.helperView?.layer.transform = CATransform3DTranslate(CATransform3DIdentity, newPosition, 0, 0)
 

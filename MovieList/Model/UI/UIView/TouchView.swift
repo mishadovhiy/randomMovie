@@ -67,8 +67,8 @@ class TouchView: View {
     
     private func defaultAnimation(begun:Bool) {
         let defaultColor = self.backHolder ?? .white
-        UIView.animate(withDuration: 0.2, delay: 0, options: .allowUserInteraction) {
-            self.backgroundColor = begun ? defaultColor.lighter(0.3) : defaultColor
+        UIView.animate(withDuration: Styles.pressedAnimation, delay: 0, options: .allowUserInteraction) {
+            self.backgroundColor = begun ? defaultColor.lighter(Styles.viewPressedComponentDelta) : defaultColor
         }
     }
 

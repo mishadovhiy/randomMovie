@@ -46,14 +46,14 @@ class LoadingButton: Button {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("begun", touches.first?.view?.frame)
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: Styles.pressedAnimation) {
             self.touchBackground?.alpha = 0.5
         }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touchesInView = touchesInView(touches)
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: Styles.pressedAnimation) {
             self.touchBackground?.alpha = touchesInView ? 0.5 : 0
         }
     }
@@ -66,13 +66,13 @@ class LoadingButton: Button {
         if touchesInView(touches) {
             print("!!!!")
             self.isEnabled = false
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: Styles.pressedAnimation) {
                 self.touchBackground?.alpha = 0
             } completion: { _ in
                 self.sendActions(for: .touchUpInside)
             }
         } else {
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: Styles.pressedAnimation) {
                 self.touchBackground?.alpha = 0
             }
         }
@@ -116,7 +116,7 @@ extension LoadingButton {
     private func setEnabled(_ value:Bool) {
         if let ai = ai {
             if isEnabled {
-                UIView.animate(withDuration: 0.3) {
+                UIView.animate(withDuration: Styles.pressedAnimation) {
                     ai.alpha = 0
                 } completion: { _ in
                     ai.stopAnimating()

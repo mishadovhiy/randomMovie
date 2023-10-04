@@ -36,10 +36,12 @@ extension SwipeMovieVC {
         }
     }
     
+    /**
+     - not animated method
+     */
     func prepareFirstCard(to container: MoviePreviewView) {
         container.isUserInteractionEnabled = true
         container.layer.zPosition = 9999999
-        container.alpha = 1
         container.vc?.containerAppeared()
     }
     
@@ -62,6 +64,9 @@ extension SwipeMovieVC {
     func performMoveCards(cards: (first: MoviePreviewView, second: MoviePreviewView?, third: MoviePreviewView?)) {
         cards.first.transform = CGAffineTransform(rotationAngle: 0)
         cards.first.moveToCenter()
+        cards.first.vc?.view.backgroundColor = #colorLiteral(red: 0.08600000292, green: 0.08600000292, blue: 0.08600000292, alpha: 1)
+        cards.first.alpha = 1
+
         self.prepareAdditionalCard(cards.second, isSecond: true)
         self.prepareAdditionalCard(cards.third, isSecond: false)
         let previewVC = cards.first.vc
@@ -78,6 +83,8 @@ extension SwipeMovieVC {
         let transform:CGFloat = isSecond ? 0.9 : 0.8
         container?.layer.transform = CATransform3DMakeScale(transform, transform, 1)
         container?.alpha = transform + 0.5
+        container?.vc?.view.backgroundColor = #colorLiteral(red: 0.08600000292, green: 0.08600000292, blue: 0.08600000292, alpha: 1).darker(0.015)
+
     }
     
     private func performCreatingMovie(first:Bool = false) -> MoviePreviewView? {
@@ -86,10 +93,13 @@ extension SwipeMovieVC {
         }
         let container = MoviePreviewView()
         container.customTouchAnimation = { begun in
-            container.vc?.view.layer.performAnimation(key: .zoom, to: begun ? CGFloat(1.02) : CGFloat(1))
+            UIView.animate(withDuration: Styles.pressedAnimation, delay: 0, animations: {
+                container.layer.zoom(value: begun ? 1.01 : 1)
+            })
         }
+        container.shadow(opasity: Styles.buttonShadow)
         container.backgroundColor = #colorLiteral(red: 0.08600000292, green: 0.08600000292, blue: 0.08600000292, alpha: 1)
-        container.layer.cornerRadius = 12
+        container.layer.cornerRadius = Styles.buttonRadius3
         container.layer.masksToBounds = true
         containerView.addSubview(container)
         container.addConstaits([.left:0, .right:0, .top:0, .bottom:0], superV: containerView)
@@ -196,7 +206,7 @@ extension SwipeMovieVC:ContainerPanGestureProtocol {
         }
     }
     
-    //
+    /// -
     
     func removeAllBoxes() {
         let all = [movieBoxes?.first, movieBoxes?.second, movieBoxes?.third]
@@ -264,4 +274,12 @@ extension SwipeMovieVC:ContainerPanGestureProtocol {
         return !(randomList.count == 0)
     }
     
+    
+    func tempAppearence() {
+        randomList.removeAll()
+        for _ in 0..<20 {
+            randomList.append(.init(dict: [:]))
+        }
+        loadMovies()
+    }
 }

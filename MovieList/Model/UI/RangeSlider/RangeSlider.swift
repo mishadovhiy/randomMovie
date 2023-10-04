@@ -121,7 +121,7 @@ class RangeSlider: UIControl {
             uppar.font = .systemFont(ofSize: 12)
             uppar.adjustsFontSizeToFitWidth = true
             uppar.backgroundColor = Text.Colors.white.withAlphaComponent(0.7)
-            uppar.layer.cornerRadius = 6
+            uppar.layer.cornerRadius = Styles.buttonRadius
             uppar.layer.masksToBounds = true
             self.upperLabel = uppar
             self.addSubview(uppar)
@@ -134,7 +134,7 @@ class RangeSlider: UIControl {
             lower.adjustsFontSizeToFitWidth = true
             lower.layer.masksToBounds = true
             lower.backgroundColor = Text.Colors.white.withAlphaComponent(0.7)
-            lower.layer.cornerRadius = 6
+            lower.layer.cornerRadius = Styles.buttonRadius
             self.lowerLabel = lower
             self.addSubview(lower)
             self.newValue(upper: true)

@@ -13,8 +13,9 @@ class View: UIView {
 
     @IBInspectable open var cornerRadius: CGFloat = 0 {
         didSet {
+            let radius = self.cornerRadius == -1 ? Styles.buttonRadius : (self.cornerRadius == -2 ? Styles.buttonRadius2 : self.cornerRadius)
             DispatchQueue.main.async {
-                self.layer.cornerRadius = self.cornerRadius
+                self.layer.cornerRadius = radius
               //  self.layer.masksToBounds = self.cornerRadius > 0
             }
         }
@@ -22,7 +23,7 @@ class View: UIView {
 
     @IBInspectable open var shadowOpasity: Float = 0 {
         didSet {
-            shadow(opasity: shadowOpasity)
+            shadow(opasity: shadowOpasity == -1 ? Styles.buttonShadow : shadowOpasity)
         }
         
     }

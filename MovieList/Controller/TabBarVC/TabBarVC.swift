@@ -27,7 +27,7 @@ class TabBarVC: UITabBarController {
     //add sidebar
     
     private func createSegmented() {
-        let size:CGSize = .init(width: 270, height: 40)
+        let size:CGSize = .init(width: 250, height: 40)
         let segment = SegmentView.init(titles: [
             .init(name: "Random", tintColor: #colorLiteral(red: 0.3449999988, green: 0.3370000124, blue: 0.8389999866, alpha: 1), selectedTextColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), deselectedColor: #colorLiteral(red: 0.3449999988, green: 0.3370000124, blue: 0.8389999866, alpha: 1)),
             .init(name: "Movie list", tintColor: #colorLiteral(red: 0.9100000262, green: 0.9100000262, blue: 0.9100000262, alpha: 1), selectedTextColor: #colorLiteral(red: 0.08600000292, green: 0.08600000292, blue: 0.08600000292, alpha: 1), deselectedColor: #colorLiteral(red: 0.2630000114, green: 0.2630000114, blue: 0.2630000114, alpha: 1))

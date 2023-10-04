@@ -34,7 +34,7 @@ extension MovieListVC {
                 NotificationCenter.default.addObserver( self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
                 NotificationCenter.default.addObserver( self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
             }
-            UIView.animate(withDuration: 0.2) {
+            UIView.animate(withDuration: Styles.pressedAnimation) {
                 self.collectionView.superview?.backgroundColor = Text.Colors.secondaryBacground
             }
         }
@@ -47,7 +47,7 @@ extension MovieListVC {
             let segment = TabBarVC.shared?.segmented
             let button = TabBarVC.shared?.sideBar?.button
             let toHide = ((AppDelegate.shared?.window?.safeAreaInsets.top ?? 0) + 60) * -1
-            UIView.animate(withDuration: 0.3, delay: 0, animations: {
+            UIView.animate(withDuration: Styles.pressedAnimation, delay: 0, animations: {
                 segment?.layer.move(.top, value: hide ? toHide : 0)
                 button?.layer.move(.top, value: hide ? toHide : 0)
 

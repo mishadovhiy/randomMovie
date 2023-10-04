@@ -39,7 +39,10 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
             }
             let data = tableData[indexPath.row]
             (cell.contentView as? TouchView)?.customTouchAnimation = { begun in
-                (cell.contentView as? TouchView)?.layer.performAnimation(key: .zoom, to: begun ? CGFloat(1.02) : CGFloat(1))
+               // (cell.contentView as? TouchView)?.layer.performAnimation(key: .zoom, to: begun ? CGFloat(1.02) : CGFloat(1))
+                UIView.animate(withDuration: Styles.pressedAnimation, delay: 0, options: .allowUserInteraction, animations: {
+                    (cell.contentView as? TouchView)?.layer.zoom(value: begun ? 1.01 : 1)
+                })
             }
             cell.dateLabel.text = data.released
             cell.imdbLabel.text = data.imdbrating > 0 ? String.init(decimalsCount: 1, from: data.imdbrating) : "0"

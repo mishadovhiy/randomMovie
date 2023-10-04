@@ -34,7 +34,7 @@ extension SegmentView {
             }
         }
         
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: Styles.pressedAnimation + 0.1) {
             self.selectedShadowView.layer.transform = CATransform3DTranslate(CATransform3DIdentity, transform, 0, 0)
             self.selectedIndicator.layer.transform = CATransform3DTranslate(CATransform3DIdentity, transform, 0, 0)
             self.additionalGradientView?.alpha = hideGradient ? 0 : 1

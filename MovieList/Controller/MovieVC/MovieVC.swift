@@ -24,7 +24,7 @@ class MovieVC: BaseVC {
         super.viewDidLoad()
         loadData()
         if isPreview {
-            self.view.layer.cornerRadius = 12
+            self.view.layer.cornerRadius = Styles.buttonRadius3
             self.view.layer.masksToBounds = true
         }
     }

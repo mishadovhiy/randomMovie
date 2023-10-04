@@ -67,7 +67,7 @@ extension UIView {
         if needBluer {
             let _ = back.addBluer(frame: frame)
         }
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: Styles.pressedAnimation) {
             back.alpha = 1
         }
     }
