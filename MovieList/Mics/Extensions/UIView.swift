@@ -8,7 +8,9 @@
 import UIKit
 
 extension UIView {
-
+    func rotate(value:CGFloat) {
+        self.transform = CGAffineTransform(rotationAngle: value)
+    }
     func shadow(opasity:Float = 0.6) {
         DispatchQueue.main.async {
             self.layer.shadowColor = UIColor.black.cgColor

@@ -185,9 +185,9 @@ extension SwipeMovieVC:ContainerPanGestureProtocol {
         guard let cards = self.movieBoxes else { return }
         switch action {
         case .dislike:
-            cards.first.transform = CGAffineTransform(rotationAngle: (scrollValue / 5) * (-1))
+            cards.first.rotate(value: scrollValue / -5)
         case .like:
-            cards.first.transform = CGAffineTransform(rotationAngle: scrollValue / 5)
+            cards.first.rotate(value: scrollValue / 5)
         }
     }
     

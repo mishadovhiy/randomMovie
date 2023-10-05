@@ -19,6 +19,7 @@
 		8D461D6B29394BC7000EDF01 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 8D461D6A29394BC7000EDF01 /* GoogleMobileAds */; };
 		8D47531D2824B2A20061970C /* LocalDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47531C2824B2A20061970C /* LocalDB.swift */; };
 		8D47531F2824C3C30061970C /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47531E2824C3C30061970C /* Date.swift */; };
+		8D50CD212ACEE8EB00BF24E0 /* HeartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D50CD202ACEE8EB00BF24E0 /* HeartButton.swift */; };
 		8D6DCF682827C0BA0039E062 /* TitleCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6DCF672827C0BA0039E062 /* TitleCollectionCell.swift */; };
 		8D72207C28286A7B004C5C6C /* LoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D72207B28286A7B004C5C6C /* LoadingButton.swift */; };
 		8D72207E28286FA2004C5C6C /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D72207D28286FA2004C5C6C /* Text.swift */; };
@@ -107,6 +108,7 @@
 		8D3E741B2828A797003AC968 /* UISearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISearchBarDelegate.swift; sourceTree = "<group>"; };
 		8D47531C2824B2A20061970C /* LocalDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDB.swift; sourceTree = "<group>"; };
 		8D47531E2824C3C30061970C /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		8D50CD202ACEE8EB00BF24E0 /* HeartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartButton.swift; sourceTree = "<group>"; };
 		8D6DCF672827C0BA0039E062 /* TitleCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionCell.swift; sourceTree = "<group>"; };
 		8D72207B28286A7B004C5C6C /* LoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingButton.swift; sourceTree = "<group>"; };
 		8D72207D28286FA2004C5C6C /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 			children = (
 				8DD4635B2821CB14008EB85A /* Button.swift */,
 				8D72207B28286A7B004C5C6C /* LoadingButton.swift */,
+				8D50CD202ACEE8EB00BF24E0 /* HeartButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -690,6 +693,7 @@
 				8D1191F02998626B00D381F6 /* Filter.swift in Sources */,
 				8D72208428287A34004C5C6C /* UIActivityIndicatorView.swift in Sources */,
 				8DD4635728212D75008EB85A /* UICollectionView.swift in Sources */,
+				8D50CD212ACEE8EB00BF24E0 /* HeartButton.swift in Sources */,
 				8DEF47012ACB82B3008EEFA6 /* ContainerPanGesture.swift in Sources */,
 				8D81F59F282466C300338946 /* UITableViewCell.swift in Sources */,
 				8DB065672ACC8EC500DE10CC /* SegmentItem.swift in Sources */,

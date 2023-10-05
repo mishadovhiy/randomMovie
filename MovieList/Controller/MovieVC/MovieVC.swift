@@ -13,7 +13,7 @@ class MovieVC: BaseVC {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var additionalLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
-    @IBOutlet weak var heartButton: Button!
+    @IBOutlet weak var heartButton: HeartButton!
     
     var container:SwipeMovieVC.MoviePreviewView?
     var movie:Movie?

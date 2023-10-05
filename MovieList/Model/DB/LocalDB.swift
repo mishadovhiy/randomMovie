@@ -57,6 +57,8 @@ struct LocalDB {
                     DispatchQueue.main.async {
                         UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                         button?.tintColor = movieFav
+                        (button as? HeartButton)?.animateImage(like: isFavorite)
+
                     }
                     completion?(isFavorite)
                 }

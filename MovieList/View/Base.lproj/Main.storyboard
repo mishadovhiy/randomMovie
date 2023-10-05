@@ -464,7 +464,7 @@ Resume</string>
                                     <constraint firstAttribute="leading" secondItem="Z2M-Ax-gXL" secondAttribute="leading" id="H2n-K6-dyd"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJU-BO-GEC" userLabel="heart" customClass="Button" customModule="MovieList" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJU-BO-GEC" userLabel="heart" customClass="HeartButton" customModule="MovieList" customModuleProvider="target">
                                 <rect key="frame" x="80" y="213.5" width="28.5" height="24"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" name="DarkGreyColor"/>
