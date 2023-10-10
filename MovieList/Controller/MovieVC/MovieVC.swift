@@ -9,6 +9,10 @@ import UIKit
 
 class MovieVC: BaseVC {
 
+    typealias TransitionComponents = (albumCoverImageView: UIImageView?, albumNameLabel: UILabel?)
+
+    public var transitionComponents = TransitionComponents(albumCoverImageView: nil, albumNameLabel: nil)
+
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var additionalLabel: UILabel!
@@ -20,9 +24,11 @@ class MovieVC: BaseVC {
     var favoritesPressedAction:(() -> ())?
     
     private var favoriteChanged = false
-    
+    private let transitionManager = TransitionManager(duration: 0.5)
+
     override func viewDidLoad() {
         super.viewDidLoad()
+      //  navigationController?.delegate = self
         loadData()
         if isPreview {
             self.view.layer.cornerRadius = Styles.buttonRadius3
@@ -47,7 +53,10 @@ class MovieVC: BaseVC {
         let xContainer = sup.minX + (container?.frame.minX ?? 0) + 13.2
 
         let top = container != nil ? hasContainer : (-15)
-        ImageVC.present(img: movie?.image, from: movieImage.frame, inVC: self, fromAdditional: .init(x: xContainer, y: top + sup.minY), animateBack: container != nil)
+        if let vc = ImageVC.configure(img: movie?.image, from: movieImage.frame, fromAdditional: .init(x: xContainer, y: top + sup.minY), animateBack: container != nil) {
+            self.push(vc: vc)
+        }
+      //  ImageVC.present(img: movie?.image, from: movieImage.frame, inVC: self, fromAdditional: .init(x: xContainer, y: top + sup.minY), animateBack: container != nil)
     }
     
     func loadData() {
@@ -154,6 +163,23 @@ class MovieVC: BaseVC {
     func happtic(start:Bool) {
         
     }
+    
+    
+    
+    func push(vc:UIViewController) {
+        navigationController?.delegate = transitionManager
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension TransitionManager:UINavigationControllerDelegate {
+    func navigationController(
+            _ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation,
+            from fromVC: UIViewController,
+            to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+            
+                return self
+        }
 }
 
 extension MovieVC {

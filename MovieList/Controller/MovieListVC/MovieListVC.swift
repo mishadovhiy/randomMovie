@@ -74,10 +74,13 @@ class MovieListVC: BaseVC {
         set {
             _selectedMovie = newValue
             if newValue != nil {
-                DispatchQueue.main.async {
+               /* DispatchQueue.main.async {
                     self.performSegue(withIdentifier: "toMovie", sender: self)
                     self.shakeButton.isEnabled = true
-                }
+                }*/
+                let vc = MovieVC.configure(movie: newValue, favoritesPressedAction: screenType == .favorite ? loadFavorites : nil)
+                let nav = UINavigationController(rootViewController: vc)
+                self.present(nav, animated: true)
             }
         }
     }
