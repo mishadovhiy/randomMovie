@@ -366,29 +366,18 @@ Resume</string>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xx6-uI-7HW">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DrM-Fb-lcS">
-                                <rect key="frame" x="0.0" y="48" width="240" height="128"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="AMz-PW-hMb"/>
-                                    <constraint firstAttribute="width" constant="240" id="QBN-hx-YCJ"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JqE-ZK-Za8"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="xx6-uI-7HW" secondAttribute="bottom" id="7G2-At-7WF"/>
                             <constraint firstAttribute="trailing" secondItem="xx6-uI-7HW" secondAttribute="trailing" id="Q8M-8J-5uF"/>
-                            <constraint firstItem="DrM-Fb-lcS" firstAttribute="top" secondItem="JqE-ZK-Za8" secondAttribute="top" id="SmO-gw-vhV"/>
                             <constraint firstItem="xx6-uI-7HW" firstAttribute="top" secondItem="1Xw-mo-Nl4" secondAttribute="top" id="Zki-cr-jYl"/>
-                            <constraint firstItem="DrM-Fb-lcS" firstAttribute="leading" secondItem="JqE-ZK-Za8" secondAttribute="leading" id="eq0-F4-Me8"/>
                             <constraint firstItem="xx6-uI-7HW" firstAttribute="leading" secondItem="1Xw-mo-Nl4" secondAttribute="leading" id="paS-O0-VgZ"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="imgView" destination="xx6-uI-7HW" id="aXM-94-9Lx"/>
-                        <outlet property="smallImgView" destination="DrM-Fb-lcS" id="Qfv-ak-XKf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NFF-Fc-vK8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -799,9 +788,6 @@ Resume</string>
         <designable name="LUU-Fy-Ccz">
             <size key="intrinsicContentSize" width="27" height="26"/>
         </designable>
-        <designable name="NJU-BO-GEC">
-            <size key="intrinsicContentSize" width="28.5" height="24"/>
-        </designable>
         <designable name="VEg-PN-xfp">
             <size key="intrinsicContentSize" width="66" height="32.5"/>
         </designable>
@@ -819,9 +805,6 @@ Resume</string>
         </designable>
         <designable name="xWS-XS-1o6">
             <size key="intrinsicContentSize" width="28.5" height="25"/>
-        </designable>
-        <designable name="xvl-kn-2Cy">
-            <size key="intrinsicContentSize" width="156" height="21"/>
         </designable>
     </designables>
     <resources>

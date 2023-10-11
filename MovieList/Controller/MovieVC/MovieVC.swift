@@ -24,11 +24,10 @@ class MovieVC: BaseVC {
     var favoritesPressedAction:(() -> ())?
     
     private var favoriteChanged = false
-    private let transitionManager = TransitionManager(duration: 0.5)
+    private let transitionManager = AnimatedImageManagerNav(duration: 0.6)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-      //  navigationController?.delegate = self
         loadData()
         if isPreview {
             self.view.layer.cornerRadius = Styles.buttonRadius3
@@ -172,7 +171,7 @@ class MovieVC: BaseVC {
     }
 }
 
-extension TransitionManager:UINavigationControllerDelegate {
+extension AnimatedImageManagerNav:UINavigationControllerDelegate {
     func navigationController(
             _ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation,
             from fromVC: UIViewController,

@@ -67,6 +67,7 @@
 		8DEF46FD2ACB7848008EEFA6 /* Extensions_Swipe_SwipeMovieVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF46FC2ACB7848008EEFA6 /* Extensions_Swipe_SwipeMovieVC.swift */; };
 		8DEF46FF2ACB7F72008EEFA6 /* Animate_SwipeViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF46FE2ACB7F72008EEFA6 /* Animate_SwipeViewVC.swift */; };
 		8DEF47012ACB82B3008EEFA6 /* ContainerPanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF47002ACB82B3008EEFA6 /* ContainerPanGesture.swift */; };
+		8DF4130F2AD6C4ED00C6D154 /* AnimatedImageManagerNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF4130E2AD6C4ED00C6D154 /* AnimatedImageManagerNav.swift */; };
 		8DF671D4281F6B0D0064849A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF671D3281F6B0D0064849A /* AppDelegate.swift */; };
 		8DF671D8281F6B0D0064849A /* MovieListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF671D7281F6B0D0064849A /* MovieListVC.swift */; };
 		8DF671DB281F6B0E0064849A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DF671D9281F6B0E0064849A /* Main.storyboard */; };
@@ -154,6 +155,7 @@
 		8DEF46FC2ACB7848008EEFA6 /* Extensions_Swipe_SwipeMovieVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_Swipe_SwipeMovieVC.swift; sourceTree = "<group>"; };
 		8DEF46FE2ACB7F72008EEFA6 /* Animate_SwipeViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animate_SwipeViewVC.swift; sourceTree = "<group>"; };
 		8DEF47002ACB82B3008EEFA6 /* ContainerPanGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerPanGesture.swift; sourceTree = "<group>"; };
+		8DF4130E2AD6C4ED00C6D154 /* AnimatedImageManagerNav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedImageManagerNav.swift; sourceTree = "<group>"; };
 		8DF671D0281F6B0D0064849A /* MovieList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DF671D3281F6B0D0064849A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8DF671D7281F6B0D0064849A /* MovieListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListVC.swift; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 			children = (
 				8DD4635D2821CEA1008EB85A /* MovieVC.swift */,
 				8DBD01ED2ACE2AC200DD1264 /* MovieActionView.swift */,
+				8DF4130E2AD6C4ED00C6D154 /* AnimatedImageManagerNav.swift */,
 			);
 			path = MovieVC;
 			sourceTree = "<group>";
@@ -715,6 +718,7 @@
 				8D7E3E7F282041AB0094F05B /* Unparce.swift in Sources */,
 				8DD4635528212C78008EB85A /* UIView.swift in Sources */,
 				8DB0656B2ACCB34B00DE10CC /* SidebarManager.swift in Sources */,
+				8DF4130F2AD6C4ED00C6D154 /* AnimatedImageManagerNav.swift in Sources */,
 				8DEF46FB2ACB6DDE008EEFA6 /* TouchView.swift in Sources */,
 				8D722080282874F8004C5C6C /* Appeareance.swift in Sources */,
 				8DE9C54428383B4F008168DF /* ExtensionsSideBar.swift in Sources */,
@@ -912,7 +916,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FQA2XH9ZUM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MovieList/Info.plist;
@@ -929,7 +933,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6;
+				MARKETING_VERSION = 3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Dovhiy.RandomMovie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -947,7 +951,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FQA2XH9ZUM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MovieList/Info.plist;
@@ -964,7 +968,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6;
+				MARKETING_VERSION = 3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Dovhiy.RandomMovie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
