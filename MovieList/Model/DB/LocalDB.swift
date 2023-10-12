@@ -42,6 +42,53 @@ struct LocalDB {
             }
         }
         
+        
+        var folders: [Folder] {
+            get {
+                return (dict["folders"] as? [[String:Any]] ?? []).compactMap({
+                    return .init(dict: $0)
+                })
+            }
+            set {
+                let dicts:[[String:Any]] = newValue.compactMap({
+                    $0.dict})
+                dict.updateValue(dicts, forKey: "folders")
+            }
+        }
+        
+        
+        struct Folder {
+            var dict:[String:Any]
+            init(dict: [String : Any]) {
+                self.dict = dict
+            }
+            init(id:Int, name:String) {
+                dict = [:]
+                self.id = id
+                self.name = name
+            }
+            var movies:[Movie] {
+                return LocalDB.db.favoriteMovies.filter({$0.folderID == self.id})
+            }
+            
+            var id:Int {
+                get {
+                    return dict["id"] as? Int ?? -1
+                }
+                set {
+                    dict.updateValue(newValue, forKey: "id")
+                }
+            }
+            var name:String {
+                get {
+                    return dict["name"] as? String ?? ""
+                }
+                set {
+                    dict.updateValue(newValue, forKey: "name")
+                }
+            }
+        }
+        
         func favoritePressed(button:UIButton?, canRemove:Bool = true, movie:Movie?, completion:((_ isFavorite:Bool)->())? = nil) {
             if let movie = movie {
                 var movieFav:UIColor = Text.Colors.darkGrey

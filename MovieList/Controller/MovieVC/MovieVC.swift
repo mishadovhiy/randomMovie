@@ -10,9 +10,9 @@ import UIKit
 class MovieVC: BaseVC {
 
     typealias TransitionComponents = (albumCoverImageView: UIImageView?, albumNameLabel: UILabel?)
-
     public var transitionComponents = TransitionComponents(albumCoverImageView: nil, albumNameLabel: nil)
-
+    private let transitionManager = AnimatedTransitioningManager(duration: 0.3)
+    
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var additionalLabel: UILabel!
@@ -24,16 +24,32 @@ class MovieVC: BaseVC {
     var favoritesPressedAction:(() -> ())?
     
     private var favoriteChanged = false
-    private let transitionManager = AnimatedImageManagerNav(duration: 0.6)
+    
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !isPreview {
+            navController?.delegate = transitionManager
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
         if isPreview {
             self.view.layer.cornerRadius = Styles.buttonRadius3
             self.view.layer.masksToBounds = true
+        } else {
+            self.navigationController?.title = movie?.name ?? "Unknown movie"
         }
         movieImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imgPressed(_:))))
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if !isPreview {
+            navController?.setNavigationBarHidden(false, animated: true)
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -53,7 +69,9 @@ class MovieVC: BaseVC {
 
         let top = container != nil ? hasContainer : (-15)
         if let vc = ImageVC.configure(img: movie?.image, from: movieImage.frame, fromAdditional: .init(x: xContainer, y: top + sup.minY), animateBack: container != nil) {
-            self.push(vc: vc)
+            if !self.isPreview {
+                self.push(vc: vc)
+            }
         }
       //  ImageVC.present(img: movie?.image, from: movieImage.frame, inVC: self, fromAdditional: .init(x: xContainer, y: top + sup.minY), animateBack: container != nil)
     }
@@ -164,24 +182,29 @@ class MovieVC: BaseVC {
     }
     
     
+    var navController:UINavigationController? {
+        return navigationController ?? TabBarVC.shared?.navigationController
+    }
     
     func push(vc:UIViewController) {
-        navigationController?.delegate = transitionManager
-        navigationController?.pushViewController(vc, animated: true)
+        navController?.delegate = transitionManager
+        navController?.pushViewController(vc, animated: true)
+        /*vc.modalPresentationStyle = .custom
+        vc.transitioningDelegate = transitionManager
+        self.present(vc, animated: true)*/
+       // self.isModalInPresentation = false
     }
 }
 
-extension AnimatedImageManagerNav:UINavigationControllerDelegate {
-    func navigationController(
-            _ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation,
-            from fromVC: UIViewController,
-            to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-            
-                return self
-        }
-}
-
 extension MovieVC {
+    static func present(isPreview:Bool = false, movie:Movie? = nil, favoritesPressedAction:(() -> ())? = nil, inVC:UIViewController) {
+        let vc = MovieVC.configure(movie: movie, favoritesPressedAction: favoritesPressedAction)
+     //   let nav = UINavigationController(rootViewController: vc)
+     //   nav.modalPresentationStyle = .formSheet
+        //inVC.present(nav, animated: true)
+        (inVC.navigationController ?? TabBarVC.shared?.navigationController)?.pushViewController(vc, animated: true)
+    }
+    
     static func configure(isPreview:Bool = false, movie:Movie? = nil, favoritesPressedAction:(() -> ())? = nil) -> MovieVC {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "MovieVC") as! MovieVC

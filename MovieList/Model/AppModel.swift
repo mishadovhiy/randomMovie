@@ -18,14 +18,9 @@ struct AppModel {
 extension AppModel {
     struct Present {
         static func movieList(_ vc:UIViewController, type:MovieListVC.ScreenType) {
-            DispatchQueue.main.async {
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let newVC = storyboard.instantiateViewController(withIdentifier: "MovieList") as! MovieListVC
-                newVC.screenType = type
-                newVC.modalPresentationStyle = .formSheet
-                vc.present(newVC, animated: true)
-
-            }
+            let newVC = MovieListVC.configure(type: type)
+            vc.navigationController?.pushViewController(newVC, animated: true)
+            vc.navigationController?.setNavigationBarHidden(false, animated:true)
         }
     }
 }

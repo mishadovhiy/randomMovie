@@ -12,6 +12,7 @@ extension MovieListVC {
         case all
         case favorite
         case search
+    //    case folderList
     }
     func updateUI(for type: ScreenType) {
         self.collectionView.delegate = self

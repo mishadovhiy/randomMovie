@@ -77,7 +77,7 @@ class SidebarManager {
         if sender.state == .began {
             scrolling = (finger.x  - width) < 80
             wasShowing = isShowing
-            superView.vibrate()
+            superView.vibrate(style: .soft)
         }
         if scrolling || isShowing {
             if sender.state == .began || sender.state == .changed {

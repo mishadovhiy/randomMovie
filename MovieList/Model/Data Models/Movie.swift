@@ -25,9 +25,9 @@ class Movie {
     let about:String
     let genre:[String]
     let dict:[String:Any]
-    
+    var folderID:Int?
     var image:Data?
-    
+    var isFolder:Bool
     init(dict:[String:Any]) {
         self.name = dict["title"] as? String ?? ""
         let images = dict["imageurl"] as? [String] ?? []
@@ -37,9 +37,24 @@ class Movie {
         self.released = "\(dict["released"] as? Int ?? 0)"
         self.about = dict["synopsis"] as? String ?? ""
         self.genre = dict["genre"] as? [String] ?? []
+        self.folderID = dict["folderID"] as? Int
+        self.isFolder = dict["isFolder"] as? Bool ?? false
         self.dict = dict
     }
     
+    init(folder:LocalDB.DB.Folder) {
+        let dict = folder.dict
+        self.name = dict["name"] as? String ?? ""
+        self.imageURL = ""
+        self.imdbid = ""
+        self.imdbrating = 0
+        self.released = ""
+        self.about = ""
+        self.genre = []
+        self.folderID = dict["id"] as? Int
+        self.isFolder = true
+        self.dict = folder.dict
+    }
     
     var type:MovieType {
         let str = self.dict["type"] as? String ?? ""

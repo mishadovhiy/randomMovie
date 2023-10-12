@@ -15,9 +15,15 @@ class TabBarVC: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         TabBarVC.shared = self
         createSegmented()
         sideBar = .init(superVC: self)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     func segmentedSelected(_ atItem:Int) {

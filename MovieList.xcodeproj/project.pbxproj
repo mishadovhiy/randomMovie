@@ -67,7 +67,7 @@
 		8DEF46FD2ACB7848008EEFA6 /* Extensions_Swipe_SwipeMovieVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF46FC2ACB7848008EEFA6 /* Extensions_Swipe_SwipeMovieVC.swift */; };
 		8DEF46FF2ACB7F72008EEFA6 /* Animate_SwipeViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF46FE2ACB7F72008EEFA6 /* Animate_SwipeViewVC.swift */; };
 		8DEF47012ACB82B3008EEFA6 /* ContainerPanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF47002ACB82B3008EEFA6 /* ContainerPanGesture.swift */; };
-		8DF4130F2AD6C4ED00C6D154 /* AnimatedImageManagerNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF4130E2AD6C4ED00C6D154 /* AnimatedImageManagerNav.swift */; };
+		8DF4130F2AD6C4ED00C6D154 /* AnimatedTransitioningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF4130E2AD6C4ED00C6D154 /* AnimatedTransitioningManager.swift */; };
 		8DF671D4281F6B0D0064849A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF671D3281F6B0D0064849A /* AppDelegate.swift */; };
 		8DF671D8281F6B0D0064849A /* MovieListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF671D7281F6B0D0064849A /* MovieListVC.swift */; };
 		8DF671DB281F6B0E0064849A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DF671D9281F6B0E0064849A /* Main.storyboard */; };
@@ -155,7 +155,7 @@
 		8DEF46FC2ACB7848008EEFA6 /* Extensions_Swipe_SwipeMovieVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_Swipe_SwipeMovieVC.swift; sourceTree = "<group>"; };
 		8DEF46FE2ACB7F72008EEFA6 /* Animate_SwipeViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animate_SwipeViewVC.swift; sourceTree = "<group>"; };
 		8DEF47002ACB82B3008EEFA6 /* ContainerPanGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerPanGesture.swift; sourceTree = "<group>"; };
-		8DF4130E2AD6C4ED00C6D154 /* AnimatedImageManagerNav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedImageManagerNav.swift; sourceTree = "<group>"; };
+		8DF4130E2AD6C4ED00C6D154 /* AnimatedTransitioningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedTransitioningManager.swift; sourceTree = "<group>"; };
 		8DF671D0281F6B0D0064849A /* MovieList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DF671D3281F6B0D0064849A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8DF671D7281F6B0D0064849A /* MovieListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListVC.swift; sourceTree = "<group>"; };
@@ -365,7 +365,6 @@
 			children = (
 				8DD4635D2821CEA1008EB85A /* MovieVC.swift */,
 				8DBD01ED2ACE2AC200DD1264 /* MovieActionView.swift */,
-				8DF4130E2AD6C4ED00C6D154 /* AnimatedImageManagerNav.swift */,
 			);
 			path = MovieVC;
 			sourceTree = "<group>";
@@ -466,6 +465,7 @@
 			children = (
 				8D1191F12998627600D381F6 /* DB */,
 				8D06DF4C28285BAB00372351 /* AppModel.swift */,
+				8DF4130E2AD6C4ED00C6D154 /* AnimatedTransitioningManager.swift */,
 				8DD463532821238B008EB85A /* UI */,
 				8D7E3E7D282041870094F05B /* Network */,
 				8D7E3E82282043040094F05B /* Data Models */,
@@ -486,10 +486,10 @@
 			children = (
 				8D06DF4A2828585500372351 /* BaseVC.swift */,
 				8DB065692ACCB32800DE10CC /* TabBarVC */,
-				8DF67208281F89750064849A /* MovieListVC */,
-				8DD4635F2821CEA6008EB85A /* MovieVC */,
 				8DE9C5412838378F008168DF /* SideBarVC */,
 				8DEF46F82ACB6DA4008EEFA6 /* SwipeMovieVC */,
+				8DF67208281F89750064849A /* MovieListVC */,
+				8DD4635F2821CEA6008EB85A /* MovieVC */,
 				8DBD01EF2ACE2AD900DD1264 /* ImageVC */,
 			);
 			path = Controller;
@@ -718,7 +718,7 @@
 				8D7E3E7F282041AB0094F05B /* Unparce.swift in Sources */,
 				8DD4635528212C78008EB85A /* UIView.swift in Sources */,
 				8DB0656B2ACCB34B00DE10CC /* SidebarManager.swift in Sources */,
-				8DF4130F2AD6C4ED00C6D154 /* AnimatedImageManagerNav.swift in Sources */,
+				8DF4130F2AD6C4ED00C6D154 /* AnimatedTransitioningManager.swift in Sources */,
 				8DEF46FB2ACB6DDE008EEFA6 /* TouchView.swift in Sources */,
 				8D722080282874F8004C5C6C /* Appeareance.swift in Sources */,
 				8DE9C54428383B4F008168DF /* ExtensionsSideBar.swift in Sources */,

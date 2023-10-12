@@ -12,7 +12,7 @@ class LoadingCollectionCell: UICollectionViewCell {
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var ai: UIActivityIndicatorView!
 
-    func setCell(animating:Bool) {
+    func setCell(animating:Bool, title:String = "") {
         let hideLabel = animating
         if mainLabel.isHidden != hideLabel {
             mainLabel.isHidden = hideLabel

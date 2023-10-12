@@ -68,22 +68,36 @@ extension MovieListVC {
     }
     
     func loadFavorites() {
-        self.tableData = LocalDB.db.favoriteMovies
+        let db = LocalDB.db
+        var newTableData:[Movie] = []
+        if selectedFolder == nil {
+            newTableData = db.favoriteMovies
+            db.folders.forEach({
+                newTableData.append(.init(folder: $0))
+            })
+        } else {
+            newTableData = db.favoriteMovies.filter({$0.folderID == selectedFolder?.id})
+        }
+        self.tableData = newTableData
     }
     
     
     func getRandom() {
         switch screenType {
         case .favorite:
-            let movies = LocalDB.db.favoriteMovies
-            if let random = movies.randomElement() {
-                self.selectedMovie = random
-            } else {
-                DispatchQueue.main.async {
-                    self.shakeButton.isEnabled = true
+            DispatchQueue.init(label: "download", qos: .userInitiated).async {
+                let movies = LocalDB.db.favoriteMovies
+                if let random = movies.randomElement() {
+                    DispatchQueue.main.async {
+                        self.selectedMovie = random
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.shakeButton.isEnabled = true
+                        (self.shakeButton as! LoadingButton).touch(false)
+                    }
                 }
             }
-            
         case .all:
             DispatchQueue.init(label: "download", qos: .userInitiated).async {
                 self.load.getMovies(page: Int.random(in: 0..<self.load.maxPage)) { movies, error, newPage  in

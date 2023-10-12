@@ -10,7 +10,7 @@ import UIKit
 extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return screenType == .all ? 3 : 2
+        return screenType == .all ? 3 : (screenType == .all ? 3 : 2)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -21,6 +21,8 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
             return tableData.count
         case 2:
             return screenType == .all ? 1 : 0
+        case 3:
+            return 1
         default:
             return 0
         }
@@ -38,10 +40,10 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
                 return cell
             }
             let data = tableData[indexPath.row]
-            (cell.contentView as? TouchView)?.customTouchAnimation = { begun in
+            cell.touchesBegun = { begun in
                // (cell.contentView as? TouchView)?.layer.performAnimation(key: .zoom, to: begun ? CGFloat(1.02) : CGFloat(1))
                 UIView.animate(withDuration: Styles.pressedAnimation, delay: 0, options: .allowUserInteraction, animations: {
-                    (cell.contentView as? TouchView)?.layer.zoom(value: begun ? 1.01 : 1)
+                    cell.contentView.layer.zoom(value: begun ? 1.01 : 1)
                 })
             }
             cell.dateLabel.text = data.released
@@ -61,9 +63,9 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
 
             
             return cell
-        case 2:
+        case 2, 3:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LoadingCollectionCell", for: indexPath) as! LoadingCollectionCell
-            cell.setCell(animating: !stopDownloading)
+            cell.setCell(animating: indexPath.section == 2 ? !stopDownloading : false, title: indexPath.section == 2 ? "" : "Create Folder")
             return cell
         default:
             return UICollectionViewCell()
@@ -80,6 +82,8 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
         case 1:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PreviewCollectionCell", for: indexPath) as! PreviewCollectionCell
+            self.selectedImageView = cell.movieImage
             selectedMovie = tableData[indexPath.row]
         case 2:
             if stopDownloading {
@@ -91,6 +95,8 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
                     tableData = []
                 }
             }
+        case 3:
+            self.createFolderPressed()
         default:
             break
         }

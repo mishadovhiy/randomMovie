@@ -8,7 +8,10 @@
 import UIKit
 
 class MovieListVC: BaseVC {
-
+    typealias TransitionComponents = (albumCoverImageView: UIImageView?, albumNameLabel: UILabel?)
+    public var transitionComponents = TransitionComponents(albumCoverImageView: nil, albumNameLabel: nil)
+    private let transitionManager = AnimatedTransitioningManager(duration: 0.5)
+    
     @IBOutlet weak var mainContentView: UIView!
     @IBOutlet weak var shakeButton: Button!
     @IBOutlet weak var pageLabel: UILabel!
@@ -32,7 +35,9 @@ class MovieListVC: BaseVC {
     var previousScrollPosition:CGFloat = 0
     var shakeHidden = false
     var screenType:ScreenType = .all
-    
+    var selectedImageView:UIImageView?
+
+    var selectedFolder:LocalDB.DB.Folder?
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI(for: screenType)
@@ -41,6 +46,11 @@ class MovieListVC: BaseVC {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewAppeare()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        (shakeButton as! LoadingButton).touch(false)
     }
     
     override func firstLayoutSubviews() {
@@ -78,10 +88,24 @@ class MovieListVC: BaseVC {
                     self.performSegue(withIdentifier: "toMovie", sender: self)
                     self.shakeButton.isEnabled = true
                 }*/
-                let vc = MovieVC.configure(movie: newValue, favoritesPressedAction: screenType == .favorite ? loadFavorites : nil)
-                let nav = UINavigationController(rootViewController: vc)
-                self.present(nav, animated: true)
+                if let _ = selectedImageView {
+                    self.navigationController?.delegate = transitionManager
+                }
+                MovieVC.present(movie: newValue, favoritesPressedAction: screenType == .favorite ? loadFavorites : nil, inVC: self)
+                self.shakeButton.isEnabled = true
+                (self.shakeButton as! LoadingButton).touch(false)
             }
+        }
+    }
+    
+    
+    
+    func createFolderPressed() {
+        print("createFolderPressedcreateFolderPressed")
+        DispatchQueue(label: "db", qos: .userInitiated).async {
+            let lastID = LocalDB.db.folders.sorted(by: {$0.id > $1.id}).first?.id
+            print("lastID", lastID, " erfwdedwfergtvf")
+            LocalDB.db.folders.append(.init(id: lastID ?? 0, name: "New Folder"))
         }
     }
     
@@ -118,5 +142,14 @@ class MovieListVC: BaseVC {
 
 }
 
+
+extension MovieListVC {
+    static func configure(type:ScreenType) -> MovieListVC {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "MovieList") as! MovieListVC
+        vc.screenType = type
+        return vc
+    }
+}
 
 

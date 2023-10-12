@@ -10,8 +10,8 @@ import UIKit
 
 extension SideBarVC {
     func toListVC(type:MovieListVC.ScreenType) {
-        AppModel.Present.movieList(self, type: type)
         DispatchQueue.main.async {
+            AppModel.Present.movieList(TabBarVC.shared!, type: type)
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
             if TabBarVC.shared?.sideBar?.isShowing ?? true {
                 TabBarVC.shared?.sideBar?.toggleSideBar(false, animated: true)
