@@ -24,12 +24,18 @@ class MovieVC: BaseVC {
     var favoritesPressedAction:(() -> ())?
     
     private var favoriteChanged = false
+    var frameHolder:CGRect?
+    var fromTransaction:AnimatedTransitioningManager?
     
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if !isPreview {
-            navController?.delegate = transitionManager
+            navController?.delegate = fromTransaction ?? transitionManager
+        }
+        
+        //didappeare was
+        if !isPreview {
+            navController?.setNavigationBarHidden(false, animated: true)
         }
     }
     
@@ -39,17 +45,13 @@ class MovieVC: BaseVC {
         if isPreview {
             self.view.layer.cornerRadius = Styles.buttonRadius3
             self.view.layer.masksToBounds = true
-        } else {
-            self.navigationController?.title = movie?.name ?? "Unknown movie"
-        }
+        } 
         movieImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imgPressed(_:))))
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if !isPreview {
-            navController?.setNavigationBarHidden(false, animated: true)
-        }
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -197,12 +199,13 @@ class MovieVC: BaseVC {
 }
 
 extension MovieVC {
-    static func present(isPreview:Bool = false, movie:Movie? = nil, favoritesPressedAction:(() -> ())? = nil, inVC:UIViewController) {
+    static func present(isPreview:Bool = false, movie:Movie? = nil, favoritesPressedAction:(() -> ())? = nil, inVC:UIViewController, fromTransaction:AnimatedTransitioningManager? = nil) {
         let vc = MovieVC.configure(movie: movie, favoritesPressedAction: favoritesPressedAction)
      //   let nav = UINavigationController(rootViewController: vc)
      //   nav.modalPresentationStyle = .formSheet
         //inVC.present(nav, animated: true)
-        (inVC.navigationController ?? TabBarVC.shared?.navigationController)?.pushViewController(vc, animated: true)
+        vc.fromTransaction = fromTransaction
+        (TabBarVC.shared?.navigationController)!.pushViewController(vc, animated: true)
     }
     
     static func configure(isPreview:Bool = false, movie:Movie? = nil, favoritesPressedAction:(() -> ())? = nil) -> MovieVC {

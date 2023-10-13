@@ -8,11 +8,13 @@
 import UIKit
 
 struct LocalDB {
+    static var dbHolder:DB?
     static var db:DB {
         get {
             return .init(dict: UserDefaults.standard.value(forKey: "LocalDB") as? [String:Any] ?? [:])
         }
         set {
+            LocalDB.dbHolder = newValue
             UserDefaults.standard.setValue(newValue.dict, forKey: "LocalDB")
         }
     }
@@ -177,18 +179,22 @@ struct LocalDB {
         }
         
         
-        func checkOldImgs() {
-            let db = movieImages
+        func checkOldImgs() {//tgrfedwregt //test
+           /* let db = movieImages
             var res: [String:[String:Any]] = [:]
             db.forEach { (key: String, value: [String : Any]) in
                 let dif = (value["date"] as? Date)?.differenceFromNow
                 let bigger = ((dif?.year ?? 0) + (dif?.month ?? 0) + (dif?.day ?? 0 >= 15 ? 1 : 0)) >= 1
                 if bigger {
                     res.removeValue(forKey: key)
+                } else {
+                    res.updateValue(value, forKey: key)
                 }
             }
 
             UserDefaults.standard.setValue(res, forKey: "movieImages")
+          //  LocalDB.db.movieImages = res
+*/
         }
     }
     

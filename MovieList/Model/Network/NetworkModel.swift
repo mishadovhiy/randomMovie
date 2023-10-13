@@ -53,8 +53,8 @@ class NetworkModel {
     }
 
     
-    func localImage(url:String) -> Data? {
-        let ud = LocalDB.db.movieImages
+    func localImage(url:String, fromHolder:Bool = false) -> Data? {
+        let ud = !fromHolder ? LocalDB.db.movieImages : (LocalDB.dbHolder?.movieImages ?? [:])
         if let result = ud[url] {
             return result["img"] as? Data
         } else {
@@ -228,6 +228,9 @@ class NetworkModel {
     
     
     private func performTask(method:Method, request:URLRequest, data:Data?, completion:@escaping (Data?, URLResponse?, Error?) -> Void) {
+        if Thread.isMainThread {
+            print("gerfwregtbrgfvd!!!")
+        }
         if method == .post {
             let dataTask = URLSession.shared.uploadTask(with: request, from: data, completionHandler: completion)
             dataTask.resume()

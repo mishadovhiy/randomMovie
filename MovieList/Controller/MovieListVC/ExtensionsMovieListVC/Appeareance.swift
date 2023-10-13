@@ -26,7 +26,9 @@ extension MovieListVC {
             
         case .favorite, .search:
             if type == .favorite {
-                loadFavorites()
+                DispatchQueue(label: "db", qos: .userInitiated).async {
+                    self.loadFavorites()
+                }
                 sectionTitle = "Favorites"
                 self.shakeButton.isHidden = false
             } else if type == .search {
@@ -63,6 +65,11 @@ extension MovieListVC {
         case .all:
             SideBarVC.shared?.getData()
             addRefreshControll()
+        case .favorite:
+            if updateData {
+                updateData = false
+                self.loadFavorites()
+            }
         default:
             break
         }
@@ -73,10 +80,13 @@ extension MovieListVC {
     
     
     func addRefreshControll() {
-        refresh = UIRefreshControl.init(frame: .init(x: 0, y: 0, width: self.view.frame.width, height: 30))
-        refresh?.tintColor = Text.Colors.white
-        collectionView.addSubview(refresh ?? UIRefreshControl.init(frame: .zero))
-        refresh?.addTarget(self, action: #selector(self.refresh(sender:)), for: .valueChanged)
+        if refresh == nil {
+            refresh = UIRefreshControl.init(frame: .init(x: 0, y: 0, width: self.view.frame.width, height: 30))
+            refresh?.tintColor = Text.Colors.white
+            collectionView.addSubview(refresh ?? UIRefreshControl.init(frame: .zero))
+            refresh?.addTarget(self, action: #selector(self.refresh(sender:)), for: .valueChanged)
+        }
+        
     }
     
     @objc func refresh(sender:UIRefreshControl) {

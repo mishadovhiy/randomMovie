@@ -83,7 +83,9 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
         switch indexPath.section {
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PreviewCollectionCell", for: indexPath) as! PreviewCollectionCell
-            self.selectedImageView = cell.movieImage
+            let cellRow = collectionView.cellForItem(at: indexPath) as! PreviewCollectionCell
+            selectedImageView = cellRow.movieImage
+            selectedImageView?.image = cellRow.movieImage.image
             selectedMovie = tableData[indexPath.row]
         case 2:
             if stopDownloading {
@@ -104,10 +106,12 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
     }
     
 
+    var collectionCellWidth:CGFloat {
+        return (collectionView.frame.width / 3) - 10
+    }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 1 {
-            let width:CGFloat = (collectionView.frame.width / 3) - 10
-            return .init(width: width, height: 180)
+            return .init(width: collectionCellWidth, height: 180)
         } else {
             return .init(width: collectionView.frame.width, height: indexPath.section == 0 ? 80 : 180)
         }

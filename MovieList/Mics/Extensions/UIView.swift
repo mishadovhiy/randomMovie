@@ -298,3 +298,11 @@ extension UIActivityIndicatorView {
         }
     }
 }
+
+extension UINavigationController {
+    func setBackButton(vc:UIViewController) {
+        self.navigationBar.backIndicatorImage = UIImage(systemName: "xmark")
+        self.navigationBar.backIndicatorTransitionMaskImage = UIImage(systemName: "xmark")
+        vc.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+}

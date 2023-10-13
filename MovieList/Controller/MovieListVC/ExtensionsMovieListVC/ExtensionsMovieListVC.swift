@@ -68,6 +68,9 @@ extension MovieListVC {
     }
     
     func loadFavorites() {
+        if Thread.isMainThread {
+            print("main errorr")
+        }
         let db = LocalDB.db
         var newTableData:[Movie] = []
         if selectedFolder == nil {

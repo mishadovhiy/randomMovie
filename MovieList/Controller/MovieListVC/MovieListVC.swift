@@ -10,7 +10,7 @@ import UIKit
 class MovieListVC: BaseVC {
     typealias TransitionComponents = (albumCoverImageView: UIImageView?, albumNameLabel: UILabel?)
     public var transitionComponents = TransitionComponents(albumCoverImageView: nil, albumNameLabel: nil)
-    private let transitionManager = AnimatedTransitioningManager(duration: 0.5)
+    private let transitionManager = AnimatedTransitioningManager(duration: 0.25)
     
     @IBOutlet weak var mainContentView: UIView!
     @IBOutlet weak var shakeButton: Button!
@@ -46,6 +46,7 @@ class MovieListVC: BaseVC {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewAppeare()
+        self.navigationController?.delegate = nil
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -88,10 +89,17 @@ class MovieListVC: BaseVC {
                     self.performSegue(withIdentifier: "toMovie", sender: self)
                     self.shakeButton.isEnabled = true
                 }*/
-                if let _ = selectedImageView {
-                    self.navigationController?.delegate = transitionManager
+               // if let _ = selectedImageView {
+                    (TabBarVC.shared?.navigationController)!.delegate = transitionManager
+             //   }
+                if selectedImageView == nil {
+                    selectedImageView = .init()
+                    selectedImageView?.frame = .init(origin: shakeButton.frame.origin, size: .init(width: collectionCellWidth, height: 180))
+                    selectedImageView?.image = .init(data: NetworkModel().localImage(url: newValue?.imageURL ?? "", fromHolder: true) ?? .init())
                 }
-                MovieVC.present(movie: newValue, favoritesPressedAction: screenType == .favorite ? loadFavorites : nil, inVC: self)
+                MovieVC.present(movie: newValue, favoritesPressedAction: screenType == .favorite ? {
+                    self.updateData = true
+                } : nil, inVC: self, fromTransaction: transitionManager)
                 self.shakeButton.isEnabled = true
                 (self.shakeButton as! LoadingButton).touch(false)
             }
@@ -126,6 +134,7 @@ class MovieListVC: BaseVC {
 
 
     @IBAction func randomPressed(_ sender: Any) {
+        selectedImageView = nil
         getRandom()
     }
     

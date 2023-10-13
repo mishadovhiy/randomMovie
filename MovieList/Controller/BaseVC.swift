@@ -16,7 +16,7 @@ class BaseVC: UIViewController {
     var apiError:String?
     var appeared:Bool = false
     var dismissedAction:(()->())?
-    
+    var updateData:Bool = false
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if !sbvsLoaded {
@@ -28,6 +28,7 @@ class BaseVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.setBackButton(vc:self)
         /*//test message
         if count > 1 {
             count = 0
