@@ -142,7 +142,7 @@ private extension AnimatedTransitioningManager {
             toView.alpha = 1
             fromView.alpha = 0
         })
-        let animator = UIViewPropertyAnimator(duration: duration, curve: .easeOut) {
+        let animator = UIViewPropertyAnimator(duration: duration, curve: .easeInOut) {
             fromImageView.frame = toFrame1
             fromImageView.frame.size = toAnimated.frame.size
             fromImageView.layer.cornerRadius = 0
@@ -151,7 +151,15 @@ private extension AnimatedTransitioningManager {
         }
         
         animator.addCompletion { position in
-            
+          /*  UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, animations: {
+                fromImageView.frame.size = toAnimated.frame.size
+                snapshotContentView.alpha = 0
+            }, completion: {_ in
+                toAnimated.alpha = 1
+                fromImageView.alpha = 0
+                fromImageView.removeFromSuperview()
+                snapshotContentView.removeFromSuperview()
+            })*/
             UIView.animate(withDuration: 0.22, animations: {
                 fromImageView.frame.size = toAnimated.frame.size
                 snapshotContentView.alpha = 0
@@ -160,7 +168,6 @@ private extension AnimatedTransitioningManager {
                 fromImageView.alpha = 0
                 fromImageView.removeFromSuperview()
                 snapshotContentView.removeFromSuperview()
-                
             })
             transitionContext.completeTransition(position == .end)
             

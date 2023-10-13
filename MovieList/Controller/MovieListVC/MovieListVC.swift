@@ -92,7 +92,7 @@ class MovieListVC: BaseVC {
                 (TabBarVC.shared?.navigationController)!.delegate = transitionManager
                 if selectedImageView == nil {
                     selectedImageView = .init()
-                    selectedImageView?.frame = .init(origin: .init(x: shakeButton.frame.minX, y: shakeButton.frame.minY - 40), size: .init(width: collectionCellWidth, height: 180))
+                    selectedImageView?.frame = .init(origin: .init(x: view.frame.width, y: shakeButton.frame.minY - 40), size: .init(width: collectionCellWidth, height: 180))
                     selectedImageView?.image = .init(data: NetworkModel().localImage(url: newValue?.imageURL ?? "", fromHolder: true) ?? .init())
                 }
                 MovieVC.present(movie: newValue, favoritesPressedAction: screenType == .favorite ? {
