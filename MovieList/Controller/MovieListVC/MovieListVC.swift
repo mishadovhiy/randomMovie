@@ -10,7 +10,7 @@ import UIKit
 class MovieListVC: BaseVC {
     typealias TransitionComponents = (albumCoverImageView: UIImageView?, albumNameLabel: UILabel?)
     public var transitionComponents = TransitionComponents(albumCoverImageView: nil, albumNameLabel: nil)
-    private let transitionManager = AnimatedTransitioningManager(duration: 0.25)
+    private let transitionManager = AnimatedTransitioningManager(duration: 0.3)
     
     @IBOutlet weak var mainContentView: UIView!
     @IBOutlet weak var shakeButton: Button!
@@ -52,6 +52,10 @@ class MovieListVC: BaseVC {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         (shakeButton as! LoadingButton).touch(false)
+        if screenType == .favorite {
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+
+        }
     }
     
     override func firstLayoutSubviews() {
@@ -85,16 +89,10 @@ class MovieListVC: BaseVC {
         set {
             _selectedMovie = newValue
             if newValue != nil {
-               /* DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "toMovie", sender: self)
-                    self.shakeButton.isEnabled = true
-                }*/
-               // if let _ = selectedImageView {
-                    (TabBarVC.shared?.navigationController)!.delegate = transitionManager
-             //   }
+                (TabBarVC.shared?.navigationController)!.delegate = transitionManager
                 if selectedImageView == nil {
                     selectedImageView = .init()
-                    selectedImageView?.frame = .init(origin: shakeButton.frame.origin, size: .init(width: collectionCellWidth, height: 180))
+                    selectedImageView?.frame = .init(origin: .init(x: shakeButton.frame.minX, y: shakeButton.frame.minY - 40), size: .init(width: collectionCellWidth, height: 180))
                     selectedImageView?.image = .init(data: NetworkModel().localImage(url: newValue?.imageURL ?? "", fromHolder: true) ?? .init())
                 }
                 MovieVC.present(movie: newValue, favoritesPressedAction: screenType == .favorite ? {
@@ -151,6 +149,39 @@ class MovieListVC: BaseVC {
 
 }
 
+//scroll view
+extension MovieListVC {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let newPosition = scrollView.contentOffset.y
+        if newPosition <= 5 {
+            toggleShakeButton(hide: false)
+        } else {
+            let scrollTop = newPosition > previousScrollPosition
+            if scrollTop {
+                toggleShakeButton(hide: scrollTop)
+                
+            } else {
+                if newPosition < (previousScrollPosition + 100) {
+                    toggleShakeButton(hide: scrollTop)
+                }
+            }
+        }
+        
+    }
+    
+
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let newPosition = scrollView.contentOffset.y
+        previousScrollPosition = newPosition
+    }
+    
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let newPosition = scrollView.contentOffset.y
+        previousScrollPosition = newPosition
+    }
+}
 
 extension MovieListVC {
     static func configure(type:ScreenType) -> MovieListVC {

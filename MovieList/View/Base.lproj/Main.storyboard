@@ -188,31 +188,6 @@ Resume</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xvl-kn-2Cy" customClass="LoadingButton" customModule="MovieList" customModuleProvider="target">
-                                <rect key="frame" x="254" y="94" width="156" height="40"/>
-                                <color key="backgroundColor" name="PurpureColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Acm-lt-CZD"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Random movie">
-                                    <color key="titleColor" name="WhiteColor"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="-1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpasity">
-                                        <real key="value" value="-1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="needAI" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="randomPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cfJ-s6-KSX"/>
-                                </connections>
-                            </button>
                             <searchBar hidden="YES" contentMode="redraw" barStyle="blackTranslucent" searchBarStyle="minimal" text="" placeholder="Search by movie name" translatesAutoresizingMaskIntoConstraints="NO" id="Oa4-wk-db0">
                                 <rect key="frame" x="0.0" y="92" width="414" height="56"/>
                                 <color key="backgroundColor" name="SecondaryBacgroundColor"/>
@@ -235,14 +210,41 @@ Resume</string>
                             <constraint firstItem="NOV-RQ-7DQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-5" id="Gi4-ht-dg7"/>
                             <constraint firstItem="hHY-LZ-u9T" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="VcZ-h7-w14"/>
                             <constraint firstItem="Oa4-wk-db0" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="aCM-3K-gJg"/>
-                            <constraint firstItem="xvl-kn-2Cy" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="2" id="ioQ-Fw-E4Q"/>
                             <constraint firstAttribute="trailing" secondItem="hHY-LZ-u9T" secondAttribute="trailing" id="ukO-uk-Nr6"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xvl-kn-2Cy" secondAttribute="trailing" constant="4" id="wbM-iS-O7t"/>
                             <constraint firstAttribute="bottom" secondItem="hHY-LZ-u9T" secondAttribute="bottom" id="zi1-x8-y2i"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="3ub-lg-8ht"/>
-                    <navigationItem key="navigationItem" id="MuJ-4d-jb0"/>
+                    <navigationItem key="navigationItem" id="MuJ-4d-jb0">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="8tF-kP-rgV">
+                            <button key="customView" hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xvl-kn-2Cy" customClass="LoadingButton" customModule="MovieList" customModuleProvider="target">
+                                <rect key="frame" x="254" y="94" width="156" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" name="PurpureColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="Acm-lt-CZD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Random movie">
+                                    <color key="titleColor" name="WhiteColor"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="-1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpasity">
+                                        <real key="value" value="-1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="needAI" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="randomPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cfJ-s6-KSX"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="6Cv-0e-yXA" id="KH5-g5-N6Q"/>
                         <outlet property="mainContentView" destination="hHY-LZ-u9T" id="zwg-qi-tyR"/>
@@ -411,7 +413,7 @@ Resume</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VEg-PN-xfp" customClass="Label" customModule="MovieList" customModuleProvider="target">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="VEg-PN-xfp" customClass="Label" customModule="MovieList" customModuleProvider="target">
                                 <rect key="frame" x="10" y="107" width="66" height="32.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="27"/>
                                 <color key="textColor" name="WhiteColor"/>
@@ -483,7 +485,7 @@ Resume</string>
                     </view>
                     <navigationItem key="navigationItem" id="pUh-v0-TNi">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="l40-ed-U1n">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="m9i-ab-phE" customClass="Button" customModule="MovieList" customModuleProvider="target">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="m9i-ab-phE" customClass="Button" customModule="MovieList" customModuleProvider="target">
                                 <rect key="frame" x="344" y="0.0" width="50" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.061751218186211321" green="0.061751218186211321" blue="0.061751218186211321" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -830,7 +832,7 @@ Resume</string>
             <size key="intrinsicContentSize" width="28.5" height="25"/>
         </designable>
         <designable name="xvl-kn-2Cy">
-            <size key="intrinsicContentSize" width="156" height="21"/>
+            <size key="intrinsicContentSize" width="144" height="18"/>
         </designable>
     </designables>
     <resources>

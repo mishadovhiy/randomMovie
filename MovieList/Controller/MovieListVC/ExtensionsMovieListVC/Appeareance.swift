@@ -57,18 +57,25 @@ extension MovieListVC {
 
             })
         }
+        if screenType == .favorite {
+            self.navigationController?.setNavigationBarHidden(hide, animated: true)
+        }
     }
     
     
     func viewAppeare() {
         switch screenType {
         case .all:
-            SideBarVC.shared?.getData()
+            DispatchQueue(label: "db", qos: .userInitiated).async {
+                SideBarVC.shared?.getData()
+            }
             addRefreshControll()
         case .favorite:
             if updateData {
                 updateData = false
-                self.loadFavorites()
+                DispatchQueue(label: "db", qos: .userInitiated).async {
+                    self.loadFavorites()
+                }
             }
         default:
             break
@@ -101,36 +108,4 @@ extension MovieListVC {
 }
 
 
-//scroll view
-extension MovieListVC {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let newPosition = scrollView.contentOffset.y
-        if newPosition <= 5 {
-            toggleShakeButton(hide: false)
-        } else {
-            let scrollTop = newPosition > previousScrollPosition
-            if scrollTop {
-                toggleShakeButton(hide: scrollTop)
-                
-            } else {
-                if newPosition < (previousScrollPosition + 100) {
-                    toggleShakeButton(hide: scrollTop)
-                }
-            }
-        }
-        
-    }
-    
 
-    
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let newPosition = scrollView.contentOffset.y
-        previousScrollPosition = newPosition
-    }
-    
-
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let newPosition = scrollView.contentOffset.y
-        previousScrollPosition = newPosition
-    }
-}

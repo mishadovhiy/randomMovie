@@ -13,20 +13,21 @@ extension MovieListVC {
             return
         }
         loading = true
-        let dbPage = LocalDB.db.page
-        let bigger = ((dbPage > (page ?? 0)) && (page != nil)) ? false : true
-        if !bigger {
-            self.tableData = []
-        }
-
-        let calcPage = page ?? dbPage
-        let loadingPage = calcPage <= 0 || calcPage >= (self.load.maxPage + 10) ? 0 : calcPage
         
-        print(dbPage, "pagepagepagepagepage")
-        if firstDispleyingPage == nil || dbPage == 0 {
-            firstDispleyingPage = dbPage
-        }
         DispatchQueue.init(label: "download", qos: .userInitiated).async {
+            let dbPage = LocalDB.db.page
+            let bigger = ((dbPage > (page ?? 0)) && (page != nil)) ? false : true
+            if !bigger {
+                self.tableData = []
+            }
+
+            let calcPage = page ?? dbPage
+            let loadingPage = calcPage <= 0 || calcPage >= (self.load.maxPage + 10) ? 0 : calcPage
+            
+            print(dbPage, "pagepagepagepagepage")
+            if self.firstDispleyingPage == nil || dbPage == 0 {
+                self.firstDispleyingPage = dbPage
+            }
             if self.tableData.count > 1000 {
                 self.tableData.removeSubrange(0..<850)
             }
@@ -68,9 +69,6 @@ extension MovieListVC {
     }
     
     func loadFavorites() {
-        if Thread.isMainThread {
-            print("main errorr")
-        }
         let db = LocalDB.db
         var newTableData:[Movie] = []
         if selectedFolder == nil {

@@ -11,9 +11,15 @@ struct LocalDB {
     static var dbHolder:DB?
     static var db:DB {
         get {
+            if Thread.isMainThread {
+                print("isMainThreaderror")
+            }
             return .init(dict: UserDefaults.standard.value(forKey: "LocalDB") as? [String:Any] ?? [:])
         }
         set {
+            if Thread.isMainThread {
+                print("isMainThreaderror")
+            }
             LocalDB.dbHolder = newValue
             UserDefaults.standard.setValue(newValue.dict, forKey: "LocalDB")
         }
@@ -95,7 +101,7 @@ struct LocalDB {
             if let movie = movie {
                 var movieFav:UIColor = Text.Colors.darkGrey
                 var isFavorite = false
-                DispatchQueue(label: "db", qos: .userInitiated).async {
+             //   DispatchQueue(label: "db", qos: .userInitiated).async {
                     if let _ = LocalDB.db.favoriteMovieID[movie.imdbid], canRemove {
                         LocalDB.db.favoriteMovieID.removeValue(forKey: movie.imdbid)
                     } else {
@@ -111,7 +117,7 @@ struct LocalDB {
                     }
                     completion?(isFavorite)
                 }
-            }
+         //   }
         }
         
         var favoriteMovies: [Movie] {
@@ -179,8 +185,8 @@ struct LocalDB {
         }
         
         
-        func checkOldImgs() {//tgrfedwregt //test
-           /* let db = movieImages
+        func checkOldImgs() {
+            let db = movieImages
             var res: [String:[String:Any]] = [:]
             db.forEach { (key: String, value: [String : Any]) in
                 let dif = (value["date"] as? Date)?.differenceFromNow
@@ -192,9 +198,8 @@ struct LocalDB {
                 }
             }
 
-            UserDefaults.standard.setValue(res, forKey: "movieImages")
-          //  LocalDB.db.movieImages = res
-*/
+            LocalDB.db.movieImages = res
+
         }
     }
     

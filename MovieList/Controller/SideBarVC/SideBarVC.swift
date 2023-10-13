@@ -18,7 +18,9 @@ class SideBarVC: UIViewController {
         SideBarVC.shared = self
         tableView.delegate = self
         tableView.dataSource = self
-        getData()
+        DispatchQueue(label: "db", qos: .userInitiated).async {
+            self.getData()
+        }
     }
     
 
@@ -76,35 +78,40 @@ class SideBarVC: UIViewController {
 extension SideBarVC {
     func newImdbRange(_ newValue:(Double, Double)) {
         changed = true
-        let new:LocalDB.Filter.Rating = .init(from: newValue.0, to: newValue.1)
-        let old = LocalDB.db.filter.imdbRating
-        if newRating(new: new, old: old, decimalsCount: 1) {
-            LocalDB.db.filter.imdbRating = new
+        DispatchQueue(label: "db", qos: .userInitiated).async {
+            let new:LocalDB.Filter.Rating = .init(from: newValue.0, to: newValue.1)
+            let old = LocalDB.db.filter.imdbRating
+            if self.newRating(new: new, old: old, decimalsCount: 1) {
+                LocalDB.db.filter.imdbRating = new
+            }
         }
     }
     
     func newYearRange(_ newValue:(Double, Double)) {
         changed = true
-        let new:LocalDB.Filter.Rating = .init(from: newValue.0, to: newValue.1)
-        let old = LocalDB.db.filter.yearRating
-        if newRating(new: new, old: old, decimalsCount: 0) {
-            LocalDB.db.filter.yearRating = new
+        DispatchQueue(label: "db", qos: .userInitiated).async {
+            let new:LocalDB.Filter.Rating = .init(from: newValue.0, to: newValue.1)
+            let old = LocalDB.db.filter.yearRating
+            if self.newRating(new: new, old: old, decimalsCount: 0) {
+                LocalDB.db.filter.yearRating = new
+            }
         }
     }
     
     func genreSelected(_ at:Int) {
         changed = true
         print(#function, ": ", at)
-        let genres = LocalDB.db.filter.allGenres
-        if #available(iOS 13.0, *) {
-            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-        } else {
-            // Fallback on earlier versions
+        DispatchQueue(label: "db", qos: .userInitiated).async {
+            let genres = LocalDB.db.filter.allGenres
+            
+            let igoneredList = LocalDB.db.filter.ignoredGenres
+            let ignored = igoneredList[genres[at]] ?? false
+            LocalDB.db.filter.ignoredGenres.updateValue(!ignored, forKey: genres[at])
+            self.getData()
+            DispatchQueue.main.async {
+                self.vibrate(style: .soft)
+            }
         }
-        let igoneredList = LocalDB.db.filter.ignoredGenres
-        let ignored = igoneredList[genres[at]] ?? false
-        LocalDB.db.filter.ignoredGenres.updateValue(!ignored, forKey: genres[at])
-        getData()
     }
     
     

@@ -11,7 +11,7 @@ class MovieVC: BaseVC {
 
     typealias TransitionComponents = (albumCoverImageView: UIImageView?, albumNameLabel: UILabel?)
     public var transitionComponents = TransitionComponents(albumCoverImageView: nil, albumNameLabel: nil)
-    private let transitionManager = AnimatedTransitioningManager(duration: 0.3)
+    private let transitionManager = AnimatedTransitioningManager(duration: 0.27)
     
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -84,10 +84,12 @@ class MovieVC: BaseVC {
             textView.text = movie.about
             additionalLabel.text = tempDescr(movie)
             nameLabel.text = movie.name
-            if let _ = LocalDB.db.favoriteMovieID[movie.imdbid] {
-                self.heartButton.tintColor = .red
-            }
             DispatchQueue.init(label: "load", qos: .userInitiated).async {
+                if let _ = LocalDB.db.favoriteMovieID[movie.imdbid] {
+                    DispatchQueue.main.async {
+                        self.heartButton.tintColor = .red
+                    }
+                }
                 load.image(for: movie.imageURL, completion: { data in
                     if let imageData = data,
                        let image = UIImage(data: imageData) {
@@ -120,7 +122,9 @@ class MovieVC: BaseVC {
     
     @IBAction func favoritesPressed(_ sender: UIButton) {
         favoriteChanged = true
-        LocalDB.db.favoritePressed(button: sender, movie: movie)
+        DispatchQueue(label: "db", qos: .userInitiated).async {
+            LocalDB.db.favoritePressed(button: sender, movie: self.movie)
+        }
     }
     
     

@@ -9,9 +9,6 @@ import UIKit
 
 class NetworkModel {
 
-    ///todo:
-    //:[int:int]
-    //key - top
     var maxPage = 490
     
     func getMovies(page:Int, completion:@escaping([Movie], Bool, Int) -> ()) {
@@ -53,7 +50,7 @@ class NetworkModel {
     }
 
     
-    func localImage(url:String, fromHolder:Bool = false) -> Data? {
+    func localImage(url:String, fromHolder:Bool = true) -> Data? {
         let ud = !fromHolder ? LocalDB.db.movieImages : (LocalDB.dbHolder?.movieImages ?? [:])
         if let result = ud[url] {
             return result["img"] as? Data
