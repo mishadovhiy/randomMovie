@@ -11,6 +11,7 @@ import MessageViewLibrary
 
 struct AppModel {
     static var mySqlMovieList:Data?
+    static var appBundle:String = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
 }
 
 

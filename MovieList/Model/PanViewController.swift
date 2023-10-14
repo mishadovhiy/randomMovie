@@ -10,10 +10,9 @@ import UIKit
 class PanViewController {
     
     private let vc:UIViewController
-    
     var delegate:PanViewControllerProtocol?
     private var properies:ScrollProperties = .init()
-    
+
     init(vc:UIViewController) {
         self.vc = vc
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(pinched(_:)))
@@ -23,7 +22,6 @@ class PanViewController {
     }
        
     deinit {
-        print("PanViewdeinitdeinitdeinitdeinit")
         let gesture = vc.view.gestureRecognizers?.first(where: {$0.name == "PanViewControllerUIPanGestureRecognizer"})
         gesture?.delegate = nil
         gesture?.isEnabled = false
@@ -36,37 +34,31 @@ class PanViewController {
             properies.scrolling = (finger.y  - height) < 80
             properies.wasShowing = properies.vcShowing
             properies.startScrollingPosition = finger.y
-          //  vc.vibrate(style: .soft)
-            properies.isHidding = false
+         //   properies.isHidding = false
             touches(true)
         }
         let currentPosition = self.vc.view.frame.minY
         let toHide:CGFloat = properies.wasShowing ? 200 : 80
         let isHidding = currentPosition > toHide ? false : true
+        var stateChanged = false
         if isHidding != properies.isHidding {
             properies.isHidding = isHidding
-            vc.vibrate(style: .soft)
+            stateChanged = true
         }
         if properies.scrolling || properies.vcShowing {
             if sender.state == .began || sender.state == .changed {
-                
                 let newPosition = (finger.y - height) >= 0 ? 0 : (finger.y - height)
                 let newResultPosition = (newPosition + properies.toHideVC) - properies.startScrollingPosition
                 let percentCalc = (newResultPosition / 2) / properies.toHideVC
                 let percent = percentCalc <= 0 ? 0 : (percentCalc >= 1 ? 1 : percentCalc)
-                print(finger.y, " yrtgerfegtr")
-                print(newPosition, " yhtrgefgrthy ", percent)
-                print(height, " rbegrfwe")
-                print("egrfwdw ", newResultPosition)
+                print(newPosition, " pinched ", percent)
                 self.vc.view.layer.cornerRadius = 140 * percent
                 self.vc.view.layer.move(.top, value: newResultPosition > 0 ? newResultPosition : (newResultPosition / 15))
+                if stateChanged && percent >= 0.1 {
+                    vc.vibrate(style: .soft)
+                }
             } else if sender.state == .ended || sender.state == .cancelled {
-                
-                print("gerfwdwef")
-                print(currentPosition)
-                print(finger.x)
-                print("gbrvfcd")
-                properies.isHidding = true
+                properies.isHidding = false
                 touches(false)
                 toggleView(show: isHidding, animated: true)
                 
@@ -75,7 +67,7 @@ class PanViewController {
     }
     
 
-    func toggleView(show:Bool, animated:Bool = true, completion:((_ show:Bool)->())? = nil) {
+    private func toggleView(show:Bool, animated:Bool = true, completion:((_ show:Bool)->())? = nil) {
         
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: .allowUserInteraction, animations: {
             self.vc.view.layer.move(.top, value: show ? 0 : self.properies.toHideVC)

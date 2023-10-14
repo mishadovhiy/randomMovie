@@ -203,6 +203,16 @@ struct LocalDB {
         }
         
         
+        func checkDBUpdated() -> Bool {
+            if let oldDB = UserDefaults.standard.value(forKey: "LocalDB") as? [String:Any] {
+                UserDefaults.standard.removeObject(forKey: "LocalDB")
+                LocalDB.db = .init(dict: oldDB)
+                return false
+            }
+            return true
+        }
+        
+        
         func checkOldImgs() {
             let db = movieImages
             var res: [String:[String:Any]] = [:]
