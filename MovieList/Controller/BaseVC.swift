@@ -15,8 +15,10 @@ class BaseVC: UIViewController {
     private var sbvsLoaded = false
     var apiError:String?
     var appeared:Bool = false
-    var dismissedAction:(()->())?
     var updateData:Bool = false
+    
+    var popupVCpanGesture:PanViewController?
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if !sbvsLoaded {
@@ -45,8 +47,10 @@ class BaseVC: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        dismissedAction?()
+
+        
     }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         

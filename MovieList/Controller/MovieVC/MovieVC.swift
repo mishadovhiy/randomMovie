@@ -29,6 +29,7 @@ class MovieVC: BaseVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.popupVCpanGesture = .init(vc: self)
         if !isPreview {
             navController?.delegate = fromTransaction ?? transitionManager
         }
@@ -41,6 +42,7 @@ class MovieVC: BaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        textView.isScrollEnabled = false
         loadData()
         if isPreview {
             self.view.layer.cornerRadius = Styles.buttonRadius3

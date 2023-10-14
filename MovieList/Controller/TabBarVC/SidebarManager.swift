@@ -72,11 +72,18 @@ class SidebarManager {
         return containerView?.frame.width ?? 0
     }
     
+    var isHidding:Bool = false
     @objc private func pinched(_ sender:UIPanGestureRecognizer) {
         let finger = sender.location(in: superView.view)
         if sender.state == .began {
             scrolling = (finger.x  - width) < 80
             wasShowing = isShowing
+            
+        }
+        let toHide:CGFloat = wasShowing ? 200 : 80
+        let isHidding = finger.x > toHide ? true : false
+        if isHidding != self.isHidding {
+            self.isHidding = isHidding
             superView.vibrate(style: .soft)
         }
         if scrolling || isShowing {
@@ -90,8 +97,7 @@ class SidebarManager {
 
             } else {
                 if sender.state == .ended || sender.state == .cancelled {
-                    let toHide:CGFloat = wasShowing ? 200 : 80
-                    toggleSideBar(finger.x > toHide ? true : false, animated: true)
+                    toggleSideBar(isHidding, animated: true)
                 }
             }
         }

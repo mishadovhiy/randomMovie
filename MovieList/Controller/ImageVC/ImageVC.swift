@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ImageVC: UIViewController {
+class ImageVC: BaseVC {
 
     @IBOutlet weak var imgView: UIImageView!
     var img:UIImage?
@@ -18,6 +18,7 @@ class ImageVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.popupVCpanGesture = .init(vc: self)
         self.imgView.image = img
         
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismiss(_:)))

@@ -9,8 +9,9 @@ import UIKit
 
 extension UINavigationController {
     func setBackButton(vc:UIViewController) {
-        self.navigationBar.backIndicatorImage = UIImage(systemName: "xmark")?.withTintColor(.white, renderingMode: .alwaysOriginal)
-        self.navigationBar.backIndicatorTransitionMaskImage = UIImage(systemName: "xmark")?.withTintColor(.white, renderingMode: .alwaysOriginal)
+        let color = #colorLiteral(red: 0.9100000262, green: 0.9100000262, blue: 0.9100000262, alpha: 1).withAlphaComponent(0.3)
+        self.navigationBar.backIndicatorImage = UIImage(systemName: "xmark")?.withTintColor(color, renderingMode: .alwaysOriginal)
+        self.navigationBar.backIndicatorTransitionMaskImage = UIImage(systemName: "xmark")?.withTintColor(color, renderingMode: .alwaysOriginal)
         vc.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.navigationBar.isTranslucent = true
         removeDefaultLine()
