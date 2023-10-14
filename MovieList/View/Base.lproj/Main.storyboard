@@ -218,7 +218,6 @@ Resume</string>
                     <navigationItem key="navigationItem" id="MuJ-4d-jb0">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="8tF-kP-rgV">
                             <button key="customView" hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xvl-kn-2Cy" customClass="LoadingButton" customModule="MovieList" customModuleProvider="target">
-                                <rect key="frame" x="254" y="94" width="156" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" name="PurpureColor"/>
                                 <constraints>
@@ -449,6 +448,28 @@ Resume</string>
                                     <constraint firstAttribute="leading" secondItem="Z2M-Ax-gXL" secondAttribute="leading" id="H2n-K6-dyd"/>
                                 </constraints>
                             </stackView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6pP-GM-IuW" customClass="Button" customModule="MovieList" customModuleProvider="target">
+                                <rect key="frame" x="344" y="98.5" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.061751218189999998" green="0.061751218189999998" blue="0.061751218189999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="UuW-ix-mt8"/>
+                                    <constraint firstAttribute="width" constant="50" id="mAa-81-cdb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="imdb">
+                                    <color key="titleColor" systemColor="tintColor"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="9"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpasity">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="tintBackground" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJU-BO-GEC" userLabel="heart" customClass="HeartButton" customModule="MovieList" customModuleProvider="target">
                                 <rect key="frame" x="80" y="305.5" width="28.5" height="24"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -481,11 +502,13 @@ Resume</string>
                             <constraint firstAttribute="trailing" secondItem="6Cu-tL-s30" secondAttribute="trailing" constant="10" id="fLD-cj-Mp0"/>
                             <constraint firstItem="6Cu-tL-s30" firstAttribute="top" secondItem="VEg-PN-xfp" secondAttribute="bottom" constant="10" id="joT-VH-SuS"/>
                             <constraint firstItem="NJU-BO-GEC" firstAttribute="bottom" secondItem="6Cu-tL-s30" secondAttribute="bottom" id="n92-71-DLH"/>
+                            <constraint firstItem="6pP-GM-IuW" firstAttribute="centerY" secondItem="VEg-PN-xfp" secondAttribute="centerY" id="yHj-3V-0Mg"/>
+                            <constraint firstItem="EWZ-rG-0I4" firstAttribute="trailing" secondItem="6pP-GM-IuW" secondAttribute="trailing" constant="20" id="zpI-jh-2Hj"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pUh-v0-TNi">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="l40-ed-U1n">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="m9i-ab-phE" customClass="Button" customModule="MovieList" customModuleProvider="target">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="m9i-ab-phE" customClass="Button" customModule="MovieList" customModuleProvider="target">
                                 <rect key="frame" x="344" y="0.0" width="50" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.061751218186211321" green="0.061751218186211321" blue="0.061751218186211321" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -804,6 +827,9 @@ Resume</string>
         </scene>
     </scenes>
     <designables>
+        <designable name="6pP-GM-IuW">
+            <size key="intrinsicContentSize" width="35" height="30"/>
+        </designable>
         <designable name="6vo-Jr-PrN">
             <size key="intrinsicContentSize" width="31" height="14.5"/>
         </designable>

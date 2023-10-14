@@ -54,6 +54,22 @@ extension MovieListVC {
         }
         LocalDB.db.page = newPage
         self.loading = false
+     //   var newImages:[[String:Any]] = []
+     /*   var all = LocalDB.db.movieImages
+
+        for movie in movies {
+            self.load.image(for: movie.imageURL) { data in
+                movie.image = data
+                self.tableData.append(movie)
+              //  newImages.append()
+                if let data = data {
+                    all.updateValue(NetworkModel().newImageData(data), forKey: movie.imageURL)
+
+                }
+            }
+        }
+
+        LocalDB.db.movieImages = all*/
         for movie in movies {
             self.load.image(for: movie.imageURL) { data in
                 movie.image = data

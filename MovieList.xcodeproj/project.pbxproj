@@ -26,6 +26,12 @@
 		8D722080282874F8004C5C6C /* Appeareance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D72207F282874F8004C5C6C /* Appeareance.swift */; };
 		8D72208228287822004C5C6C /* ExtensionsMovieListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D72208128287822004C5C6C /* ExtensionsMovieListVC.swift */; };
 		8D72208428287A34004C5C6C /* UIActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D72208328287A34004C5C6C /* UIActivityIndicatorView.swift */; };
+		8D7CE5BF2AD995C6007F19C0 /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7CE5BE2AD995C6007F19C0 /* UINavigationController.swift */; };
+		8D7CE5C12AD995F7007F19C0 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7CE5C02AD995F7007F19C0 /* UIColor.swift */; };
+		8D7CE5C32AD99609007F19C0 /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7CE5C22AD99609007F19C0 /* CALayer.swift */; };
+		8D7CE5C52AD9964E007F19C0 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7CE5C42AD9964E007F19C0 /* UITableView.swift */; };
+		8D7CE5C72AD99661007F19C0 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7CE5C62AD99661007F19C0 /* Data.swift */; };
+		8D7CE5C92AD99677007F19C0 /* NSArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7CE5C82AD99677007F19C0 /* NSArray.swift */; };
 		8D7E3E7A281F8CF90094F05B /* PaggingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E3E79281F8CF90094F05B /* PaggingCell.swift */; };
 		8D7E3E7C282000160094F05B /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E3E7B282000160094F05B /* Movie.swift */; };
 		8D7E3E7F282041AB0094F05B /* Unparce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E3E7E282041AB0094F05B /* Unparce.swift */; };
@@ -51,6 +57,8 @@
 		8DB7C45C284EBC4D001DBFB7 /* AlertViewLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 8DB7C45B284EBC4D001DBFB7 /* AlertViewLibrary */; };
 		8DBD01EE2ACE2AC200DD1264 /* MovieActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBD01ED2ACE2AC200DD1264 /* MovieActionView.swift */; };
 		8DBD01F12ACE2AD900DD1264 /* ImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBD01F02ACE2AD900DD1264 /* ImageVC.swift */; };
+		8DC9B64D2AD9E44B001C6125 /* LocalDataBase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8DC9B64B2AD9E44A001C6125 /* LocalDataBase.xcdatamodeld */; };
+		8DC9B64F2AD9E5B8001C6125 /* CoreDataDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC9B64E2AD9E5B8001C6125 /* CoreDataDBManager.swift */; };
 		8DD4634D2821206F008EB85A /* PreviewCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD4634C2821206F008EB85A /* PreviewCollectionCell.swift */; };
 		8DD4634F28212084008EB85A /* LoadingCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD4634E28212084008EB85A /* LoadingCollectionCell.swift */; };
 		8DD4635228212385008EB85A /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD4635128212385008EB85A /* View.swift */; };
@@ -116,6 +124,12 @@
 		8D72207F282874F8004C5C6C /* Appeareance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appeareance.swift; sourceTree = "<group>"; };
 		8D72208128287822004C5C6C /* ExtensionsMovieListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsMovieListVC.swift; sourceTree = "<group>"; };
 		8D72208328287A34004C5C6C /* UIActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIActivityIndicatorView.swift; sourceTree = "<group>"; };
+		8D7CE5BE2AD995C6007F19C0 /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
+		8D7CE5C02AD995F7007F19C0 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		8D7CE5C22AD99609007F19C0 /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
+		8D7CE5C42AD9964E007F19C0 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
+		8D7CE5C62AD99661007F19C0 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		8D7CE5C82AD99677007F19C0 /* NSArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSArray.swift; sourceTree = "<group>"; };
 		8D7E3E79281F8CF90094F05B /* PaggingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaggingCell.swift; sourceTree = "<group>"; };
 		8D7E3E7B282000160094F05B /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		8D7E3E7E282041AB0094F05B /* Unparce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unparce.swift; sourceTree = "<group>"; };
@@ -140,6 +154,8 @@
 		8DB0656A2ACCB34B00DE10CC /* SidebarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarManager.swift; sourceTree = "<group>"; };
 		8DBD01ED2ACE2AC200DD1264 /* MovieActionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieActionView.swift; sourceTree = "<group>"; };
 		8DBD01F02ACE2AD900DD1264 /* ImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageVC.swift; sourceTree = "<group>"; };
+		8DC9B64C2AD9E44A001C6125 /* LocalDataBase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LocalDataBase.xcdatamodel; sourceTree = "<group>"; };
+		8DC9B64E2AD9E5B8001C6125 /* CoreDataDBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataDBManager.swift; sourceTree = "<group>"; };
 		8DD4634C2821206F008EB85A /* PreviewCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewCollectionCell.swift; sourceTree = "<group>"; };
 		8DD4634E28212084008EB85A /* LoadingCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCollectionCell.swift; sourceTree = "<group>"; };
 		8DD4635128212385008EB85A /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
@@ -203,6 +219,7 @@
 		8D1191F12998627600D381F6 /* DB */ = {
 			isa = PBXGroup;
 			children = (
+				8DC9B64E2AD9E5B8001C6125 /* CoreDataDBManager.swift */,
 				8D47531C2824B2A20061970C /* LocalDB.swift */,
 				8D1191EF2998626B00D381F6 /* Filter.swift */,
 			);
@@ -272,11 +289,17 @@
 			isa = PBXGroup;
 			children = (
 				8D7E3E86282092A00094F05B /* String.swift */,
+				8D7CE5C82AD99677007F19C0 /* NSArray.swift */,
+				8D7CE5C62AD99661007F19C0 /* Data.swift */,
 				8DD4635428212C78008EB85A /* UIView.swift */,
+				8D7CE5C22AD99609007F19C0 /* CALayer.swift */,
+				8D7CE5C02AD995F7007F19C0 /* UIColor.swift */,
+				8D7CE5BE2AD995C6007F19C0 /* UINavigationController.swift */,
 				8DD4635628212D75008EB85A /* UICollectionView.swift */,
 				8D81F59E282466C300338946 /* UITableViewCell.swift */,
 				8D47531E2824C3C30061970C /* Date.swift */,
 				8D06DF482828570500372351 /* UIViewController.swift */,
+				8D7CE5C42AD9964E007F19C0 /* UITableView.swift */,
 				8D72208328287A34004C5C6C /* UIActivityIndicatorView.swift */,
 				8D3E74182828954F003AC968 /* NSLayoutConstraint.swift */,
 			);
@@ -439,6 +462,7 @@
 				8DF6720B281F89AE0064849A /* View */,
 				8DF6720D281F89D30064849A /* Mics */,
 				8DF671E1281F6B0F0064849A /* Info.plist */,
+				8DC9B64B2AD9E44A001C6125 /* LocalDataBase.xcdatamodeld */,
 			);
 			path = MovieList;
 			sourceTree = "<group>";
@@ -698,6 +722,7 @@
 				8DD4635728212D75008EB85A /* UICollectionView.swift in Sources */,
 				8D50CD212ACEE8EB00BF24E0 /* HeartButton.swift in Sources */,
 				8DEF47012ACB82B3008EEFA6 /* ContainerPanGesture.swift in Sources */,
+				8D7CE5C12AD995F7007F19C0 /* UIColor.swift in Sources */,
 				8D81F59F282466C300338946 /* UITableViewCell.swift in Sources */,
 				8DB065672ACC8EC500DE10CC /* SegmentItem.swift in Sources */,
 				8DEF46F72ACB6D34008EEFA6 /* SwipeMovieVC.swift in Sources */,
@@ -712,12 +737,15 @@
 				8DF671D4281F6B0D0064849A /* AppDelegate.swift in Sources */,
 				8D353E3028E24562007F774F /* ExtensionGADBannerViewDelegate.swift in Sources */,
 				8D81F5A5282468B200338946 /* RangeSliderManager.swift in Sources */,
+				8D7CE5C72AD99661007F19C0 /* Data.swift in Sources */,
 				8D72207E28286FA2004C5C6C /* Text.swift in Sources */,
 				8DB065552ACC469D00DE10CC /* TabBarVC.swift in Sources */,
 				8DF6720A281F89A40064849A /* MovieCell.swift in Sources */,
 				8D7E3E7F282041AB0094F05B /* Unparce.swift in Sources */,
+				8D7CE5C32AD99609007F19C0 /* CALayer.swift in Sources */,
 				8DD4635528212C78008EB85A /* UIView.swift in Sources */,
 				8DB0656B2ACCB34B00DE10CC /* SidebarManager.swift in Sources */,
+				8D7CE5C92AD99677007F19C0 /* NSArray.swift in Sources */,
 				8DF4130F2AD6C4ED00C6D154 /* AnimatedTransitioningManager.swift in Sources */,
 				8DEF46FB2ACB6DDE008EEFA6 /* TouchView.swift in Sources */,
 				8D722080282874F8004C5C6C /* Appeareance.swift in Sources */,
@@ -734,7 +762,11 @@
 				8D3E741C2828A797003AC968 /* UISearchBarDelegate.swift in Sources */,
 				8DBD01F12ACE2AD900DD1264 /* ImageVC.swift in Sources */,
 				8D72208228287822004C5C6C /* ExtensionsMovieListVC.swift in Sources */,
+				8DC9B64D2AD9E44B001C6125 /* LocalDataBase.xcdatamodeld in Sources */,
 				8DD4635A2821C622008EB85A /* Label.swift in Sources */,
+				8D7CE5BF2AD995C6007F19C0 /* UINavigationController.swift in Sources */,
+				8D7CE5C52AD9964E007F19C0 /* UITableView.swift in Sources */,
+				8DC9B64F2AD9E5B8001C6125 /* CoreDataDBManager.swift in Sources */,
 				8DD4635E2821CEA1008EB85A /* MovieVC.swift in Sources */,
 				8DD4635228212385008EB85A /* View.swift in Sources */,
 			);
@@ -916,24 +948,24 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = FQA2XH9ZUM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MovieList/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Random Movie";
-				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3;
+				MARKETING_VERSION = 3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Dovhiy.RandomMovie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -951,24 +983,24 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = FQA2XH9ZUM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MovieList/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Random Movie";
-				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3;
+				MARKETING_VERSION = 3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Dovhiy.RandomMovie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1141,6 +1173,19 @@
 			productName = MessageViewLibrary;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		8DC9B64B2AD9E44A001C6125 /* LocalDataBase.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8DC9B64C2AD9E44A001C6125 /* LocalDataBase.xcdatamodel */,
+			);
+			currentVersion = 8DC9B64C2AD9E44A001C6125 /* LocalDataBase.xcdatamodel */;
+			path = LocalDataBase.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 8DF671C8281F6B0D0064849A /* Project object */;
 }

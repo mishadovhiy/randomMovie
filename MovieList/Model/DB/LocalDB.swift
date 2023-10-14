@@ -12,16 +12,34 @@ struct LocalDB {
     static var db:DB {
         get {
             if Thread.isMainThread {
-                print("isMainThreaderror")
+                print("isMainThreaderror fine")
             }
-            return .init(dict: UserDefaults.standard.value(forKey: "LocalDB") as? [String:Any] ?? [:])
+            if let holder = dbHolder {
+                return holder
+            } else {
+                if Thread.isMainThread {
+                    print("isMainThreaderror fatal")
+                }
+                let db = AppDelegate.shared?.db?.fetch(.general)?.db?.toDict
+                LocalDB.dbHolder = .init(dict: db ?? [:])
+                return .init(dict: db ?? [:])
+            }
+            
+                //.init(dict: UserDefaults.standard.value(forKey: "LocalDB") as? [String:Any] ?? [:])
         }
         set {
             if Thread.isMainThread {
                 print("isMainThreaderror")
             }
             LocalDB.dbHolder = newValue
-            UserDefaults.standard.setValue(newValue.dict, forKey: "LocalDB")
+            if let core:Data = .create(from: newValue.dict) {
+                print("updating core data")
+                AppDelegate.shared?.db?.updateTransactions(.init(db: core))
+            } else {
+                
+            }
+
+         //   UserDefaults.standard.setValue(newValue.dict, forKey: "LocalDB")
         }
     }
     

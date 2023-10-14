@@ -70,10 +70,7 @@ class NetworkModel {
             Load(method: .get, task: .img, parameters: "", urlString: url) { data, error in
                 if let data = data {
                     var ud = LocalDB.db.movieImages
-                    let new:[String:Any] = [
-                        "img":data,
-                        "date":Date()
-                    ]
+                    let new:[String:Any] = self.newImageData(data)
                     ud.updateValue(new, forKey: url)
                     LocalDB.db.movieImages = ud
                 }
@@ -86,7 +83,12 @@ class NetworkModel {
         
     }
     
-    
+    func newImageData(_ data:Data) -> [String:Any] {
+        return [
+            "img":data,
+            "date":Date()
+        ]
+    }
     
     
     private func updateDBwithApi(page:Int, completion:@escaping([Movie], Bool) -> ()) {

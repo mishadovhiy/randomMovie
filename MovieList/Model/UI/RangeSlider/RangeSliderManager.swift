@@ -125,7 +125,9 @@ class RangeSliderManager {
 
         selectedDuration = (rangeSlider.lowerValue, rangeSlider.upperValue)
         if !firstLoad {
-            newPosition(selectedDuration)
+            if !rangeSlider.isHighlighted {
+                newPosition(selectedDuration)
+            }
         } else {
             firstLoad = false
         }

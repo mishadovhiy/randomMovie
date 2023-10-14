@@ -53,7 +53,7 @@ extension SwipeMovieVC {
         if cardRemoved {
             print("fixViewcardRemoved")
             /*UIView.animate(withDuration: animated ? 0.23 : 0, delay: 0, options: .allowUserInteraction, animations: {*/
-            UIView.animate(withDuration: animated ? 0.5 : 0, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: [.allowAnimatedContent, .allowUserInteraction], animations: {
+            UIView.animate(withDuration: animated ? 0.6 : 0, delay: 0, usingSpringWithDamping: 0.65, initialSpringVelocity: 0, options: [.allowAnimatedContent, .allowUserInteraction], animations: {
                 self.performMoveCards(cards: cards)
             }, completion: { _ in
                 self.cardMovedToTop(card: cards.first, fixingViews: true)

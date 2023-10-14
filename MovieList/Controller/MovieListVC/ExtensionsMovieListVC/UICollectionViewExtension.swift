@@ -52,12 +52,16 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
             if let imageData = data.image ?? load.localImage(url: data.imageURL),
                let image = UIImage(data:imageData) {
                 cell.movieImage.image = image
-            } else {
-                if #available(iOS 13.0, *) {
-                    cell.movieImage.image = UIImage(systemName: "photo.fill")
-                } else {
-                    // Fallback on earlier versions
+            } /*else if data.imageURL != "" {
+                DispatchQueue(label: "api", qos: .userInitiated).async {
+                    self.load.image(for: data.imageURL, completion: { res in
+                        DispatchQueue.main.async {
+                            cell.movieImage.image = .init(data: res ?? .init()) ?? UIImage(systemName: "photo.fill")
+                        }
+                    })
                 }
+            }*/ else {
+                cell.movieImage.image = UIImage(systemName: "photo.fill")
             }
             
 

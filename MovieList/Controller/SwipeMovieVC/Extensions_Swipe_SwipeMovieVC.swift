@@ -116,7 +116,7 @@ extension SwipeMovieVC {
         }
     }
     
-    private func prepareAdditionalCard(_ container:MoviePreviewView?, isSecond:Bool) {
+    func prepareAdditionalCard(_ container:MoviePreviewView?, isSecond:Bool) {
         container?.layer.zPosition = isSecond ? -1 : -2
         container?.isUserInteractionEnabled = false
         container?.subviews.last?.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, isSecond ? transform.first : transform.second, 0)

@@ -84,6 +84,7 @@ class MovieVC: BaseVC {
             textView.text = movie.about
             additionalLabel.text = tempDescr(movie)
             nameLabel.text = movie.name
+          //  invcImdbButton.isHidden = !isPreview
             DispatchQueue.init(label: "load", qos: .userInitiated).async {
                 if let _ = LocalDB.db.favoriteMovieID[movie.imdbid] {
                     DispatchQueue.main.async {
@@ -127,6 +128,7 @@ class MovieVC: BaseVC {
         }
     }
     
+    @IBOutlet weak var invcImdbButton: Button!
     
     @IBAction func imdbPressed(_ sender: UIButton) {
         let errorActions = {

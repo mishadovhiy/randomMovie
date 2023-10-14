@@ -323,7 +323,8 @@ class RangeSlider: UIControl {
     
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         previouslocation = touch.location(in: self)
-        
+        isHighlighted = true
+
         // Hit test the thumb layers
         if lowerThumbLayer.frame.contains(previouslocation) {
             
@@ -350,6 +351,7 @@ class RangeSlider: UIControl {
     }
     
     override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        isHighlighted = true
         let location = touch.location(in: self)
         
         // Determine by how much the user has dragged
@@ -366,13 +368,14 @@ class RangeSlider: UIControl {
         }
         
         sendActions(for: .valueChanged)
-        
         return true
     }
     
     override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
         lowerThumbLayer.highlighted = false
         upperThumbLayer.highlighted = false
+        isHighlighted = false
+        self.sendActions(for: .valueChanged)
        /* DispatchQueue.main.async {
             UIView.animate(withDuration: 0.2, delay: 0.5) {
                 self.lowerLabel?.alpha = 0

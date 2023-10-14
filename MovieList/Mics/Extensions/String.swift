@@ -8,6 +8,14 @@
 import UIKit
 
 extension String {
+    var toByteData:Data? {
+      return Data(self.split(separator: ",").compactMap({UInt8($0)}))
+    }
+    
+    var toDict:[String:Any]? {
+        return Data(self.utf8).toDict
+    }
+    
     init(decimalsCount:Int, from double:Double) {
         self.init(format: "%.\(decimalsCount)f", double)
     }
