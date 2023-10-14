@@ -51,16 +51,22 @@ class PanViewController {
             if sender.state == .began || sender.state == .changed {
                 
                 let newPosition = (finger.y - height) >= 0 ? 0 : (finger.y - height)
+                let newResultPosition = (newPosition + properies.toHideVC) - properies.startScrollingPosition
+                let percentCalc = (newResultPosition / 2) / properies.toHideVC
+                let percent = percentCalc <= 0 ? 0 : (percentCalc >= 1 ? 1 : percentCalc)
                 print(finger.y, " yrtgerfegtr")
-                print(newPosition, " yhtrgefgrthy")
+                print(newPosition, " yhtrgefgrthy ", percent)
                 print(height, " rbegrfwe")
-                self.vc.view.layer.move(.top, value: (newPosition + properies.toHideVC) - properies.startScrollingPosition)
+                print("egrfwdw ", newResultPosition)
+                self.vc.view.layer.cornerRadius = 140 * percent
+                self.vc.view.layer.move(.top, value: newResultPosition > 0 ? newResultPosition : (newResultPosition / 15))
             } else if sender.state == .ended || sender.state == .cancelled {
                 
                 print("gerfwdwef")
                 print(currentPosition)
                 print(finger.x)
                 print("gbrvfcd")
+                properies.isHidding = true
                 touches(false)
                 toggleView(show: isHidding, animated: true)
                 
@@ -102,8 +108,9 @@ class PanViewController {
         let panIndocator = vc.view.subviews.first(where: {
             $0.layer.name == UIViewController.panIndicatorLayerName
         })
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.38, animations: {
             panIndocator?.alpha = begun ? 0.3 : 0.1
+            self.vc.view.layer.cornerRadius = 0
         })
     }
 

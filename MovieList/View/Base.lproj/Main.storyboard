@@ -449,7 +449,7 @@ Resume</string>
                                 </constraints>
                             </stackView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6pP-GM-IuW" customClass="Button" customModule="MovieList" customModuleProvider="target">
-                                <rect key="frame" x="344" y="98.5" width="50" height="50"/>
+                                <rect key="frame" x="357.5" y="98.5" width="50" height="50"/>
                                 <color key="backgroundColor" red="0.061751218189999998" green="0.061751218189999998" blue="0.061751218189999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="UuW-ix-mt8"/>
@@ -469,6 +469,9 @@ Resume</string>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="tintBackground" value="YES"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="imdbPressed:" destination="GeP-ju-G10" eventType="touchUpInside" id="tL7-0M-eGr"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJU-BO-GEC" userLabel="heart" customClass="HeartButton" customModule="MovieList" customModuleProvider="target">
                                 <rect key="frame" x="80" y="305.5" width="28.5" height="24"/>
@@ -495,6 +498,7 @@ Resume</string>
                             <constraint firstItem="xg3-6t-RAj" firstAttribute="top" secondItem="6Cu-tL-s30" secondAttribute="bottom" constant="5" id="38r-cx-C7M"/>
                             <constraint firstItem="6Cu-tL-s30" firstAttribute="leading" secondItem="EWZ-rG-0I4" secondAttribute="leading" constant="10" id="Ayu-TY-mqz"/>
                             <constraint firstItem="NJU-BO-GEC" firstAttribute="leading" secondItem="Z2M-Ax-gXL" secondAttribute="trailing" constant="10" id="E0k-7V-7ua"/>
+                            <constraint firstItem="EWZ-rG-0I4" firstAttribute="trailing" secondItem="6pP-GM-IuW" secondAttribute="trailing" constant="6.5" id="H5c-o7-lPw"/>
                             <constraint firstItem="xg3-6t-RAj" firstAttribute="leading" secondItem="EWZ-rG-0I4" secondAttribute="leading" constant="10" id="LZy-uI-PJD"/>
                             <constraint firstItem="VEg-PN-xfp" firstAttribute="leading" secondItem="EWZ-rG-0I4" secondAttribute="leading" constant="10" id="Pct-tg-LMf"/>
                             <constraint firstItem="VEg-PN-xfp" firstAttribute="top" secondItem="EWZ-rG-0I4" secondAttribute="top" constant="15" id="Wep-wV-vup"/>
@@ -502,8 +506,7 @@ Resume</string>
                             <constraint firstAttribute="trailing" secondItem="6Cu-tL-s30" secondAttribute="trailing" constant="10" id="fLD-cj-Mp0"/>
                             <constraint firstItem="6Cu-tL-s30" firstAttribute="top" secondItem="VEg-PN-xfp" secondAttribute="bottom" constant="10" id="joT-VH-SuS"/>
                             <constraint firstItem="NJU-BO-GEC" firstAttribute="bottom" secondItem="6Cu-tL-s30" secondAttribute="bottom" id="n92-71-DLH"/>
-                            <constraint firstItem="6pP-GM-IuW" firstAttribute="centerY" secondItem="VEg-PN-xfp" secondAttribute="centerY" id="yHj-3V-0Mg"/>
-                            <constraint firstItem="EWZ-rG-0I4" firstAttribute="trailing" secondItem="6pP-GM-IuW" secondAttribute="trailing" constant="20" id="zpI-jh-2Hj"/>
+                            <constraint firstItem="6pP-GM-IuW" firstAttribute="top" secondItem="EWZ-rG-0I4" secondAttribute="top" constant="6.5" id="uyW-TY-xgT"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pUh-v0-TNi">
@@ -541,6 +544,7 @@ Resume</string>
                         <outlet property="heartButton" destination="NJU-BO-GEC" id="8FK-lk-0mr"/>
                         <outlet property="movieImage" destination="Z2M-Ax-gXL" id="zlg-23-E0P"/>
                         <outlet property="nameLabel" destination="VEg-PN-xfp" id="ljA-LT-lqR"/>
+                        <outlet property="secondImdbButton" destination="6pP-GM-IuW" id="Z24-2J-PUk"/>
                         <outlet property="textView" destination="xg3-6t-RAj" id="gme-Sb-Tow"/>
                     </connections>
                 </viewController>

@@ -18,6 +18,7 @@ class MovieVC: BaseVC {
     @IBOutlet weak var additionalLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var heartButton: HeartButton!
+    @IBOutlet weak var secondImdbButton: Button!
     
     var container:SwipeMovieVC.MoviePreviewView?
     var movie:Movie?
@@ -29,13 +30,9 @@ class MovieVC: BaseVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.popupVCpanGesture = .init(vc: self)
         if !isPreview {
             navController?.delegate = fromTransaction ?? transitionManager
-        }
-        
-        //didappeare was
-        if !isPreview {
+            self.popupVCpanGesture = .init(vc: self)
             navController?.setNavigationBarHidden(false, animated: true)
         }
     }
@@ -47,7 +44,8 @@ class MovieVC: BaseVC {
         if isPreview {
             self.view.layer.cornerRadius = Styles.buttonRadius3
             self.view.layer.masksToBounds = true
-        } 
+            secondImdbButton.isHidden = false
+        }
         movieImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imgPressed(_:))))
     }
     
@@ -130,7 +128,6 @@ class MovieVC: BaseVC {
         }
     }
     
-    @IBOutlet weak var invcImdbButton: Button!
     
     @IBAction func imdbPressed(_ sender: UIButton) {
         let errorActions = {

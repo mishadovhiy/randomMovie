@@ -151,23 +151,24 @@ private extension AnimatedTransitioningManager {
         }
         
         animator.addCompletion { position in
-          /*  UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, animations: {
-                fromImageView.frame.size = toAnimated.frame.size
-                snapshotContentView.alpha = 0
-            }, completion: {_ in
-                toAnimated.alpha = 1
-                fromImageView.alpha = 0
-                fromImageView.removeFromSuperview()
-                snapshotContentView.removeFromSuperview()
-            })*/
-            UIView.animate(withDuration: 0.22, animations: {
+            UIView.animate(withDuration: 0.24, delay: 0, options: .allowUserInteraction, animations: {
                 fromImageView.frame.size = toAnimated.frame.size
                 snapshotContentView.alpha = 0
             }, completion: { _ in
-                toAnimated.alpha = 1
-                fromImageView.alpha = 0
-                fromImageView.removeFromSuperview()
-                snapshotContentView.removeFromSuperview()
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    UIView.animate(withDuration: 0.24, delay: 0, options: .allowUserInteraction, animations: {
+                        toAnimated.alpha = 1
+                        fromImageView.alpha = 0
+                    }, completion: { _ in
+                        fromImageView.removeFromSuperview()
+                        snapshotContentView.removeFromSuperview()
+                    })
+                } else {
+                    toAnimated.alpha = 1
+                    fromImageView.alpha = 0
+                    fromImageView.removeFromSuperview()
+                    snapshotContentView.removeFromSuperview()
+                }
             })
             transitionContext.completeTransition(position == .end)
             
