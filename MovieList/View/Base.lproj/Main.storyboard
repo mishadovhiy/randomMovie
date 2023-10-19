@@ -216,12 +216,13 @@ Resume</string>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="3ub-lg-8ht"/>
                     <navigationItem key="navigationItem" id="MuJ-4d-jb0">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="8tF-kP-rgV">
-                            <button key="customView" hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xvl-kn-2Cy" customClass="LoadingButton" customModule="MovieList" customModuleProvider="target">
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <barButtonItem key="rightBarButtonItem" width="200" style="plain" id="8tF-kP-rgV">
+                            <button key="customView" hidden="YES" opaque="NO" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xvl-kn-2Cy" customClass="LoadingButton" customModule="MovieList" customModuleProvider="target">
                                 <color key="backgroundColor" name="PurpureColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="Acm-lt-CZD"/>
+                                    <constraint firstAttribute="width" constant="150" id="Lrj-EU-9Ap"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="37" id="Obz-gK-q4H"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
@@ -412,8 +413,8 @@ Resume</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="VEg-PN-xfp" customClass="Label" customModule="MovieList" customModuleProvider="target">
-                                <rect key="frame" x="10" y="107" width="66" height="32.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VEg-PN-xfp" customClass="Label" customModule="MovieList" customModuleProvider="target">
+                                <rect key="frame" x="10" y="107" width="342.5" height="32.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="27"/>
                                 <color key="textColor" name="WhiteColor"/>
                                 <nil key="highlightedColor"/>
@@ -502,6 +503,7 @@ Resume</string>
                             <constraint firstItem="xg3-6t-RAj" firstAttribute="leading" secondItem="EWZ-rG-0I4" secondAttribute="leading" constant="10" id="LZy-uI-PJD"/>
                             <constraint firstItem="VEg-PN-xfp" firstAttribute="leading" secondItem="EWZ-rG-0I4" secondAttribute="leading" constant="10" id="Pct-tg-LMf"/>
                             <constraint firstItem="VEg-PN-xfp" firstAttribute="top" secondItem="EWZ-rG-0I4" secondAttribute="top" constant="15" id="Wep-wV-vup"/>
+                            <constraint firstItem="6pP-GM-IuW" firstAttribute="leading" secondItem="VEg-PN-xfp" secondAttribute="trailing" constant="5" id="ZnT-ym-lFM"/>
                             <constraint firstAttribute="bottom" secondItem="xg3-6t-RAj" secondAttribute="bottom" id="d3p-aK-Vaq"/>
                             <constraint firstAttribute="trailing" secondItem="6Cu-tL-s30" secondAttribute="trailing" constant="10" id="fLD-cj-Mp0"/>
                             <constraint firstItem="6Cu-tL-s30" firstAttribute="top" secondItem="VEg-PN-xfp" secondAttribute="bottom" constant="10" id="joT-VH-SuS"/>
@@ -511,7 +513,7 @@ Resume</string>
                     </view>
                     <navigationItem key="navigationItem" id="pUh-v0-TNi">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="l40-ed-U1n">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="m9i-ab-phE" customClass="Button" customModule="MovieList" customModuleProvider="target">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="m9i-ab-phE" customClass="Button" customModule="MovieList" customModuleProvider="target">
                                 <rect key="frame" x="344" y="0.0" width="50" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.061751218186211321" green="0.061751218186211321" blue="0.061751218186211321" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

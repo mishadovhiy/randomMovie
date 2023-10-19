@@ -31,14 +31,14 @@ extension MovieListVC {
             if self.tableData.count > 1000 {
                 self.tableData.removeSubrange(0..<850)
             }
-            self.load.getMovies(page: loadingPage) { movies, error, newPage in
-                self.dataLoaded(movies: movies, error: error, newPage: newPage, loadingPage:loadingPage)
+            self.load.getMovies(page: loadingPage) { movies, error, newPage,listCount  in
+                self.dataLoaded(movies: movies, error: error, newPage: newPage, loadingPage:loadingPage, listCount: listCount)
             }
         }
         
     }
     
-    func dataLoaded(movies:[Movie], error:Bool, newPage:Int, loadingPage:Int) {
+    func dataLoaded(movies:[Movie], error:Bool, newPage:Int, loadingPage:Int, listCount:Int) {
         print(error, " errorrrr")
         if error && (movies.count == 0) {
             print("Error and no loaded movies")
@@ -46,7 +46,7 @@ extension MovieListVC {
                 self.message.show(type: .internetError)
             }
         }
-        if ((newPage + 1) >= self.load.moviesCount) || (loadingPage > newPage) {
+        if ((newPage + 1) >= listCount) || (loadingPage > newPage) {
             self.stopDownloading = true
         }
         if self.tableData.count < 40 && movies.count < 40 {
@@ -95,7 +95,8 @@ extension MovieListVC {
         } else {
             newTableData = db.favoriteMovies.filter({$0.folderID == selectedFolder?.id})
         }
-        self.tableData = newTableData
+        self.dataLoaded(movies: newTableData, error: false, newPage: 1, loadingPage:1, listCount: 1)
+       // self.tableData = newTableData
     }
     
     
@@ -117,7 +118,7 @@ extension MovieListVC {
             }
         case .all:
             DispatchQueue.init(label: "download", qos: .userInitiated).async {
-                self.load.getMovies(page: Int.random(in: 0..<self.load.maxPage)) { movies, error, newPage  in
+                self.load.getMovies(page: Int.random(in: 0..<self.load.maxPage)) { movies, error, newPage,_   in
                     if error && movies.count == 0 {
                         DispatchQueue.main.async {
                             self.message.show(type: .internetError)

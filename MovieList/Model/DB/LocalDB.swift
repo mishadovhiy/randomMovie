@@ -12,20 +12,14 @@ struct LocalDB {
     static var db:DB {
         get {
             if Thread.isMainThread {
-                print("isMainThreaderror fine")
+                print("isMainThreaderror fatal")
             }
-            if let holder = dbHolder {
+            if let holder = LocalDB.dbHolder {
                 return holder
-            } else {
-                if Thread.isMainThread {
-                    print("isMainThreaderror fatal")
-                }
-                let db = AppDelegate.shared?.db?.fetch(.general)?.db?.toDict
-                LocalDB.dbHolder = .init(dict: db ?? [:])
-                return .init(dict: db ?? [:])
             }
-            
-                //.init(dict: UserDefaults.standard.value(forKey: "LocalDB") as? [String:Any] ?? [:])
+            let db = AppDelegate.shared?.db?.fetch(.general)?.db?.toDict
+        //    LocalDB.dbHolder = .init(dict: db ?? [:])
+            return .init(dict: db ?? [:])
         }
         set {
             if Thread.isMainThread {
@@ -38,8 +32,6 @@ struct LocalDB {
             } else {
                 
             }
-
-         //   UserDefaults.standard.setValue(newValue.dict, forKey: "LocalDB")
         }
     }
     
@@ -176,10 +168,10 @@ struct LocalDB {
         
         var movieImages: [String:[String:Any]] {
             get {
-                return dict["movieImages"] as? [String:[String:Any]] ?? [:]
+                return [:]//dict["movieImages"] as? [String:[String:Any]] ?? [:]
             }
             set {
-                dict.updateValue(newValue, forKey: "movieImages")
+                //dict.updateValue(newValue, forKey: "movieImages")
             }
         }
         
@@ -204,11 +196,12 @@ struct LocalDB {
         
         
         func checkDBUpdated() -> Bool {
-            if let oldDB = UserDefaults.standard.value(forKey: "LocalDB") as? [String:Any] {
+         /*   if let oldDB = UserDefaults.standard.value(forKey: "LocalDB") as? [String:Any] {
                 UserDefaults.standard.removeObject(forKey: "LocalDB")
                 LocalDB.db = .init(dict: oldDB)
                 return false
             }
+            return true*/
             return true
         }
         

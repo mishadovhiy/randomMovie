@@ -7,19 +7,19 @@
 
 import UIKit
 
-class NetworkModel {
+struct NetworkModel {
 
     var maxPage = 490
     
-    func getMovies(page:Int, completion:@escaping([Movie], Bool, Int) -> ()) {
+    func getMovies(page:Int, completion:@escaping([Movie], Bool, Int, Int) -> ()) {
         loadSQLMovies { sqlMovies, error in
             let data = self.movieFor(page: page, list: sqlMovies)
             if let moviesData = data.movies {
-                completion(moviesData, error, data.lastPage)
+                completion(moviesData, error, data.lastPage, data.listCount)
             } else {
                 self.updateDBwithApi(page: page) { apiMovies, apiError in
                     let resultMovies:[Movie] = apiMovies.count == 0 ? (sqlMovies.randomElement()?.movie ?? []) : apiMovies
-                    completion(resultMovies, error, data.lastPage)
+                    completion(resultMovies, error, data.lastPage, resultMovies.count)
                 }
             }
         }
@@ -51,12 +51,13 @@ class NetworkModel {
 
     
     func localImage(url:String, fromHolder:Bool = true) -> Data? {
-        let ud = !fromHolder ? LocalDB.db.movieImages : (LocalDB.dbHolder?.movieImages ?? [:])
+       /* let ud = !fromHolder ? LocalDB.db.movieImages : (LocalDB.dbHolder?.movieImages ?? [:])
         if let result = ud[url] {
             return result["img"] as? Data
         } else {
             return nil
-        }
+        }*/
+        return nil
     }
     
     func image(for url:String, completion:@escaping(Data?) -> ()) {
@@ -69,10 +70,10 @@ class NetworkModel {
         } else {
             Load(method: .get, task: .img, parameters: "", urlString: url) { data, error in
                 if let data = data {
-                    var ud = LocalDB.db.movieImages
+                  /*  var ud = LocalDB.db.movieImages
                     let new:[String:Any] = self.newImageData(data)
-                    ud.updateValue(new, forKey: url)
-                    LocalDB.db.movieImages = ud
+                    ud.updateValue(new, forKey: url)*/
+                  //  LocalDB.db.movieImages = self.newImageData(data)
                 }
                 
                 completion(data)
@@ -127,11 +128,9 @@ class NetworkModel {
         }
     }
     
-    var moviesCount = 0
     
-    private func movieFor(page:Int, list:[MovieList]) -> (movies: [Movie]?, lastPage:Int) {
+    private func movieFor(page:Int, list:[MovieList]) -> (movies: [Movie]?, lastPage:Int, listCount:Int) {
         var result:[Movie] = []
-        moviesCount = list.count
         let sorted = list.sorted { $0.page < $1.page }
 
         for i in 0..<sorted.count {
@@ -139,20 +138,20 @@ class NetworkModel {
             if sorted[i].page == page {
                 result = result + (sorted[i].movie)
                 if result.count >= 50 {
-                    return (result, sorted[i].page)
+                    return (result, sorted[i].page, list.count)
                 }
             } else {
                 if sorted[i].page > page {
                     result = result + (sorted[i].movie)
                     if result.count >= 50 {
-                        return (result, sorted[i].page)
+                        return (result, sorted[i].page, list.count)
                     }
                 }
             }
             
         }
         
-        return (result, 0)
+        return (result, 0, list.count)
     }
     
     

@@ -106,7 +106,7 @@ class SwipeMovieVC: BaseVC {
     func cardDidMove(for action:PanActionType, card:MoviePreviewView) {
         if action == .like {
             DispatchQueue(label: "db", qos: .userInitiated).async {
-                LocalDB.db.favoritePressed(button: nil, movie: card.vc?.movie)
+                LocalDB.db.favoritePressed(button: nil, canRemove: false, movie: card.vc?.movie)
             }
         }
     }

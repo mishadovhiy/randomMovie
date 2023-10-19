@@ -22,14 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         AppDelegate.shared = self
         db = .init(persistentContainer: persistentContainer, appDelegate: self)
-        DispatchQueue.init(label: "local", qos: .userInitiated).async {
-            if LocalDB.db.checkDBUpdated() {
-                LocalDB.db.checkOldImgs()
-            }
-            DispatchQueue.main.async {
-                self.banner.createBanner()
-            }
-        }
+        self.banner.createBanner()
         return true
     }
 
