@@ -18,8 +18,6 @@ class SideBarVC: UIViewController {
         SideBarVC.shared = self
         tableView.delegate = self
         tableView.dataSource = self
-        let appDelegate = AppDelegate.shared
-
         DispatchQueue(label: "db", qos: .userInitiated).async {
             self.getData()
         }
