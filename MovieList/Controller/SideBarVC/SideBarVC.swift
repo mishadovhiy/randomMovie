@@ -18,6 +18,8 @@ class SideBarVC: UIViewController {
         SideBarVC.shared = self
         tableView.delegate = self
         tableView.dataSource = self
+        let appDelegate = AppDelegate.shared
+
         DispatchQueue(label: "db", qos: .userInitiated).async {
             self.getData()
         }
@@ -43,12 +45,11 @@ class SideBarVC: UIViewController {
         let yearCell:SliderCellData = .init(range: yearData, newPosition: newYearRange)
         
         let genres = LocalDB.db.filter.allGenres
-        var ganrs : [CollectionCellData.ColldetionData] = []
         let ignoredList = LocalDB.db.filter.ignoredGenres
-        for ganr in genres {
-            let ignored = ignoredList[ganr] ?? false
-            ganrs.append(.init(name: ganr, ignored: ignored))
-        }
+        let ganrs : [CollectionCellData.ColldetionData] = genres.compactMap({
+            return .init(name: $0, ignored: ignoredList[$0] ?? false)
+        })
+
         let genresCell:CollectionCellData = .init(collectionData: ganrs, selected: genreSelected(_:))
         
         tableData = [
@@ -132,6 +133,13 @@ extension SideBarVC {
 
 
 extension SideBarVC {
+    override func encodeRestorableState(with coder: NSCoder) {
+        super.encodeRestorableState(with: coder)
+        
+    }
+    override func decodeRestorableState(with coder: NSCoder) {
+        super.decodeRestorableState(with: coder)
+    }
     static func configure() -> SideBarVC {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "SideBarVC") as! SideBarVC

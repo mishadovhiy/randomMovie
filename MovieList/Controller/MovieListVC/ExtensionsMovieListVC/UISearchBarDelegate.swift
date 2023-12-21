@@ -36,7 +36,7 @@ extension MovieListVC:UISearchBarDelegate {
                 self.tableData = searchText == "" ? [] : movies
             } else {
                 DispatchQueue.main.async {
-                    self.message.show(type: .internetError)
+                    AppModel.Appearence.message.show(type: .internetError)
                 }
             }
         }

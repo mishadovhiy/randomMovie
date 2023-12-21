@@ -9,8 +9,9 @@ import UIKit
 //var count = 0
 class BaseVC: UIViewController {
 
-    lazy var message = AppModel.Appearence.message
-    lazy var ai = AppModel.Appearence.ai
+    var appearence:AppModel.Appearence? {
+        return AppDelegate.shared?.appearence
+    }
     
     private var sbvsLoaded = false
     var apiError:String?

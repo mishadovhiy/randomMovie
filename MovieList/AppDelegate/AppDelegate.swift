@@ -7,25 +7,54 @@
 
 import UIKit
 import CoreData
+import AlertViewLibrary
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    static var shared:AppDelegate?
+    static var shared:AppDelegate? {
+        if !Thread.isMainThread {
+            print("faterror")
+        }
+        return UIApplication.shared.delegate as? AppDelegate
+    }
     lazy var banner: adBannerView = {
         return adBannerView.instanceFromNib() as! adBannerView
     }()
     
+    lazy var appearence:AppModel.Appearence? = {
+        return AppModel.Appearence()
+    }()
+    lazy var ai:AlertManager = {
+        .init(appearence:.with({
+            $0.colors = .generate({
+                $0.view = .red
+            })
+        }))
+    }()
     var db:CoreDataDBManager?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        AppDelegate.shared = self
         db = .init(persistentContainer: persistentContainer, appDelegate: self)
+        DispatchQueue(label: "db", qos: .userInitiated).async {
+            LocalDB.dbHolder = .init(dict: self.db?.fetch(.general)?.db?.toDict ?? [:])
+        }
         self.banner.createBanner()
         return true
     }
 
+    func application(_ application: UIApplication, shouldRestoreSecureApplicationState coder: NSCoder) -> Bool {
+        return true
+    }
+    
+    func application(_ application: UIApplication, shouldSaveSecureApplicationState coder: NSCoder) -> Bool {
+        return true
+    }
+    
+    func stateRestorationActivity(for scene: UIScene) -> NSUserActivity? {
+        return scene.userActivity
+    }
 
     // MARK: - Core Data stack
 

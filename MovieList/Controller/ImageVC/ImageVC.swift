@@ -33,6 +33,14 @@ class ImageVC: BaseVC {
 }
 
 extension ImageVC {
+    override func encodeRestorableState(with coder: NSCoder) {
+        super.encodeRestorableState(with: coder)
+        
+    }
+    override func decodeRestorableState(with coder: NSCoder) {
+        super.decodeRestorableState(with: coder)
+    }
+    
     static func present(img:Data?, from:CGRect?, inVC:UIViewController, fromAdditional:CGPoint?, animateBack:Bool = true) {
         if let vc = ImageVC.configure(img: img, from: from, fromAdditional: fromAdditional, animateBack: animateBack) {
             //inVC.present(vc, animated: true)

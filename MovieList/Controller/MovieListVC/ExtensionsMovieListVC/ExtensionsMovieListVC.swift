@@ -43,7 +43,7 @@ extension MovieListVC {
         if error && (movies.count == 0) {
             print("Error and no loaded movies")
             DispatchQueue.main.async {
-                self.message.show(type: .internetError)
+                AppModel.Appearence.message.show(type: .internetError)
             }
         }
         if ((newPage + 1) >= listCount) || (loadingPage > newPage) {
@@ -121,7 +121,7 @@ extension MovieListVC {
                 self.load.getMovies(page: Int.random(in: 0..<self.load.maxPage)) { movies, error, newPage,_   in
                     if error && movies.count == 0 {
                         DispatchQueue.main.async {
-                            self.message.show(type: .internetError)
+                            AppModel.Appearence.message.show(type: .internetError)
                         }
                     }
                     if let random = movies.randomElement() {

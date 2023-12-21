@@ -28,7 +28,9 @@ struct LocalDB {
             LocalDB.dbHolder = newValue
             if let core:Data = .create(from: newValue.dict) {
                 print("updating core data")
-                AppDelegate.shared?.db?.updateTransactions(.init(db: core))
+                DispatchQueue.main.async {
+                    AppDelegate.shared?.db?.updateTransactions(.init(db: core))
+                }
             } else {
                 
             }

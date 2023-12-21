@@ -47,13 +47,26 @@ struct CoreDataDBManager {
     
 
     func updateTransactions(_ new:GeneralEntityStruct) {
-        if let old = fetch(.general) {
-            old.db = new.db
-            appDelegate.saveContext()
+        if Thread.isMainThread {
+            DispatchQueue(label: "db", qos: .userInitiated).async {
+                if let old = fetch(.general) {
+                    old.db = new.db
+                    self.appDelegate.saveContext()
+                } else {
+                    let _: GeneralEntitie = .create(entity: context, transaction: new)
+                    self.appDelegate.saveContext()
+                }
+            }
         } else {
-            let _: GeneralEntitie = .create(entity: context, transaction: new)
-            appDelegate.saveContext()
+            if let old = fetch(.general) {
+                old.db = new.db
+                appDelegate.saveContext()
+            } else {
+                let _: GeneralEntitie = .create(entity: context, transaction: new)
+                appDelegate.saveContext()
+            }
         }
+        
     }
     
     private func fetchRecordsForEntity(_ entity:Entities, inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> [NSManagedObject] {

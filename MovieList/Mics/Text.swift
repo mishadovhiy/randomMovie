@@ -29,6 +29,4 @@ struct Styles {
     static let buttonRadius:CGFloat = 5
     static let buttonRadius2:CGFloat = 9
     static let buttonRadius3:CGFloat = 12
-
-
 }

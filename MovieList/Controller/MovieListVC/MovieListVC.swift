@@ -184,6 +184,13 @@ extension MovieListVC {
 }
 
 extension MovieListVC {
+    override func encodeRestorableState(with coder: NSCoder) {
+        super.encodeRestorableState(with: coder)
+        
+    }
+    override func decodeRestorableState(with coder: NSCoder) {
+        super.decodeRestorableState(with: coder)
+    }
     static func configure(type:ScreenType) -> MovieListVC {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "MovieList") as! MovieListVC

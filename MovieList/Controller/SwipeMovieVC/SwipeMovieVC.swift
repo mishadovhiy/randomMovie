@@ -120,7 +120,7 @@ class SwipeMovieVC: BaseVC {
 
 extension SwipeMovieVC {
     class MoviePreviewView:TouchView {
-        var vc:MovieVC?
+        weak var vc:MovieVC?
         var gesture:UIPanGestureRecognizer?
         lazy var defaultCenter:CGPoint = { return self.center }()
         var isFirst:Bool = false
@@ -148,6 +148,14 @@ extension SwipeMovieVC {
 
 
 extension SwipeMovieVC {
+    override func encodeRestorableState(with coder: NSCoder) {
+        super.encodeRestorableState(with: coder)
+        
+    }
+    override func decodeRestorableState(with coder: NSCoder) {
+        super.decodeRestorableState(with: coder)
+    }
+    
     static func configure() -> SwipeMovieVC {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "SwipeMovieVC") as! SwipeMovieVC

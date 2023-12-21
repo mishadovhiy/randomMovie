@@ -34,10 +34,9 @@ extension AppModel {
             return MessageViewLibrary.instanceFromNib()
         }()
         
-        static var ai:AlertViewLibrary = {
-            let ai = AlertViewLibrary.instanceFromNib()
-            return ai
-        }()
+        static var ai:AlertManager {
+            return AppDelegate.shared?.ai ?? .init()
+        }
     }
     
     

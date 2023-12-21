@@ -20,8 +20,8 @@ class MovieVC: BaseVC {
     @IBOutlet weak var heartButton: HeartButton!
     @IBOutlet weak var secondImdbButton: Button!
     
-    var container:SwipeMovieVC.MoviePreviewView?
-    var movie:Movie?
+    weak var container:SwipeMovieVC.MoviePreviewView?
+    weak var movie:Movie?
     var favoritesPressedAction:(() -> ())?
     
     private var favoriteChanged = false
@@ -132,7 +132,7 @@ class MovieVC: BaseVC {
     @IBAction func imdbPressed(_ sender: UIButton) {
         let errorActions = {
             DispatchQueue.main.async {
-                self.message.show(title:"URL not found", type: .error)
+                AppModel.Appearence.message.show(title:"URL not found", type: .error)
             }
         }
         guard let movie = movie else {
@@ -204,6 +204,13 @@ class MovieVC: BaseVC {
 }
 
 extension MovieVC {
+    override func encodeRestorableState(with coder: NSCoder) {
+        super.encodeRestorableState(with: coder)
+        
+    }
+    override func decodeRestorableState(with coder: NSCoder) {
+        super.decodeRestorableState(with: coder)
+    }
     static func present(isPreview:Bool = false, movie:Movie? = nil, favoritesPressedAction:(() -> ())? = nil, inVC:UIViewController, fromTransaction:AnimatedTransitioningManager? = nil) {
         let vc = MovieVC.configure(movie: movie, favoritesPressedAction: favoritesPressedAction)
      //   let nav = UINavigationController(rootViewController: vc)
