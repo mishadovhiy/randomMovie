@@ -26,10 +26,72 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var appearence:AppModel.Appearence? = {
         return AppModel.Appearence()
     }()
+    
     lazy var ai:AlertManager = {
-        .init(appearence:.with({
-            $0.colors = .generate({
-                $0.view = .red
+        let blue = UIColor.init(red: 205/255, green: 253/255, blue: 255/255, alpha: 1)
+        let orange = UIColor(red: 218/255, green: 203/255, blue: 165/255, alpha: 1)
+        
+        return AlertManager.init(appearence:.with({
+            $0.images = .with({
+                $0.alertError = nil
+                $0.alertSuccess = nil
+            })
+            $0.animations = .with({
+                $0.setBackground = 0.8
+                $0.alertShow = 0.5
+                $0.performHide1 = 0.5
+                $0.performHide2 = 0.3
+                $0.loadingShow1 = 0.4
+                $0.loadingShow2 = 0.5
+            })
+            $0.colors = .with({
+                $0.buttom = .with({
+                    $0.link = .black
+                    $0.normal = .gray
+                })
+                $0.alertState = .with({
+                    $0.view = blue
+                    $0.background = .black.withAlphaComponent(0.5)
+                })
+                $0.activityState = .with({
+                    $0.view = orange.withAlphaComponent(0.8)
+                    $0.background = .black.withAlphaComponent(0.1)
+                })
+                $0.texts = .with({
+                    $0.title = .black
+                    $0.description = .black.withAlphaComponent(0.5)
+                })
+            })
+        }))
+    }()
+    
+    lazy var ai1:AlertManager = {
+        let orange = UIColor.init(red: 181/255, green: 107/255, blue: 68/255, alpha: 1)
+        let blue = UIColor.init(red: 75/255, green: 201/255, blue: 206/255, alpha: 1)
+        return .init(appearence:.with({
+            $0.animations = .with({
+                $0.setBackground = 0.7
+                $0.alertShow = 0.5
+                $0.performHide2 = 0.3
+            })
+            $0.colors = .with({
+                $0.separetor = .link
+                $0.buttom = .with({
+                    $0.normal = .red
+                    $0.link = .blue
+                })
+                $0.texts = .with({
+                    $0.title = .black
+                    $0.description = .white
+                })
+                $0.alertState = .with({
+                    $0.view = blue
+                    $0.background = .red.withAlphaComponent(0.4)
+                })
+                $0.activityState = .with({
+                    $0.view = .systemPink
+                    $0.background = blue.withAlphaComponent(0.1)
+                })
             })
         }))
     }()

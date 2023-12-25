@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AlertViewLibrary
 
 class TabBarVC: UITabBarController {
 
@@ -31,70 +32,22 @@ class TabBarVC: UITabBarController {
     private var viewAppeared:Bool = false
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
-//            self.testAI()
-//        })
+        view.subviews.forEach({$0.alpha = 1})
+        let white = UIView()
+        white.backgroundColor = .clear//.white.withAlphaComponent(0.4)
+        view.addSubview(white)
+        white.addConstaits([
+            .left:0, .right:0, .top:0, .bottom:0
+        ], superV: view)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+            TestAlert().load()
+        })
         if !viewAppeared {
             viewAppeared = true
-            DispatchQueue(label: "db", qos: .userInitiated).async {
-            }
         }
     }
+
     
-    func testAI(canMany:Bool = true) {
-        let ai = AppModel.Appearence.ai
-        ai.showLoading {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
-                ai.showAlert(title: canMany ? nil : "some erfewd egrfwd tegrf wer svdcsd rwe", appearence: .with({
-                    if canMany {
-                        $0.primaryButton = .with({
-                            $0.title = "many alerts"
-                            $0.action = {
-                                for i in 0..<5{
-                                    self.testRegulare()
-                                }
-                            }
-                        })
-                    } else {
-                        $0.primaryButton = .with({
-                            $0.style = .link
-                            $0.title = "loading test"
-                            $0.action = self.loadingTest
-                        })
-                    }
-                    $0.secondaryButton = .with({
-                        $0.style = .error
-                        $0.close = false
-                        $0.action = {
-                            self.testAI(canMany: false)
-                        }
-                        $0.title = "fuck you"
-                    })
-                    $0.type = canMany ? .internetError : .standard
-                }))
-            })
-            
-        }
-    }
-    
-    private func loadingTest() {
-        let ai = AppModel.Appearence.ai
-        ai.showLoading(title: "some title", completion: {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
-                ai.showAlert(title: "areer", appearence: .with({
-                    $0.image = .image(.add)
-                }))
-            })
-        })
-        
-    }
-    
-    private func testRegulare() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-            let ai = AppModel.Appearence.ai
-//t
-        })
-    }
     
     
     func segmentedSelected(_ atItem:Int) {
