@@ -37,19 +37,20 @@ struct NetworkModel {
         let searchingText = text.uppercased()
         if let movieList = AppModel.mySqlMovieList {
             let result = sqlLoaded(data: movieList, filter: false)
-            var resultMovies:[Movie] = []
+            var resultMovies:Set<Movie> = []
             for movies in result {
                 for movie in movies.movie {
-                    if movie.name.uppercased().contains(searchingText) ||
-                    //    movie.genreString.uppercased().contains(searchingText) ||
-                        movie.imdbid.uppercased().contains(searchingText) ||
-                        movie.released.uppercased().contains(searchingText)
+                    if
+                        searchingText.uppercased().contains(movie.name.uppercased()) ||
+                        searchingText.uppercased().contains(movie.imdbid.uppercased()) ||
+                        searchingText.uppercased().contains(movie.released.uppercased()) ||
+                            movie.genre.contains(searchingText)
                     {
-                        resultMovies.append(movie)
+                        resultMovies.insert(movie)
                     }
                 }
             }
-            return resultMovies
+            return Array(resultMovies)
         } else {
             return nil
         }

@@ -170,6 +170,7 @@
 		8DBD01F02ACE2AD900DD1264 /* ImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageVC.swift; sourceTree = "<group>"; };
 		8DC9B64C2AD9E44A001C6125 /* LocalDataBase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LocalDataBase.xcdatamodel; sourceTree = "<group>"; };
 		8DC9B64E2AD9E5B8001C6125 /* CoreDataDBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataDBManager.swift; sourceTree = "<group>"; };
+		8DCA2BF62BD3720F0071ACE0 /* MovieList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MovieList.entitlements; sourceTree = "<group>"; };
 		8DD4634C2821206F008EB85A /* PreviewCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewCollectionCell.swift; sourceTree = "<group>"; };
 		8DD4634E28212084008EB85A /* LoadingCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCollectionCell.swift; sourceTree = "<group>"; };
 		8DD4635128212385008EB85A /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
@@ -495,6 +496,7 @@
 		8DF671D2281F6B0D0064849A /* MovieList */ = {
 			isa = PBXGroup;
 			children = (
+				8DCA2BF62BD3720F0071ACE0 /* MovieList.entitlements */,
 				8DF67206281F6BC80064849A /* AppDelegate */,
 				8DF67205281F6B990064849A /* Model */,
 				8DF67207281F89680064849A /* Controller */,
@@ -1113,6 +1115,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MovieList/MovieList.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = FQA2XH9ZUM;
@@ -1140,6 +1143,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 17.0;
 			};
 			name = Debug;
 		};
@@ -1149,6 +1153,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MovieList/MovieList.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = FQA2XH9ZUM;
@@ -1176,6 +1181,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 17.0;
 			};
 			name = Release;
 		};

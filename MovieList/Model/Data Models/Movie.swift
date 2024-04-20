@@ -16,7 +16,24 @@ struct MovieList {
     }
 }
 
-class Movie {
+class Movie:Hashable {
+    static func == (lhs: Movie, rhs: Movie) -> Bool {
+        return lhs.imdbid == rhs.imdbid
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
+        hasher.combine(imageURL)
+        hasher.combine(imdbid)
+        hasher.combine(imdbrating)
+        hasher.combine(released)
+        hasher.combine(about)
+        hasher.combine(genre)
+        hasher.combine(folderID)
+        hasher.combine(image)
+        hasher.combine(isFolder)
+    }
+    
     let name:String
     let imageURL:String
     let imdbid:String
@@ -88,7 +105,7 @@ class Movie {
         }
         return result
     }
-
+    
     
     
     func filterValidation(imgOnly:Bool = false) -> Bool {
@@ -115,7 +132,7 @@ extension Movie {
     func validate() -> Bool {
         return self.validateRange(.year) && self.validateRange(.imdb) && self.validateGanre()
     }
-
+    
     
     
     private func validateGanre() -> Bool {
@@ -150,7 +167,7 @@ extension Movie {
         }
         
     }
-
+    
     
     
     private enum RangeType {

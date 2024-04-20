@@ -34,21 +34,21 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TitleCollectionCell" id="NY1-pg-Rhx" customClass="TitleCollectionCell" customModule="MovieList" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="66" height="200"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="76" height="200"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="J8R-Ej-5cS">
-                                                    <rect key="frame" x="0.0" y="0.0" width="66" height="200"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="76" height="200"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XO8-ja-z2q">
-                                                            <rect key="frame" x="0.0" y="167.5" width="66" height="32.5"/>
+                                                            <rect key="frame" x="10" y="167.5" width="66" height="32.5"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="27"/>
                                                             <color key="textColor" name="WhiteColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="XO8-ja-z2q" firstAttribute="leading" secondItem="J8R-Ej-5cS" secondAttribute="leading" id="FUZ-p7-9dN"/>
+                                                        <constraint firstItem="XO8-ja-z2q" firstAttribute="leading" secondItem="J8R-Ej-5cS" secondAttribute="leading" constant="10" id="FUZ-p7-9dN"/>
                                                         <constraint firstAttribute="bottom" secondItem="XO8-ja-z2q" secondAttribute="bottom" id="VI5-4L-MFu"/>
                                                         <constraint firstAttribute="trailing" secondItem="XO8-ja-z2q" secondAttribute="trailing" id="zgz-Wq-jl1"/>
                                                     </constraints>
@@ -560,7 +560,6 @@ Resume</string>
                             </barButtonItem>
                             <barButtonItem style="plain" hidden="YES" id="jMs-Za-7Pb">
                                 <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="jas-CX-Jio">
-                                    <rect key="frame" x="213.5" y="2" width="122.5" height="40.5"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.062745098039215685" green="0.062745098039215685" blue="0.062745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <state key="normal" title="Button"/>
@@ -905,6 +904,9 @@ Resume</string>
         </designable>
         <designable name="6vo-Jr-PrN">
             <size key="intrinsicContentSize" width="31" height="14.5"/>
+        </designable>
+        <designable name="Jrc-pm-Syc">
+            <size key="intrinsicContentSize" width="122.5" height="40.5"/>
         </designable>
         <designable name="LUU-Fy-Ccz">
             <size key="intrinsicContentSize" width="27" height="26"/>

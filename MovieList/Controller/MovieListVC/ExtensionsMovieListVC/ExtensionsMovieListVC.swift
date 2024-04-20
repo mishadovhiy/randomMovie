@@ -70,10 +70,12 @@ extension MovieListVC {
         }
 
         LocalDB.db.movieImages = all*/
-        for movie in movies {
-            self.load.image(for: movie.imageURL) { data in
-                movie.image = data
-                self.tableData.append(movie)
+        movies.forEach { movie in
+            if !tableData.contains(where: {movie.imdbid == $0.imdbid}) {
+                self.load.image(for: movie.imageURL) { data in
+                    movie.image = data
+                    self.tableData.append(movie)
+                }
             }
         }
         DispatchQueue.main.async {
