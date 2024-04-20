@@ -41,10 +41,10 @@ struct NetworkModel {
             for movies in result {
                 for movie in movies.movie {
                     if
-                        searchingText.uppercased().contains(movie.name.uppercased()) ||
+                        movie.name.uppercased().contains(searchingText.uppercased()) ||
                         searchingText.uppercased().contains(movie.imdbid.uppercased()) ||
                         searchingText.uppercased().contains(movie.released.uppercased()) ||
-                            movie.genre.contains(searchingText)
+                        movie.genreString.uppercased().contains( searchingText.uppercased())
                     {
                         resultMovies.insert(movie)
                     }
