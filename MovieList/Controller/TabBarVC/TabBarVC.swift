@@ -33,15 +33,6 @@ class TabBarVC: UITabBarController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         view.subviews.forEach({$0.alpha = 1})
-        let white = UIView()
-        white.backgroundColor = .clear//.white.withAlphaComponent(0.4)
-        view.addSubview(white)
-        white.addConstaits([
-            .left:0, .right:0, .top:0, .bottom:0
-        ], superV: view)
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
-            TestAlert().load()
-        })
         if !viewAppeared {
             viewAppeared = true
         }

@@ -108,7 +108,9 @@ extension SideBarVC {
             LocalDB.db.filter.ignoredGenres.updateValue(!ignored, forKey: genres[at])
             self.getData()
             DispatchQueue.main.async {
-                self.vibrate(style: .soft)
+                if #available(iOS 13.0, *) {
+                    self.vibrate(style: .soft)
+                } 
             }
         }
     }

@@ -65,43 +65,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }))
     }()
     
-    lazy var ai1:AlertManager = {
-        let orange = UIColor.init(red: 181/255, green: 107/255, blue: 68/255, alpha: 1)
-        let blue = UIColor.init(red: 75/255, green: 201/255, blue: 206/255, alpha: 1)
-        return .init(appearence:.with({
-            $0.animations = .with({
-                $0.setBackground = 0.7
-                $0.alertShow = 0.5
-                $0.performHide2 = 0.3
-            })
-            $0.colors = .with({
-                $0.separetor = .link
-                $0.buttom = .with({
-                    $0.normal = .red
-                    $0.link = .blue
-                })
-                $0.texts = .with({
-                    $0.title = .black
-                    $0.description = .white
-                })
-                $0.alertState = .with({
-                    $0.view = blue
-                    $0.background = .red.withAlphaComponent(0.4)
-                })
-                $0.activityState = .with({
-                    $0.view = .systemPink
-                    $0.background = blue.withAlphaComponent(0.1)
-                })
-            })
-        }))
-    }()
     var db:CoreDataDBManager?
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         db = .init(persistentContainer: persistentContainer, appDelegate: self)
         DispatchQueue(label: "db", qos: .userInitiated).async {
             LocalDB.dbHolder = .init(dict: self.db?.fetch(.general)?.db?.toDict ?? [:])
         }
+        return true
+    }
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         self.banner.createBanner()
         return true
     }
@@ -114,6 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    @available(iOS 13.0, *)
     func stateRestorationActivity(for scene: UIScene) -> NSUserActivity? {
         return scene.userActivity
     }

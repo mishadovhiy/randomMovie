@@ -11,6 +11,13 @@ struct NetworkModel {
 
     var maxPage = 490
     
+    func movieStream(movie:Movie, completion:@escaping()->()) {
+        Load(task: .moviewSteam, parameters: movie.imdbid) { data, string in
+            print("sfeawds dataaa: ", data)
+            print("str: ", string)
+        }
+    }
+    
     func getMovies(page:Int, completion:@escaping([Movie], Bool, Int, Int) -> ()) {
         loadSQLMovies { sqlMovies, error in
             let data = self.movieFor(page: page, list: sqlMovies)
@@ -184,7 +191,11 @@ struct NetworkModel {
     private func Load(optUrl:String? = nil, method:Method = .get, task:Task, parameters:String, urlString:String? = nil, completion:@escaping(Data?, String?) -> ()) {//movies
         let mySQL = task.rawValue.contains(".php")
         let url = task.url//mySQL ? Keys.sqlURL : Keys.apiURL
-        let urlParam = task == .saveMovie ? "" : parameters
+        let urlParam:String
+        switch task {
+        case .saveMovie: urlParam = ""
+        default: urlParam = parameters
+        }
         let requestString = urlString ?? (url + task.rawValue + urlParam)
         print(requestString, " requestStringrequestString")
         guard let url =  NSURL(string: requestString) else {
@@ -251,7 +262,7 @@ extension NetworkModel {
         case sqlMovies = "LoadMovies.php"
         case saveMovie = "NewMovie.php?"
         case img = ""
-        
+        case moviewSteam = "/"
         
         var url:String {
             switch self {
@@ -261,6 +272,7 @@ extension NetworkModel {
                 return Keys.sqlURL
             case .img:
                 return ""
+            case .moviewSteam: return Keys.movieStreamURL
             }
         }
         

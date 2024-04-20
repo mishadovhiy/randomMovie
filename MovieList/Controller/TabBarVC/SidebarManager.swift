@@ -43,7 +43,9 @@ class SidebarManager {
         helperView = view
         
         let button = Button(type: .system)
-        button.setImage(.init(systemName: "line.3.horizontal"), for: .normal)
+        if #available(iOS 13.0, *) {
+            button.setImage(.init(systemName: "line.3.horizontal"), for: .normal)
+        }
         button.tintColor = #colorLiteral(red: 0.2630000114, green: 0.2630000114, blue: 0.2630000114, alpha: 1)
         button.backgroundColor = #colorLiteral(red: 0.08600000292, green: 0.08600000292, blue: 0.08600000292, alpha: 1)
         button.layer.cornerRadius = Styles.buttonRadius3
@@ -84,7 +86,9 @@ class SidebarManager {
         let isHidding = finger.x > toHide ? true : false
         if isHidding != self.isHidding {
             self.isHidding = isHidding
-            superView.vibrate(style: .soft)
+            if #available(iOS 13.0, *) {
+                superView.vibrate(style: .soft)
+            } 
         }
         if scrolling || isShowing {
             if sender.state == .began || sender.state == .changed {

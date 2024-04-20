@@ -9,8 +9,13 @@ import UIKit
 
 extension UIViewController {
     func vibrate(style: UIImpactFeedbackGenerator.FeedbackStyle?) {
-        let styleResult = style ?? .soft
-        UIImpactFeedbackGenerator(style: styleResult).impactOccurred()
+        if #available(iOS 13.0, *) {
+            let styleResult = style ?? .soft
+            UIImpactFeedbackGenerator(style: styleResult).impactOccurred()
+        } else {
+            let styleResult = style ?? .light
+            UIImpactFeedbackGenerator(style: styleResult).impactOccurred()
+        }
     }
     
     

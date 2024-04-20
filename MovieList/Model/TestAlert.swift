@@ -78,7 +78,9 @@ fileprivate extension TestAlert {
         ai.showLoading(title: "some title", completion: {
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
                 ai.showAlert(title: "areer", appearence: .with({
-                    $0.image = .image(.add)
+                    if #available(iOS 13.0, *) {
+                        $0.image = .image(.add)
+                    } 
                 }))
             })
         })

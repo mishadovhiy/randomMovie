@@ -20,6 +20,7 @@ class MovieVC: BaseVC {
     @IBOutlet weak var heartButton: HeartButton!
     @IBOutlet weak var secondImdbButton: Button!
     
+    @IBOutlet var watchMovieButton: [UIButton]!
     weak var container:SwipeMovieVC.MoviePreviewView?
     weak var movie:Movie?
     var favoritesPressedAction:(() -> ())?
@@ -47,6 +48,9 @@ class MovieVC: BaseVC {
             secondImdbButton.isHidden = false
         }
         movieImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imgPressed(_:))))
+        watchMovieButton.forEach({
+            $0.isHidden = movie?.imdbid ?? "" == ""
+        })
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -128,6 +132,9 @@ class MovieVC: BaseVC {
         }
     }
     
+    @IBAction func watchMoviePressed(_ sender: UIButton) {
+        self.present(StreamMovieVC.configure(movie: self.movie!), animated: true)
+    }
     
     @IBAction func imdbPressed(_ sender: UIButton) {
         let errorActions = {

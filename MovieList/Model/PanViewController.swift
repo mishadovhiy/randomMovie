@@ -55,7 +55,9 @@ class PanViewController {
                 self.vc.view.layer.cornerRadius = 140 * percent
                 self.vc.view.layer.move(.top, value: newResultPosition > 0 ? newResultPosition : (newResultPosition / 15))
                 if stateChanged && percent >= 0.1 {
-                    vc.vibrate(style: .soft)
+                    if #available(iOS 13.0, *) {
+                        vc.vibrate(style: .soft)
+                    }
                 }
             } else if sender.state == .ended || sender.state == .cancelled {
                 properies.isHidding = false

@@ -61,7 +61,9 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
                     })
                 }
             }*/ else {
-                cell.movieImage.image = UIImage(systemName: "photo.fill")
+                if #available(iOS 13.0, *) {
+                    cell.movieImage.image = UIImage(systemName: "photo.fill")
+                } 
             }
             
 

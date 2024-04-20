@@ -66,13 +66,14 @@ class adBannerView: UIView {
     
     public func hide(remove:Bool = false, ios13Hide:Bool = false) {
         //add buy pro vc
-       /* var go:Bool {
-            if #available(iOS 13.0, *) {
-                return (remove || appData.proEnabeled || ios13Hide) && !adHidden
-            } else {
-                return true
-            }
-        }
+        let go:Bool = true
+//        {
+//            if #available(iOS 13.0, *) {
+//                return (remove || appData.proEnabeled || ios13Hide) && !adHidden
+//            } else {
+//                return true
+//            }
+//        }
         if !adNotReceved && go {
             adHidden = true
             DispatchQueue.main.async {
@@ -87,7 +88,7 @@ class adBannerView: UIView {
                     }
                 }
             }
-        }*/
+        }
     }
     
     var clearBackground = true

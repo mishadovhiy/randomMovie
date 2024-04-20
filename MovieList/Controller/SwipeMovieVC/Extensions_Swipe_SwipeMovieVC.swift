@@ -201,8 +201,9 @@ extension SwipeMovieVC:ContainerPanGestureProtocol {
     }
     
     func actionValueChanged(_ action: PanActionType?, scrollValue: CGFloat, topCalc: CGFloat) {
-        
-        vibrate(style: .soft)
+        if #available(iOS 13.0, *) {
+            vibrate(style: .soft)
+        }
     }
     
     func reloadPressed() {
