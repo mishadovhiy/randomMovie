@@ -82,7 +82,7 @@ struct LocalDB {
             init(dict: [String : Any]) {
                 self.dict = dict
             }
-            init(id:Int, name:String) {
+            init(id:Int, name:String? = nil) {
                 dict = [:]
                 self.id = id
                 self.name = name
@@ -99,13 +99,20 @@ struct LocalDB {
                     dict.updateValue(newValue, forKey: "id")
                 }
             }
-            var name:String {
+            var name:String? {
                 get {
-                    return dict["name"] as? String ?? ""
+                    return dict["name"] as? String ?? defaultName
                 }
                 set {
-                    dict.updateValue(newValue, forKey: "name")
+                    if let newValue {
+                        dict.updateValue(newValue, forKey: "name")
+                    } else {
+                        dict.removeValue(forKey: "name")
+                    }
                 }
+            }
+            var defaultName:String {
+                return "New Folder" + " \(id)"
             }
         }
         
@@ -150,7 +157,7 @@ struct LocalDB {
                 for movie in newValue {
                     result.updateValue(movie.dict, forKey: movie.imdbid)
                 }
-                dict.updateValue(newValue, forKey: "favoriteMovie")
+                dict.updateValue(result, forKey: "favoriteMovie")
             }
         }
         

@@ -12,7 +12,7 @@ extension MovieListVC {
         case all
         case favorite
         case search
-    //    case folderList
+        case folder
     }
     func updateUI(for type: ScreenType) {
         self.collectionView.delegate = self
@@ -23,14 +23,18 @@ extension MovieListVC {
         case .all:
             sectionTitle = "Movie List"
             MovieListVC.shared = self
-            
-        case .favorite, .search:
-            if type == .favorite {
+        case .favorite, .search, .folder:
+            if type == .favorite || type == .folder {
                 DispatchQueue(label: "db", qos: .userInitiated).async {
                     self.loadFavorites()
                 }
-                sectionTitle = "Favorites"
-                self.shakeButton.isHidden = false
+                sectionTitle = type == .favorite ? "Favorites" : selectedFolder?.name
+                shakeButton.isHidden = false
+                if type == .favorite {
+                    collectionView.dragDelegate = self
+                    collectionView.dropDelegate = self
+                    collectionView.dragInteractionEnabled = true
+                }
             } else if type == .search {
                 self.searchBar.isHidden = false
                 self.searchBar.delegate = self

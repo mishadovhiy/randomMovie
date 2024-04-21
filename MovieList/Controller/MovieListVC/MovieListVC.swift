@@ -38,6 +38,8 @@ class MovieListVC: BaseVC {
     var selectedImageView:UIImageView?
 
     var selectedFolder:LocalDB.DB.Folder?
+    var dragIndex:IndexPath?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI(for: screenType)
@@ -68,6 +70,8 @@ class MovieListVC: BaseVC {
         super.filterChanged()
         self.collectionView.reloadData()
     }
+    
+    var folders:[LocalDB.DB.Folder] = []
     
     var tableData:[Movie] {
         get {
@@ -105,13 +109,25 @@ class MovieListVC: BaseVC {
     }
     
     
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        if selectedFolder != nil {
+            view.endEditing(true)
+            collectionView.reloadData()
+        }
+    }
+    
     
     func createFolderPressed() {
         print("createFolderPressedcreateFolderPressed")
+        self.vibrate(style: .light)
         DispatchQueue(label: "db", qos: .userInitiated).async {
-            let lastID = LocalDB.db.folders.sorted(by: {$0.id > $1.id}).first?.id
+            let lastID = LocalDB.db.folders.sorted(by: {$0.id > $1.id}).first?.id ?? 0
             print("lastID", lastID, " erfwdedwfergtvf")
-            LocalDB.db.folders.append(.init(id: lastID ?? 0, name: "New Folder"))
+            LocalDB.db.folders.append(.init(id: lastID + 1))
+            self.folders = LocalDB.db.folders
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         }
     }
     
@@ -137,7 +153,18 @@ class MovieListVC: BaseVC {
     }
     
 
-
+    func folderNameChanged(_ newValue:String) {
+        guard let selected = selectedFolder else {
+            return
+        }
+        selectedFolder?.name = newValue
+        DispatchQueue(label: "db", qos: .userInitiated).async {
+            LocalDB.db.folders.removeAll {
+                $0.id == selected.id
+            }
+            LocalDB.db.folders.append(selected)
+        }
+    }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if self.searchBar.isFirstResponder {
@@ -191,10 +218,11 @@ extension MovieListVC {
     override func decodeRestorableState(with coder: NSCoder) {
         super.decodeRestorableState(with: coder)
     }
-    static func configure(type:ScreenType) -> MovieListVC {
+    static func configure(type:ScreenType, folder:LocalDB.DB.Folder? = nil) -> MovieListVC {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "MovieList") as! MovieListVC
         vc.screenType = type
+        vc.selectedFolder = folder
         return vc
     }
 }

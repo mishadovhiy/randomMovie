@@ -40,11 +40,29 @@ class Movie:Hashable {
     let imdbrating:Double
     let released:String
     let about:String
-    let genre:[String]
-    let dict:[String:Any]
-    var folderID:Int?
+    let genre:[String] 
+    var dict:[String:Any]
+    var folderID:Int? {
+        get {
+            return Int(dict["folderID"] as? String ?? "")
+        }
+        set {
+            if let newValue {
+                dict.updateValue("\(newValue)", forKey: "folderID")
+            } else {
+                dict.removeValue(forKey: "folderID")
+            }
+        }
+    }
     var image:Data?
-    var isFolder:Bool
+    var isFolder:Bool {
+        get {
+            return dict["isFolder"] as? String == "1"
+        }
+        set {
+            dict.updateValue(newValue ? "1" : "0", forKey: "isFolder")
+        }
+    }
     init(dict:[String:Any]) {
         self.name = dict["title"] as? String ?? ""
         let images = dict["imageurl"] as? [String] ?? []
@@ -54,8 +72,6 @@ class Movie:Hashable {
         self.released = "\(dict["released"] as? Int ?? 0)"
         self.about = dict["synopsis"] as? String ?? ""
         self.genre = dict["genre"] as? [String] ?? []
-        self.folderID = dict["folderID"] as? Int
-        self.isFolder = dict["isFolder"] as? Bool ?? false
         self.dict = dict
     }
     
@@ -68,8 +84,6 @@ class Movie:Hashable {
         self.released = ""
         self.about = ""
         self.genre = []
-        self.folderID = dict["id"] as? Int
-        self.isFolder = true
         self.dict = folder.dict
     }
     

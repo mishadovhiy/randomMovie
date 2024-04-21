@@ -32,13 +32,13 @@ extension MovieListVC {
                 self.tableData.removeSubrange(0..<850)
             }
             self.load.getMovies(page: loadingPage) { movies, error, newPage,listCount  in
-                self.dataLoaded(movies: movies, error: error, newPage: newPage, loadingPage:loadingPage, listCount: listCount)
+                self.dataLoaded(movies: movies, folders:[], error: error, newPage: newPage, loadingPage:loadingPage, listCount: listCount)
             }
         }
         
     }
     
-    func dataLoaded(movies:[Movie], error:Bool, newPage:Int, loadingPage:Int, listCount:Int) {
+    func dataLoaded(movies:[Movie], folders:[LocalDB.DB.Folder], error:Bool, newPage:Int, loadingPage:Int, listCount:Int) {
         print(error, " errorrrr")
         if error && (movies.count == 0) {
             print("Error and no loaded movies")
@@ -70,6 +70,7 @@ extension MovieListVC {
         }
 
         LocalDB.db.movieImages = all*/
+        self.folders = folders
         movies.forEach { movie in
             if !tableData.contains(where: {movie.imdbid == $0.imdbid}) {
                 self.load.image(for: movie.imageURL) { data in
@@ -90,14 +91,19 @@ extension MovieListVC {
         let db = LocalDB.db
         var newTableData:[Movie] = []
         if selectedFolder == nil {
-            newTableData = db.favoriteMovies
+            newTableData = db.favoriteMovies.filter({$0.folderID == nil})
             db.folders.forEach({
                 newTableData.append(.init(folder: $0))
             })
         } else {
+            print(selectedFolder?.id, " tgerfwdas")
+            db.favoriteMovies.forEach {
+                print($0.dict, " yhgtfredsw")
+            }
             newTableData = db.favoriteMovies.filter({$0.folderID == selectedFolder?.id})
+            print(newTableData, " gerfwedsx")
         }
-        self.dataLoaded(movies: newTableData, error: false, newPage: 1, loadingPage:1, listCount: 1)
+        self.dataLoaded(movies: newTableData, folders: LocalDB.db.folders, error: false, newPage: 1, loadingPage:1, listCount: 1)
        // self.tableData = newTableData
     }
     

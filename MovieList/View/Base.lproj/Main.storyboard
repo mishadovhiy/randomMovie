@@ -40,6 +40,12 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="76" height="200"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
+                                                        <textField opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="jj" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bSx-Tx-RtY">
+                                                            <rect key="frame" x="0.0" y="166" width="76" height="34"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XO8-ja-z2q">
                                                             <rect key="frame" x="10" y="167.5" width="66" height="32.5"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="27"/>
@@ -50,11 +56,15 @@
                                                     <constraints>
                                                         <constraint firstItem="XO8-ja-z2q" firstAttribute="leading" secondItem="J8R-Ej-5cS" secondAttribute="leading" constant="10" id="FUZ-p7-9dN"/>
                                                         <constraint firstAttribute="bottom" secondItem="XO8-ja-z2q" secondAttribute="bottom" id="VI5-4L-MFu"/>
+                                                        <constraint firstAttribute="trailing" secondItem="bSx-Tx-RtY" secondAttribute="trailing" id="YFH-gQ-gIg"/>
+                                                        <constraint firstItem="bSx-Tx-RtY" firstAttribute="leading" secondItem="J8R-Ej-5cS" secondAttribute="leading" id="dFh-7A-OLF"/>
+                                                        <constraint firstAttribute="bottom" secondItem="bSx-Tx-RtY" secondAttribute="bottom" id="qmc-a5-muW"/>
                                                         <constraint firstAttribute="trailing" secondItem="XO8-ja-z2q" secondAttribute="trailing" id="zgz-Wq-jl1"/>
                                                     </constraints>
                                                 </collectionViewCellContentView>
                                                 <connections>
                                                     <outlet property="mainLabel" destination="XO8-ja-z2q" id="xJ8-fT-7KO"/>
+                                                    <outlet property="textField" destination="bSx-Tx-RtY" id="Y13-u4-WKc"/>
                                                 </connections>
                                             </collectionViewCell>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PreviewCollectionCell" id="K0X-z5-LUD" customClass="PreviewCollectionCell" customModule="MovieList" customModuleProvider="target">
