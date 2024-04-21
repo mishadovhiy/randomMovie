@@ -11,6 +11,8 @@
 		8D06DF4B2828585500372351 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06DF4A2828585500372351 /* BaseVC.swift */; };
 		8D06DF4D28285BAB00372351 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06DF4C28285BAB00372351 /* AppModel.swift */; };
 		8D1191F02998626B00D381F6 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1191EF2998626B00D381F6 /* Filter.swift */; };
+		8D28BE6C2BD52594004D2F97 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D28BE6B2BD52594004D2F97 /* SceneDelegate.swift */; };
+		8D28BE6E2BD525C1004D2F97 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D28BE6D2BD525C1004D2F97 /* UIApplication.swift */; };
 		8D353E2E28E24562007F774F /* adBannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D353E2B28E24561007F774F /* adBannerView.xib */; };
 		8D353E2F28E24562007F774F /* adBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D353E2C28E24561007F774F /* adBannerView.swift */; };
 		8D353E3028E24562007F774F /* ExtensionGADBannerViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D353E2D28E24561007F774F /* ExtensionGADBannerViewDelegate.swift */; };
@@ -121,6 +123,8 @@
 		8D06DF4A2828585500372351 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		8D06DF4C28285BAB00372351 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		8D1191EF2998626B00D381F6 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		8D28BE6B2BD52594004D2F97 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		8D28BE6D2BD525C1004D2F97 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		8D353E2B28E24561007F774F /* adBannerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = adBannerView.xib; sourceTree = "<group>"; };
 		8D353E2C28E24561007F774F /* adBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = adBannerView.swift; sourceTree = "<group>"; };
 		8D353E2D28E24561007F774F /* ExtensionGADBannerViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionGADBannerViewDelegate.swift; sourceTree = "<group>"; };
@@ -330,6 +334,7 @@
 				8D47531E2824C3C30061970C /* Date.swift */,
 				8D06DF482828570500372351 /* UIViewController.swift */,
 				8D7CE5C42AD9964E007F19C0 /* UITableView.swift */,
+				8D28BE6D2BD525C1004D2F97 /* UIApplication.swift */,
 				8D72208328287A34004C5C6C /* UIActivityIndicatorView.swift */,
 				8D3E74182828954F003AC968 /* NSLayoutConstraint.swift */,
 			);
@@ -544,6 +549,7 @@
 			isa = PBXGroup;
 			children = (
 				8DF671D3281F6B0D0064849A /* AppDelegate.swift */,
+				8D28BE6B2BD52594004D2F97 /* SceneDelegate.swift */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -908,6 +914,7 @@
 				8DB065552ACC469D00DE10CC /* TabBarVC.swift in Sources */,
 				8DF6720A281F89A40064849A /* MovieCell.swift in Sources */,
 				8D7E3E7F282041AB0094F05B /* Unparce.swift in Sources */,
+				8D28BE6C2BD52594004D2F97 /* SceneDelegate.swift in Sources */,
 				8D7CE5C32AD99609007F19C0 /* CALayer.swift in Sources */,
 				8DD4635528212C78008EB85A /* UIView.swift in Sources */,
 				8DB0656B2ACCB34B00DE10CC /* SidebarManager.swift in Sources */,
@@ -917,6 +924,7 @@
 				8D722080282874F8004C5C6C /* Appeareance.swift in Sources */,
 				8DE9C54428383B4F008168DF /* ExtensionsSideBar.swift in Sources */,
 				8D353E2F28E24562007F774F /* adBannerView.swift in Sources */,
+				8D28BE6E2BD525C1004D2F97 /* UIApplication.swift in Sources */,
 				8D3E741928289550003AC968 /* NSLayoutConstraint.swift in Sources */,
 				8D81F5A4282468B200338946 /* RangeSlider.swift in Sources */,
 				8DD4634F28212084008EB85A /* LoadingCollectionCell.swift in Sources */,

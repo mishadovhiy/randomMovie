@@ -18,7 +18,6 @@ class MovieListVC: BaseVC {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    static var shared:MovieListVC?
     let load = NetworkModel()
     var _tableData:[Movie] = []
     
@@ -39,6 +38,7 @@ class MovieListVC: BaseVC {
 
     var selectedFolder:LocalDB.DB.Folder?
     var dragIndex:IndexPath?
+    private var needReloadDB:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,16 +48,25 @@ class MovieListVC: BaseVC {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewAppeare()
-        self.navigationController?.delegate = nil
+        navigationController?.delegate = nil
+        if needReloadDB {
+            updateUI(for: screenType)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        needReloadDB = true
         (shakeButton as! LoadingButton).touch(false)
         if screenType == .favorite {
             self.navigationController?.setNavigationBarHidden(false, animated: true)
 
         }
+    }
+    
+    override func dataBaseUpdated() {
+        super.dataBaseUpdated()
+        updateUI(for: screenType)
     }
     
     override func firstLayoutSubviews() {

@@ -71,7 +71,7 @@ extension MovieListVC {
 
         LocalDB.db.movieImages = all*/
         self.folders = folders
-        movies.forEach { movie in
+        movies.sorted(by: {$0.imdbrating > $1.imdbrating}).forEach { movie in
             if !tableData.contains(where: {movie.imdbid == $0.imdbid}) {
                 self.load.image(for: movie.imageURL) { data in
                     movie.image = data

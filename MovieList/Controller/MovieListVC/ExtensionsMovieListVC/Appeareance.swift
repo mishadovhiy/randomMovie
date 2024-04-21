@@ -22,7 +22,6 @@ extension MovieListVC {
         switch type {
         case .all:
             sectionTitle = "Movie List"
-            MovieListVC.shared = self
         case .favorite, .search, .folder:
             if type == .favorite || type == .folder {
                 DispatchQueue(label: "db", qos: .userInitiated).async {
@@ -30,7 +29,7 @@ extension MovieListVC {
                 }
                 sectionTitle = type == .favorite ? "Favorites" : selectedFolder?.name
                 shakeButton.isHidden = false
-                if type == .favorite {
+                if type == .favorite || type == .folder {
                     collectionView.dragDelegate = self
                     collectionView.dropDelegate = self
                     collectionView.dragInteractionEnabled = true
@@ -54,7 +53,7 @@ extension MovieListVC {
             shakeHidden = hide
             let segment = TabBarVC.shared?.segmented
             let button = TabBarVC.shared?.sideBar?.button
-            let toHide = ((AppDelegate.shared?.window?.safeAreaInsets.top ?? 0) + 60) * -1
+            let toHide = ((UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0) + 60) * -1
             UIView.animate(withDuration: Styles.pressedAnimation, delay: 0, animations: {
                 segment?.layer.move(.top, value: hide ? toHide : 0)
                 button?.layer.move(.top, value: hide ? toHide : 0)

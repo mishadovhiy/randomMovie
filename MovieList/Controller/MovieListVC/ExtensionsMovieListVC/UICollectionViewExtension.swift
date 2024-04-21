@@ -12,8 +12,8 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         switch screenType {
         case .all: return 3
-        case .favorite: return 3
-        case .search, .folder: return 2
+        case .favorite, .folder: return 3
+        case .search: return 2
         }
     }
     
@@ -24,7 +24,11 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
         case 1:
             return tableData.count
         case 2:
-            return screenType == .all ? 1 : (screenType == .favorite ? (folders.count + 1) : 0)
+            switch screenType {
+            case .all, .folder: return 1
+            case .favorite: return folders.count + 1
+            default: return 0
+            }
         case 3:
             return 1
         default:
@@ -40,7 +44,7 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
     
     private func cellType(for indexPath:IndexPath) -> CellType {
         let cellType:CellType
-        if indexPath.section == 1 || (screenType == .favorite && indexPath.section == 2) {
+        if indexPath.section == 1 || ((screenType == .favorite || screenType == .folder) && indexPath.section == 2) {
             cellType = .preview
         } else if indexPath.section == 0 {
             cellType = .title
@@ -51,7 +55,7 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let isFolderCell = screenType == .favorite && indexPath.section == 2
+        let isFolderCell = (screenType == .favorite || screenType == .folder) && indexPath.section == 2
         let cellType = cellType(for: indexPath)
         
         switch cellType {
@@ -61,17 +65,14 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
             return cell
         case .preview:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PreviewCollectionCell", for: indexPath) as! PreviewCollectionCell
-//            if (isFolderCell ? folders.count : tableData.count) <= indexPath.row || (isFolderCell && folders.count == indexPath.row) {
-//                return cell
-//            }
-            if isFolderCell {
-                print("yrtgerfwdwewfergtrht")
-            }
+            //            if (isFolderCell ? folders.count : tableData.count) <= indexPath.row || (isFolderCell && folders.count == indexPath.row) {
+            //                return cell
+            //            }
             let anyData:Any = isFolderCell ? (folders.count == indexPath.row ? .init(id: -1, name: "Create Folder") : folders[indexPath.row]) : tableData[indexPath.row]
             let data = anyData as? Movie
             let folderData = anyData as? LocalDB.DB.Folder
             cell.touchesBegun = { begun in
-               // (cell.contentView as? TouchView)?.layer.performAnimation(key: .zoom, to: begun ? CGFloat(1.02) : CGFloat(1))
+                // (cell.contentView as? TouchView)?.layer.performAnimation(key: .zoom, to: begun ? CGFloat(1.02) : CGFloat(1))
                 UIView.animate(withDuration: Styles.pressedAnimation, delay: 0, options: .allowUserInteraction, animations: {
                     cell.contentView.layer.zoom(value: begun ? 1.01 : 1)
                 })
@@ -99,11 +100,12 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
             } else {
                 cell.imdbLabel.text = ""
                 if #available(iOS 13.0, *) {
-                    cell.movieImage.image = UIImage(systemName: "photo.fill")
+                    cell.movieImage.image = screenType == .folder ? UIImage(named: "trash") : UIImage(systemName: "folder.fill")
                 }
             }
-            cell.titleLabel.text = data?.name ?? folderData?.name
-            cell.dateLabel.text = data?.released ?? folderData?.name
+            let title = screenType == .folder ? "Drag here to remove from Folder" : data?.name ?? folderData?.name
+            cell.titleLabel.text = title
+            cell.dateLabel.text = title
             return cell
         case .loader:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LoadingCollectionCell", for: indexPath) as! LoadingCollectionCell
@@ -118,26 +120,26 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
                 let page = LocalDB.db.page + 1
                 DispatchQueue.main.async {
                     self.download()
-
+                    
                 }
             }
         }
     }
     
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch cellType(for: indexPath) {
         case .preview:
             let isFolderCell = screenType == .favorite && indexPath.section == 2
-            if !isFolderCell {
-              //  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PreviewCollectionCell", for: indexPath) as! PreviewCollectionCell
+            if !isFolderCell && !(screenType == .folder && indexPath.section == 2) {
+                //  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PreviewCollectionCell", for: indexPath) as! PreviewCollectionCell
                 let cellRow = collectionView.cellForItem(at: indexPath) as! PreviewCollectionCell
                 selectedImageView = cellRow.movieImage
                 selectedImageView?.image = cellRow.movieImage.image
                 selectedMovie = tableData[indexPath.row]
-            } else if folders.count == indexPath.row {
+            } else if folders.count == indexPath.row, screenType != .folder {
                 createFolderPressed()
-            } else if folders.count > indexPath.row {
+            } else if folders.count > indexPath.row, screenType != .folder {
                 let vc = MovieListVC.configure(type: .folder, folder: folders[indexPath.row])
                 if let nav = self.navigationController {
                     nav.pushViewController(vc, animated: true)
@@ -164,7 +166,7 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
         
     }
     
-
+    
     var collectionCellWidth:CGFloat {
         return (collectionView.frame.width / 3) - 10
     }
@@ -177,7 +179,7 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
         }
         
     }
-
+    
 }
 
 extension MovieListVC:UICollectionViewDragDelegate, UICollectionViewDropDelegate {
@@ -196,15 +198,15 @@ extension MovieListVC:UICollectionViewDragDelegate, UICollectionViewDropDelegate
         print(session, " tgrfeds")
         let allowSections = [1, 2]
         if collectionView.hasActiveDrag && allowSections.contains(destinationIndexPath?.section ?? 0) && !(destinationIndexPath?.section == 2 && folders.count == destinationIndexPath?.row) {
-                if session.localDragSession != nil {
-                    return UICollectionViewDropProposal(operation: .move, intent: destinationIndexPath?.section == 2 ? .insertIntoDestinationIndexPath : .insertAtDestinationIndexPath)
-                } else {
-                    return UICollectionViewDropProposal(operation: .copy, intent: .insertAtDestinationIndexPath)
-                }
+            if session.localDragSession != nil {
+                return UICollectionViewDropProposal(operation: .move, intent: destinationIndexPath?.section == 2 ? .insertIntoDestinationIndexPath : .insertAtDestinationIndexPath)
             } else {
-                return UICollectionViewDropProposal(operation: .forbidden, intent: .unspecified)
+                return UICollectionViewDropProposal(operation: .copy, intent: .insertAtDestinationIndexPath)
             }
-            
+        } else {
+            return UICollectionViewDropProposal(operation: .forbidden, intent: .unspecified)
+        }
+        
     }
     
     
@@ -228,7 +230,7 @@ extension MovieListVC:UICollectionViewDragDelegate, UICollectionViewDropDelegate
             collectionView.deleteItems(at: [dragIndex])
             DispatchQueue(label: "db", qos: .userInitiated).async {
                 let new = LocalDB.db.favoriteMovies.first(where: {$0.imdbid == value.imdbid})
-                new?.folderID = dragIndex.row
+                new?.folderID = self.screenType == .favorite ? dragIndex.row : nil
                 if let new {
                     LocalDB.db.favoriteMovies.removeAll(where: {$0.imdbid == value.imdbid})
                     LocalDB.db.favoriteMovies.append(new)

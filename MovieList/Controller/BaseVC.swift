@@ -52,6 +52,9 @@ class BaseVC: UIViewController {
         
     }
 
+    /// Called when LocalDB set value
+    /// Called from AppDelegate
+    func dataBaseUpdated() { }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         

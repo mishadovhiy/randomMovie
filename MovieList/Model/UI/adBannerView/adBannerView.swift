@@ -21,7 +21,9 @@ class adBannerView: UIView {
     public func createBanner() {
         GADMobileAds.sharedInstance().start { status in
             DispatchQueue.main.async {
-                let window = AppDelegate.shared?.window ?? UIWindow()
+               // let window = AppDelegate.shared?.window ?? UIWindow()
+                                let window = UIApplication.shared.keyWindow!
+
                 let height = self.backgroundView.frame.height
                 let screenWidth:CGFloat = window.frame.width > 330 ? 320 : 300
                 let adSize = GADAdSizeFromCGSize(CGSize(width: screenWidth, height: height))
@@ -29,6 +31,8 @@ class adBannerView: UIView {
                 let bannerView = GADBannerView(adSize: adSize)
                 bannerView.adUnitID = "ca-app-pub-5463058852615321/4611360906"
                 bannerView.rootViewController = AppDelegate.shared?.window?.rootViewController
+                //                bannerView.rootViewController = window.rootViewController
+
                 bannerView.load(GADRequest())
                 bannerView.delegate = self
                 self.adStack.addArrangedSubview(bannerView)
@@ -77,7 +81,9 @@ class adBannerView: UIView {
         if !adNotReceved && go {
             adHidden = true
             DispatchQueue.main.async {
-                let window = AppDelegate.shared?.window ?? UIWindow()
+                //let window = AppDelegate.shared?.window ?? UIWindow()
+
+                let window = UIApplication.shared.keyWindow ?? .init()
                 UIView.animate(withDuration: 0.3) {
                    // self.alpha = 0
                     self.backgroundView.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, window.frame.height, 0)

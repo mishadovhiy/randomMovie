@@ -10,7 +10,11 @@ import AlertViewLibrary
 
 class TabBarVC: UITabBarController {
 
-    static var shared:TabBarVC?
+    static var shared:TabBarVC? {
+        let vc = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.viewControllers.first as? TabBarVC
+        print(vc, " gterfweregt")
+        return vc
+    }
     var segmented:SegmentView?
     var sideBar:SidebarManager?
     
@@ -18,9 +22,11 @@ class TabBarVC: UITabBarController {
         super.viewDidLoad()
         self.navigationController?.setBackButton(vc: self)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        TabBarVC.shared = self
         createSegmented()
         sideBar = .init(superVC: self)
+      //  DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+            AppDelegate.shared?.banner.createBanner()
+    //    })
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,5 +78,12 @@ extension TabBarVC {
     }
     override func decodeRestorableState(with coder: NSCoder) {
         super.decodeRestorableState(with: coder)
+    }
+}
+
+extension TabBarVC {
+    static func configure() -> UIViewController {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarVC") as! TabBarVC
+        return UINavigationController(rootViewController: vc)
     }
 }

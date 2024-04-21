@@ -117,8 +117,9 @@ class SidebarManager {
 
             } completion: { _ in
                 if show {
+                    let sideBar = SideBarVC.shared
                     DispatchQueue(label: "db", qos: .userInitiated).async {
-                        SideBarVC.shared?.getData()
+                        sideBar?.getData()
                     }
                 }
                 if self.containerView?.alpha == 0 {

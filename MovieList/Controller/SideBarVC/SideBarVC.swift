@@ -11,11 +11,12 @@ class SideBarVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    static var shared:SideBarVC?
+    static var shared:SideBarVC? {
+        return TabBarVC.shared?.sideBar?.superView.children.first(where: {$0 is SideBarVC}) as? SideBarVC
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        SideBarVC.shared = self
         tableView.delegate = self
         tableView.dataSource = self
         DispatchQueue(label: "db", qos: .userInitiated).async {

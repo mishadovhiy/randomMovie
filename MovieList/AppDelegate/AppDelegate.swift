@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return UIApplication.shared.delegate as? AppDelegate
     }
+    var selectedWindowID:String = ""
+    
     lazy var banner: adBannerView = {
         return adBannerView.instanceFromNib() as! adBannerView
     }()
@@ -76,7 +78,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        self.banner.createBanner()
         return true
     }
     
@@ -91,6 +92,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     @available(iOS 13.0, *)
     func stateRestorationActivity(for scene: UIScene) -> NSUserActivity? {
         return scene.userActivity
+    }
+    
+    @available(iOS 13.0, *)
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        // Called when a new scene session is being created.
+        // Use this method to select a configuration to create the new scene with.
+        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
     
     // MARK: - Core Data stack
@@ -128,6 +136,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
     }()
+    
+    func dataBaseUpdated() {
+//        UIApplication.shared.windows.forEach {
+//            if let nav = $0.rootViewController as? UINavigationController {
+//                nav.viewControllers.forEach {
+//                    if let vc = $0 as? BaseVC {
+//                        vc.dataBaseUpdated()
+//                    } else if let subVC = $0 as? BaseVC {
+//                        if let window = subVC.view.window as? BaseWindow {
+//                            if window.layer.name != AppDelegate.shared?.selectedWindowID {
+//                                subVC.dataBaseUpdated()
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+    }
     
     // MARK: - Core Data Saving support
     

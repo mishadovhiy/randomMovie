@@ -82,7 +82,7 @@ class SwipeMovieVC: BaseVC {
     }
     
     lazy var transform:(first:CGFloat, second:CGFloat) = {
-        let selfAr = (AppDelegate.shared?.window?.safeAreaInsets.bottom ?? 0) > 0
+        let selfAr = (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0) > 0
         return(first: selfAr ? 5 : 10,
                second: selfAr ? 10 : 20)
     }()
