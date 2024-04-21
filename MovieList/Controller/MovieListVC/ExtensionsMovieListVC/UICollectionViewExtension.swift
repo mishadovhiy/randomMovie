@@ -98,7 +98,9 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
                 }
             } else {
                 cell.imdbLabel.text = ""
-                cell.movieImage.image = nil
+                if #available(iOS 13.0, *) {
+                    cell.movieImage.image = UIImage(systemName: "photo.fill")
+                }
             }
             cell.titleLabel.text = data?.name ?? folderData?.name
             cell.dateLabel.text = data?.released ?? folderData?.name
@@ -166,8 +168,9 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
     var collectionCellWidth:CGFloat {
         return (collectionView.frame.width / 3) - 10
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if indexPath.section == 1 {
+        if cellType(for: indexPath) == .preview {
             return .init(width: collectionCellWidth, height: 180)
         } else {
             return .init(width: collectionView.frame.width, height: indexPath.section == 0 ? 80 : 180)
