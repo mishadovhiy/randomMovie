@@ -18,7 +18,6 @@ extension MovieListVC {
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         self.collectionView.doubleView()
-        
         switch type {
         case .all:
             sectionTitle = "Movie List"
@@ -33,6 +32,9 @@ extension MovieListVC {
                     collectionView.dragDelegate = self
                     collectionView.dropDelegate = self
                     collectionView.dragInteractionEnabled = true
+                }
+                if type == .folder {
+                    deleteFolderButton.isHidden = false
                 }
             } else if type == .search {
                 self.searchBar.isHidden = false
@@ -69,8 +71,9 @@ extension MovieListVC {
     func viewAppeare() {
         switch screenType {
         case .all:
+            let sideBar = SideBarVC.shared
             DispatchQueue(label: "db", qos: .userInitiated).async {
-                SideBarVC.shared?.getData()
+                sideBar?.getData()
             }
             addRefreshControll()
         case .favorite:

@@ -68,7 +68,7 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
             //            if (isFolderCell ? folders.count : tableData.count) <= indexPath.row || (isFolderCell && folders.count == indexPath.row) {
             //                return cell
             //            }
-            let anyData:Any = isFolderCell ? (folders.count == indexPath.row ? .init(id: -1, name: "Create Folder") : folders[indexPath.row]) : tableData[indexPath.row]
+            let anyData:Any = isFolderCell ? (folders.count >= (indexPath.row + 1) ? folders[indexPath.row] : .init(id: -1, name: "Create Folder")) : tableData[indexPath.row]
             let data = anyData as? Movie
             let folderData = anyData as? LocalDB.DB.Folder
             cell.touchesBegun = { begun in
@@ -97,10 +97,12 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
                         cell.movieImage.image = UIImage(systemName: "photo.fill")
                     }
                 }
+                cell.movieImage.contentMode = .scaleAspectFill
             } else {
                 cell.imdbLabel.text = ""
                 if #available(iOS 13.0, *) {
                     cell.movieImage.image = screenType == .folder ? UIImage(named: "trash") : UIImage(systemName: "folder.fill")
+                    cell.movieImage.contentMode = .center
                 }
             }
             let title = screenType == .folder ? "Drag here to remove from Folder" : data?.name ?? folderData?.name
@@ -140,7 +142,9 @@ extension MovieListVC:UICollectionViewDelegate, UICollectionViewDataSource, UICo
             } else if folders.count == indexPath.row, screenType != .folder {
                 createFolderPressed()
             } else if folders.count > indexPath.row, screenType != .folder {
-                let vc = MovieListVC.configure(type: .folder, folder: folders[indexPath.row])
+                let vc = MovieListVC.configure(type: .folder, folder: folders[indexPath.row]) {
+                    self.updateData = true
+                }
                 if let nav = self.navigationController {
                     nav.pushViewController(vc, animated: true)
                 } else {
@@ -220,6 +224,7 @@ extension MovieListVC:UICollectionViewDragDelegate, UICollectionViewDropDelegate
     }
     
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: any UICollectionViewDropCoordinator) {
+        reloadAction?()
         guard let dragIndex else {
             return
         }
@@ -230,7 +235,9 @@ extension MovieListVC:UICollectionViewDragDelegate, UICollectionViewDropDelegate
             collectionView.deleteItems(at: [dragIndex])
             DispatchQueue(label: "db", qos: .userInitiated).async {
                 let new = LocalDB.db.favoriteMovies.first(where: {$0.imdbid == value.imdbid})
-                new?.folderID = self.screenType == .favorite ? dragIndex.row : nil
+                let toFolder = self.folders.count >= destinationIndexPath.row + 1 ? self.folders[destinationIndexPath.row].id : nil
+                print(toFolder, " tefrdwerfgtr")
+                new?.folderID = self.screenType == .favorite ? toFolder : nil
                 if let new {
                     LocalDB.db.favoriteMovies.removeAll(where: {$0.imdbid == value.imdbid})
                     LocalDB.db.favoriteMovies.append(new)

@@ -12,6 +12,7 @@ class MovieListVC: BaseVC {
     public var transitionComponents = TransitionComponents(albumCoverImageView: nil, albumNameLabel: nil)
     private let transitionManager = AnimatedTransitioningManager(duration: 0.3)
     
+    @IBOutlet weak var deleteFolderButton: UIButton!
     @IBOutlet weak var mainContentView: UIView!
     @IBOutlet weak var shakeButton: Button!
     @IBOutlet weak var pageLabel: UILabel!
@@ -38,7 +39,7 @@ class MovieListVC: BaseVC {
 
     var selectedFolder:LocalDB.DB.Folder?
     var dragIndex:IndexPath?
-    private var needReloadDB:Bool = false
+    var reloadAction:(()->())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,21 +50,17 @@ class MovieListVC: BaseVC {
         super.viewDidAppear(animated)
         viewAppeare()
         navigationController?.delegate = nil
-        if needReloadDB {
-            updateUI(for: screenType)
-        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        needReloadDB = true
         (shakeButton as! LoadingButton).touch(false)
         if screenType == .favorite {
             self.navigationController?.setNavigationBarHidden(false, animated: true)
 
         }
     }
-    
+        
     override func dataBaseUpdated() {
         super.dataBaseUpdated()
         updateUI(for: screenType)
@@ -155,6 +152,32 @@ class MovieListVC: BaseVC {
         }
     }
 
+    @IBAction func deleteFolderPressed(_ sender: UIButton) {
+        reloadAction?()
+        sender.isUserInteractionEnabled = false
+        UIView.animate(withDuration: 0.2, animations: {
+            sender.alpha = 0
+        }) { _ in
+            sender.removeFromSuperview()
+        }
+        DispatchQueue(label: "db", qos: .userInitiated).async {
+            LocalDB.db.folders.removeAll {
+                $0.id == self.selectedFolder?.id
+            }
+            let movies = LocalDB.db.favoriteMovies.filter({ $0.folderID == self.selectedFolder?.id })
+            movies.forEach {
+                $0.folderID = nil
+            }
+            LocalDB.db.favoriteMovies.removeAll(where: {$0.folderID == self.selectedFolder?.id})
+            movies.forEach {
+                LocalDB.db.favoriteMovies.append($0)
+            }
+            DispatchQueue.main.async {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+    
 
     @IBAction func randomPressed(_ sender: Any) {
         selectedImageView = nil
@@ -166,12 +189,15 @@ class MovieListVC: BaseVC {
         guard let selected = selectedFolder else {
             return
         }
+        reloadAction?()
+        var selectedValue = selected
+        selectedValue.name = newValue
         selectedFolder?.name = newValue
         DispatchQueue(label: "db", qos: .userInitiated).async {
             LocalDB.db.folders.removeAll {
-                $0.id == selected.id
+                $0.id == selectedValue.id
             }
-            LocalDB.db.folders.append(selected)
+            LocalDB.db.folders.append(selectedValue)
         }
     }
     
@@ -227,11 +253,12 @@ extension MovieListVC {
     override func decodeRestorableState(with coder: NSCoder) {
         super.decodeRestorableState(with: coder)
     }
-    static func configure(type:ScreenType, folder:LocalDB.DB.Folder? = nil) -> MovieListVC {
+    static func configure(type:ScreenType, folder:LocalDB.DB.Folder? = nil, reloadAction:(()->())? = nil) -> MovieListVC {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "MovieList") as! MovieListVC
         vc.screenType = type
         vc.selectedFolder = folder
+        vc.reloadAction = reloadAction
         return vc
     }
 }

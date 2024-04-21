@@ -110,15 +110,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
          */
-        if #available(iOS 13.0, *) {
-            let container = NSPersistentCloudKitContainer(name: "LocalDataBase")
-            container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-                if let error = error as NSError? {
-                    fatalError("Unresolved error \(error), \(error.userInfo)")
-                }
-            })
-            return container
-        } else {
+//        if #available(iOS 13.0, *) {
+//            let container = NSPersistentCloudKitContainer(name: "LocalDataBase")
+//            container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+//                if let error = error as NSError? {
+//                    fatalError("Unresolved error \(error), \(error.userInfo)")
+//                }
+//            })
+//            return container
+//        } else {
             let container = NSPersistentContainer(name: "LocalDataBase")
             container.loadPersistentStores(completionHandler: { (storeDescription, error) in
                 if let error = error as NSError? {
@@ -133,7 +133,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             })
             return container
-        }
+//        }
         
     }()
     

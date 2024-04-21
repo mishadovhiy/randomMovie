@@ -52,6 +52,9 @@ extension MovieListVC {
         if self.tableData.count < 40 && movies.count < 40 {
             self.tableData.removeAll()
         }
+        if screenType == .favorite {
+            self.tableData.removeAll()
+        }
         LocalDB.db.page = newPage
         self.loading = false
      //   var newImages:[[String:Any]] = []
@@ -140,8 +143,9 @@ extension MovieListVC {
                 }
             }
         default:
-            break
-            
+            selectedMovie = tableData.randomElement()
+            self.shakeButton.isEnabled = true
+            (self.shakeButton as! LoadingButton).touch(false)
         }
         
     }
