@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class MovieVC: BaseVC {
 
@@ -131,9 +132,15 @@ class MovieVC: BaseVC {
             LocalDB.db.favoritePressed(button: sender, movie: self.movie)
         }
     }
-    
+    private var interstitial: GADFullScreenPresentingAd?
+
     @IBAction func watchMoviePressed(_ sender: UIButton) {
-        self.present(StreamMovieVC.configure(movie: self.movie!), animated: true)
+        AppDelegate.shared?.banner.toggleFullScreenAdd(self, loaded: {
+            self.interstitial = $0
+            self.interstitial?.fullScreenContentDelegate = self
+        }, closed: { presented in
+            self.present(StreamMovieVC.configure(movie: self.movie!), animated: true)
+        })
     }
     
     @IBAction func imdbPressed(_ sender: UIButton) {
@@ -234,5 +241,15 @@ extension MovieVC {
         vc.movie = movie
         vc.favoritesPressedAction = favoritesPressedAction
         return vc
+    }
+}
+
+extension MovieVC: GADFullScreenContentDelegate {
+    func adWillPresentFullScreenContent(_ ad: any GADFullScreenPresentingAd) {
+        AppDelegate.shared?.banner.adDidPresentFullScreenContent(ad)
+    }
+
+    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        AppDelegate.shared?.banner.adDidDismissFullScreenContent(ad)
     }
 }

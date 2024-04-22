@@ -8,6 +8,7 @@
 import UIKit
 import CoreData
 import AlertViewLibrary
+import MessageViewLibrary
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -65,6 +66,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 })
             })
         }))
+    }()
+    
+    lazy var message:MessageViewLibrary = {
+        return .instanceFromNib()
     }()
     
     var db:CoreDataDBManager?

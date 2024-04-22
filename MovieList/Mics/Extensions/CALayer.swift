@@ -105,7 +105,7 @@ extension CALayer {
         case height = "bounds.size.height"
         case background = "backgroundColor"
         case zoom = "transform.scale"
-        
+        case stokeEnd = "strokeEnd"
         func from(_ view:CALayer) -> Any {
             switch self {
             case .height:
@@ -113,6 +113,8 @@ extension CALayer {
             case .background:
                 return view.backgroundColor ?? UIColor.black.cgColor
             case .zoom: return CGFloat(1)
+            case .stokeEnd:
+                return 0
             }
         }
         
@@ -123,6 +125,8 @@ extension CALayer {
             case .background:
                 return nil
             case .zoom: return nil
+            case .stokeEnd:
+                return 1
             }
         }
         
@@ -135,6 +139,8 @@ extension CALayer {
             case .zoom:
                 let to = (to ?? self.to(view)) as! CGFloat
                 view.transform = CATransform3DMakeScale(to, to, 1)
+            case .stokeEnd:
+                break
             }
         }
     }

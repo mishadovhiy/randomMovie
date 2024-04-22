@@ -9,6 +9,10 @@
 import UIKit
 import GoogleMobileAds
 
+protocol FullScreenDelegate {
+    func toggleAdView(_ show:Bool)
+}
+
 class adBannerView: UIView {
     
     @IBOutlet weak var backgroundView: UIView!
@@ -17,7 +21,13 @@ class adBannerView: UIView {
     var _size:CGFloat = 0
     var adHidden = true
     var adNotReceved = true
-    
+    private var showedBannerTime:Data?
+    var bannerWatchedFull:Bool = false
+    private var bannerShowCompletion:((_ presented:Bool)->())?
+    private var showedBanner:Date?
+    var fullScreenDelegates:[String:FullScreenDelegate] = [:]
+    let videoShowDelay:Double = (3 * 60) * 60
+
     public func createBanner() {
         GADMobileAds.sharedInstance().start { status in
             DispatchQueue.main.async {
@@ -45,8 +55,62 @@ class adBannerView: UIView {
         }
     }
 
+    func toggleFullScreenAdd(_ vc:UIViewController, loaded:@escaping(GADFullScreenPresentingAd?)->(), closed:@escaping(_ presented:Bool)->()) {
+        bannerCanShow { show in
+            if show {
+                self.bannerShowCompletion = closed
+                if !self.adHidden {
+                    self.hide(ios13Hide: true, completion: {
+                        self.presentFullScreen(vc, loaded: loaded)
+                    })
+                } else {
+                    self.presentFullScreen(vc, loaded: loaded)
+
+                }
+            } else {
+                closed(false)
+            }
+        }
+    }
+    private weak var rootVC:UIViewController?
+
+    private func presentFullScreen(_ vc:UIViewController, loaded:@escaping(GADFullScreenPresentingAd?)->()) {
+        //here
+        rootVC = vc
+        let id = "ca-app-pub-5463058852615321/7352213464"
+        GADInterstitialAd.load(withAdUnitID: id, request: GADRequest()) { ad, error in
+            loaded(ad)
+            if error != nil {
+                print(error ?? "-", "bannerror")
+            }
+            ad?.present(fromRootViewController: vc)
+        }
+    }
     
-    public func appeare(force:Bool = false) {
+    func bannerCanShow(completion:@escaping(_ show:Bool)->()) {
+        if let from = self.showedBanner {
+            let now = Date()
+            let dif = now.timeIntervalSince(from)
+            if dif >= self.videoShowDelay {
+                DispatchQueue.main.async {
+                    completion(true)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion(false)
+                }
+            }
+        } else {
+            DispatchQueue.main.async {
+                completion(true)
+            }
+        }
+        
+        
+    }
+    
+    
+    public func appeare(force:Bool = false, completion:(()->())? = nil) {
         
         var go:Bool {
            /* if #available(iOS 13.0, *) {
@@ -60,15 +124,17 @@ class adBannerView: UIView {
             adHidden = false
             DispatchQueue.main.async {
                 self.isHidden = false
-                UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.85, initialSpringVelocity: 0, options: .allowAnimatedContent) {
+                UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.85, initialSpringVelocity: 0, options: .allowAnimatedContent, animations: {
                     //self.alpha = 1
                     self.backgroundView.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, 0, 0)
+                }) { _ in
+                    completion?()
                 }
             }
         }
     }
     
-    public func hide(remove:Bool = false, ios13Hide:Bool = false) {
+    public func hide(remove:Bool = false, ios13Hide:Bool = false, completion:(()->())? = nil) {
         //add buy pro vc
         let go:Bool = true
 //        {
@@ -92,6 +158,7 @@ class adBannerView: UIView {
                     if remove {
                         self.removeAd()
                     }
+                    completion?()
                 }
             }
         }
@@ -163,3 +230,59 @@ class adBannerView: UIView {
 
 
 
+extension adBannerView {
+    func adDidPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        bannerWatchedFull = false
+        showedBannerTime = Data()
+        AppDelegate.shared?.ai.hide()
+      //  let shape = UIApplication.shared.keyWindow?.layer.drawSeparetor(color: UIColor.link, y: UIApplication.shared.keyWindow?.safeAreaInsets.top, width: 3)
+        let window = UIApplication.shared.keyWindow ?? .init()
+        let shape = UIApplication.shared.keyWindow?.layer.drawLine([.init(x: 0, y: window.safeAreaInsets.top), .init(x: window.frame.width, y: window.safeAreaInsets.top)], color: .red, width: 3)
+        shape?.zPosition = 999
+        shape?.name = "adFullBanerLine"
+        shape?.performAnimation(key: .stokeEnd, to: CGFloat(1), code: .general, duration: 10, completion: {
+            UIView.animate(withDuration: 0.3) {
+                shape?.strokeColor = UIColor.green.cgColor
+            }
+        })
+        Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { _ in
+            if self.bannerShowCompletion != nil {
+                self.bannerWatchedFull = true
+            }
+        })
+    }
+    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        let holderCompletion = bannerShowCompletion
+        bannerShowCompletion = nil
+        let layer = UIApplication.shared.keyWindow?.layer.sublayers?.first(where: {$0.name == "adFullBanerLine"})
+        
+        if self.bannerWatchedFull {
+            self.showedBanner = Date()
+            self.fullScreenDelegates.forEach({
+                $0.value.toggleAdView(false)
+            })
+            Timer.scheduledTimer(withTimeInterval: videoShowDelay, repeats: false, block: { _ in
+                self.fullScreenDelegates.forEach({
+                    $0.value.toggleAdView(true)
+                })
+            })
+            self.appeare(force: true) {
+                holderCompletion?(true)
+            }
+        } else {
+            AppDelegate.shared?.message.show(title:"Ad not watched till the end", type: .error)
+
+            self.appeare(force: true)
+        }
+        UIView.animate(withDuration: 0.6, animations: {
+            layer?.opacity = 0
+        }, completion: {
+            if !$0 {
+                return
+            }
+            layer?.removeAllAnimations()
+            layer?.removeFromSuperlayer()
+        })
+
+    }
+}

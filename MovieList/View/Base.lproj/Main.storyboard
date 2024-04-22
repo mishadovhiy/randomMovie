@@ -258,8 +258,11 @@ Resume</string>
                             <barButtonItem style="plain" id="q8H-2n-73s">
                                 <button key="customView" hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="hMl-h3-zeu">
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="tintColor" systemColor="systemRedColor"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                    <state key="normal" title="Delete Folder"/>
+                                    <state key="normal" title="Delete Folder">
+                                        <color key="titleColor" systemColor="systemRedColor"/>
+                                    </state>
                                     <connections>
                                         <action selector="deleteFolderPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VZd-v1-kCT"/>
                                     </connections>
@@ -451,24 +454,6 @@ Resume</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jrc-pm-Syc" customClass="Button" customModule="MovieList" customModuleProvider="target">
-                                <rect key="frame" x="130" y="297.5" width="122.5" height="40"/>
-                                <color key="backgroundColor" red="0.062745098039215685" green="0.062745098039215685" blue="0.062745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="VcF-O6-I0X"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Watch movie"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="9"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="tintBackground" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="watchMoviePressed:" destination="GeP-ju-G10" eventType="touchUpInside" id="tcD-hr-xef"/>
-                                </connections>
-                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6Cu-tL-s30">
                                 <rect key="frame" x="10" y="149.5" width="394" height="180"/>
                                 <subviews>
@@ -533,6 +518,24 @@ Resume</string>
                                     <action selector="favoritesPressed:" destination="GeP-ju-G10" eventType="touchUpInside" id="oAa-Jf-pUH"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jrc-pm-Syc" customClass="Button" customModule="MovieList" customModuleProvider="target">
+                                <rect key="frame" x="130" y="289.5" width="122.5" height="40"/>
+                                <color key="backgroundColor" red="0.062745098039215685" green="0.062745098039215685" blue="0.062745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="VcF-O6-I0X"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Watch movie"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="9"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="tintBackground" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="watchMoviePressed:" destination="GeP-ju-G10" eventType="touchUpInside" id="tcD-hr-xef"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="EWZ-rG-0I4"/>
                         <color key="backgroundColor" name="SecondaryBacgroundColor"/>
@@ -551,7 +554,7 @@ Resume</string>
                             <constraint firstAttribute="trailing" secondItem="6Cu-tL-s30" secondAttribute="trailing" constant="10" id="fLD-cj-Mp0"/>
                             <constraint firstItem="6Cu-tL-s30" firstAttribute="top" secondItem="VEg-PN-xfp" secondAttribute="bottom" constant="10" id="joT-VH-SuS"/>
                             <constraint firstItem="NJU-BO-GEC" firstAttribute="bottom" secondItem="6Cu-tL-s30" secondAttribute="bottom" id="n92-71-DLH"/>
-                            <constraint firstItem="Jrc-pm-Syc" firstAttribute="centerY" secondItem="NJU-BO-GEC" secondAttribute="centerY" id="qAO-RE-VSW"/>
+                            <constraint firstItem="Jrc-pm-Syc" firstAttribute="bottom" secondItem="NJU-BO-GEC" secondAttribute="bottom" id="uHm-f8-Q2J"/>
                             <constraint firstItem="6pP-GM-IuW" firstAttribute="top" secondItem="EWZ-rG-0I4" secondAttribute="top" constant="6.5" id="uyW-TY-xgT"/>
                         </constraints>
                     </view>
