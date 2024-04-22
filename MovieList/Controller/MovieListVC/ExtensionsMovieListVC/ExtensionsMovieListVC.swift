@@ -95,9 +95,6 @@ extension MovieListVC {
         var newTableData:[Movie] = []
         if selectedFolder == nil {
             newTableData = db.favoriteMovies.filter({$0.folderID == nil})
-            db.folders.forEach({
-                newTableData.append(.init(folder: $0))
-            })
         } else {
             print(selectedFolder?.id, " tgerfwdas")
             db.favoriteMovies.forEach {
