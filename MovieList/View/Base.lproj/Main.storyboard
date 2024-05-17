@@ -557,6 +557,11 @@ Resume</string>
                             <constraint firstItem="Jrc-pm-Syc" firstAttribute="bottom" secondItem="NJU-BO-GEC" secondAttribute="bottom" id="uHm-f8-Q2J"/>
                             <constraint firstItem="6pP-GM-IuW" firstAttribute="top" secondItem="EWZ-rG-0I4" secondAttribute="top" constant="6.5" id="uyW-TY-xgT"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Jrc-pm-Syc"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="pUh-v0-TNi">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="l40-ed-U1n">
@@ -977,10 +982,10 @@ Resume</string>
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tintColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

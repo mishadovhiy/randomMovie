@@ -115,15 +115,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
          */
-//        if #available(iOS 13.0, *) {
-//            let container = NSPersistentCloudKitContainer(name: "LocalDataBase")
-//            container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-//                if let error = error as NSError? {
-//                    fatalError("Unresolved error \(error), \(error.userInfo)")
-//                }
-//            })
-//            return container
-//        } else {
+        if #available(iOS 13.0, *) {
+            let container = NSPersistentCloudKitContainer(name: "LocalDataBase")
+            container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+                if let error = error as NSError? {
+                    fatalError("Unresolved error \(error), \(error.userInfo)")
+                }
+            })
+            return container
+        } else {
             let container = NSPersistentContainer(name: "LocalDataBase")
             container.loadPersistentStores(completionHandler: { (storeDescription, error) in
                 if let error = error as NSError? {
@@ -138,26 +138,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             })
             return container
-//        }
+        }
         
     }()
     
     func dataBaseUpdated() {
-//        UIApplication.shared.windows.forEach {
-//            if let nav = $0.rootViewController as? UINavigationController {
-//                nav.viewControllers.forEach {
-//                    if let vc = $0 as? BaseVC {
-//                        vc.dataBaseUpdated()
-//                    } else if let subVC = $0 as? BaseVC {
-//                        if let window = subVC.view.window as? BaseWindow {
-//                            if window.layer.name != AppDelegate.shared?.selectedWindowID {
-//                                subVC.dataBaseUpdated()
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
+        UIApplication.shared.windows.forEach {
+            if let nav = $0.rootViewController as? UINavigationController {
+                nav.viewControllers.forEach {
+                    if let tabBar = $0 as? TabBarVC {
+                        tabBar.viewControllers?.forEach({
+                            if let vc = $0 as? BaseVC {
+                                vc.dataBaseUpdated()
+                            } else if let navTwo = $0 as? UINavigationController {
+                                navTwo.viewControllers.forEach {
+                                    if let vc = $0 as? BaseVC {
+                                        vc.dataBaseUpdated()
+                                    }
+                                }
+                            }
+                        })
+                    }
+                }
+            }
+        }
     }
     
     // MARK: - Core Data Saving support
@@ -167,6 +171,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if context.hasChanges {
             do {
                 try context.save()
+                if Thread.isMainThread {
+                    self.dataBaseUpdated()
+                } else {
+                    DispatchQueue.main.async {
+                        self.dataBaseUpdated()
+                    }
+                }
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.

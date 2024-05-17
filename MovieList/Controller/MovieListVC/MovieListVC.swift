@@ -62,8 +62,10 @@ class MovieListVC: BaseVC {
     }
         
     override func dataBaseUpdated() {
-        super.dataBaseUpdated()
-        updateUI(for: screenType)
+        if view.superview != nil {
+            super.dataBaseUpdated()
+            updateUI(for: screenType)
+        }
     }
     
     override func firstLayoutSubviews() {
