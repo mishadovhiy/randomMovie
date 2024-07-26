@@ -30,47 +30,56 @@ class adBannerView: UIView {
     var interstitial: GADFullScreenPresentingAd?
 
     public func createBanner() {
-        GADMobileAds.sharedInstance().start { status in
-            DispatchQueue.main.async {
-               // let window = AppDelegate.shared?.window ?? UIWindow()
-                                let window = UIApplication.shared.keyWindow!
+        if #available(iOS 13.0, *) {
+            GADMobileAds.sharedInstance().start { status in
+                DispatchQueue.main.async {
+                   // let window = AppDelegate.shared?.window ?? UIWindow()
+                                    let window = UIApplication.shared.keyWindow!
 
-                let height = self.backgroundView.frame.height
-                let screenWidth:CGFloat = window.frame.width > 330 ? 320 : 300
-                let adSize = GADAdSizeFromCGSize(CGSize(width: screenWidth, height: height))
-                self.size = height
-                let bannerView = GADBannerView(adSize: adSize)
-                bannerView.adUnitID = "ca-app-pub-5463058852615321/4611360906"
-                bannerView.rootViewController = AppDelegate.shared?.window?.rootViewController
-                //                bannerView.rootViewController = window.rootViewController
+                    let height = self.backgroundView.frame.height
+                    let screenWidth:CGFloat = window.frame.width > 330 ? 320 : 300
+                    let adSize = GADAdSizeFromCGSize(CGSize(width: screenWidth, height: height))
+                    self.size = height
+                    let bannerView = GADBannerView(adSize: adSize)
+                    bannerView.adUnitID = "ca-app-pub-5463058852615321/4611360906"
+                    bannerView.rootViewController = AppDelegate.shared?.window?.rootViewController
+                    //                bannerView.rootViewController = window.rootViewController
 
-                bannerView.load(GADRequest())
-                bannerView.delegate = self
-                self.adStack.addArrangedSubview(bannerView)
-                self.addConstants(window)
-                self.adStack.layer.cornerRadius = Styles.buttonRadius
-                self.adStack.layer.masksToBounds = true
-                self.layer.zPosition = 999
-                self.backgroundView.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, window.frame.height, 0)
+                    bannerView.load(GADRequest())
+                    bannerView.delegate = self
+                    self.adStack.addArrangedSubview(bannerView)
+                    self.addConstants(window)
+                    self.adStack.layer.cornerRadius = Styles.buttonRadius
+                    self.adStack.layer.masksToBounds = true
+                    self.layer.zPosition = 999
+                    self.backgroundView.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, window.frame.height, 0)
+                }
             }
+        } else {
+            
         }
     }
 
     func toggleFullScreenAdd(_ vc:UIViewController, loaded:@escaping(GADFullScreenPresentingAd?)->(), closed:@escaping(_ presented:Bool)->()) {
-        bannerCanShow { show in
-            if show {
-                self.bannerShowCompletion = closed
-                if !self.adHidden {
-                    self.hide(ios13Hide: true, completion: {
+        if #available(iOS 13.0, *) {
+            bannerCanShow { show in
+                if show {
+                    self.bannerShowCompletion = closed
+                    if !self.adHidden {
+                        self.hide(ios13Hide: true, completion: {
+                            self.presentFullScreen(vc, loaded: loaded)
+                        })
+                    } else {
                         self.presentFullScreen(vc, loaded: loaded)
-                    })
-                } else {
-                    self.presentFullScreen(vc, loaded: loaded)
 
+                    }
+                } else {
+                    closed(false)
                 }
-            } else {
-                closed(false)
             }
+
+        } else {
+            closed(true)
         }
     }
     private weak var rootVC:UIViewController?
@@ -89,37 +98,38 @@ class adBannerView: UIView {
     }
     
     func bannerCanShow(completion:@escaping(_ show:Bool)->()) {
-        if let from = self.showedBanner {
-            let now = Date()
-            let dif = now.timeIntervalSince(from)
-            if dif >= self.videoShowDelay {
-                DispatchQueue.main.async {
-                    completion(true)
+        if #available(iOS 13.0, *) {
+            if let from = self.showedBanner {
+                let now = Date()
+                let dif = now.timeIntervalSince(from)
+                if dif >= self.videoShowDelay {
+                    DispatchQueue.main.async {
+                        completion(true)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        completion(false)
+                    }
                 }
             } else {
                 DispatchQueue.main.async {
-                    completion(false)
+                    completion(true)
                 }
             }
         } else {
-            DispatchQueue.main.async {
-                completion(true)
-            }
+            completion(false)
         }
-        
-        
     }
     
     
     public func appeare(force:Bool = false, completion:(()->())? = nil) {
         
         var go:Bool {
-           /* if #available(iOS 13.0, *) {
-                return force && !appData.proEnabeled
+            if #available(iOS 13.0, *) {
+                return true
             } else {
-                return !appData.proEnabeled
-            }*/
-            return true
+                return false
+            }
         }
         if go {
             adHidden = false
@@ -132,19 +142,21 @@ class adBannerView: UIView {
                     completion?()
                 }
             }
+        } else {
+            completion?()
         }
     }
     
     public func hide(remove:Bool = false, ios13Hide:Bool = false, completion:(()->())? = nil) {
         //add buy pro vc
-        let go:Bool = true
-//        {
-//            if #available(iOS 13.0, *) {
-//                return (remove || appData.proEnabeled || ios13Hide) && !adHidden
-//            } else {
-//                return true
-//            }
-//        }
+        var go:Bool
+        {
+            if #available(iOS 13.0, *) {
+                return true
+            } else {
+                return false
+            }
+        }
         if !adNotReceved && go {
             adHidden = true
             DispatchQueue.main.async {
@@ -162,6 +174,8 @@ class adBannerView: UIView {
                     completion?()
                 }
             }
+        } else {
+            completion?()
         }
     }
     
