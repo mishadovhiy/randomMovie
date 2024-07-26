@@ -198,7 +198,7 @@ Resume</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <searchBar hidden="YES" contentMode="redraw" barStyle="blackTranslucent" searchBarStyle="minimal" text="" placeholder="Search by movie name" translatesAutoresizingMaskIntoConstraints="NO" id="Oa4-wk-db0">
+                            <searchBar hidden="YES" contentMode="redraw" barStyle="blackTranslucent" searchBarStyle="minimal" text="" placeholder="Search by movie name / imdb URL / imdb ID" translatesAutoresizingMaskIntoConstraints="NO" id="Oa4-wk-db0">
                                 <rect key="frame" x="0.0" y="92" width="414" height="56"/>
                                 <color key="backgroundColor" name="SecondaryBacgroundColor"/>
                                 <color key="tintColor" name="WhiteColor"/>
