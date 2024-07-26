@@ -46,6 +46,9 @@ extension MovieListVC {
             UIView.animate(withDuration: Styles.pressedAnimation) {
                 self.collectionView.superview?.backgroundColor = Text.Colors.secondaryBacground
             }
+            if type == .search {
+                searchBar.delegate = self
+            }
         }
     }
     
@@ -107,11 +110,5 @@ extension MovieListVC {
         firstDispleyingPage = nil
         download(new)
     }
-    
-
-  
-    
 }
-
-
 

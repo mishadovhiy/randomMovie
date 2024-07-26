@@ -27,6 +27,7 @@ class adBannerView: UIView {
     private var showedBanner:Date?
     var fullScreenDelegates:[String:FullScreenDelegate] = [:]
     let videoShowDelay:Double = (3 * 60) * 60
+    var interstitial: GADFullScreenPresentingAd?
 
     public func createBanner() {
         GADMobileAds.sharedInstance().start { status in

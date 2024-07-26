@@ -36,7 +36,7 @@ class Movie:Hashable {
     
     let name:String
     let imageURL:String
-    let imdbid:String
+    var imdbid:String
     let imdbrating:Double
     let released:String
     let about:String

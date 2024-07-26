@@ -132,12 +132,11 @@ class MovieVC: BaseVC {
             LocalDB.db.favoritePressed(button: sender, movie: self.movie)
         }
     }
-    private var interstitial: GADFullScreenPresentingAd?
 
     @IBAction func watchMoviePressed(_ sender: UIButton) {
         AppDelegate.shared?.banner.toggleFullScreenAdd(self, loaded: {
-            self.interstitial = $0
-            self.interstitial?.fullScreenContentDelegate = self
+            AppDelegate.shared?.banner.interstitial = $0
+            AppDelegate.shared?.banner.interstitial?.fullScreenContentDelegate = self
         }, closed: { presented in
             self.present(StreamMovieVC.configure(movie: self.movie!), animated: true)
         })

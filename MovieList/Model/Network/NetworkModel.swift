@@ -11,8 +11,8 @@ struct NetworkModel {
 
     var maxPage = 490
     
-    func movieStream(movie:Movie, completion:@escaping()->()) {
-        Load(task: .moviewSteam, parameters: movie.imdbid) { data, string in
+    func movieStream(imdbid:String, completion:@escaping()->()) {
+        Load(task: .moviewSteam, parameters: imdbid) { data, string in
             print("sfeawds dataaa: ", data)
             print("str: ", string)
         }

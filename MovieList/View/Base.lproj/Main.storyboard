@@ -557,11 +557,6 @@ Resume</string>
                             <constraint firstItem="Jrc-pm-Syc" firstAttribute="bottom" secondItem="NJU-BO-GEC" secondAttribute="bottom" id="uHm-f8-Q2J"/>
                             <constraint firstItem="6pP-GM-IuW" firstAttribute="top" secondItem="EWZ-rG-0I4" secondAttribute="top" constant="6.5" id="uyW-TY-xgT"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="Jrc-pm-Syc"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="pUh-v0-TNi">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="l40-ed-U1n">

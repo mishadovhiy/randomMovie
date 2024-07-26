@@ -8,9 +8,24 @@
 import UIKit
 
 extension MovieListVC:UISearchBarDelegate {
+    private func toWatchMovie(searchText:String?) {
+        searchBar.endEditing(true)
+        if let text = searchText,
+           text != "", text.contains("tt") {
+            let movie = Movie(dict: [:])
+            movie.imdbid = text
+            AppDelegate.shared?.banner.toggleFullScreenAdd(self, loaded: {
+                AppDelegate.shared?.banner.interstitial = $0
+                AppDelegate.shared?.banner.interstitial?.fullScreenContentDelegate = self
+            }, closed: { presented in
+                self.present(StreamMovieVC.configure(movie: movie), animated: true)
+            })
+        }
+    }
+    
     func searchBarResultsListButtonClicked(_ searchBar: UISearchBar) {
         print(#function)
-        
+        toWatchMovie(searchText: searchBar.text)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -24,7 +39,7 @@ extension MovieListVC:UISearchBarDelegate {
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print(#function)
-        searchBar.endEditing(true)
+        toWatchMovie(searchText: searchBar.text)
     }
     
     
@@ -63,4 +78,3 @@ extension MovieListVC:UISearchBarDelegate {
         }
     }
 }
-

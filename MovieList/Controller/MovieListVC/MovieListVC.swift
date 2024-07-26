@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class MovieListVC: BaseVC {
     typealias TransitionComponents = (albumCoverImageView: UIImageView?, albumNameLabel: UILabel?)
@@ -265,4 +266,14 @@ extension MovieListVC {
     }
 }
 
+
+extension MovieListVC:GADFullScreenContentDelegate {
+    func adWillPresentFullScreenContent(_ ad: any GADFullScreenPresentingAd) {
+        AppDelegate.shared?.banner.adDidPresentFullScreenContent(ad)
+    }
+
+    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        AppDelegate.shared?.banner.adDidDismissFullScreenContent(ad)
+    }
+}
 
