@@ -14,11 +14,13 @@ extension MovieListVC:UISearchBarDelegate {
            text != "", text.contains("tt") {
             let movie = Movie(dict: [:])
             movie.imdbid = text
+            movie.name = text
             AppDelegate.shared?.banner.toggleFullScreenAdd(self, loaded: {
                 AppDelegate.shared?.banner.interstitial = $0
                 AppDelegate.shared?.banner.interstitial?.fullScreenContentDelegate = self
             }, closed: { presented in
-                self.present(StreamMovieVC.configure(movie: movie), animated: true)
+                let vc = MovieVC.configure(movie: movie)
+                self.present(vc, animated: true)
             })
         }
     }

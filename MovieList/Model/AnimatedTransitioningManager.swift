@@ -37,7 +37,10 @@ final class AnimatedTransitioningManager: NSObject, UIViewControllerAnimatedTran
         {
             self.transactionPerform(movieVC: movieVC, tabVC: tabbarVC as! TabBarVC, using: transitionContext)
         } else {
-            fatalError()
+            UIApplication.shared.keyWindow?.layer.name = UUID().uuidString
+            UIApplication.shared.keyWindow?.rootViewController = TabBarVC.configure()
+            UIApplication.shared.keyWindow?.makeKeyAndVisible()
+            AppDelegate.shared?.selectedWindowID = UIApplication.shared.keyWindow?.layer.name ?? ""
         }
         
     }

@@ -34,7 +34,7 @@ class Movie:Hashable {
         hasher.combine(isFolder)
     }
     
-    let name:String
+    var name:String
     let imageURL:String
     var imdbid:String
     let imdbrating:Double

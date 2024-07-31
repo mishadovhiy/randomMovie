@@ -33,7 +33,11 @@ class StreamMovieVC: UIViewController {
         super.viewDidDisappear(animated)
         AppDelegate.shared?.banner.appeare()
     }
-
+    
+    @IBAction func closePressed(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
 }
 
 extension StreamMovieVC:UIWebViewDelegate, WKUIDelegate {

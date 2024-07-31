@@ -23,7 +23,7 @@ class MovieVC: BaseVC {
     
     @IBOutlet var watchMovieButton: [UIButton]!
     weak var container:SwipeMovieVC.MoviePreviewView?
-    weak var movie:Movie?
+    var movie:Movie?
     var favoritesPressedAction:(() -> ())?
     
     private var favoriteChanged = false
