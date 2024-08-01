@@ -617,18 +617,6 @@ Resume</string>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CdA-bH-cri">
-                                <rect key="frame" x="364" y="53" width="45" height="45"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="45" id="eXh-LM-VCf"/>
-                                    <constraint firstAttribute="height" constant="45" id="eun-KS-xZI"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="close"/>
-                                <connections>
-                                    <action selector="closePressed:" destination="gli-Tk-TJ5" eventType="touchUpInside" id="tPx-9h-2A4"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sLb-uv-TGU"/>
                         <color key="backgroundColor" name="SecondaryBacgroundColor"/>
@@ -636,8 +624,6 @@ Resume</string>
                             <constraint firstAttribute="trailing" secondItem="PF2-jy-7dX" secondAttribute="trailing" id="8Tc-ki-mz5"/>
                             <constraint firstItem="PF2-jy-7dX" firstAttribute="leading" secondItem="jaE-eo-pJK" secondAttribute="leading" id="EoZ-wt-r8f"/>
                             <constraint firstAttribute="bottom" secondItem="PF2-jy-7dX" secondAttribute="bottom" id="W4a-Wt-3d2"/>
-                            <constraint firstItem="sLb-uv-TGU" firstAttribute="trailing" secondItem="CdA-bH-cri" secondAttribute="trailing" constant="5" id="WkU-Fg-kBe"/>
-                            <constraint firstItem="CdA-bH-cri" firstAttribute="top" secondItem="sLb-uv-TGU" secondAttribute="top" constant="5" id="Ykm-wg-ZnD"/>
                             <constraint firstItem="PF2-jy-7dX" firstAttribute="top" secondItem="jaE-eo-pJK" secondAttribute="top" id="axa-OY-v2t"/>
                         </constraints>
                     </view>
@@ -991,10 +977,10 @@ Resume</string>
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tintColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
