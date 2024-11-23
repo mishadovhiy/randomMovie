@@ -8,6 +8,27 @@
 import UIKit
 
 extension String {
+    func substring(between start: String, and end: String) -> String? {
+        let pattern = "\(start)(.*?)\(end)"
+        if self.isEmpty {
+            return nil
+        }
+        do {
+            let regex = try NSRegularExpression(pattern: pattern, options: [])
+            let range = NSRange(self.startIndex..<self.endIndex, in: self)
+            
+            if let match = regex.firstMatch(in: self, options: [], range: range) {
+                if let range = Range(match.range(at: 1), in: self) {
+                    return String(self[range])
+                }
+            }
+        } catch {
+            print("Invalid regular expression: \(error.localizedDescription)")
+        }
+        
+        return nil
+    }
+    
     var toByteData:Data? {
       return Data(self.split(separator: ",").compactMap({UInt8($0)}))
     }

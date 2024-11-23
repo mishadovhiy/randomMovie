@@ -44,7 +44,14 @@ struct LocalDB {
             self.dict = dict
         }
         
-        
+        var tempOpenAI:String {
+            get {
+                dict["tempOpenAI"] as? String ?? ""
+            }
+            set {
+                dict["tempOpenAI"] = newValue
+            }
+        }
         
         var filter:Filter {
             get { return .init(dict: dict["Filter"] as? [String:Any] ?? [:]) }

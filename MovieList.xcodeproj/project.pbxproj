@@ -721,7 +721,6 @@
 			packageReferences = (
 				8DB7C45A284EBC4D001DBFB7 /* XCRemoteSwiftPackageReference "AlertViewLibrary" */,
 				8DE94B6B28502D1D00ADF861 /* XCRemoteSwiftPackageReference "MessageViewLibrary" */,
-				8D461D6929394BC7000EDF01 /* XCRemoteSwiftPackageReference "GoogleMobileAds" */,
 			);
 			productRefGroup = 8DF671D1281F6B0D0064849A /* Products */;
 			projectDirPath = "";
@@ -1315,14 +1314,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8D461D6929394BC7000EDF01 /* XCRemoteSwiftPackageReference "GoogleMobileAds" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/quanghits/GoogleMobileAds.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
-			};
-		};
 		8DB7C45A284EBC4D001DBFB7 /* XCRemoteSwiftPackageReference "AlertViewLibrary" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mishadovhiy/AlertViewLibrary.git";

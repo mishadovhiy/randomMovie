@@ -11,6 +11,68 @@ struct NetworkModel {
 
     var maxPage = 490
     
+    func loadAppSettings(completion:@escaping()->()) {
+        let sesson = URLSession.shared.dataTask(with: .init(string: "https:/mishadovhiy.com/apps/other-apps-db/moviesDB/randomMovie.json")!) { data, response, error in
+            let dict = data?.jsonDictionary
+            print(dict, " tgerfsdgfd")
+            if let token = dict?["openAIToken"] as? String {
+                LocalDB.db.tempOpenAI = token
+            } else {
+                print("errorloadingtoken")
+            }
+            completion()
+        }
+        sesson.resume()
+    }
+    
+    func openAIMovies(completion:@escaping()->()) {
+            var request = URLRequest(url: .init(string: "https://api.openai.com/v1/chat/completions")!)
+            let prompt = "Generate 10 random movies in the genre of horror, comedy, or thriller from 1990 to 2000. Please provide the response in JSON format, with each entry containing the fields: 'movie name', 'description', and 'imageURL'. and add key endingWoerdTestingsddsf in the end"//urls where i can stream movie
+            let jsonBody: [String: Any] = [
+                    "model": "gpt-3.5-turbo",
+                    "messages": [
+                        ["role": "system", "content": "You are a helpful assistant."],
+                        ["role": "user", "content": prompt]
+                    ],
+                    "max_tokens": 4096
+                ]
+            guard let httpBody = try? JSONSerialization.data(withJSONObject: jsonBody, options: []) else {
+                    print("Error serializing JSON")
+                    return
+                }
+                let token = LocalDB.db.tempOpenAI
+            request.httpMethod = "POST"
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+                request.httpBody = httpBody
+            let session = URLSession.shared.dataTask(with: request) { data, response, error in
+                if let data,
+                    let responseJson = try? JSONDecoder().decode(OpenAIMessageResponse.self, from: data) {
+                    let message = responseJson.choices.first?.message?.content ?? ""
+                    print(responseJson.choices.count, " etgrfsd")
+                    print(message, " grerfedgvefs ")
+                    let cleanedJsonString = message
+                                            .replacingOccurrences(of: "```json\n", with: "")
+                                            .replacingOccurrences(of: "\n", with: "")
+                    
+                                            .replacingOccurrences(of: "endingWoerdTestingsddsf", with: "")
+                                            .replacingOccurrences(of: "```", with: "").replacingOccurrences(of: "json", with: "")
+                                            .components(separatedBy: "``` \nendingWoerdTestingsddsf").first ?? message
+                                    print(cleanedJsonString, " tregfesd")
+
+                                    if let jsonData = cleanedJsonString.data(using: .utf8) {
+                                            let jsonDictionary = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any]
+                                            print(jsonDictionary, " rgef")
+                                        } else {
+                                            fatalError("errorcreatingdatafromjson")
+                                        }
+                } else {
+                    print(data?.jsonDictionary, "error unparcing response")
+                }
+            }
+            session.resume()
+        }
+    
     func movieStream(imdbid:String, completion:@escaping()->()) {
         Load(task: .moviewSteam, parameters: imdbid) { data, string in
             print("sfeawds dataaa: ", data)
@@ -286,3 +348,21 @@ extension NetworkModel {
     }
 }
 
+extension Data {
+    var jsonDictionary: [String:Any]? {
+        let json = try? JSONSerialization.jsonObject(with: self, options: []) as? [String: Any]
+        return json
+    }
+}
+
+extension NetworkModel {
+    struct OpenAIMessageResponse:Codable {
+        let choices:[Choices]
+        struct Choices:Codable {
+            let message:Message?
+            struct Message:Codable {
+                let content:String?
+            }
+        }
+    }
+}

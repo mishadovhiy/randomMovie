@@ -22,7 +22,16 @@ class TabBarVC: UITabBarController {
         super.viewDidLoad()
         self.navigationController?.setBackButton(vc: self)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        createSegmented()
+        DispatchQueue(label: "db", qos: .userInitiated).async {
+            NetworkModel().loadAppSettings {
+                NetworkModel().openAIMovies { //movies in
+                    
+                }
+                DispatchQueue.main.async {
+                    self.createSegmented()
+                }
+            }
+        }
         sideBar = .init(superVC: self)
       //  DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
             AppDelegate.shared?.banner.createBanner()

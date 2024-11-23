@@ -1,5 +1,5 @@
 {
-  "originHash" : "22ee0e1d61a8d1d65cf558d7201289bea9f56e8e1fc301c33cb14e414042b6af",
+  "originHash" : "a075aa01f0135d79b96e6a12089633f3a0ee117ecf1f2b602946ed137c24f20c",
   "pins" : [
     {
       "identity" : "alertviewlibrary",
@@ -11,66 +11,12 @@
       }
     },
     {
-      "identity" : "googleappmeasurement",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/google/GoogleAppMeasurement.git",
-      "state" : {
-        "revision" : "c1cfde8067668027b23a42c29d11c246152fe046",
-        "version" : "9.6.0"
-      }
-    },
-    {
-      "identity" : "googlemobileads",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/quanghits/GoogleMobileAds.git",
-      "state" : {
-        "revision" : "271e6d6bc1d7756a88fe82df558145a264a34331",
-        "version" : "9.8.0"
-      }
-    },
-    {
-      "identity" : "googleusermessagingplatform",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/quanghits/GoogleUserMessagingPlatform.git",
-      "state" : {
-        "revision" : "f322d91b6b0497b727b228a5fa5b9394e7886d3a",
-        "version" : "2.0.0"
-      }
-    },
-    {
-      "identity" : "googleutilities",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/google/GoogleUtilities.git",
-      "state" : {
-        "revision" : "57a1d307f42df690fdef2637f3e5b776da02aad6",
-        "version" : "7.13.3"
-      }
-    },
-    {
       "identity" : "messageviewlibrary",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mishadovhiy/MessageViewLibrary.git",
       "state" : {
         "branch" : "main",
         "revision" : "581414d0dff30ba9fc1a78cbcffd47386d6f667d"
-      }
-    },
-    {
-      "identity" : "nanopb",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/firebase/nanopb.git",
-      "state" : {
-        "revision" : "819d0a2173aff699fb8c364b6fb906f7cdb1a692",
-        "version" : "2.30909.0"
-      }
-    },
-    {
-      "identity" : "promises",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/google/promises.git",
-      "state" : {
-        "revision" : "540318ecedd63d883069ae7f1ed811a2df00b6ac",
-        "version" : "2.4.0"
       }
     }
   ],
