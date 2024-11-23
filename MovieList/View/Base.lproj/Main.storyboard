@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TAC-eZ-gS4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TAC-eZ-gS4">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -350,7 +350,7 @@ Resume</string>
                                 </subviews>
                             </stackView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v2X-99-XJ9" customClass="TouchView" customModule="MovieList" customModuleProvider="target">
-                                <rect key="frame" x="10" y="102" width="394" height="706"/>
+                                <rect key="frame" x="10" y="97" width="394" height="711"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </containerView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="plC-QN-6r5" customClass="Button" customModule="MovieList" customModuleProvider="target">
@@ -381,7 +381,7 @@ Resume</string>
                             <constraint firstItem="HXH-Ev-uzJ" firstAttribute="centerY" secondItem="QnX-3E-1ri" secondAttribute="centerY" id="8ks-xP-rQS"/>
                             <constraint firstItem="HXH-Ev-uzJ" firstAttribute="height" relation="lessThanOrEqual" secondItem="QnX-3E-1ri" secondAttribute="height" id="AMp-kJ-yim"/>
                             <constraint firstItem="HXH-Ev-uzJ" firstAttribute="width" relation="lessThanOrEqual" secondItem="QnX-3E-1ri" secondAttribute="width" id="CPv-hF-Rj0"/>
-                            <constraint firstItem="v2X-99-XJ9" firstAttribute="top" secondItem="v9L-PA-49n" secondAttribute="top" constant="10" id="Cdp-9x-Obm"/>
+                            <constraint firstItem="v2X-99-XJ9" firstAttribute="top" secondItem="v9L-PA-49n" secondAttribute="top" constant="5" id="Cdp-9x-Obm"/>
                             <constraint firstItem="plC-QN-6r5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="v9L-PA-49n" secondAttribute="leading" constant="10" id="EPQ-3t-OIE"/>
                             <constraint firstItem="v2X-99-XJ9" firstAttribute="leading" secondItem="QnX-3E-1ri" secondAttribute="leading" constant="10" id="RU9-CI-Imz"/>
                             <constraint firstItem="v9L-PA-49n" firstAttribute="bottom" secondItem="v2X-99-XJ9" secondAttribute="bottom" constant="5" id="c3f-z8-bSz"/>
@@ -913,44 +913,6 @@ Resume</string>
             <point key="canvasLocation" x="-741" y="29"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="6pP-GM-IuW">
-            <size key="intrinsicContentSize" width="35" height="30"/>
-        </designable>
-        <designable name="6vo-Jr-PrN">
-            <size key="intrinsicContentSize" width="31" height="14.5"/>
-        </designable>
-        <designable name="Jrc-pm-Syc">
-            <size key="intrinsicContentSize" width="122.5" height="40.5"/>
-        </designable>
-        <designable name="LUU-Fy-Ccz">
-            <size key="intrinsicContentSize" width="27" height="26"/>
-        </designable>
-        <designable name="NJU-BO-GEC">
-            <size key="intrinsicContentSize" width="28.5" height="24"/>
-        </designable>
-        <designable name="VEg-PN-xfp">
-            <size key="intrinsicContentSize" width="66" height="32.5"/>
-        </designable>
-        <designable name="VQ8-KJ-hl3">
-            <size key="intrinsicContentSize" width="24" height="11"/>
-        </designable>
-        <designable name="Zte-2U-iMa">
-            <size key="intrinsicContentSize" width="24" height="11"/>
-        </designable>
-        <designable name="m9i-ab-phE">
-            <size key="intrinsicContentSize" width="35" height="30"/>
-        </designable>
-        <designable name="plC-QN-6r5">
-            <size key="intrinsicContentSize" width="49" height="30"/>
-        </designable>
-        <designable name="xWS-XS-1o6">
-            <size key="intrinsicContentSize" width="28.5" height="25"/>
-        </designable>
-        <designable name="xvl-kn-2Cy">
-            <size key="intrinsicContentSize" width="144" height="18"/>
-        </designable>
-    </designables>
     <resources>
         <image name="heart.fill" catalog="system" width="128" height="107"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
