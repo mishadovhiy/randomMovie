@@ -24,9 +24,6 @@ class TabBarVC: UITabBarController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         DispatchQueue(label: "db", qos: .userInitiated).async {
             NetworkModel().loadAppSettings {
-//                NetworkModel().openAIMovies { //movies in
-//                    
-//                }
                 DispatchQueue.main.async {
                     self.createSegmented()
                 }
@@ -52,8 +49,6 @@ class TabBarVC: UITabBarController {
             viewAppeared = true
         }
     }
-
-    
     
     
     func segmentedSelected(_ atItem:Int) {

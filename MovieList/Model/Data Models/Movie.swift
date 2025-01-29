@@ -35,11 +35,11 @@ class Movie:Hashable {
     }
     
     var name:String
-    let imageURL:String
+    var imageURL:String
     var imdbid:String
-    let imdbrating:Double
+    var imdbrating:Double
     let released:String
-    let about:String
+    var about:String
     let genre:[String] 
     var dict:[String:Any]
     var folderID:Int? {
@@ -139,7 +139,25 @@ class Movie:Hashable {
 }
 
 
-
+extension Movie {
+    static func configure(_ response:Unparce.OpenAIMovieResponse.MovieList) -> Movie {
+        .with {
+            $0.imdbid = response.imdbid ?? ""
+            $0.about = response.description ?? ""
+            $0.imdbrating = Double(response.imdbrating ?? 0) ?? 0
+            $0.name = response.movieName ?? ""
+            $0.imageURL = response.imageURL ?? ""
+        }
+    }
+    
+    public static func with(
+        _ populator: (inout Movie) throws -> ()
+    ) rethrows -> Movie {
+        var message = Movie(dict: [:])
+        try populator(&message)
+        return message
+    }
+}
 
 
 extension Movie {

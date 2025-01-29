@@ -25,9 +25,78 @@ struct NetworkModel {
         sesson.resume()
     }
     
-    func openAIMovies(completion:@escaping()->()) {
+    func extractSubstring(from text: String) -> String? {
+        let pattern = "listStart\\s*(.*?)\\s*listEnd"
+        let regex = try! NSRegularExpression(pattern: pattern, options: [])
+        let range = NSRange(location: 0, length: text.count)
+        
+        if let match = regex.firstMatch(in: text, options: [], range: range) {
+            let matchRange = match.range(at: 1)
+            let substring = (text as NSString).substring(with: matchRange)
+            return substring
+        }
+        
+        return nil
+    }
+    
+    
+    func movieByID(completion:@escaping()->()) {
+        
+    }
+    
+    /**
+     curl --request GET \
+          --url 'https://api.themoviedb.org/3/find/tt0113680?external_source=imdb_id' \
+          --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NDZjN2YwZTQ4ZGNkYmFhNGRmZDQxZDU2MTY0YzcxZSIsIm5iZiI6MTY1MTU0MDc4NS4xMTgsInN1YiI6IjYyNzA4MzMxMDM3MjY0MDA1MWZhZDFjYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fRhl1zoTX2b-SC4k31ALnL6yocF2xjTZ4gejtzptv9U' \
+          --header 'accept: application/json'
+     */
+    
+    func openAIMovies(completion:@escaping([Movie])->()) {
             var request = URLRequest(url: .init(string: "https://api.openai.com/v1/chat/completions")!)
-            let prompt = "Generate 10 random movies in the genre of horror, comedy, or thriller from 1990 to 2000. Please provide the response in JSON format, with each entry containing the fields: 'movie name', 'description', and 'imageURL'. and add key endingWoerdTestingsddsf in the end"//urls where i can stream movie
+            let prompt = "Generate 10 random movies imdbids (comma separeted) as solid string in the genre of horror, comedy, or thriller from 1990 to 2000. add 'listStart' before list and 'listEnd' at the end"//urls where i can stream movie
+            let jsonBody: [String: Any] = [
+                    "model": "gpt-3.5-turbo",
+                    "messages": [
+                        ["role": "system", "content": "You are a helpful assistant."],
+                        ["role": "user", "content": prompt]
+                    ],
+                    "max_tokens": 4096
+                ]
+            guard let httpBody = try? JSONSerialization.data(withJSONObject: jsonBody, options: []) else {
+                    print("Error serializing JSON")
+                    return
+                }
+                let token = LocalDB.db.tempOpenAI
+            request.httpMethod = "POST"
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+                request.httpBody = httpBody
+            let session = URLSession.shared.dataTask(with: request) { data, response, error in
+                if let data,
+                    let responseJson = try? JSONDecoder().decode(OpenAIMessageResponse.self, from: data) {
+                    let message = responseJson.choices.first?.message?.content ?? ""
+                    print(responseJson.choices.count, " etgrfsd")
+                    print(message, " grerfedgvefs ")
+                    let cleanedJsonString = self.extractSubstring(from: message) ?? ""
+                    print("fsdas ", cleanedJsonString, " tregfesd")
+                    
+                    let jsonData = cleanedJsonString.data(using: .utf8)
+                    if cleanedJsonString.contains("tt") {
+                        fatalError()
+                    }
+                    completion([])
+                } else {
+                    completion([])
+                    print(data?.jsonDictionary, "error unparcing response")
+                }
+            }
+            session.resume()
+        }
+
+    
+    func openAIMoviesOld(completion:@escaping([Movie])->()) {
+            var request = URLRequest(url: .init(string: "https://api.openai.com/v1/chat/completions")!)
+            let prompt = "Generate 10 random movies in the genre of horror, comedy, or thriller from 1990 to 2000. Please provide the response in JSON format, with each entry containing the fields: 'movieName', 'description', and 'imageURL', 'imdbid', 'imdbrating' as double, 'releaseDate' as string date"//urls where i can stream movie
             let jsonBody: [String: Any] = [
                     "model": "gpt-3.5-turbo",
                     "messages": [
@@ -59,14 +128,23 @@ struct NetworkModel {
                                             .replacingOccurrences(of: "```", with: "").replacingOccurrences(of: "json", with: "")
                                             .components(separatedBy: "``` \nendingWoerdTestingsddsf").first ?? message
                                     print(cleanedJsonString, " tregfesd")
-
-                                    if let jsonData = cleanedJsonString.data(using: .utf8) {
-                                            let jsonDictionary = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any]
+                    let jsonData = cleanedJsonString.data(using: .utf8)
+                    let jsonDictionary = try? JSONSerialization.jsonObject(with: jsonData ?? .init(), options: []) as? [String: Any]
+                    print(jsonDictionary, " grefdsas")
+                    if let jsonData = cleanedJsonString.data(using: .utf8),
+                                       let jsonDictionary = try? JSONDecoder().decode(Unparce.OpenAIMovieResponse.self, from: jsonData)
+                    {
                                             print(jsonDictionary, " rgef")
+                        completion(jsonDictionary.movies.compactMap({
+                            .configure($0)
+                        }))
                                         } else {
-                                            fatalError("errorcreatingdatafromjson")
+
+                                            print("errorcreatingdatafromjson ", jsonDictionary)
+                                            completion([])
                                         }
                 } else {
+                    completion([])
                     print(data?.jsonDictionary, "error unparcing response")
                 }
             }

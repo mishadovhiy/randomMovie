@@ -78,3 +78,19 @@ struct Unparce {
     }
     
 }
+
+extension Unparce {
+    struct OpenAIMovieResponse: Codable {
+        var movies:[MovieList]
+        struct MovieList:Codable {
+            var description:String?
+            var imageURL:String?
+            var movieName:String?
+            var releaseDate:String?
+            var imdbid:String?
+            var imdbrating:Double?
+            
+            
+        }
+    }
+}

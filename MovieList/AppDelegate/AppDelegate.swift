@@ -4,7 +4,14 @@
 //
 //  Created by Misha Dovhiy on 02.05.2022.
 //
-
+/**
+ /// TO DO:
+ 
+ unparce openai json - ids only DONE
+ themoviedb
+ card swiped all - (if need )
+ 
+ */
 import UIKit
 import CoreData
 import AlertViewLibrary
