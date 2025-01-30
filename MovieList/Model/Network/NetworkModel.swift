@@ -51,6 +51,31 @@ struct NetworkModel {
           --header 'accept: application/json'
      */
     
+    private func movieDetails(id:String,
+                              completion:@escaping(_ movie:Movie?)->()) {
+        var request = URLRequest(url: .init(string: "https://api.themoviedb.org/3/find/\(id)?external_source=imdb_id")!)
+        request.setValue("""
+Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NDZjN2YwZTQ4ZGNkYmFhNGRmZDQxZDU2MTY0YzcxZSIsIm5iZiI6MTY1MTU0MDc4NS4xMTgsInN1YiI6IjYyNzA4MzMxMDM3MjY0MDA1MWZhZDFjYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fRhl1zoTX2b-SC4k31ALnL6yocF2xjTZ4gejtzptv9U
+""", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "accept")
+        let session = URLSession.shared.dataTask(with: request) { data, response, error in
+            let jsonDictionary = try? JSONSerialization.jsonObject(with: data ?? .init(), options: []) as? [String: Any]
+            print(jsonDictionary, " gfdgfdgfd ")
+            print(jsonDictionary?["movie_results"] as? [[String:Any]])
+            let responseJson = try? JSONDecoder().decode(Unparce.MovieDetails.self, from: data ?? .init())
+            if let movie = responseJson, (responseJson?.movie_results.count ?? 0) >= 1 {
+                print("gdfsdfb ", movie)
+                var movieResult = Movie.configure(movie)
+                movieResult.imdbid = id
+                completion(movieResult)
+            } else {
+                completion(nil)
+            }
+            
+        }
+        session.resume()
+    }
+    
     func openAIMovies(completion:@escaping([Movie])->()) {
             var request = URLRequest(url: .init(string: "https://api.openai.com/v1/chat/completions")!)
             let prompt = "Generate 10 random movies imdbids (comma separeted) as solid string in the genre of horror, comedy, or thriller from 1990 to 2000. add 'listStart' before list and 'listEnd' at the end"//urls where i can stream movie
@@ -79,12 +104,24 @@ struct NetworkModel {
                     print(message, " grerfedgvefs ")
                     let cleanedJsonString = self.extractSubstring(from: message) ?? ""
                     print("fsdas ", cleanedJsonString, " tregfesd")
-                    
-                    let jsonData = cleanedJsonString.data(using: .utf8)
-                    if cleanedJsonString.contains("tt") {
-                        fatalError()
+                    let array = cleanedJsonString.split(separator: ",")
+                    if cleanedJsonString.contains("tt"), array.count >= 1 {
+                        var results:[Movie] = []
+                        array.forEach { str in
+                            self.movieDetails(id: String(str)) { movie in
+                                if let movie {
+                                    results.append(movie)
+                                }
+                                
+                                if str == array.last {
+                                    completion(results)
+                                }
+                            }
+                        }
+                    } else {
+                        completion([])
                     }
-                    completion([])
+                    
                 } else {
                     completion([])
                     print(data?.jsonDictionary, "error unparcing response")

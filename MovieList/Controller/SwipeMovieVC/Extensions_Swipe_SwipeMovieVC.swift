@@ -242,41 +242,42 @@ extension SwipeMovieVC:ContainerPanGestureProtocol {
     func setRandoms() -> Bool {
         print("setRandomssetRandomssetRandoms")
         randomList.removeAll()
-        var data:[Int: [Movie]] = [:]
-        for _ in 0..<20 {
-            if let randomPage = allApi.randomElement()?.page {
-                var newMovies = self.randomMovies(page: randomPage)
-                
-                if let updating = data[randomPage] {
-                    updating.forEach({newMovies.append($0)})
-                }
-                data.updateValue(newMovies, forKey: randomPage)
-                
-            }
-        }
-        
-        var c = 0
-        let api = Array(allApi)
-        data.forEach({ list in
-            var new = api.first(where: {$0.page == list.key})?.movie ?? []
-            print(new.count, " gterfwds")
-            new.removeAll(where: { rem in
-                return list.value.contains(where: {$0.imdbid == rem.imdbid})
-            })
-            print(new.count, " gterfwdsafterrrr")
-            list.value.forEach({ _ in
-                c += 1
-            })
-            allApi.removeAll(where: {$0.page == list.key})
-            allApi.append(.init(movie: new, page: list.key))
-        })
-        data.forEach({ dict in
-            dict.value.forEach({
-                self.randomList.append($0)
-            })
-        })
-        
-        print(c, " brtgerfrvrgb")
+        randomList = self.allApi.first?.movie ?? []
+//        var data:[Int: [Movie]] = [:]
+//        for _ in 0..<20 {
+//            if let randomPage = allApi.randomElement()?.page {
+//                var newMovies = self.randomMovies(page: randomPage)
+//                
+//                if let updating = data[randomPage] {
+//                    updating.forEach({newMovies.append($0)})
+//                }
+//                data.updateValue(newMovies, forKey: randomPage)
+//                
+//            }
+//        }
+//        
+//        var c = 0
+//        let api = Array(allApi)
+//        data.forEach({ list in
+//            var new = api.first(where: {$0.page == list.key})?.movie ?? []
+//            print(new.count, " gterfwds")
+//            new.removeAll(where: { rem in
+//                return list.value.contains(where: {$0.imdbid == rem.imdbid})
+//            })
+//            print(new.count, " gterfwdsafterrrr")
+//            list.value.forEach({ _ in
+//                c += 1
+//            })
+//            allApi.removeAll(where: {$0.page == list.key})
+//            allApi.append(.init(movie: new, page: list.key))
+//        })
+//        data.forEach({ dict in
+//            dict.value.forEach({
+//                self.randomList.append($0)
+//            })
+//        })
+//        
+//        print(c, " brtgerfrvrgb")
         return !(randomList.count == 0)
     }
     

@@ -93,4 +93,18 @@ extension Unparce {
             
         }
     }
+    
+    struct MovieDetails:Codable {
+        let movie_results:[Movie]
+        struct Movie:Codable {
+            var title:String?
+            let release_date:String?
+            let poster_path:String?
+//            /// movie description
+            let overview:String?
+            let backdrop_path:String?
+//            let popularity:String?
+//            let genre_ids:[String]
+        }
+    }
 }

@@ -32,11 +32,13 @@ class SwipeMovieVC: BaseVC {
     
     func apiLoad() {
        //  tempAppearence()
+        self.index = 0
        DispatchQueue(label: "api", qos: .userInitiated).async {
             NetworkModel().loadSQLMovies { loadedData, error in
                 NetworkModel().openAIMovies { loadedData in
                     print(loadedData.compactMap({$0.name}), " rgtefrsd")
                     self.allApi = [.init(movie: loadedData, page: 0)]
+                    self.randomList = loadedData
                     DispatchQueue.main.async {
                                             self.setAnimating(animating: loadedData.count == 0, error: loadedData.count == 0 ? .init(title: "No data loaded from the server") : nil, completion: {
                                                 if loadedData.count != 0 {
@@ -66,17 +68,19 @@ class SwipeMovieVC: BaseVC {
         } else {
             index = 0
             touched = false
-            DispatchQueue(label: "prepare", qos: .userInitiated).async {
-                let randoms = self.setRandoms()
-                DispatchQueue.main.async {
-                    if randoms {
-                        self.loadMovies()
-                    } else {
-                        print("movie list completed")
-                        self.setAnimating(error: .init(title: "Movie list is Emty", description: ""))
-                    }
-                }
-            }
+            self.setAnimating(error: .init(title: "Movie list is Emty", description: ""))
+
+//            DispatchQueue(label: "prepare", qos: .userInitiated).async {
+//                let randoms = self.setRandoms()
+//                DispatchQueue.main.async {
+//                    if randoms {
+//                        self.loadMovies()
+//                    } else {
+//                        print("movie list completed")
+//                        self.setAnimating(error: .init(title: "Movie list is Emty", description: ""))
+//                    }
+//                }
+//            }
         }
     }
     
@@ -87,6 +91,7 @@ class SwipeMovieVC: BaseVC {
     }()
     
     func cardMovedToTop(card:MoviePreviewView, fixingViews:Bool = false, cardRemoved:Bool = false) {
+        print(card, " gdfdssfgdhfn")
         if fixingViews && !touched {
             UIView.animate(withDuration: 0.4) {
                 self.containerView.alpha = 1

@@ -21,6 +21,15 @@ class Movie:Hashable {
         return lhs.imdbid == rhs.imdbid
     }
     
+    static func configure(_ api:Unparce.MovieDetails?) -> Movie {
+        .with({
+            $0.name = api?.movie_results.first?.title ?? "-"
+            $0.imageURL = (api?.movie_results.first?.poster_path ?? api?.movie_results.first?.backdrop_path) ?? ""
+            $0.released = api?.movie_results.first?.release_date ?? ""
+            $0.about = api?.movie_results.first?.overview ?? ""
+        })
+    }
+    
     func hash(into hasher: inout Hasher) {
         hasher.combine(name)
         hasher.combine(imageURL)
@@ -38,7 +47,7 @@ class Movie:Hashable {
     var imageURL:String
     var imdbid:String
     var imdbrating:Double
-    let released:String
+    var released:String
     var about:String
     let genre:[String] 
     var dict:[String:Any]
