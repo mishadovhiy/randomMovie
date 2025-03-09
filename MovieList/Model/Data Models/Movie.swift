@@ -23,10 +23,10 @@ class Movie:Hashable {
     
     static func configure(_ api:Unparce.MovieDetails?) -> Movie {
         .with({
-            $0.name = api?.movie_results.first?.title ?? "-"
-            $0.imageURL = (api?.movie_results.first?.poster_path ?? api?.movie_results.first?.backdrop_path) ?? ""
-            $0.released = api?.movie_results.first?.release_date ?? ""
-            $0.about = api?.movie_results.first?.overview ?? ""
+            $0.name = api?.movie?.first?.title ?? "-"
+            $0.imageURL = (api?.movie?.first?.poster_path ?? api?.movie?.first?.backdrop_path) ?? ""
+            $0.released = api?.movie?.first?.release_date ?? ""
+            $0.about = api?.movie?.first?.overview ?? ""
         })
     }
     

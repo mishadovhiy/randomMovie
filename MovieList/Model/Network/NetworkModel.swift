@@ -50,8 +50,63 @@ struct NetworkModel {
           --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NDZjN2YwZTQ4ZGNkYmFhNGRmZDQxZDU2MTY0YzcxZSIsIm5iZiI6MTY1MTU0MDc4NS4xMTgsInN1YiI6IjYyNzA4MzMxMDM3MjY0MDA1MWZhZDFjYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fRhl1zoTX2b-SC4k31ALnL6yocF2xjTZ4gejtzptv9U' \
           --header 'accept: application/json'
      */
-    
-    private func movieDetails(id:String,
+#warning("respond tv_results or movie_results")
+    /**
+     "tv_results": <__NSSingleObjectArrayI 0x3006170a0>(
+     {
+         adult = 0;
+         "backdrop_path" = "/a4doyPOabvQor0RGkWdhVENAR3G.jpg";
+         "first_air_date" = "2011-10-05";
+         "genre_ids" =     (
+             18,
+             9648,
+             10765
+         );
+         id = 1413;
+         "media_type" = tv;
+         name = "American Horror Story";
+         "origin_country" =     (
+             US
+         );
+         "original_language" = en;
+         "original_name" = "American Horror Story";
+         overview = "An anthology horror drama series centering on different characters and locations, including a house with a murderous past, an asylum, a witch coven, a freak show, a hotel, a farmhouse in Roanoke, a cult, the apocalypse and a summer camp.";
+         popularity = "126.952";
+         "poster_path" = "/5LLG9bjq0i7V5N4UfRhnab8zHK4.jpg";
+         "vote_average" = "8.116";
+         "vote_count" = 5697;
+     }
+     )
+     */
+
+    /**
+     "movie_results": <__NSSingleObjectArrayI 0x30061d210>(
+     {
+         adult = 0;
+         "backdrop_path" = "/8UOdqhVP28OcnzNL6DnQf0GDLvR.jpg";
+         "genre_ids" =     (
+             18
+         );
+         id = 881;
+         "media_type" = movie;
+         "original_language" = en;
+         "original_title" = "A Few Good Men";
+         overview = "When cocky military lawyer Lt. Daniel Kaffee and his co-counsel, Lt. Cmdr. JoAnne Galloway, are assigned to a murder case, they uncover a hazing ritual that could implicate high-ranking officials such as shady Col. Nathan Jessep.";
+         popularity = "19.879";
+         "poster_path" = "/rLOk4z9zL1tTukIYV56P94aZXKk.jpg";
+         "release_date" = "1992-12-11";
+         title = "A Few Good Men";
+         video = 0;
+         "vote_average" = "7.547";
+         "vote_count" = 3709;
+     }
+     )
+     */
+    ///dict:
+    /// movie_results
+    /// movie_results
+    //randomMovie - unparce codable movie_results/tv_result
+    func movieDetails(id:String,
                               completion:@escaping(_ movie:Movie?)->()) {
         var request = URLRequest(url: .init(string: "https://api.themoviedb.org/3/find/\(id)?external_source=imdb_id")!)
         request.setValue("""
@@ -60,12 +115,14 @@ Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NDZjN2YwZTQ4ZGNkYmFhNGRmZDQxZDU2MTY0Yzcx
         request.setValue("application/json", forHTTPHeaderField: "accept")
         let session = URLSession.shared.dataTask(with: request) { data, response, error in
             let jsonDictionary = try? JSONSerialization.jsonObject(with: data ?? .init(), options: []) as? [String: Any]
-            print(jsonDictionary, " gfdgfdgfd ")
+#warning("unparcemoviedetailshere")
+            print(jsonDictionary, " jsondictionarymoviedetails ")
             print(jsonDictionary?["movie_results"] as? [[String:Any]])
             let responseJson = try? JSONDecoder().decode(Unparce.MovieDetails.self, from: data ?? .init())
-            if let movie = responseJson, (responseJson?.movie_results.count ?? 0) >= 1 {
+            print("fwedawfed ", responseJson, " ghbjnkm ")
+            if let movie = responseJson, (responseJson?.movie?.count ?? 0) >= 1 {
                 print("gdfsdfb ", movie)
-                var movieResult = Movie.configure(movie)
+                let movieResult = Movie.configure(movie)
                 movieResult.imdbid = id
                 completion(movieResult)
             } else {
@@ -111,6 +168,7 @@ Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NDZjN2YwZTQ4ZGNkYmFhNGRmZDQxZDU2MTY0Yzcx
                             self.movieDetails(id: String(str)) { movie in
                                 if let movie {
                                     results.append(movie)
+                                    print("appendfaddsasd")
                                 }
                                 
                                 if str == array.last {

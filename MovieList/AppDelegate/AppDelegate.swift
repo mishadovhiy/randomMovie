@@ -16,7 +16,8 @@ import UIKit
 import CoreData
 import AlertViewLibrary
 import MessageViewLibrary
-
+#warning("todo: posterurl")
+#warning("when not loaded - reload 3 times")
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     

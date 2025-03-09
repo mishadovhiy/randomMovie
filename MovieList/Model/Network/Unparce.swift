@@ -94,8 +94,36 @@ extension Unparce {
         }
     }
     
+    /**
+     "movie_results": <__NSSingleObjectArrayI 0x30061d210>(
+     {
+         adult = 0;
+         "backdrop_path" = "/8UOdqhVP28OcnzNL6DnQf0GDLvR.jpg";
+         "genre_ids" =     (
+             18
+         );
+         id = 881;
+         "media_type" = movie;
+         "original_language" = en;
+         "original_title" = "A Few Good Men";
+         overview = "When cocky military lawyer Lt. Daniel Kaffee and his co-counsel, Lt. Cmdr. JoAnne Galloway, are assigned to a murder case, they uncover a hazing ritual that could implicate high-ranking officials such as shady Col. Nathan Jessep.";
+         popularity = "19.879";
+         "poster_path" = "/rLOk4z9zL1tTukIYV56P94aZXKk.jpg";
+         "release_date" = "1992-12-11";
+         title = "A Few Good Men";
+         video = 0;
+         "vote_average" = "7.547";
+         "vote_count" = 3709;
+     }
+     )
+     */
     struct MovieDetails:Codable {
-        let movie_results:[Movie]
+        var movie_results:[Movie]? = nil
+        var tv_results:[Movie]? = nil
+        
+        var movie:[Movie]? {
+            movie_results ?? tv_results
+        }
         struct Movie:Codable {
             var title:String?
             let release_date:String?
