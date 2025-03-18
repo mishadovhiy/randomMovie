@@ -69,6 +69,15 @@ struct LocalDB {
             }
         }
         
+        var favoriteMoviesData: [String: [String:Any]] {
+            get {
+                return dict["favoriteMoviesData"] as? [String : [String:Any]] ?? [:]
+            }
+            set {
+                dict.updateValue(newValue, forKey: "favoriteMoviesData")
+            }
+        }
+        
         
         var folders: [Folder] {
             get {

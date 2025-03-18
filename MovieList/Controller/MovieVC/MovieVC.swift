@@ -91,6 +91,7 @@ class MovieVC: BaseVC {
             nameLabel.text = movie.name
           //  invcImdbButton.isHidden = !isPreview
             DispatchQueue.init(label: "load", qos: .userInitiated).async {
+                print(movie.imdbid, " erfwedawf ")
                 if let _ = LocalDB.db.favoriteMovieID[movie.imdbid] {
                     DispatchQueue.main.async {
                         self.heartButton.tintColor = .red
@@ -110,7 +111,7 @@ class MovieVC: BaseVC {
     }
     
     func tempDescr(_ movie:Movie) -> String {
-        return "Genres: \(tempArrey(movie.genre))\n" + "imdb: \(movie.imdbrating)\n" + "relaesed: \(movie.released)\n"
+        return "relaesed: \n\(movie.released)\n"
     }
     
     
@@ -129,6 +130,8 @@ class MovieVC: BaseVC {
     @IBAction func favoritesPressed(_ sender: UIButton) {
         favoriteChanged = true
         DispatchQueue(label: "db", qos: .userInitiated).async {
+            LocalDB.db.favoriteMovies.append(self.movie!)
+            LocalDB.db.favoriteMoviesData.updateValue(self.movie?.dict ?? [:], forKey: self.movie?.imdbid ?? "")
             LocalDB.db.favoritePressed(button: sender, movie: self.movie)
         }
     }

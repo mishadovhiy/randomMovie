@@ -124,6 +124,8 @@ Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NDZjN2YwZTQ4ZGNkYmFhNGRmZDQxZDU2MTY0Yzcx
                 print("gdfsdfb ", movie)
                 let movieResult = Movie.configure(movie)
                 movieResult.imdbid = id
+                movieResult.imageURL = "https://image.tmdb.org/t/p/w500" + movieResult.imageURL
+                print(movieResult.imageURL, " efrwdwfr ")
                 completion(movieResult)
             } else {
                 completion(nil)
@@ -135,7 +137,8 @@ Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NDZjN2YwZTQ4ZGNkYmFhNGRmZDQxZDU2MTY0Yzcx
     
     func openAIMovies(completion:@escaping([Movie])->()) {
             var request = URLRequest(url: .init(string: "https://api.openai.com/v1/chat/completions")!)
-            let prompt = "Generate 10 random movies imdbids (comma separeted) as solid string in the genre of horror, comedy, or thriller from 1990 to 2000. add 'listStart' before list and 'listEnd' at the end"//urls where i can stream movie
+        let prompt = "Generate 10 random movies imdbids (comma separeted) as solid string in the genre of \(LocalDB.db.filter.selectedGanres.joined(separator: ", ")) from \(LocalDB.db.filter.yearRating.from) to \(LocalDB.db.filter.yearRating.to). add 'listStart' before list and 'listEnd' at the end"//urls where i can stream movie
+        print(prompt, " rtgefwds")
             let jsonBody: [String: Any] = [
                     "model": "gpt-3.5-turbo",
                     "messages": [
@@ -164,11 +167,17 @@ Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NDZjN2YwZTQ4ZGNkYmFhNGRmZDQxZDU2MTY0Yzcx
                     let array = cleanedJsonString.split(separator: ",")
                     if cleanedJsonString.contains("tt"), array.count >= 1 {
                         var results:[Movie] = []
+                        if array.isEmpty {
+                            completion(results)
+                        }
+                        print("loadingmoviedetailses ", array.count)
                         array.forEach { str in
                             self.movieDetails(id: String(str)) { movie in
                                 if let movie {
                                     results.append(movie)
-                                    print("appendfaddsasd")
+                                    print("appendfaddsasd ", array.count)
+                                } else {
+                                    print("errorloadingmoviedetail ", str)
                                 }
                                 
                                 if str == array.last {

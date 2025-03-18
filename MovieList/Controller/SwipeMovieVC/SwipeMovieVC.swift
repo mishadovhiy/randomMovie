@@ -34,20 +34,18 @@ class SwipeMovieVC: BaseVC {
        //  tempAppearence()
         self.index = 0
        DispatchQueue(label: "api", qos: .userInitiated).async {
-            NetworkModel().loadSQLMovies { loadedData, error in
-                NetworkModel().openAIMovies { loadedData in
-                    print(loadedData.compactMap({$0.name}), " rgtefrsd")
-                    self.allApi = [.init(movie: loadedData, page: 0)]
-                    self.randomList = loadedData
-                    DispatchQueue.main.async {
-                                            self.setAnimating(animating: loadedData.count == 0, error: loadedData.count == 0 ? .init(title: "No data loaded from the server") : nil, completion: {
-                                                if loadedData.count != 0 {
-                                                    self.loadMovies()
-                                                }
-                                            })
-                    }
-                }
-            }
+           NetworkModel().openAIMovies { loadedData in
+               print(loadedData.compactMap({$0.name}), " rgtefrsd")
+               self.allApi = [.init(movie: loadedData, page: 0)]
+               self.randomList = loadedData
+               DispatchQueue.main.async {
+                                       self.setAnimating(animating: loadedData.count == 0, error: loadedData.count == 0 ? .init(title: "No data loaded from the server") : nil, completion: {
+                                           if loadedData.count != 0 {
+                                               self.loadMovies()
+                                           }
+                                       })
+               }
+           }
         }
     }
     
@@ -69,6 +67,8 @@ class SwipeMovieVC: BaseVC {
             index = 0
             touched = false
             self.setAnimating(error: .init(title: "Movie list is Emty", description: ""))
+            
+//            reloadPressed()
 
 //            DispatchQueue(label: "prepare", qos: .userInitiated).async {
 //                let randoms = self.setRandoms()

@@ -62,6 +62,13 @@ extension LocalDB {
             }
         }
         
+        var selectedGanres:[String] {
+            
+            return allGenres.filter({
+                !(ignoredGenres[$0] ?? false)
+            })
+        }
+        
         struct Rating {
             let from:Double
             let to:Double
