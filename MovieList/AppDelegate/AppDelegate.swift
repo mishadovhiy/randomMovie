@@ -16,8 +16,7 @@ import UIKit
 import CoreData
 import AlertViewLibrary
 import MessageViewLibrary
-#warning("todo: posterurl")
-#warning("when not loaded - reload 3 times")
+#warning("favorite pressed - not adding to favorites")
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     

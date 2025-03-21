@@ -43,13 +43,34 @@ class Movie:Hashable {
         hasher.combine(isFolder)
     }
     
-    var name:String
-    var imageURL:String
-    var imdbid:String
+    var name:String {
+        didSet {
+            self.dict.updateValue(self.name, forKey: "title")
+        }
+    }
+    var imageURL:String {
+        didSet {
+            self.dict.updateValue([imageURL], forKey: "imageurl")
+        }
+    }
+    var imdbid:String {
+        didSet {
+            self.dict.updateValue(self.imdbid, forKey: "imdbid")
+        }
+    }
     var imdbrating:Double
-    var released:String
-    var about:String
-    let genre:[String] 
+    var released:String {
+        didSet {
+            self.dict.updateValue(self.released, forKey: "released")
+        }
+    }
+    var about:String //synopsis
+    {
+        didSet {
+            self.dict.updateValue(self.about, forKey: "synopsis")
+        }
+    }
+    let genre:[String]
     var dict:[String:Any]
     var folderID:Int? {
         get {
@@ -78,7 +99,13 @@ class Movie:Hashable {
         self.imageURL = images.first ?? ""
         self.imdbid = dict["imdbid"] as? String ?? ""
         self.imdbrating = dict["imdbrating"] as? Double ?? 0.0
-        self.released = "\(dict["released"] as? Int ?? 0)"
+        if let relised = dict["released"] as? Int {
+            self.released = "\(dict["released"] as? Int ?? 0)"
+
+        } else {
+            self.released = dict["released"] as? String ?? ""
+
+        }
         self.about = dict["synopsis"] as? String ?? ""
         self.genre = dict["genre"] as? [String] ?? []
         self.dict = dict

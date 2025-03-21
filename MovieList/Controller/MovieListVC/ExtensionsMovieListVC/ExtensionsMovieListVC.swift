@@ -93,6 +93,8 @@ extension MovieListVC {
     func loadFavorites() {
         let db = LocalDB.db
         var newTableData:[Movie] = []
+        print(db.favoriteMovies.count, " rgterfsda")
+        print(db.favoriteMovies.compactMap({$0.name}).joined(separator: ", "), " egfrsda ")
         if selectedFolder == nil {
             newTableData = db.favoriteMovies.filter({$0.folderID == nil})
         } else {

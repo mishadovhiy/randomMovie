@@ -38,8 +38,17 @@ class SwipeMovieVC: BaseVC {
                print(loadedData.compactMap({$0.name}), " rgtefrsd")
                self.allApi = [.init(movie: loadedData, page: 0)]
                self.randomList = loadedData
+               if loadedData.isEmpty {
+                   self.reloadedCount += 1
+               } else {
+                   self.reloadedCount = 0
+               }
                DispatchQueue.main.async {
-                                       self.setAnimating(animating: loadedData.count == 0, error: loadedData.count == 0 ? .init(title: "No data loaded from the server") : nil, completion: {
+                   if loadedData.isEmpty && self.reloadedCount <= 10 {
+                       self.apiLoad()
+                       return
+                   }
+            self.setAnimating(animating: loadedData.count == 0, error: loadedData.count == 0 ? .init(title: "No data loaded from the server") : nil, completion: {
                                            if loadedData.count != 0 {
                                                self.loadMovies()
                                            }
@@ -48,7 +57,7 @@ class SwipeMovieVC: BaseVC {
            }
         }
     }
-    
+    var reloadedCount = 0
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         touched = false

@@ -86,6 +86,7 @@ class MovieVC: BaseVC {
     func loadData() {
         let load = NetworkModel()
         if let movie = movie {
+            print(movie.imageURL, " hyrtgdrfshfyimageurl ", movie.name)
             textView.text = movie.about
             additionalLabel.text = tempDescr(movie)
             nameLabel.text = movie.name
@@ -98,6 +99,7 @@ class MovieVC: BaseVC {
                     }
                 }
                 load.image(for: movie.imageURL, completion: { data in
+                    print("loadimagecompletion ", data?.count)
                     if let imageData = data,
                        let image = UIImage(data: imageData) {
                         self.movie?.image = imageData
@@ -130,7 +132,8 @@ class MovieVC: BaseVC {
     @IBAction func favoritesPressed(_ sender: UIButton) {
         favoriteChanged = true
         DispatchQueue(label: "db", qos: .userInitiated).async {
-            LocalDB.db.favoriteMovies.append(self.movie!)
+            print(self.movie?.dict, " ghbjnkgfcvjhb ")
+//            LocalDB.db.favoriteMovies.append(self.movie!)
             LocalDB.db.favoriteMoviesData.updateValue(self.movie?.dict ?? [:], forKey: self.movie?.imdbid ?? "")
             LocalDB.db.favoritePressed(button: sender, movie: self.movie)
         }
