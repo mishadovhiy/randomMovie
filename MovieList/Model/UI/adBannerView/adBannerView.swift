@@ -41,7 +41,7 @@ class adBannerView: UIView {
                     let adSize = GADAdSizeFromCGSize(CGSize(width: screenWidth, height: height))
                     self.size = height
                     let bannerView = GADBannerView(adSize: adSize)
-                    bannerView.adUnitID = "ca-app-pub-5463058852615321/4611360906"
+                    bannerView.adUnitID = "ca-app-pub-5463058852615321/8859730315"
                     bannerView.rootViewController = AppDelegate.shared?.window?.rootViewController
                     //                bannerView.rootViewController = window.rootViewController
 

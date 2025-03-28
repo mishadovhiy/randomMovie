@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class SwipeMovieVC: BaseVC {
     @IBOutlet weak var containerView: TouchView!
@@ -35,7 +36,6 @@ class SwipeMovieVC: BaseVC {
         self.index = 0
        DispatchQueue(label: "api", qos: .userInitiated).async {
            NetworkModel().openAIMovies { loadedData in
-               print(loadedData.compactMap({$0.name}), " rgtefrsd")
                self.allApi = [.init(movie: loadedData, page: 0)]
                self.randomList = loadedData
                if loadedData.isEmpty {
@@ -66,8 +66,16 @@ class SwipeMovieVC: BaseVC {
     var movieBoxes:(first:MoviePreviewView, second:MoviePreviewView?, third:MoviePreviewView?)?
     
     @IBAction func reloadPressed(_ sender: Any) {
-        reloadPressed()
+        AppDelegate.shared?.banner.toggleFullScreenAdd(self, loaded: {
+            AppDelegate.shared?.banner.interstitial = $0
+            AppDelegate.shared?.banner.interstitial?.fullScreenContentDelegate = self
+        }, closed: { presented in
+            self.reloadPressed()
+        })
+        
     }
+    
+    
     
     func loadMovies() {
         if let first = createMovie(first: true) {
@@ -173,5 +181,15 @@ extension SwipeMovieVC {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "SwipeMovieVC") as! SwipeMovieVC
         return vc
+    }
+}
+
+extension SwipeMovieVC:GADFullScreenContentDelegate {
+    func adWillPresentFullScreenContent(_ ad: any GADFullScreenPresentingAd) {
+        AppDelegate.shared?.banner.adDidPresentFullScreenContent(ad)
+    }
+
+    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        AppDelegate.shared?.banner.adDidDismissFullScreenContent(ad)
     }
 }
