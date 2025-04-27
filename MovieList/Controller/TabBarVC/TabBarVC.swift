@@ -22,6 +22,8 @@ class TabBarVC: UITabBarController {
         super.viewDidLoad()
         self.navigationController?.setBackButton(vc: self)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.tabBar.isHidden = true
+
         DispatchQueue(label: "db", qos: .userInitiated).async {
             NetworkModel().loadAppSettings {
                 DispatchQueue.main.async {
@@ -35,6 +37,7 @@ class TabBarVC: UITabBarController {
     //    })
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -45,6 +48,8 @@ class TabBarVC: UITabBarController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         view.subviews.forEach({$0.alpha = 1})
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.tabBar.isHidden = true
         if !viewAppeared {
             viewAppeared = true
         }

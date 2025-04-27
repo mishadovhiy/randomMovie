@@ -37,7 +37,7 @@ class SideBarVC: UIViewController {
         let imdbCell:SliderCellData = .init(range: imdbData, newPosition: newImdbRange)
         
 
-        let yearData:RangeSliderView = .init(min: 1980, max: 2022,
+        let yearData:RangeSliderView = .init(min: 1980, max: Double(Calendar.current.dateComponents([.year], from: .init()).year ?? 2022),
                                              selectedMin: LocalDB.db.filter.yearRating.from,
                                              selectedMax: LocalDB.db.filter.yearRating.to,
                                              digitsCount: 0)
