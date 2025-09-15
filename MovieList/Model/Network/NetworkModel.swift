@@ -137,7 +137,8 @@ Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NDZjN2YwZTQ4ZGNkYmFhNGRmZDQxZDU2MTY0Yzcx
     
     func openAIMovies(completion:@escaping([Movie])->()) {
             var request = URLRequest(url: .init(string: "https://api.openai.com/v1/chat/completions")!)
-        let prompt = "Generate 10 random movies imdbids (comma separeted) as solid string in the genre of \(LocalDB.db.filter.selectedGanres.joined(separator: ", ")) from \(LocalDB.db.filter.yearRating.from) to \(LocalDB.db.filter.yearRating.to). add 'listStart' before list and 'listEnd' at the end"//urls where i can stream movie
+        let description = LocalDB.db.text != "" ? "with description " + LocalDB.db.text : ""
+        let prompt = "Generate 10 random movies imdbids (comma separeted) as solid string in the genre of \(LocalDB.db.filter.selectedGanres.joined(separator: ", ")) from \(LocalDB.db.filter.yearRating.from) to \(LocalDB.db.filter.yearRating.to) \(description). add 'listStart' before list and 'listEnd' at the end, wrapp list in the structure: \(RecommendationKeys.allCases.prompt)"//urls where i can stream movie
         print(prompt, " rtgefwds")
             let jsonBody: [String: Any] = [
                     "model": "gpt-3.5-turbo",
@@ -159,25 +160,31 @@ Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NDZjN2YwZTQ4ZGNkYmFhNGRmZDQxZDU2MTY0Yzcx
             let session = URLSession.shared.dataTask(with: request) { data, response, error in
                 if let data,
                     let responseJson = try? JSONDecoder().decode(OpenAIMessageResponse.self, from: data) {
-                    let message = responseJson.choices.first?.message?.content ?? ""
+                    var message = responseJson.choices.first?.message?.content ?? ""
                     print(responseJson.choices.count, " etgrfsd")
                     print(message, " grerfedgvefs ")
                     let cleanedJsonString = self.extractSubstring(from: message) ?? ""
                     print("fsdas ", cleanedJsonString, " tregfesd")
-                    let array = cleanedJsonString.split(separator: ",")
-                    if cleanedJsonString.contains("tt"), array.count >= 1 {
+                    let array =  message.arrayOfPattern()
+                  //  if cleanedJsonString.contains("tt"), array.count >= 1 {
                         var results:[Movie] = []
-                        if array.isEmpty {
-                            completion(results)
-                        }
                         print("loadingmoviedetailses ", array.count)
-                        array.forEach { str in
-                            self.movieDetails(id: String(str)) { movie in
+                    array.forEach { str in
+                            var dict:[RecommendationKeys:String] = [:]
+                            RecommendationKeys.allCases.forEach { key in
+                                let text = String(str).extractSubstring(key: key.rawValue)
+                                dict.updateValue(text ?? "", forKey: key)
+                            }
+
+                            self.movieDetails(id: String(dict[.imdbID] ?? "")) { movie in
                                 if let movie {
                                     results.append(movie)
                                     print("appendfaddsasd ", array.count)
                                 } else {
                                     print("errorloadingmoviedetail ", str)
+                                    
+                                    let movie = Movie.configure(.init(description: dict[.description], imageURL: "", movieName: dict[.name], releaseDate: "", imdbid: dict[.imdbID], imdbrating: nil))
+                                    results.append(movie)
                                 }
                                 
                                 if str == array.last {
@@ -185,9 +192,9 @@ Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NDZjN2YwZTQ4ZGNkYmFhNGRmZDQxZDU2MTY0Yzcx
                                 }
                             }
                         }
-                    } else {
-                        completion([])
-                    }
+                //    } else {
+                     //   completion([])
+                   // }
                     
                 } else {
                     completion([])
@@ -548,3 +555,73 @@ extension NetworkModel {
         }
     }
 }
+extension String {
+    func arrayOfPattern() -> [Self] {
+        let pattern = "<listItem>(.*?)</listItem>"
+
+        do {
+            let regex = try NSRegularExpression(pattern: pattern, options: [])
+            
+            let matches = regex.matches(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count))
+            
+            // Map the matches to the text between the tags
+            let extractedTexts = matches.map { match -> String in
+                let range = match.range(at: 1) // Range of the text inside <listItem>...</listItem>
+                let substring = (self as NSString).substring(with: range)
+                return substring
+            }
+            
+            // Output the array of extracted texts
+            print(extractedTexts)
+            return extractedTexts
+        } catch {
+            print("Invalid regular expression")
+            return []
+        }
+    }
+    func extractSubstring(key:String) -> String? {
+        let pattern = "<\(key)>(.*?)</\(key)>"
+        guard let regex = try? NSRegularExpression(pattern: pattern, options: [.dotMatchesLineSeparators]) else {
+            
+                return nil
+            }
+            
+            let range = NSRange(self.startIndex..<self.endIndex, in: self)
+        if let match = regex.firstMatch(in: self, options: [], range: range) {
+                
+                let rangeStart = match.range(at: 1)
+                if let swiftRange = Range(rangeStart, in: self) {
+                    return String(self[swiftRange])
+                }
+            }
+        
+        return nil
+    }
+
+}
+/// for ai request
+enum RecommendationKeys: String, CaseIterable {
+    
+    case imdbID
+    case name
+    case description
+    case ganre
+    
+    var description: String {
+        switch self {
+        case .description:
+            "Movie description in 3 senteces"
+        default: rawValue
+        }
+    }
+}
+
+extension [RecommendationKeys] {
+    var prompt: String {
+        let list = self.compactMap({
+            "<" + $0.rawValue + ">" + $0.description + "</" + $0.rawValue + ">"
+        }).joined(separator: ", ")
+        return "<listItem>\(list)</listItem>"
+    }
+}
+

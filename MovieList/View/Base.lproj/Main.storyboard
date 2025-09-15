@@ -441,13 +441,13 @@ Resume</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VEg-PN-xfp" customClass="Label" customModule="MovieList" customModuleProvider="target">
-                                <rect key="frame" x="50" y="155" width="1013" height="32.5"/>
+                                <rect key="frame" x="50" y="155" width="302.5" height="32.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="27"/>
                                 <color key="textColor" name="WhiteColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xg3-6t-RAj">
-                                <rect key="frame" x="10" y="382.5" width="1114.5" height="513.5"/>
+                                <rect key="frame" x="10" y="382.5" width="404" height="513.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" name="WhiteColor"/>
@@ -455,7 +455,7 @@ Resume</string>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6Cu-tL-s30">
-                                <rect key="frame" x="10" y="197.5" width="1070" height="180"/>
+                                <rect key="frame" x="10" y="197.5" width="394" height="180"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Z2M-Ax-gXL">
                                         <rect key="frame" x="0.0" y="1" width="60" height="177.5"/>
@@ -466,7 +466,7 @@ Resume</string>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1QR-40-292">
-                                        <rect key="frame" x="70" y="0.0" width="1000" height="180"/>
+                                        <rect key="frame" x="70" y="0.0" width="324" height="180"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" name="LightGreyColor"/>
                                         <nil key="highlightedColor"/>
@@ -477,7 +477,7 @@ Resume</string>
                                 </constraints>
                             </stackView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6pP-GM-IuW" customClass="Button" customModule="MovieList" customModuleProvider="target">
-                                <rect key="frame" x="1068" y="146.5" width="50" height="50"/>
+                                <rect key="frame" x="357.5" y="146.5" width="50" height="50"/>
                                 <color key="backgroundColor" red="0.062745098039215685" green="0.062745098039215685" blue="0.062745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="UuW-ix-mt8"/>
@@ -646,7 +646,7 @@ Resume</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="B5g-6J-Uj1">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="828"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -843,6 +843,35 @@ Resume</string>
                                             <outlet property="collectionView" destination="h1a-BX-3zQ" id="Wsw-5Q-TF2"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextViewCell" id="SWx-ZX-yrX" customClass="TextViewCell" customModule="MovieList" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="297.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SWx-ZX-yrX" id="3Bk-6q-3kt">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cJk-ly-lHn">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="cJk-ly-lHn" secondAttribute="bottom" id="0aG-Gd-Iq7"/>
+                                                <constraint firstItem="cJk-ly-lHn" firstAttribute="leading" secondItem="3Bk-6q-3kt" secondAttribute="leading" id="8PO-b6-jbw"/>
+                                                <constraint firstItem="cJk-ly-lHn" firstAttribute="top" secondItem="3Bk-6q-3kt" secondAttribute="top" id="fe1-fT-DSP"/>
+                                                <constraint firstAttribute="trailing" secondItem="cJk-ly-lHn" secondAttribute="trailing" id="qV7-Q8-aOS"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="textView" destination="cJk-ly-lHn" id="fq3-uC-cCb"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="cab-5n-z3u">
@@ -900,9 +929,9 @@ Resume</string>
                         <constraints>
                             <constraint firstItem="cab-5n-z3u" firstAttribute="leading" secondItem="0s4-ix-g67" secondAttribute="leading" constant="10" id="DL3-Hw-542"/>
                             <constraint firstItem="B5g-6J-Uj1" firstAttribute="trailing" secondItem="34W-rr-Xte" secondAttribute="trailing" id="PIp-Ug-bUW"/>
-                            <constraint firstAttribute="bottom" secondItem="B5g-6J-Uj1" secondAttribute="bottom" id="REt-Tb-CpV"/>
                             <constraint firstItem="B5g-6J-Uj1" firstAttribute="top" secondItem="0s4-ix-g67" secondAttribute="top" id="S9f-Cc-TT7"/>
                             <constraint firstItem="B5g-6J-Uj1" firstAttribute="leading" secondItem="34W-rr-Xte" secondAttribute="leading" id="SAx-eC-XsU"/>
+                            <constraint firstItem="34W-rr-Xte" firstAttribute="bottom" secondItem="B5g-6J-Uj1" secondAttribute="bottom" id="e4c-SB-gi9"/>
                             <constraint firstItem="34W-rr-Xte" firstAttribute="bottom" secondItem="cab-5n-z3u" secondAttribute="bottom" id="kyE-Tb-oVw"/>
                         </constraints>
                     </view>

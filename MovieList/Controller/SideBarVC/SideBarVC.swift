@@ -19,9 +19,9 @@ class SideBarVC: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        DispatchQueue(label: "db", qos: .userInitiated).async {
-            self.getData()
-        }
+        self.getData()
+        tableView.keyboardDismissMode = .interactive
+
     }
     
 
@@ -30,35 +30,38 @@ class SideBarVC: UIViewController {
     
     func getData(){
 
-        let imdbData:RangeSliderView = .init(min: 4, max: 10,
-                                             selectedMin: LocalDB.db.filter.imdbRating.from,
-                                             selectedMax: LocalDB.db.filter.imdbRating.to,
-                                             digitsCount: 1)
-        let imdbCell:SliderCellData = .init(range: imdbData, newPosition: newImdbRange)
-        
+        DispatchQueue(label: "db", qos: .userInitiated).async {
+            let imdbData:RangeSliderView = .init(min: 4, max: 10,
+                                                 selectedMin: LocalDB.db.filter.imdbRating.from,
+                                                 selectedMax: LocalDB.db.filter.imdbRating.to,
+                                                 digitsCount: 1)
+            let imdbCell:SliderCellData = .init(range: imdbData, newPosition: self.newImdbRange)
+            
 
-        let yearData:RangeSliderView = .init(min: 1980, max: Double(Calendar.current.dateComponents([.year], from: .init()).year ?? 2022),
-                                             selectedMin: LocalDB.db.filter.yearRating.from,
-                                             selectedMax: LocalDB.db.filter.yearRating.to,
-                                             digitsCount: 0)
-        let yearCell:SliderCellData = .init(range: yearData, newPosition: newYearRange)
-        
-        let genres = LocalDB.db.filter.allGenres
-        let ignoredList = LocalDB.db.filter.ignoredGenres
-        let ganrs : [CollectionCellData.ColldetionData] = genres.compactMap({
-            return .init(name: $0, ignored: ignoredList[$0] ?? false)
-        })
+            let yearData:RangeSliderView = .init(min: 1980, max: Double(Calendar.current.dateComponents([.year], from: .init()).year ?? 2022) - 1,
+                                                 selectedMin: LocalDB.db.filter.yearRating.from,
+                                                 selectedMax: LocalDB.db.filter.yearRating.to,
+                                                 digitsCount: 0)
+            let yearCell:SliderCellData = .init(range: yearData, newPosition: self.newYearRange)
+            
+            let genres = LocalDB.db.filter.allGenres
+            let ignoredList = LocalDB.db.filter.ignoredGenres
+            let ganrs : [CollectionCellData.ColldetionData] = genres.compactMap({
+                return .init(name: $0, ignored: ignoredList[$0] ?? false)
+            })
 
-        let genresCell:CollectionCellData = .init(collectionData: ganrs, selected: genreSelected(_:))
-        
-        tableData = [
-            .init(cells: imdbCell, title: "imdb rating"),
-            .init(cells: yearCell, title: "year range"),
-            .init(cells: genresCell, title: "genre")
-        ]
-        
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
+            let genresCell:CollectionCellData = .init(collectionData: ganrs, selected: self.genreSelected(_:))
+            
+            self.tableData = [
+                .init(cells: imdbCell, title: "imdb rating"),
+                .init(cells: yearCell, title: "year range"),
+                .init(cells: genresCell, title: "genre"),
+                .init(cells: TextData(text: LocalDB.db.text), title: "description")
+            ]
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     

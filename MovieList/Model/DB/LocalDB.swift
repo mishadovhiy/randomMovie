@@ -59,6 +59,15 @@ struct LocalDB {
                 dict.updateValue(newValue.dict, forKey: "Filter")
             }
         }
+
+        var text:String {
+            get {
+                return dict["text"] as? String ?? ""
+            }
+            set {
+                dict.updateValue(newValue, forKey: "text")
+            }
+        }
         
         var favoriteMovieID: [String:Any] {
             get {

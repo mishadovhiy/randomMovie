@@ -34,6 +34,17 @@ extension SideBarVC: UITableViewDelegate, UITableViewDataSource {
                     cell.data = collections.collectionData
                     cell.valueSelected = collections.selected
                     return cell
+                } else if let collections = tableData[section].cells as? TextData {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "TextViewCell", for: indexPath) as! TextViewCell
+                    cell.set(text: collections.text) { newText in
+                        if let text = (self.tableData[section].cells as? TextData) {
+                            self.tableData[section].cells = text
+                            DispatchQueue(label: "db", qos: .userInitiated).async {
+                                LocalDB.db.text = newText
+                            }
+                        }
+                    }
+                    return cell
                 } else {
                     return UITableViewCell()
                 }

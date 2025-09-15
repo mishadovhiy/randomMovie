@@ -9,7 +9,7 @@ import UIKit
 
 extension SideBarVC {
     struct TableData {
-        let cells: Any
+        var cells: Any
         let title: String
       //  let hidden: Bool
     }
@@ -17,6 +17,10 @@ extension SideBarVC {
     struct SliderCellData {
         let range:RangeSliderView
         let newPosition: ((Double, Double)) -> ()
+    }
+    
+    struct TextData {
+        var text: String
     }
     
     struct CollectionCellData {
